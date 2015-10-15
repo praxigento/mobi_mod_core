@@ -3,7 +3,6 @@
  * Create DB schema.
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigneto\Core\Setup;
 
 use Magento\Framework\DB\Ddl\Table as Ddl;

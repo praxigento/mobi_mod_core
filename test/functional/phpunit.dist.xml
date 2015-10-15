@@ -9,7 +9,7 @@
          stopOnFailure="false"
          syntaxCheck="true"
          bootstrap="./phpunit_bootstrap.php">
-    <testsuite name="Functional Tests for Praxigento_Core">
+    <testsuite name="Functional Tests for Praxigento_Core (M2)">
         <directory suffix="_Test.php">.</directory>
     </testsuite>
     <logging>
