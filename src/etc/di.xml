@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <preference for="Praxigento\Core\Lib\Db\ResourceInterface"
+                type="Praxigento\Core\Lib\Db\Resource"/>
+
+    <type name="Praxigento\Core\Lib\Db\Resource">
+        <arguments>
+            <argument name="m2Resource" xsi:type="object">Magento\Framework\App\Resource\Proxy</argument>
+        </arguments>
+    </type>
+
+</config>
