@@ -2,10 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
-    <preference for="Praxigento\Core\Lib\Context\IResource"
-                type="Praxigento\Core\Lib\Context\Resource"/>
+    <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
+                type="Praxigento\Core\Lib\Context\DbAdapter"/>
 
-    <type name="Praxigento\Core\Lib\Context\Resource">
+    <type name="Praxigento\Core\Lib\Context\DbAdapter">
         <arguments>
             <argument name="m2Resource" xsi:type="object">Magento\Framework\App\Resource\Proxy</argument>
         </arguments>
