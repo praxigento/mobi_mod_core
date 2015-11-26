@@ -20,6 +20,7 @@
   },
   "require": {
     "php": ">=5.3",
+    "symfony/filesystem": "^2.7",
     "praxigento/mobi_mod_common_core": "dev-master"
   },
   "extra": {
