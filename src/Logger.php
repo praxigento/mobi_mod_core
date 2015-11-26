@@ -5,8 +5,9 @@
 
 namespace Praxigento\Core;
 
-
+use Cascade\Cascade;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Webapi\Exception;
 
 class Logger implements \Psr\Log\LoggerInterface {
     /** @var \Psr\Log\LoggerInterface */
@@ -19,7 +20,7 @@ class Logger implements \Psr\Log\LoggerInterface {
      * @param null $configFile
      */
     public function __construct(
-        $configFile = 'bubuka',
+        $configFile = null,
         $loggerName = 'main'
     ) {
         if(is_null($configFile)) {
@@ -27,7 +28,7 @@ class Logger implements \Psr\Log\LoggerInterface {
             $this->_initLoggerMagento();
         } else {
             /* use Cascaded Monolog */
-            $this->_initLoggerCascade($configFile);
+            $this->_initLoggerCascade($configFile, $loggerName);
         }
     }
 
@@ -55,13 +56,28 @@ class Logger implements \Psr\Log\LoggerInterface {
      * @param string $loggerName
      */
     private function  _initLoggerCascade($configFile, $loggerName) {
-        $fs = $this->getFilesystem();
-        if($fs->exists($configFile)) {
-            Cascade::fileConfig($configFile);
-            $this->_logger = Cascade::getLogger($loggerName);
-        } else {
-            $this->_initLoggerMagento();
-            $this->warning("Cannot open logging configuration file '$configFile'. Default Magento logger is used.");
+        $err = '';
+        try {
+            $fs = $this->getFilesystem();
+            if($fs->isAbsolutePath($configFile)) {
+                $fileName = $configFile;
+            } else {
+                $fileName = BP . '/' . $configFile;
+            }
+            $realPath = realpath($fileName);
+            if($realPath) {
+                Cascade::fileConfig($realPath);
+                $this->_logger = Cascade::getLogger($loggerName);
+            } else {
+                $err = "Cannot open logging configuration file '$fileName'. Default Magento logger is used.";
+            }
+        } catch(Exception $e) {
+            $err = $e->getMessage();
+        } finally {
+            if(is_null($this->_logger)) {
+                $this->_initLoggerMagento();
+                $this->warning($err);
+            }
         }
     }
 
