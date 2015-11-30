@@ -21,7 +21,8 @@
   "require": {
     "php": ">=5.3",
     "symfony/filesystem": "^2.7",
-    "praxigento/mobi_mod_common_core": "dev-master"
+    "praxigento/mobi_mod_common_core": "dev-master",
+    "praxigento/mage_ext_logging": "dev-master"
   },
   "extra": {
     "map": [

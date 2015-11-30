@@ -5,7 +5,7 @@
     <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
                 type="Praxigento\Core\Lib\Context\DbAdapter"/>
     <preference for="Psr\Log\LoggerInterface"
-                type="Praxigento\Core\Logger"/>
+                type="Praxigento\Logging\Logger"/>
 
     <type name="Praxigento\Core\Logger">
         <arguments>
