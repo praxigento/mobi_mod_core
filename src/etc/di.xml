@@ -7,13 +7,6 @@
     <preference for="Psr\Log\LoggerInterface"
                 type="Praxigento\Logging\Logger"/>
 
-    <type name="Praxigento\Core\Logger">
-        <arguments>
-            <argument name="configFile" xsi:type="string">./var/log/logging.yaml</argument>
-            <argument name="loggerName" xsi:type="string">main</argument>
-        </arguments>
-    </type>
-
     <type name="Praxigento\Core\Lib\Context\DbAdapter">
         <arguments>
             <argument name="m2Resource" xsi:type="object">Magento\Framework\App\ResourceConnection\Proxy</argument>
