@@ -3,7 +3,7 @@
  * Create DB schema.
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigneto\Core\Setup;
+namespace Praxigento\Core\Setup;
 
 use Praxigento\Core\Lib\Setup\Schema\Base as SchemaBase;
 

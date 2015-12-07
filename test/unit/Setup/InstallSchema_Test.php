@@ -2,10 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigneto\Core\Setup;
-
-
-use Praxigneto\Core\Setup\InstallSchema;
+namespace Praxigento\Core\Setup;
 
 include_once(__DIR__ . '/../phpunit_bootstrap.php');
 
