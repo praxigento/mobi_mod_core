@@ -23,13 +23,5 @@
     "symfony/filesystem": "^2.7",
     "praxigento/mobi_mod_common_core": "dev-master",
     "praxigento/mage2_ext_logging": "dev-master"
-  },
-  "extra": {
-    "map": [
-      [
-        "src",
-        "Praxigento/Core"
-      ]
-    ]
   }
 }
