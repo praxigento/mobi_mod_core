@@ -5,7 +5,7 @@
  */
 namespace Praxigento\Core\Setup;
 
-use Praxigento\Core\Lib\Setup\Schema\Base as SchemaBase;
+use Praxigento\Core\Setup\Schema\Base as SchemaBase;
 
 class InstallSchema extends SchemaBase {
 
