@@ -4,6 +4,10 @@
 
     <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
                 type="Praxigento\Core\Lib\Context\DbAdapter"/>
+    <preference for="Praxigento\Core\Lib\IToolbox"
+                type="Praxigento\Core\Lib\Tool\Box"/>
+    <preference for="Praxigento\Core\Lib\Service\IRepo"
+                type="Praxigento\Core\Lib\Service\Repo\Call"/>
     <preference for="Psr\Log\LoggerInterface"
                 type="Praxigento\Logging\Logger"/>
 
