@@ -19,8 +19,8 @@
     }
   },
   "require": {
-    "php": ">=5.3",
-    "symfony/filesystem": "^2.7",
-    "praxigento/mobi_mod_common_core": "dev-master"
+    "symfony/filesystem": "~2.8",
+    "praxigento/mobi_mod_common_core": "dev-master",
+    "praxigento/mage2_ext_logging": "dev-master"
   }
 }
