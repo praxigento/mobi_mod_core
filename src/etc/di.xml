@@ -2,15 +2,26 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
+    <!-- Context -->
     <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
                 type="Praxigento\Core\Lib\Context\DbAdapter"/>
-    <preference for="Praxigento\Core\Lib\IToolbox"
-                type="Praxigento\Core\Lib\Tool\Box"/>
+
+    <!-- Repos -->
+    <preference for="Praxigento\Core\Lib\Repo\IBasic"
+                type="Praxigento\Core\Lib\Repo\Def\Basic"/>
+
+    <!-- Services -->
     <preference for="Praxigento\Core\Lib\Service\IRepo"
                 type="Praxigento\Core\Lib\Service\Repo\Call"/>
+
+    <!-- Tools -->
+    <preference for="Praxigento\Core\Lib\IToolbox"
+                type="Praxigento\Core\Lib\Tool\Box"/>
+
+    <!-- Other -->
     <preference for="Psr\Log\LoggerInterface"
                 type="Praxigento\Logging\Logger"/>
-
+    <!-- Bind M2 DB proxe to MOBI DBA -->
     <type name="Praxigento\Core\Lib\Context\DbAdapter">
         <arguments>
             <argument name="m2Resource" xsi:type="object">Magento\Framework\App\ResourceConnection\Proxy</argument>
