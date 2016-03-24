@@ -29,4 +29,7 @@
     </type>
 
 
+    <!-- API Data -->
+    <preference for="Praxigento\Core\Api\Data\BaseInterface"
+                type="Praxigento\Core\Api\Data\Def\Base"/>
 </config>
