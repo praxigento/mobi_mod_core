@@ -21,6 +21,7 @@ abstract class Base implements InstallSchemaInterface
      * @var  \Praxigento\Core\Lib\Setup\Db
      */
     protected $_demDb;
+
     public function __construct(
         \Praxigento\Core\Setup\Dem\Tool $toolDem
     ) {
@@ -32,10 +33,11 @@ abstract class Base implements InstallSchemaInterface
      */
     protected abstract function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context);
 
-    public function install(
-        SchemaSetupInterface $setup,
-        ModuleContextInterface $context
-    ) {
+    /**
+     * @inheritdoc
+     */
+    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    {
         /* start M2 setup*/
         $setup->startSetup();
         /* perform module specific operations */
