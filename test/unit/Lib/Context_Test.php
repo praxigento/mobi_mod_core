@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 namespace Praxigento\Core\Lib;
-include_once(__DIR__ . '/phpunit_bootstrap.php');
+include_once(__DIR__ . '/../phpunit_bootstrap.php');
 
 class Context_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
 
