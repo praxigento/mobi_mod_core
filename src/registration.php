@@ -1,6 +1,6 @@
 <?php
 /**
- * Script to register M2-module
+ * Script to register module in Magento 2 (see "autoload.files" in module's composer,json).
  *
  * User: Alex Gusev <alex@flancer64.com>
  */

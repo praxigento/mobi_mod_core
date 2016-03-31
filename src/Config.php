@@ -1,11 +1,12 @@
 <?php
 /**
- * Empty class to stub testing.
+ * Module's configuration (hard-coded).
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
 namespace Praxigento\Core;
 
-class Config {
+class Config
+{
     const MODULE = 'Praxigento_Core';
 }
