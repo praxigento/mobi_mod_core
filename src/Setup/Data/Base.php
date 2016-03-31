@@ -17,7 +17,7 @@ abstract class Base implements InstallDataInterface
     /**
      * Module specific routines to create initial module's data on install.
      */
-    protected abstract function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context);
+    protected abstract function _setup(ModuleDataSetupInterface $setup, ModuleContextInterface $context);
 
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
