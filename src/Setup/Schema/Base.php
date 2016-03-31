@@ -15,7 +15,12 @@ abstract class Base implements InstallSchemaInterface
 {
     /** @var \Praxigento\Core\Setup\Dem\Tool */
     protected $_toolDem;
-
+    /**
+     * Utility to parse DEM JSON and to create DB structure.
+     *
+     * @var  \Praxigento\Core\Lib\Setup\Db
+     */
+    protected $_demDb;
     public function __construct(
         \Praxigento\Core\Setup\Dem\Tool $toolDem
     ) {
