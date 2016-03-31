@@ -8,6 +8,7 @@ namespace Praxigento\Core;
 
 class Config
 {
+    const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Default stock ID for empty Magento instance. */
     const DEF_STOCK_ID = 1;
     /** Default 'admin' website ID for empty Magento instance */
