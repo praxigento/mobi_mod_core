@@ -15,12 +15,12 @@
       "src/registration.php"
     ],
     "psr-4": {
-      "Praxigento\\Core\\": "src/"
+      "Praxigento\\Core\\": "src/",
+      "Praxigento\\Core\\Lib\\Test\\": "test/fw"
     }
   },
   "require": {
     "symfony/filesystem": "~2.8",
-    "praxigento/mobi_mod_common_core": "dev-master",
     "praxigento/mage2_ext_logging": "~0.1.0"
   }
 }

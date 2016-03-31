@@ -1,0 +1,448 @@
+<?php
+/**
+ * User: Alex Gusev <alex@flancer64.com>
+ */
+namespace Praxigento\Core\Lib\Tool;
+
+
+use Praxigento\Core\Config as Cfg;
+use Praxigento\Core\Lib\Context as Ctx;
+
+/**
+ * Period is a string representation of the day, week, month or year period: '20151112', '201511', '2015'.
+ * Week period is like day period but value is equal to the end of the period. If week period is started from friday,
+ * then second week of the 2015 is '20150108' - second thursday.
+ *
+ * Class Period
+ * @package Praxigento\Core\Lib\Tool
+ */
+class Period {
+    const TYPE_DAY = 'DAY';
+    const TYPE_MONTH = 'MONTH';
+    const TYPE_WEEK = 'WEEK';
+    const TYPE_YEAR = 'YEAR';
+
+    const WEEK_FRIDAY = 'friday';
+    const WEEK_MONDAY = 'monday';
+    const WEEK_SATURDAY = 'saturday';
+    const WEEK_SUNDAY = 'sunday';
+    const WEEK_THURSDAY = 'thursday';
+    const WEEK_TUESDAY = 'tuesday';
+    const WEEK_WEDNESDAY = 'wednesday';
+    /** @var array Common cache for periods bounds: [period][type][from|to] = ... */
+    private static $_cachePeriodBounds = [ ];
+    private $_convert;
+    /** @var int Delta in seconds for Magento timezone according to UTC */
+    private $_tzDelta = 0;
+    private $_weekFirstDay = self::WEEK_SATURDAY;
+    private $_weekLastDay = self::WEEK_FRIDAY;
+
+    /**
+     * Period constructor.
+     *
+     * @param Convert                                                           $convert
+     * @param \Mage_Core_Model_Date|\Magento\Framework\Stdlib\DateTime\DateTime $dateTime
+     */
+    public function __construct(
+        \Praxigento\Core\Lib\Tool\Convert $convert,
+        $dateTime = null
+    ) {
+        $this->_convert = $convert;
+        // @codeCoverageIgnoreStart
+        if(is_null($dateTime)) {
+            //     /** @var  $obm */
+            $obm = Ctx::instance()->getObjectManager();
+            if(class_exists('\Magento\Framework\Stdlib\DateTime\DateTime')) {
+                $dt = $obm->get('\Magento\Framework\Stdlib\DateTime\DateTime');
+                $this->_tzDelta = $dt->getGmtOffset();
+            } else {
+                $dt = $obm->get('\Mage_Core_Model_Date');
+                $this->_tzDelta = $dt->getGmtOffset();
+            }
+        } else {
+            $this->_tzDelta = $dateTime->getGmtOffset();
+        }
+        // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 01:59:59") and cache it.
+     *
+     * @param $periodValue 20150601 | 201506 | 2015
+     * @param $periodType DAY | WEEK | MONTH | YEAR
+     */
+    private function _calcPeriodBounds($periodValue, $periodType = self::TYPE_DAY) {
+        $from = null;
+        $to = null;
+        switch($periodType) {
+            case self::TYPE_DAY:
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime('midnight', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $from = date(Cfg::FORMAT_DATETIME, $ts);
+                $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $to = date(Cfg::FORMAT_DATETIME, $ts);
+                break;
+            case self::TYPE_WEEK:
+                /* week period ends on ...  */
+                $end = $this->getWeekLastDay();
+                $prev = $this->getWeekDayNext($end);
+                /* this should be the last day of the week */
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime("previous $prev midnight", $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $from = date(Cfg::FORMAT_DATETIME, $ts);
+                $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $to = date(Cfg::FORMAT_DATETIME, $ts);
+                break;
+            case self::TYPE_MONTH:
+                $dt = date_create_from_format('Ym', $periodValue);
+                $ts = strtotime('first day of midnight', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $from = date(Cfg::FORMAT_DATETIME, $ts);
+                $ts = strtotime('first day of next month midnight -1 second', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $to = date(Cfg::FORMAT_DATETIME, $ts);
+                break;
+            case self::TYPE_YEAR:
+                $dt = date_create_from_format('Y', $periodValue);
+                $ts = strtotime('first day of January', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $from = date(Cfg::FORMAT_DATETIME, $ts);
+                $ts = strtotime('first day of January next year midnight -1 second', $dt->getTimestamp());
+                $ts -= $this->_tzDelta;
+                $to = date(Cfg::FORMAT_DATETIME, $ts);
+                break;
+        }
+        self::$_cachePeriodBounds[$periodValue][$periodType]['from'] = $from;
+        self::$_cachePeriodBounds[$periodValue][$periodType]['to'] = $to;
+    }
+
+    /**
+     * @param $date string "2015-11-11 22:21:37"
+     * @param $periodType string see self::TYPE_...
+     *
+     * @return null|string 20150601 | 201506 | 2015
+     */
+    public function getPeriodCurrent($date, $periodType = self::TYPE_DAY, $withTimezone = true) {
+        $result = null;
+        $dt = $this->_convert->toDateTime($date);
+        if($withTimezone) {
+            $dt->setTimestamp($dt->getTimestamp() - $this->_tzDelta);
+        }
+        switch($periodType) {
+            case self::TYPE_DAY:
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_WEEK:
+                $weekDay = date('w', $dt->getTimestamp());
+                if($weekDay != 0) {
+                    /* week period ends on ...  */
+                    $end = $this->getWeekLastDay();
+                    $ts = strtotime("next $end", $dt->getTimestamp());
+                    $dt = $this->_convert->toDateTime($ts);
+                }
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_MONTH:
+                $result = date_format($dt, 'Ym');
+                break;
+            case self::TYPE_YEAR:
+                $result = date_format($dt, 'Y');
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * Return the datestamp for the first date of the month or year period.
+     *
+     * @param $periodValue 'YYYY' or 'YYYYMM'
+     *
+     * @return string 'YYYYMMDD' - the first datestamp for the given period.
+     */
+    public function getPeriodFirstDate($periodValue) {
+        $result = $periodValue;
+        if($this->isPeriodYear($periodValue)) {
+            $dt = date_create_from_format('Y', $periodValue);
+            $ts = strtotime('first day of January', $dt->getTimestamp());
+            $dt = $this->_convert->toDateTime($ts);
+            $result = date_format($dt, 'Ymd');
+        } else {
+            if($this->isPeriodMonth($periodValue)) {
+                $dt = date_create_from_format('Ym', $periodValue);
+                $ts = strtotime('first day of this month', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Return the datestamp for the last date of the month or year period.
+     *
+     * @param $periodValue 'YYYY' or 'YYYYMM'
+     *
+     * @return string 'YYYYMMDD' - the last datestamp for the given period.
+     */
+    public function getPeriodLastDate($periodValue) {
+        $result = $periodValue;
+        if($this->isPeriodYear($periodValue)) {
+            $dt = date_create_from_format('Y', $periodValue);
+            $ts = strtotime('last day of December', $dt->getTimestamp());
+            $dt = $this->_convert->toDateTime($ts);
+            $result = date_format($dt, 'Ymd');
+        } else {
+            if($this->isPeriodMonth($periodValue)) {
+                $dt = date_create_from_format('Ym', $periodValue);
+                $ts = strtotime('last day of this month', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+            }
+        }
+        return $result;
+    }
+
+    public function getPeriodNext($periodValue, $periodType = self::TYPE_DAY) {
+        $result = null;
+        switch($periodType) {
+            case self::TYPE_DAY:
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime('next day', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_WEEK:
+                /* week period ends on ...  */
+                $end = $this->getWeekLastDay();
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime("next $end", $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_MONTH:
+                $truncated = substr($periodValue, 0, 6);
+                $dt = date_create_from_format('Ym', $truncated);
+                $ts = strtotime('next month', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ym');
+                break;
+            case self::TYPE_YEAR:
+                $truncated = substr($periodValue, 0, 4);
+                $dt = date_create_from_format('Y', $truncated);
+                $ts = strtotime('next year', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Y');
+                break;
+        }
+        return $result;
+    }
+
+    public function getPeriodPrev($periodValue, $periodType = self::TYPE_DAY) {
+        $result = null;
+        switch($periodType) {
+            case self::TYPE_DAY:
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime('previous day', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_WEEK:
+                /* week period ends on ...  */
+                $end = $this->getWeekLastDay();
+                $dt = date_create_from_format('Ymd', $periodValue);
+                $ts = strtotime("previous $end", $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_MONTH:
+                $dt = date_create_from_format('Ym', $periodValue);
+                $ts = strtotime('previous month', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Ym');
+                break;
+            case self::TYPE_YEAR:
+                $dt = date_create_from_format('Y', $periodValue);
+                $ts = strtotime('previous year', $dt->getTimestamp());
+                $dt = $this->_convert->toDateTime($ts);
+                $result = date_format($dt, 'Y');
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * Calculate FROM bound as timestamp for the period.
+     *
+     * @param $periodValue 20150601 | 201506 | 2015
+     * @param $periodType DAY | WEEK | MONTH | YEAR
+     *
+     * @return string 2015-08-12 12:23:34
+     */
+    public function getTimestampFrom($periodValue, $periodType = self::TYPE_DAY) {
+        if(
+            !isset(self::$_cachePeriodBounds[$periodValue]) &&
+            !isset(self::$_cachePeriodBounds[$periodValue][$periodType])
+        ) {
+            $this->_calcPeriodBounds($periodValue, $periodType);
+        }
+        $result = self::$_cachePeriodBounds[$periodValue][$periodType]['from'];
+        return $result;
+    }
+
+    public function getTimestampNextFrom($periodValue, $periodType = self::TYPE_DAY) {
+        $periodNext = $this->getPeriodNext($periodValue, $periodType);
+        $result = $this->getTimestampFrom($periodNext, $periodType);
+        return $result;
+    }
+
+    public function getTimestampPrevTo($periodValue, $periodType = self::TYPE_DAY) {
+        $periodPrev = $this->getPeriodPrev($periodValue, $periodType);
+        $result = $this->getTimestampTo($periodPrev, $periodType);
+        return $result;
+    }
+
+    public function getTimestampTo($periodValue, $periodType = self::TYPE_DAY) {
+        if(
+            !isset(self::$_cachePeriodBounds[$periodValue]) &&
+            !isset(self::$_cachePeriodBounds[$periodValue][$periodType])
+        ) {
+            $this->_calcPeriodBounds($periodValue, $periodType);
+        }
+        $result = self::$_cachePeriodBounds[$periodValue][$periodType]['to'];
+        return $result;
+    }
+
+    /**
+     * @param $weekDay - string see self::WEEK_
+     *
+     * @return string see self::WEEK_
+     */
+    public function getWeekDayNext($weekDay) {
+        switch(strtolower($weekDay)) {
+            case self::WEEK_SUNDAY:
+                $result = self::WEEK_MONDAY;
+                break;
+            case self::WEEK_MONDAY:
+                $result = self::WEEK_TUESDAY;
+                break;
+            case self::WEEK_TUESDAY:
+                $result = self::WEEK_WEDNESDAY;
+                break;
+            case self::WEEK_WEDNESDAY:
+                $result = self::WEEK_THURSDAY;
+                break;
+            case self::WEEK_THURSDAY:
+                $result = self::WEEK_FRIDAY;
+                break;
+            case self::WEEK_FRIDAY:
+                $result = self::WEEK_SATURDAY;
+                break;
+            case self::WEEK_SATURDAY:
+                $result = self::WEEK_SUNDAY;
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * @param $weekDay - string see self::WEEK_
+     *
+     * @return string see self::WEEK_
+     */
+    public function getWeekDayPrev($weekDay) {
+        switch(strtolower($weekDay)) {
+            case self::WEEK_SUNDAY:
+                $result = self::WEEK_SATURDAY;
+                break;
+            case self::WEEK_MONDAY:
+                $result = self::WEEK_SUNDAY;
+                break;
+            case self::WEEK_TUESDAY:
+                $result = self::WEEK_MONDAY;
+                break;
+            case self::WEEK_WEDNESDAY:
+                $result = self::WEEK_TUESDAY;
+                break;
+            case self::WEEK_THURSDAY:
+                $result = self::WEEK_WEDNESDAY;
+                break;
+            case self::WEEK_FRIDAY:
+                $result = self::WEEK_THURSDAY;
+                break;
+            case self::WEEK_SATURDAY:
+                $result = self::WEEK_FRIDAY;
+                break;
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeekFirstDay() {
+        return $this->_weekFirstDay;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeekLastDay() {
+        return $this->_weekLastDay;
+    }
+
+    /**
+     * Return 'true' if $periodValue is day period (YYYYMMDD).
+     *
+     * @param $periodValue
+     *
+     * @return bool
+     */
+    public function isPeriodDay($periodValue) {
+        $result = (strlen($periodValue) == 8);
+        return $result;
+    }
+
+    /**
+     * Return 'true' if $periodValue is month period (YYYYMM).
+     *
+     * @param $periodValue
+     *
+     * @return bool
+     */
+    public function isPeriodMonth($periodValue) {
+        $result = (strlen($periodValue) == 6);
+        return $result;
+    }
+
+    /**
+     * Return 'true' if $periodValue is year period (YYYY).
+     *
+     * @param $periodValue
+     *
+     * @return bool
+     */
+    public function isPeriodYear($periodValue) {
+        $result = (strlen($periodValue) == 4);
+        return $result;
+    }
+
+    /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekFirstDay($weekDay) {
+        $this->_weekFirstDay = $weekDay;
+        $this->_weekLastDay = $this->getWeekDayPrev($weekDay);
+    }
+
+    /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekLastDay($weekDay) {
+        $this->_weekLastDay = $weekDay;
+        $this->_weekFirstDay = $this->getWeekDayNext($weekDay);
+    }
+}
