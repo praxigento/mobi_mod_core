@@ -11,33 +11,31 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 use Praxigento\Core\Lib\Context;
 
-abstract class Base implements InstallSchemaInterface {
-    /**
-     * Name of the core module class to create module's schema.
-     *
-     * @var string
-     */
-    protected $_classSchema;
+abstract class Base implements InstallSchemaInterface
+{
+    /** @var \Praxigento\Core\Setup\Dem\Tool */
+    protected $_toolDem;
+
+    public function __construct(
+        \Praxigento\Core\Setup\Dem\Tool $toolDem
+    ) {
+        $this->_toolDem = $toolDem;
+    }
 
     /**
-     * @param $classModuleSchema string name of the class of the module's schema installer
-     * (Praxigento\Pv\Lib\Setup\Schema).
+     * Module specific routines to create database structure on install.
      */
-    public function __construct($classModuleSchema) {
-        $this->_classSchema = $classModuleSchema;
-    }
+    protected abstract function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context);
 
     public function install(
         SchemaSetupInterface $setup,
         ModuleContextInterface $context
     ) {
-        /** start M2 setup*/
+        /* start M2 setup*/
         $setup->startSetup();
-        /** Get module's schema installer using DI Object Manager. */
-        $obm = Context::instance()->getObjectManager();
-        $moduleSchema = $obm->get($this->_classSchema);
-        $moduleSchema->setup();
-        /** complete M2 setup*/
+        /* perform module specific operations */
+        $this->_setup($setup, $context);
+        /* complete M2 setup*/
         $setup->endSetup();
     }
 }

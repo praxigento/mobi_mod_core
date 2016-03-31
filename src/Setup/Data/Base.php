@@ -10,32 +10,21 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Praxigento\Core\Lib\Context;
-use Praxigento\Core\Lib\Setup\IData;
 
-abstract class Base implements InstallDataInterface {
-    /**
-     * Name of the core module class to create module's data.
-     *
-     * @var string
-     */
-    protected $_classData;
+abstract class Base implements InstallDataInterface
+{
 
     /**
-     * @param $classModuleData string name of the class of the module's data installer
-     * (Praxigento\Pv\Lib\Setup\Data).
+     * Module specific routines to create initial module's data on install.
      */
-    public function __construct($classModuleData) {
-        $this->_classData = $classModuleData;
-    }
+    protected abstract function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context);
 
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context) {
+    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    {
         /** start M2 setup*/
         $setup->startSetup();
-        /** Get module's schema installer using DI Object Manager. */
-        $obm = Context::instance()->getObjectManager();
-        /** @var  $moduleData IData */
-        $moduleData = $obm->get($this->_classData);
-        $moduleData->install();
+        /* perform module specific operations */
+        $this->_setup($setup, $context);
         /** complete M2 setup*/
         $setup->endSetup();
     }
