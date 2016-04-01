@@ -7,6 +7,7 @@
 
 namespace Praxigento\Core\Setup\Dem;
 
+use Flancer32\Lib\DataObject;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Lib\Setup\Db\Dem as Dem;
 use Praxigento\Core\Lib\Setup\Db\Dem\Type as DemType;
@@ -108,23 +109,24 @@ class Tool
      *
      * @param string $pathToDemFile absolute path to the DEM definition in JSON format.
      * @param string $pathToDemNode as "/dBEAR/package/Praxigento/package/ExpDate"
-     * @return array
+     * @return DataObject
      * @throws \Exception
      */
     public function readDemPackage($pathToDemFile, $pathToDemNode)
     {
         $json = file_get_contents($pathToDemFile);
-        $result = json_decode($json, true);
+        $data = json_decode($json, true);
         $paths = explode(self::PS, $pathToDemNode);
         foreach ($paths as $path) {
             if (strlen(trim($path)) > 0) {
-                if (isset($result[$path])) {
-                    $result = $result[$path];
+                if (isset($data[$path])) {
+                    $data = $data[$path];
                 } else {
                     throw new \Exception("Cannot find DEM node '$pathToDemNode' in file '$pathToDemFile'.");
                 }
             }
         }
+        $result = new DataObject($data);
         return $result;
     }
 }
