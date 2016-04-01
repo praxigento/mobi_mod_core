@@ -1,9 +1,11 @@
 <?php
 /**
+ * Interface for the persistence entities (match to tables & vies in db).
+ *
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Data;
+namespace Praxigento\Core\Data;
 
 
 interface IEntity
@@ -17,7 +19,7 @@ interface IEntity
 
     /**
      * Get array with names of the primary key attributes.
-     * 
+     *
      * @return array
      */
     public function getPrimaryKeyAttrs();

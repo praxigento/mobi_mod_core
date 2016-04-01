@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Lib\Service\Type\Base\Response;
 
-use Praxigento\Core\Lib\Entity\Type\Base as BaseType;
+use Praxigento\Core\Data\Entity\Type\Base as BaseType;
 
 abstract class GetByCode extends \Praxigento\Core\Lib\Service\Base\Response {
     /**

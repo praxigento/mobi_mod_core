@@ -4,7 +4,7 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Lib\Repo\Def;
+namespace Praxigento\Core\Repo\Def;
 
 abstract class Base
 {

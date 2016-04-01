@@ -12,7 +12,7 @@
 
     <!-- Repos -->
     <preference for="Praxigento\Core\Lib\Repo\IBasic"
-                type="Praxigento\Core\Lib\Repo\Def\Basic"/>
+                type="Praxigento\Core\Repo\Def\Basic"/>
 
     <!-- Services -->
     <preference for="Praxigento\Core\Lib\Service\IRepo"

@@ -1,13 +1,13 @@
 <?php
 /**
  * Default implementation for basic repository to do universal operations with data (CRUD).
+ *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Lib\Repo\Def;
+namespace Praxigento\Core\Repo\Def;
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Core\Lib\Context;
-use Praxigento\Core\Lib\Repo\IBasic;
+use Praxigento\Core\Repo\IBasic;
 
 class  Basic extends Base implements IBasic
 {

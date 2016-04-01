@@ -5,7 +5,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Repo;
+namespace Praxigento\Core\Repo;
 
 
 interface IBasic

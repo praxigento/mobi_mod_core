@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Lib\Service\Type\Base;
 
-use Praxigento\Core\Lib\Entity\Type\Base as BaseTypeCode;
+use Praxigento\Core\Data\Entity\Type\Base as BaseTypeCode;
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
