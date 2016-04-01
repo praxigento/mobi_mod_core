@@ -27,7 +27,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 
     protected function _mockDbSelect()
     {
-        $result = $this->_mock(\Praxigento\Core\Lib\Context\Dba\ISelect::class);
+        $result = $this->_mock(\Magento\Framework\DB\Select::class);
         return $result;
     }
 
@@ -45,7 +45,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 
     protected function _mockRepoBasic()
     {
-        $result = $this->_mock(\Praxigento\Core\Lib\Repo\IBasic::class);
+        $result = $this->_mock(\Praxigento\Core\Repo\IBasic::class);
         return $result;
     }
 

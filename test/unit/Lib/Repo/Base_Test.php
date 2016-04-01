@@ -23,6 +23,6 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase {
 
     public function test_getBasicRepo() {
         $resp = $this->repo->getBasicRepo();
-        $this->assertInstanceOf(\Praxigento\Core\Lib\Repo\IBasic::class, $resp);
+        $this->assertInstanceOf(\Praxigento\Core\Repo\IBasic::class, $resp);
     }
 }

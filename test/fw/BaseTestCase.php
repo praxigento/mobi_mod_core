@@ -107,7 +107,7 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
 
     protected function _mockRepoBasic($mDba) {
         $result = $this
-            ->getMockBuilder(\Praxigento\Core\Lib\Repo\IBasic::class)
+            ->getMockBuilder(\Praxigento\Core\Repo\IBasic::class)
             ->getMock();
         $result
             ->expects($this->any())

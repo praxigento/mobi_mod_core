@@ -11,7 +11,7 @@
                 type="Praxigento\Core\Lib\Context\Def\TransactionDefinition"/>
 
     <!-- Repos -->
-    <preference for="Praxigento\Core\Lib\Repo\IBasic"
+    <preference for="Praxigento\Core\Repo\IBasic"
                 type="Praxigento\Core\Repo\Def\Basic"/>
 
     <!-- Services -->

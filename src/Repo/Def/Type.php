@@ -25,7 +25,7 @@ abstract class  Type extends Base implements IType
         $result = null;
         $entity = $this->_getEntityName();
         $tbl = $this->_dba->getTableName($entity);
-        /** @var  $query \Zend_Db_Select */
+        /** @var  $query \Magento\Framework\DB\Select */
         $query = $this->_dba->select();
         $query->from($tbl);
         $query->where(EntityTypeBase::ATTR_CODE . '=:code');

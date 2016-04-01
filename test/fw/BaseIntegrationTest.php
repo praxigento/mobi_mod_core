@@ -8,6 +8,7 @@
 
 namespace Praxigento\Core\Lib\Test;
 
+use Magento\Framework\App\ObjectManager;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Lib\Context;
 use Praxigento\Downline\Lib\Entity\Customer;
@@ -45,7 +46,7 @@ abstract class BaseIntegrationTest extends BaseTestCase
      */
     protected $_mapCustomerMageIdByIndex = [];
     /** @var  \Praxigento\Core\Lib\Context\IObjectManager */
-    protected $_obm;
+    protected $_manObj;
     /** @var \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
     protected $_resource;
     /** @var  \Praxigento\Core\Lib\IToolbox */
@@ -72,21 +73,16 @@ abstract class BaseIntegrationTest extends BaseTestCase
 
     public function __construct()
     {
-        /* Reset and get singleton instance */
-        Context::reset();
-        $ctx = Context::instance();
-        $this->_obm = $ctx->getObjectManager();
-        $this->_logger = $this->_obm->get(\Psr\Log\LoggerInterface::class);
-        /** @var  $dba \Praxigento\Core\Lib\Context\IDbAdapter */
-        $dba = $this->_obm->get(\Praxigento\Core\Lib\Context\IDbAdapter::class);
-        $this->_resource = $dba->getResource();
-        $this->_conn = $dba->getDefaultConnection();
+        $this->_manObj = ObjectManager::getInstance();
+        $this->_logger = $this->_manObj->get(\Psr\Log\LoggerInterface::class);
+        $this->_resource = $this->_manObj->get(\Magento\Framework\App\ResourceConnection::class);
+        $this->_conn = $this->_resource->getConnection();
         /* toolbox */
         /* TODO: remove it */
-        $this->_toolbox = $this->_obm->get(\Praxigento\Core\Lib\IToolbox::class);
+        $this->_toolbox = $this->_manObj->get(\Praxigento\Core\Lib\IToolbox::class);
         /* base services */
-        $this->_callDownlineCustomer = $this->_obm->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
-        $this->_callDownlineSnap = $this->_obm->get(\Praxigento\Downline\Lib\Service\ISnap::class);
+        $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
+        $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ISnap::class);
     }
 
     /**
