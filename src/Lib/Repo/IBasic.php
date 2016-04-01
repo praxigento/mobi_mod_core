@@ -8,29 +8,23 @@
 namespace Praxigento\Core\Lib\Repo;
 
 
-interface IBasic {
+interface IBasic
+{
     /**
      * @param string $entity Entity name (not table name).
-     * @param array  $bind [COL_NAME=>$value, ...]
+     * @param array $bind [COL_NAME=>$value, ...]
      *
      * @return int ID of the inserted record.
      */
     public function addEntity($entity, $bind);
 
     /**
-     * Get database adapter.
-     *
-     * @return \Praxigento\Core\Lib\Context\IDbAdapter
-     */
-    public function getDba();
-
-    /**
-     * @param string                    $entity Entity name (not table name)
+     * @param string $entity Entity name (not table name)
      * @param array|string|Zend_Db_Expr $cols The columns to select from the table.
-     * @param string                    $where The WHERE condition.
-     * @param array|string              $order The column(s) and direction to order by.
-     * @param int                       $limit The number of rows to return.
-     * @param int                       $offset Start returning after this many rows.
+     * @param string $where The WHERE condition.
+     * @param array|string $order The column(s) and direction to order by.
+     * @param int $limit The number of rows to return.
+     * @param int $offset Start returning after this many rows.
      *
      * @return bool|array 'false' or selected data ( [[...], ...]).
      */

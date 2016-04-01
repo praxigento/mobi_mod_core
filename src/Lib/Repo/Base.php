@@ -6,7 +6,8 @@
  */
 namespace Praxigento\Core\Lib\Repo;
 
-class  Base implements IModule {
+class  Base implements IModule
+{
     /** @var IBasic */
     protected $_repoBasic;
 
@@ -22,7 +23,8 @@ class  Base implements IModule {
      *
      * @return \Praxigento\Core\Lib\Context\Dba\IConnection
      */
-    protected function _getConn() {
+    protected function _getConn()
+    {
         return $this->_repoBasic->getDba()->getDefaultConnection();
     }
 
@@ -34,7 +36,8 @@ class  Base implements IModule {
      * @return string 'm1_prxgt_mod_entity' table name (with prefix or M1 analog for M2 name - sales_flat_order
      * & sales_order).
      */
-    protected function _getTableName($entityName) {
+    protected function _getTableName($entityName)
+    {
         $result = $this->_repoBasic->getDba()->getTableName($entityName);
         return $result;
     }
@@ -44,7 +47,8 @@ class  Base implements IModule {
      *
      * @return IBasic
      */
-    public function getBasicRepo() {
+    public function getBasicRepo()
+    {
         return $this->_repoBasic;
     }
 }

@@ -17,14 +17,14 @@ class Tool
     const PS = Cfg::DEM_PS;
     /** @var \Praxigento\Core\Lib\Setup\Db\Dem\Parser */
     private $_parser;
-    /** @var \Magento\Framework\App\ResourceConnection\Proxy */
+    /** @var \Magento\Framework\App\ResourceConnection */
     private $_resource;
 
     /**
      * Tool constructor.
      */
     public function __construct(
-        \Magento\Framework\App\ResourceConnection\Proxy $resource,
+        \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Lib\Setup\Db\Dem\Parser $parser
     ) {
         $this->_parser = $parser;
