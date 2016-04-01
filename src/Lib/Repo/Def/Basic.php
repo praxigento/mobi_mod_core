@@ -9,20 +9,8 @@ use Flancer32\Lib\DataObject;
 use Praxigento\Core\Lib\Context;
 use Praxigento\Core\Lib\Repo\IBasic;
 
-class  Basic implements IBasic
+class  Basic extends Base implements IBasic
 {
-    /** @var \Magento\Framework\App\ResourceConnection */
-    protected $_resourceConnection;
-    /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
-    protected $_dba;
-
-    public function __construct(
-        \Magento\Framework\App\ResourceConnection $resourceConnection
-    ) {
-        $this->_resourceConnection = $resourceConnection;
-        $this->_dba = $resourceConnection->getConnection();
-    }
-
     public function addEntity($entity, $bind)
     {
         $result = null;

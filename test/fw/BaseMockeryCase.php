@@ -43,12 +43,9 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
-    protected function _mockRepoBasic($mDba)
+    protected function _mockRepoBasic()
     {
         $result = $this->_mock(\Praxigento\Core\Lib\Repo\IBasic::class);
-        $result
-            ->shouldReceive('getDba')
-            ->andReturn($mDba);
         return $result;
     }
 
@@ -61,12 +58,12 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
-    protected function _mockResourceConnection($mConn)
+    protected function _mockResourceConnection($mDba)
     {
         $result = $this->_mock(\Magento\Framework\App\ResourceConnection::class);
         $result
             ->shouldReceive('getConnection')
-            ->andReturn($mConn);
+            ->andReturn($mDba);
         return $result;
     }
 
