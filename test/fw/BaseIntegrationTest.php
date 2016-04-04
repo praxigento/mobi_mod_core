@@ -11,7 +11,7 @@ namespace Praxigento\Core\Lib\Test;
 use Magento\Framework\App\ObjectManager;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Lib\Context;
-use Praxigento\Downline\Lib\Entity\Customer;
+use Praxigento\Downline\Data\Entity\Customer;
 use Praxigento\Downline\Lib\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Lib\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
