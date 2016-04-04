@@ -5,10 +5,10 @@
     <!-- Context -->
     <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
                 type="Praxigento\Core\Lib\Context\DbAdapter"/>
-    <preference for="Praxigento\Core\Lib\Context\ITransactionManager"
-                type="Praxigento\Core\Lib\Context\DbAdapter"/>
-    <preference for="Praxigento\Core\Lib\Context\ITransactionDefinition"
-                type="Praxigento\Core\Lib\Context\Def\TransactionDefinition"/>
+    <preference for="Praxigento\Core\Repo\ITransactionManager"
+                type="\Praxigento\Core\Repo\Def\TransactionManager"/>
+    <preference for="Praxigento\Core\Repo\ITransactionDefinition"
+                type="Praxigento\Core\Repo\Def\TransactionDefinition"/>
 
     <!-- Repos -->
     <preference for="Praxigento\Core\Repo\IBasic"

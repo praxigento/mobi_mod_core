@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Context;
+namespace Praxigento\Core\Repo;
 
 /**
  * Transaction definition to use in Transaction Manager.

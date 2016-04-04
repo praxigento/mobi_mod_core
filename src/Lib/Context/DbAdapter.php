@@ -16,16 +16,8 @@ use Praxigento\Core\Lib\Context as Ctx;
 /**
  * TODO: move implementation to 'Def' folder.
  */
-class DbAdapter implements IDbAdapter, ITransactionManager
+class DbAdapter implements IDbAdapter
 {
-
-    /**
-     * Current Transaction Level
-     *
-     * @var int
-     */
-    protected $_transactionLevel = 0;
-
     /** @var  \Magento_Db_Adapter_Pdo_Mysql|\Magento\Framework\DB\Adapter\Pdo\Mysql */
     protected $_defaultConnection;
     /** @var  \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
@@ -87,54 +79,5 @@ class DbAdapter implements IDbAdapter, ITransactionManager
         $mapped = Ctx::getMappedEntityName($entityName);
         $result = $this->_resource->getTableName($mapped);
         return $result;
-    }
-
-    public function getTransactionManager()
-    {
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function transactionBegin()
-    {
-        $this->_transactionLevel++;
-        $this->_defaultConnection->beginTransaction();
-        $result = $this->_manObject->create(Ctx\Def\TransactionDefinition::class);
-        $result->setLevel($this->_transactionLevel);
-        return $result;
-    }
-
-    public function transactionClose(ITransactionDefinition $data)
-    {
-        $level = $data->getLevel();
-        $levelUp = $level - 1;
-        if ($level == $this->_transactionLevel) {
-            $this->_defaultConnection->rollBack();
-            $this->_transactionLevel--;
-        } elseif ($levelUp) {
-            // do nothing, this is committed transaction
-        } else {
-            // exception should be thrown but I suppose it will be done in the other place.
-        }
-    }
-
-    public function transactionCommit(ITransactionDefinition $data)
-    {
-        $level = $data->getLevel();
-        if ($level == $this->_transactionLevel) {
-            $this->_defaultConnection->commit();
-            $this->_transactionLevel--;
-        }
-    }
-
-    public function transactionRollback(ITransactionDefinition $data)
-    {
-        $level = $data->getLevel();
-        if ($level == $this->_transactionLevel) {
-            $this->_defaultConnection->rollBack();
-            $this->_transactionLevel--;
-        }
     }
 }

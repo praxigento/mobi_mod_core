@@ -29,8 +29,4 @@ interface IDbAdapter
      */
     public function getTableName($entityName);
 
-    /**
-     * @return \Praxigento\Core\Lib\Context\ITransactionManager
-     */
-    public function getTransactionManager();
 }
