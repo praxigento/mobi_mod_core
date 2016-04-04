@@ -21,15 +21,15 @@ interface BaseInterface
      * @param mixed $data
      */
     public function setData($data);
-
-    /**
-     * @return mixed|null
-     */
-    public function getCustomAttributes();
-
-    /**
-     * @param mixed $data
-     */
-    public function setCustomAttributes($data);
+    /* TODO this is test code and should be removed after 2016/06/01 */
+//    /**
+//     * @return mixed|null
+//     */
+//    public function getCustomAttributes();
+//
+//    /**
+//     * @param mixed $data
+//     */
+//    public function setCustomAttributes($data);
 
 }
