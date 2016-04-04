@@ -9,15 +9,15 @@ namespace Praxigento\Core\Repo\Def;
 abstract class Base
 {
     /** @var \Magento\Framework\App\ResourceConnection */
-    protected $_resourceConnection;
+    protected $_resource;
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_dba;
 
     public function __construct(
-        \Magento\Framework\App\ResourceConnection $rsrcConn
+        \Magento\Framework\App\ResourceConnection $resource
     ) {
-        $this->_resourceConnection = $rsrcConn;
-        $this->_dba = $rsrcConn->getConnection();
+        $this->_resource = $resource;
+        $this->_dba = $resource->getConnection();
     }
 
     /**

@@ -9,17 +9,14 @@
 namespace Praxigento\Core\Lib\Service\Base\Sub;
 
 
-abstract class Base {
+abstract class Base
+{
     /** @var \Psr\Log\LoggerInterface */
     protected $_logger;
-    /** @var  \Praxigento\Core\Lib\IToolbox */
-    protected $_toolbox;
 
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
-        \Praxigento\Core\Lib\IToolbox $toolbox
+        \Psr\Log\LoggerInterface $logger
     ) {
         $this->_logger = $logger;
-        $this->_toolbox = $toolbox;
     }
 }
