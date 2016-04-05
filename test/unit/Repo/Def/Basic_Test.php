@@ -2,66 +2,95 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Lib\Repo\Def;
+namespace Praxigento\Core\Repo\Def;
 
-use Praxigento\Core\Lib\Context;
-use Praxigento\Core\Lib\Context\Dba\Def\Select;
+use Flancer32\Lib\DataObject;
 
-include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
+include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class Basic_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
-    private $mDba;
-    /** @var  \Mockery\MockInterface */
-    private $mRsrcConn;
+    private $mConn;
     /** @var  Basic */
-    private $repo;
+    private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
-        $this->mDba = $this->_mockDba();
-        $this->mRsrcConn = $this->_mockResourceConnection($this->mDba);
-        $this->repo = new Basic($this->mRsrcConn);
+        /* create mocks */
+        $this->mConn = $this->_mockConn();
+        $this->mRepoBasic = $this->_mockRepoBasic();
+        /* create object */
+        $mResource = $this->_mockResourceConnection($this->mConn);
+        $this->obj = new Basic($mResource);
     }
+
 
     public function test_addEntity()
     {
         // $tbl = $this->_dba->getTableName($entity);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $rowsAdded = $this->_dba->insert($tbl, $bind);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('insert')->once()
             ->with('table', [])
             ->andReturn('added');
         // $result = $this->_dba->lastInsertId($tbl);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('lastInsertId')->once()
             ->with('table')
             ->andReturn('inserted');
-        //
-        $resp = $this->repo->addEntity('entity', []);
+        /* === Call and asserts  === */
+        $resp = $this->obj->addEntity('entity', []);
         $this->assertEquals('inserted', $resp);
+    }
+
+    public function test_addEntity_dataObject()
+    {
+        // $tbl = $this->_dba->getTableName($entity);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
+            ->andReturn('table');
+        // $rowsAdded = $this->_dba->insert($tbl, $bind);
+        $this->mConn
+            ->shouldReceive('insert')->once()
+            ->with('table', [])
+            ->andReturn('added');
+        // $result = $this->_dba->lastInsertId($tbl);
+        $this->mConn
+            ->shouldReceive('lastInsertId')->once()
+            ->with('table')
+            ->andReturn('inserted');
+        /* === Call and asserts  === */
+        $resp = $this->obj->addEntity('entity', new DataObject([]));
+        $this->assertEquals('inserted', $resp);
+    }
+
+    public function test_constructor()
+    {
+        /* === Test Data === */
+        /* === Setup Mocks === */
+        /* === Call and asserts  === */
+        $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\Def\Base);
     }
 
     public function test_getEntities()
     {
         // $tbl = $this->_dba->getTableName($entity);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $query = $this->_dba->select();
         $mQuery = $this->_mockDbSelect();
-        $this->mDba
+        $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mQuery);
         // $query->from($tbl, $cols);
         $mQuery->shouldReceive('from')->once()
-            ->with('table', Select::SQL_WILDCARD);
+            ->with('table', \Zend_Db_Select::SQL_WILDCARD);
         // $query->where($where);
         $mQuery->shouldReceive('where')->once()
             ->with('where');
@@ -72,11 +101,11 @@ class Basic_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         $mQuery->shouldReceive('limit')->once()
             ->with('limit', 'offset');
         // $result = $this->_dba->fetchAll($query);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('fetchAll')->once()
             ->andReturn('result');
-        //
-        $resp = $this->repo->getEntities('entity', null, 'where', 'order', 'limit', 'offset');
+        /* === Call and asserts  === */
+        $resp = $this->obj->getEntities('entity', null, 'where', 'order', 'limit', 'offset');
         $this->assertEquals('result', $resp);
     }
 
@@ -86,26 +115,26 @@ class Basic_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
             'field' => 'value'
         ];
         // $tbl = $this->_dba->getTableName($entity);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $query = $conn->select();
         $mQuery = $this->_mockDbSelect();
-        $this->mDba
+        $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mQuery);
         // $query->from($tbl, $cols);
         $mQuery->shouldReceive('from')->once()
-            ->with('table', Select::SQL_WILDCARD);
+            ->with('table', \Zend_Db_Select::SQL_WILDCARD);
         // $query->where($where);
         $mQuery->shouldReceive('where')->once()
             ->with('field=:field');
         // $result = $conn->fetchRow($query, $pk);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('fetchRow')->once()
             ->andReturn('result');
-        //
-        $resp = $this->repo->getEntityByPk('entity', $PK);
+        /* === Call and asserts  === */
+        $resp = $this->obj->getEntityByPk('entity', $PK);
         $this->assertEquals('result', $resp);
     }
 
@@ -113,33 +142,48 @@ class Basic_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
     {
         $BIND = ['key' => 'value'];
         // $tbl = $this->_dba->getTableName($entity);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $this->_dba->query($query, $bind);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('query')->once()
             ->with('REPLACE table (key) VALUES (:key)', anything())
             ->andReturn('result');
-        //
-        $this->repo->replaceEntity('entity', $BIND);
+        /* === Call and asserts  === */
+        $this->obj->replaceEntity('entity', $BIND);
     }
 
     public function test_updateEntity()
     {
         // $tbl = $this->_dba->getTableName($entity);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $result = $this->_dba->update($tbl, $bind, $where);
-        $this->mDba
+        $this->mConn
             ->shouldReceive('update')->once()
             ->with('table', [], null)
             ->andReturn('result');
-        //
-        $resp = $this->repo->updateEntity('entity', []);
+        /* === Call and asserts  === */
+        $resp = $this->obj->updateEntity('entity', []);
         $this->assertEquals('result', $resp);
     }
 
+    public function test_updateEntity_dataObject()
+    {
+        // $tbl = $this->_dba->getTableName($entity);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
+            ->andReturn('table');
+        // $result = $this->_dba->update($tbl, $bind, $where);
+        $this->mConn
+            ->shouldReceive('update')->once()
+            ->with('table', [], null)
+            ->andReturn('result');
+        /* === Call and asserts  === */
+        $resp = $this->obj->updateEntity('entity', new DataObject([]));
+        $this->assertEquals('result', $resp);
+    }
 
 }
