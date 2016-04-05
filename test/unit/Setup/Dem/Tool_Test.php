@@ -15,7 +15,7 @@ class Tool_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
-    private $mToolDem;
+    private $mParser;
     /** @var  Tool */
     private $obj;
 
@@ -24,20 +24,20 @@ class Tool_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         parent::setUp();
         /* create mocks */
         $this->mConn = $this->_mockConn();
-        $this->mToolDem = $this->_mock(\Praxigento\Core\Setup\Dem\Tool::class);
+        $this->mParser = $this->_mock(\Praxigento\Core\Setup\Dem\Parser::class);
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTest($mResource, $this->mToolDem);
+        $this->obj = new Tool($mResource, $this->mParser);
     }
 
-    public function test_readDemPackage()
-    {
-        /* === Test Data === */
-        /* === Setup Mocks === */
-        /* === Call and asserts  === */
-        $this->obj->install($this->mSetup, $this->mContext);
-    }
+//    public function test_readDemPackage()
+//    {
+//        /* === Test Data === */
+//        /* === Setup Mocks === */
+//        /* === Call and asserts  === */
+////        $this->obj->readDemPackage('pathToDemFile', 'pathToDemNode');
+//    }
 
 }

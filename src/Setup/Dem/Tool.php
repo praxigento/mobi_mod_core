@@ -8,13 +8,13 @@
 namespace Praxigento\Core\Setup\Dem;
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Core\Config as Cfg;
+use Praxigento\Core\Config;
 use Praxigento\Core\Setup\Dem\Cfg as DemCfg;
 
 class Tool
 {
     /** Path separator between packages. */
-    const PS = Cfg::DEM_PS;
+    const PS = Config::DEM_PS;
     /** @var \Praxigento\Core\Setup\Dem\Parser */
     private $_parser;
     /** @var \Magento\Framework\App\ResourceConnection */
