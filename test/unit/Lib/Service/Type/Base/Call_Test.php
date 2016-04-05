@@ -9,7 +9,11 @@ use Praxigento\Core\Data\Entity\Type\Base as BaseTypeCode;
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
 class Call_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
-
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
+    }
     public function test_getByCode() {
         /** === Test Data === */
         $TABLE = 'table name here';

@@ -12,7 +12,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Check name of the class or interface, convert M2 classes to M1 if necessary and return mock for valid name.
+     * Get mock for the class/interface.
      *
      * @param  $className string distinguished name of the class or interface.
      *
@@ -20,8 +20,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
      */
     protected function _mock($className)
     {
-        $validClassName = Context::getMappedClassName($className);
-        $result = m::mock($validClassName);
+        $result = m::mock($className);
         return $result;
     }
 

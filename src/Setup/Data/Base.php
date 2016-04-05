@@ -13,39 +13,43 @@ use Praxigento\Core\Lib\Context;
 
 abstract class Base implements InstallDataInterface
 {
-
-    /** @var  ModuleDataSetupInterface */
-    private $_setup;
+    /** @var \Praxigento\Core\Repo\IBasic */
+    protected $_repoBasic;
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $_resource;
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface */
+    protected $_conn;
+    /** @var  \Magento\Framework\Setup\ModuleContextInterface */
+    protected $_context;
 
     /**
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     * Base constructor.
+     * @param ModuleDataSetupInterface $_setup
      */
-    protected function _getConn()
-    {
-        return $this->_setup->getConnection();
-    }
-
-    protected function _getTableName($entityName)
-    {
-        $result = $this->_setup->getConnection()->getTableName($entityName);
-        return $result;
+    public function __construct(
+        \Magento\Framework\App\ResourceConnection $resource,
+        \Praxigento\Core\Repo\IBasic $repoBasic
+    ) {
+        $this->_resource = $resource;
+        $this->_conn = $resource->getConnection();
+        $this->_repoBasic = $repoBasic;
     }
 
     /**
      * Module specific routines to create initial module's data on install.
      */
-    protected abstract function _setup(ModuleDataSetupInterface $setup, ModuleContextInterface $context);
+    protected abstract function _setup();
 
     /**
      * @inheritdoc
      */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $this->_setup = $setup;
+        $this->_context = $context;
         /** start M2 setup*/
         $setup->startSetup();
         /* perform module specific operations */
-        $this->_setup($setup, $context);
+        $this->_setup();
         /** complete M2 setup*/
         $setup->endSetup();
     }

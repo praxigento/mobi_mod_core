@@ -5,63 +5,63 @@
  */
 namespace Praxigento\Core\Setup\Data;
 
+use Magento\Framework\Setup\ModuleContextInterface;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Praxigento\Core\Lib\Context;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
+define('TEST_TABLE_NAME', 'table name');
 
-    public function test_install() {
-        /** === Test Data === */
-        $CLASS_NAME = '\Praxigento\Module\Lib\Setup\Data';
-        /** === Mocks === */
-        $mockSetup = $this
-            ->getMockBuilder('Magento\Framework\Setup\ModuleDataSetupInterface')
-            ->getMock();
-        $mockMageContext = $this
-            ->getMockBuilder('Magento\Framework\Setup\ModuleContextInterface')
-            ->getMock();
+class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+{
+    /** @var  \Mockery\MockInterface */
+    private $mSetup;
+    private $mContext;
+    /** @var  ChildToTest */
+    private $obj;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
+        $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
+        $this->obj = new ChildToTest();
+    }
+
+    public function test_install()
+    {      /* === Test Data === */
+        /* === Setup Mocks === */
         // $setup->startSetup();
-        $mockSetup
-            ->expects($this->once())
-            ->method('startSetup');
-        // $obm = Context::instance()->getObjectManager();
-        $mockCtx = $this
-            ->getMockBuilder('Praxigento\Core\Lib\Context')
-            ->getMock();
-        Context::set($mockCtx);
-        $mockObm = $this
-            ->getMockBuilder('Praxigento\Core\Lib\Context\IObjectManager')
-            ->getMock();
-        $mockCtx
-            ->expects($this->once())
-            ->method('getObjectManager')
-            ->willReturn($mockObm);
-        // $moduleData = $obm->get($this->_classData);
-        $mockModData = $this
-            ->getMockBuilder('Praxigento\Core\Lib\Setup\IData')
-            ->getMock();
-        $mockObm
-            ->expects($this->once())
-            ->method('get')
-            ->with($CLASS_NAME)
-            ->willReturn($mockModData);
-        // $moduleData->install();
-        $mockModData
-            ->expects($this->once())
-            ->method('install');
+        $this->mSetup
+            ->shouldReceive('startSetup')->once();
+        // $this->_setup($setup, $context);
+        // $this->_getConn();
+        // return $this->_setup->getConnection();
+        $mConn = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
+        $this->mSetup
+            ->shouldReceive('getConnection')
+            ->andReturn($mConn);
+        // $this->_getTableName(TEST_TABLE_NAME);
+        // $result = $this->_setup->getConnection()->getTableName($entityName);
+        $mConn->shouldReceive('getTableName')->once()
+            ->with(TEST_TABLE_NAME);
         // $setup->endSetup();
-        $mockSetup
-            ->expects($this->once())
-            ->method('endSetup');
-        /** Test itself. */
-        /** @var  $mockBase \Praxigento\Core\Setup\Data\Base */
-        $mockBase = $this->getMockBuilder('Praxigento\Core\Setup\Data\Base')
-                         ->setConstructorArgs([ $CLASS_NAME ])
-                         ->setMethods(null)
-                         ->getMock();
-        $mockBase->install($mockSetup, $mockMageContext);
+        $this->mSetup
+            ->shouldReceive('endSetup')->once();
+        /* === Call and asserts  === */
+        $this->obj->install($this->mSetup, $this->mContext);
+    }
 
+}
+
+class ChildToTest extends Base
+{
+    protected function _setup()
+    {
+        $this->_getConn();
+        $this->_getTableName(TEST_TABLE_NAME);
+        1 + 1;
     }
 
 }

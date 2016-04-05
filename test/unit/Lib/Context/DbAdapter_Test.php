@@ -8,9 +8,18 @@ use Praxigento\Core\Lib\Context;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class DbAdapter_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
+/**
+ * @deprecated
+ */
+class DbAdapter_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase
+{
+    protected function setUp()
+    {
+        $this->markTestSkipped('Test is deprecated after M1 & M2 merge is done.');
+    }
 
-    public function test_construct_m1() {
+    public function test_construct_m1()
+    {
         /** === Test Data === */
         /** === Mocks === */
         $mResource = $this->_mockResource();
@@ -19,8 +28,9 @@ class DbAdapter_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
         $this->assertNotNull($obj);
     }
 
-    public function test_construct_m2() {
-        if(!defined("IS_M1_TESTS")) {
+    public function test_construct_m2()
+    {
+        if (!defined("IS_M1_TESTS")) {
             /** === Test Data === */
             /** === Mocks === */
             $mResource = $this->_mockResource();
@@ -30,23 +40,8 @@ class DbAdapter_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
         }
     }
 
-    public function test_getters() {
-        /** === Test Data === */
-        /** === Mocks === */
-        $mResource = $this->_mockResource();
-        $mConnection = $this->_mockFor('Magento\Framework\DB\Adapter\Pdo\Mysql');
-
-        $mResource
-            ->expects($this->once())
-            ->method('getConnection')
-            ->willReturn($mConnection);
-        /** === Test itself === */
-        $obj = new DbAdapter($mResource);
-        $this->assertNotNull($obj->getResource());
-        $this->assertNotNull($obj->getDefaultConnection());
-    }
-
-    public function test_getTableName() {
+    public function test_getTableName()
+    {
         /** === Test Data === */
         $TABLE = 'table_name';
         $MAPPED = 'mapped_name';
@@ -62,6 +57,23 @@ class DbAdapter_UnitTest extends \Praxigento\Core\Lib\Test\BaseTestCase {
         $res = $obj->getTableName($TABLE);
         $this->assertEquals($MAPPED, $res);
 
+    }
+
+    public function test_getters()
+    {
+        /** === Test Data === */
+        /** === Mocks === */
+        $mResource = $this->_mockResource();
+        $mConnection = $this->_mockFor('Magento\Framework\DB\Adapter\Pdo\Mysql');
+
+        $mResource
+            ->expects($this->once())
+            ->method('getConnection')
+            ->willReturn($mConnection);
+        /** === Test itself === */
+        $obj = new DbAdapter($mResource);
+        $this->assertNotNull($obj->getResource());
+        $this->assertNotNull($obj->getDefaultConnection());
     }
 
 }
