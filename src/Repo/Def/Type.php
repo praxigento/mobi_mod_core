@@ -24,12 +24,12 @@ abstract class  Type extends Base implements IType
     {
         $result = null;
         $entity = $this->_getEntityName();
-        $tbl = $this->_dba->getTableName($entity);
+        $tbl = $this->_conn->getTableName($entity);
         /** @var  $query \Magento\Framework\DB\Select */
-        $query = $this->_dba->select();
+        $query = $this->_conn->select();
         $query->from($tbl);
         $query->where(EntityTypeBase::ATTR_CODE . '=:code');
-        $data = $this->_dba->fetchRow($query, ['code' => $code]);
+        $data = $this->_conn->fetchRow($query, ['code' => $code]);
         if (
             is_array($data) &&
             isset($data[EntityTypeBase::ATTR_ID])

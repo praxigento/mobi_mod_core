@@ -11,13 +11,13 @@ abstract class Base
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $_resource;
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
-    protected $_dba;
+    protected $_conn;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource
     ) {
         $this->_resource = $resource;
-        $this->_dba = $resource->getConnection();
+        $this->_conn = $resource->getConnection();
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class Base
      */
     protected function _getConn()
     {
-        return $this->_dba;
+        return $this->_conn;
     }
 
     /**
@@ -42,7 +42,7 @@ abstract class Base
      */
     protected function _getTableName($entityName)
     {
-        $result = $this->_dba->getTableName($entityName);
+        $result = $this->_conn->getTableName($entityName);
         return $result;
     }
 
