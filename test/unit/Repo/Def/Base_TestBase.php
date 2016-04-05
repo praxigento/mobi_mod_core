@@ -21,7 +21,7 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         $this->mRepoBasic = $this->_mockRepoBasic();
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTest($mResource);
+        $this->obj = new ChildToTestBase($mResource);
     }
 
     public function test_constructor()
@@ -34,7 +34,7 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 
 }
 
-class ChildToTest extends Base
+class ChildToTestBase extends Base
 {
 
 }
