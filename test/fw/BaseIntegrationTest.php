@@ -86,6 +86,25 @@ abstract class BaseIntegrationTest extends BaseTestCase
     }
 
     /**
+     * Reset cache for services and repos that use the cache.
+     */
+    protected function _cacheReset()
+    {
+        /** @var  $obj \Praxigento\Accounting\Lib\Repo\IModule */
+        $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Repo\IModule::class);
+        $obj->cacheReset();
+        /** @var  $obj \Praxigento\Accounting\Lib\Service\IAccount */
+        $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Service\IAccount::class);
+        $obj->cacheReset();
+        /** @var  $call \Praxigento\Pv\Lib\Service\ISale */
+        $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ISale::class);
+        $obj->cacheReset();
+        /** @var  $call \Praxigento\Pv\Lib\Service\ITransfer */
+        $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ITransfer::class);
+        $obj->cacheReset();
+    }
+
+    /**
      * @param string $dateBegin datestamp (YYYYMMDD) for the date when the first customer should be created.
      * @param bool $swithDateOnNewCustomer 'true' - create customers day by day, 'false' - create all customers
      * in one day.
@@ -158,5 +177,11 @@ abstract class BaseIntegrationTest extends BaseTestCase
         $memPeak = number_format(memory_get_peak_usage(), 0, '.', ',');
         $memCurrent = number_format(memory_get_usage(), 0, '.', ',');
         $this->_logger->debug("Current memory usage: $memCurrent bytes (peak: $memPeak bytes).");
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->_cacheReset();
     }
 }
