@@ -20,30 +20,4 @@ abstract class Base
         $this->_conn = $resource->getConnection();
     }
 
-    /**
-     * Decorator for DBA method (shortcut).
-     *
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface
-     * @deprecated use $this->_dba directly
-     */
-    protected function _getConn()
-    {
-        return $this->_conn;
-    }
-
-    /**
-     * Decorator for DBA method (shortcut).
-     *
-     * @param string $entityName 'prxgt_mod_entity'
-     *
-     * @return string 'm1_prxgt_mod_entity' table name (with prefix or M1 analog for M2 name - sales_flat_order
-     * & sales_order).
-     * @deprecated use $this->_dba->getTableName() directly
-     */
-    protected function _getTableName($entityName)
-    {
-        $result = $this->_conn->getTableName($entityName);
-        return $result;
-    }
-
 }
