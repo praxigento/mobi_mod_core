@@ -33,17 +33,6 @@ class Tool
     }
 
     /**
-     * Convert Entity name to the corresponded table name.
-     * @param string $entityName
-     * @return string
-     */
-    protected function _getTableName($entityName)
-    {
-        $result = $this->_resource->getTableName($entityName);
-        return $result;
-    }
-
-    /**
      *
      * @param $entityAlias string Alias of the entity ('prxgt_acc_type_asset').
      * @param $demEntity array Associative array with entity definition (DEM subtree).
@@ -51,7 +40,7 @@ class Tool
     public function createEntity($entityAlias, $demEntity)
     {
         $conn = $this->_conn;
-        $tblName = $this->_getTableName($entityAlias);
+        $tblName = $conn->getTableName($entityAlias);
         /* init new object to create table in DB */
         $tbl = $conn->newTable($tblName);
         if (isset($demEntity[DemCfg::COMMENT])) {
@@ -91,7 +80,7 @@ class Tool
                 /* one only column FK is supported by Magento FW */
                 $ownColumn = reset($one[DemCfg::OWN][DemCfg::ALIASES]);
                 $refTableAlias = $one[DemCfg::REFERENCE][DemCfg::ENTITY][DemCfg::COMPLETE_ALIAS];
-                $refTable = $this->_getTableName($refTableAlias);
+                $refTable = $this->_conn->getTableName($refTableAlias);
                 $refColumn = reset($one[DemCfg::REFERENCE][DemCfg::ALIASES]);
                 $onDelete = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::DELETE]);
                 /* there is no onUpdate in M2, $purge is used instead. Set default value 'false' for purge. */
