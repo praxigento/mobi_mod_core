@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Setup\Data;
+namespace Praxigento\Core\Setup\Schema;
 
 use Praxigento\Core\Lib\Context;
 

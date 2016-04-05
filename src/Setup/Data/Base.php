@@ -46,11 +46,9 @@ abstract class Base implements InstallDataInterface
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $this->_context = $context;
-        /** start M2 setup*/
         $setup->startSetup();
         /* perform module specific operations */
         $this->_setup();
-        /** complete M2 setup*/
         $setup->endSetup();
     }
 }

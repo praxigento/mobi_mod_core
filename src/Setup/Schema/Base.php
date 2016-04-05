@@ -13,36 +13,39 @@ use Praxigento\Core\Lib\Context;
 
 abstract class Base implements InstallSchemaInterface
 {
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $_resource;
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface */
+    protected $_conn;
     /** @var \Praxigento\Core\Setup\Dem\Tool */
     protected $_toolDem;
-    /**
-     * Utility to parse DEM JSON and to create DB structure.
-     *
-     * @var  \Praxigento\Core\Lib\Setup\Db
-     */
-    protected $_demDb;
+    /** @var  \Magento\Framework\Setup\ModuleContextInterface */
+    protected $_context;
 
     public function __construct(
+        \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Setup\Dem\Tool $toolDem
+
     ) {
+        $this->_resource = $resource;
+        $this->_conn = $resource->getConnection();
         $this->_toolDem = $toolDem;
     }
 
     /**
      * Module specific routines to create database structure on install.
      */
-    protected abstract function _setup(SchemaSetupInterface $setup, ModuleContextInterface $context);
+    protected abstract function _setup();
 
     /**
      * @inheritdoc
      */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        /* start M2 setup*/
+        $this->_context = $context;
         $setup->startSetup();
         /* perform module specific operations */
-        $this->_setup($setup, $context);
-        /* complete M2 setup*/
+        $this->_setup();
         $setup->endSetup();
     }
 }
