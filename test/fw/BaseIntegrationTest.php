@@ -55,7 +55,7 @@ abstract class BaseIntegrationTest extends BaseTestCase
      * Downline tree default dependencies.
      * @var array
      */
-    private $DEFAULT_DWNL_TREE = [
+    protected $DEFAULT_DWNL_TREE = [
         1 => 1,
         2 => 1,
         3 => 1,
