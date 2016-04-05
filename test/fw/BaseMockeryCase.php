@@ -24,16 +24,24 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
+    protected function _mockConn()
+    {
+        $result = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
+        return $result;
+    }
+
     protected function _mockDbSelect()
     {
         $result = $this->_mock(\Magento\Framework\DB\Select::class);
         return $result;
     }
 
+    /**
+     * @deprecated use _mockConn() instead of.
+     */
     protected function _mockDba()
     {
-        $result = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
-        return $result;
+        return $this->_mockConn();
     }
 
     protected function _mockLogger()

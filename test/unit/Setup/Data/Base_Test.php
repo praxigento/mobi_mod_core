@@ -5,8 +5,6 @@
  */
 namespace Praxigento\Core\Setup\Data;
 
-use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Praxigento\Core\Lib\Context;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
@@ -17,34 +15,39 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mSetup;
+    /** @var  \Mockery\MockInterface */
     private $mContext;
+    /** @var  \Mockery\MockInterface */
+    private $mConn;
+    /** @var  \Mockery\MockInterface */
+    private $mRepoBasic;
     /** @var  ChildToTest */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
+        /* create mocks */
+        $this->mConn = $this->_mockConn();
+        $this->mRepoBasic = $this->_mockRepoBasic();
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
-        $this->obj = new ChildToTest();
+        /* create object */
+        $mResource = $this->_mockResourceConnection($this->mConn);
+        $this->obj = new ChildToTest($mResource, $this->mRepoBasic);
     }
 
     public function test_install()
-    {      /* === Test Data === */
+    {
+        /* === Test Data === */
         /* === Setup Mocks === */
         // $setup->startSetup();
         $this->mSetup
             ->shouldReceive('startSetup')->once();
-        // $this->_setup($setup, $context);
-        // $this->_getConn();
-        // return $this->_setup->getConnection();
-        $mConn = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
-        $this->mSetup
-            ->shouldReceive('getConnection')
-            ->andReturn($mConn);
-        // $this->_getTableName(TEST_TABLE_NAME);
-        // $result = $this->_setup->getConnection()->getTableName($entityName);
-        $mConn->shouldReceive('getTableName')->once()
+        // $this->_setup();
+        // $this->_conn->getTableName(TEST_TABLE_NAME);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
             ->with(TEST_TABLE_NAME);
         // $setup->endSetup();
         $this->mSetup
@@ -59,9 +62,7 @@ class ChildToTest extends Base
 {
     protected function _setup()
     {
-        $this->_getConn();
-        $this->_getTableName(TEST_TABLE_NAME);
-        1 + 1;
+        $this->_conn->getTableName(TEST_TABLE_NAME);
     }
 
 }
