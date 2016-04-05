@@ -4,13 +4,15 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Lib\Setup\Db\Dem;
+namespace Praxigento\Core\Setup\Dem;
 
-class Type {
+class DemType
+{
 
     /**
      * Attribute subtypes modifiers.
      */
+
     const ATTRSUB_SMALL_INT = 'smallint';
 
     /**
@@ -24,6 +26,7 @@ class Type {
     const ATTR_NUMERIC = 'numeric';
     const ATTR_OPTION = 'option';
     const ATTR_TEXT = 'text';
+
     /**
      * Default values for attributes.
      */

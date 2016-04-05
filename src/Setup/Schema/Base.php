@@ -9,7 +9,6 @@ namespace Praxigento\Core\Setup\Schema;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
-use Praxigento\Core\Lib\Context;
 
 abstract class Base implements InstallSchemaInterface
 {

@@ -2,11 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Setup\Schema;
+namespace Praxigento\Core\Setup\Dem;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Tool_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mSetup;
@@ -16,7 +16,7 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
     private $mConn;
     /** @var  \Mockery\MockInterface */
     private $mToolDem;
-    /** @var  ChildToTest */
+    /** @var  Tool */
     private $obj;
 
     protected function setUp()
@@ -32,31 +32,12 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         $this->obj = new ChildToTest($mResource, $this->mToolDem);
     }
 
-    public function test_install()
+    public function test_readDemPackage()
     {
         /* === Test Data === */
         /* === Setup Mocks === */
-        // $setup->startSetup();
-        $this->mSetup
-            ->shouldReceive('startSetup')->once();
-        // $this->_setup();
-        // $this->_toolDem->readDemPackage('pathToFile', 'pathToNode');
-        $this->mToolDem
-            ->shouldReceive('readDemPackage')->once();
-        // $setup->endSetup();
-        $this->mSetup
-            ->shouldReceive('endSetup')->once();
         /* === Call and asserts  === */
         $this->obj->install($this->mSetup, $this->mContext);
-    }
-
-}
-
-class ChildToTest extends Base
-{
-    protected function _setup()
-    {
-        $this->_toolDem->readDemPackage('pathToFile', 'pathToNode');
     }
 
 }

@@ -4,9 +4,9 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Lib\Setup\Db;
+namespace Praxigento\Core\Setup\Dem;
 
-class Dem {
+class Cfg {
     const ACTION = 'action';
     const ALIAS = 'alias';
     const ALIASES = 'aliases';

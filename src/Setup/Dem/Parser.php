@@ -4,13 +4,10 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Setup\Db\Dem;
+namespace Praxigento\Core\Setup\Dem;
 
-use Praxigento\Core\Lib\Setup\Db\Dem as Dem;
-use Praxigento\Core\Lib\Setup\Db\Dem\Type as DemType;
-use Praxigento\Core\Lib\Setup\Db\Mage\Type as MageType;
-
-class Parser {
+class Parser
+{
     /**
      * Parse DEM attribute and indexes data and return options for Magento DDL field.
      *
@@ -19,22 +16,23 @@ class Parser {
      *
      * @return array
      */
-    public function entityGetAttrOptions($demAttr, $demIndexes) {
-        $result = [ ];
-        $alias = $demAttr[Dem::ALIAS];
+    public function entityGetAttrOptions($demAttr, $demIndexes)
+    {
+        $result = [];
+        $alias = $demAttr[Cfg::ALIAS];
         /* parse common options */
-        if(isset($demAttr[Dem::NULLABLE])) {
-            $result[MageType::OPT_NULLABLE] = $demAttr[Dem::NULLABLE];
+        if (isset($demAttr[Cfg::NULLABLE])) {
+            $result[MageType::OPT_NULLABLE] = $demAttr[Cfg::NULLABLE];
         }
-        if(isset($demAttr[Dem::DEFAULT_])) {
-            $result[MageType::OPT_DEFAULT] = $demAttr[Dem::DEFAULT_];
+        if (isset($demAttr[Cfg::DEFAULT_])) {
+            $result[MageType::OPT_DEFAULT] = $demAttr[Cfg::DEFAULT_];
         }
         /* parse indexes to define PRIMARY option */
-        foreach($demIndexes as $ndx) {
-            $ndxType = $ndx[Dem::TYPE];
-            if($ndxType == DemType::INDEX_PRIMARY) {
-                foreach($ndx[Dem::ALIASES] as $one) {
-                    if($alias == $one) {
+        foreach ($demIndexes as $ndx) {
+            $ndxType = $ndx[Cfg::TYPE];
+            if ($ndxType == DemType::INDEX_PRIMARY) {
+                foreach ($ndx[Cfg::ALIASES] as $one) {
+                    if ($alias == $one) {
                         $result[MageType::INDEX_PRIMARY] = true;
                         break;
                     }
@@ -43,23 +41,23 @@ class Parser {
             }
         }
         /* parse type specific options */
-        $type = key($demAttr[Dem::TYPE]);
-        switch($type) {
+        $type = key($demAttr[Cfg::TYPE]);
+        switch ($type) {
             case DemType::ATTR_BINARY:
                 break;
             case DemType::ATTR_BOOLEAN:
                 break;
             case DemType::ATTR_DATETIME:
-                if(isset($demAttr[Dem::DEFAULT_]) && ($demAttr[Dem::DEFAULT_] == DemType::DEF_CURRENT)) {
+                if (isset($demAttr[Cfg::DEFAULT_]) && ($demAttr[Cfg::DEFAULT_] == DemType::DEF_CURRENT)) {
                     $result[MageType::OPT_DEFAULT] = MageType::DEF_CURRENT_TIMESTAMP;
                 }
                 break;
             case DemType::ATTR_INTEGER:
-                if(isset($demAttr[Dem::TYPE][DemType::ATTR_INTEGER][Dem::UNSIGNED])) {
-                    $result[MageType::OPT_UNSIGNED] = $demAttr[Dem::TYPE][DemType::ATTR_INTEGER][Dem::UNSIGNED];
+                if (isset($demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::UNSIGNED])) {
+                    $result[MageType::OPT_UNSIGNED] = $demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::UNSIGNED];
                 }
-                if(isset($demAttr[Dem::TYPE][DemType::ATTR_INTEGER][Dem::AUTOINCREMENT])) {
-                    $result[MageType::OPT_AUTO_INC] = $demAttr[Dem::TYPE][DemType::ATTR_INTEGER][Dem::AUTOINCREMENT];
+                if (isset($demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::AUTOINCREMENT])) {
+                    $result[MageType::OPT_AUTO_INC] = $demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::AUTOINCREMENT];
                 }
                 break;
             case DemType::ATTR_NUMERIC:
@@ -79,11 +77,12 @@ class Parser {
      *
      * @return null
      */
-    public function entityGetAttrSize($demAttrType) {
+    public function entityGetAttrSize($demAttrType)
+    {
         $result = null;
         $type = key($demAttrType);
         $typeData = reset($demAttrType);
-        switch($type) {
+        switch ($type) {
             case DemType::ATTR_BINARY:
                 break;
             case DemType::ATTR_BOOLEAN:
@@ -91,22 +90,22 @@ class Parser {
             case DemType::ATTR_DATETIME:
                 break;
             case DemType::ATTR_INTEGER:
-                $result = isset($typeData[Dem::LENGTH]) ? $typeData[Dem::LENGTH] : null;
+                $result = isset($typeData[Cfg::LENGTH]) ? $typeData[Cfg::LENGTH] : null;
                 break;
             case DemType::ATTR_NUMERIC:
-                if(isset($typeData[Dem::PRECISION])) {
+                if (isset($typeData[Cfg::PRECISION])) {
                     /* we should have 2 elements in the result array*/
-                    $result = [ MageType::OPT_PRECISION => 10, MageType::OPT_SCALE => 0 ];
-                    $result[MageType::OPT_PRECISION] = $typeData[Dem::PRECISION];
-                    if(isset($typeData[Dem::SCALE])) {
-                        $result[MageType::OPT_SCALE] = $typeData[Dem::SCALE];
+                    $result = [MageType::OPT_PRECISION => 10, MageType::OPT_SCALE => 0];
+                    $result[MageType::OPT_PRECISION] = $typeData[Cfg::PRECISION];
+                    if (isset($typeData[Cfg::SCALE])) {
+                        $result[MageType::OPT_SCALE] = $typeData[Cfg::SCALE];
                     }
                 }
                 break;
             case DemType::ATTR_OPTION:
                 break;
             case DemType::ATTR_TEXT:
-                $result = isset($typeData[Dem::LENGTH]) ? $typeData[Dem::LENGTH] : null;
+                $result = isset($typeData[Cfg::LENGTH]) ? $typeData[Cfg::LENGTH] : null;
                 break;
         }
         return $result;
@@ -119,11 +118,12 @@ class Parser {
      *
      * @return string
      */
-    public function entityGetAttrType($demAttrType) {
+    public function entityGetAttrType($demAttrType)
+    {
         $result = MageType::COL_TEXT;
         $type = key($demAttrType);
         $typeData = reset($demAttrType);
-        switch($type) {
+        switch ($type) {
             case DemType::ATTR_BINARY:
                 $result = MageType::COL_BLOB;
                 break;
@@ -135,8 +135,8 @@ class Parser {
                 break;
             case DemType::ATTR_INTEGER:
                 $result = MageType::COL_INTEGER;
-                if(isset($typeData[Dem::SUBTYPE])) {
-                    if($typeData[Dem::SUBTYPE] == DemType::ATTRSUB_SMALL_INT) {
+                if (isset($typeData[Cfg::SUBTYPE])) {
+                    if ($typeData[Cfg::SUBTYPE] == DemType::ATTRSUB_SMALL_INT) {
                         $result = MageType::COL_SMALLINT;
                     }
                 }
@@ -154,27 +154,30 @@ class Parser {
         return $result;
     }
 
-    public function entityGetIndexFields($demIndex) {
-        $result = $demIndex[Dem::ALIASES];
+    public function entityGetIndexFields($demIndex)
+    {
+        $result = $demIndex[Cfg::ALIASES];
         return $result;
     }
 
-    public function entityGetIndexOptions($demIndex) {
-        $result = [ ];
-        if(
-            isset($demIndex[Dem::TYPE]) &&
-            ($demIndex[Dem::TYPE] == DemType::INDEX_UNIQUE)
+    public function entityGetIndexOptions($demIndex)
+    {
+        $result = [];
+        if (
+            isset($demIndex[Cfg::TYPE]) &&
+            ($demIndex[Cfg::TYPE] == DemType::INDEX_UNIQUE)
         ) {
             $result[MageType::OPT_TYPE] = MageType::INDEX_UNIQUE;
         }
         return $result;
     }
 
-    public function entityGetIndexType($demIndex) {
+    public function entityGetIndexType($demIndex)
+    {
         $result = MageType::INDEX_INDEX;
-        if(isset($demIndex[Dem::TYPE])) {
-            $type = $demIndex[Dem::TYPE];
-            switch($type) {
+        if (isset($demIndex[Cfg::TYPE])) {
+            $type = $demIndex[Cfg::TYPE];
+            switch ($type) {
                 case DemType::INDEX_PRIMARY:
                     $result = MageType::INDEX_PRIMARY;
                     break;
@@ -196,12 +199,13 @@ class Parser {
      *
      * @return string
      */
-    public function referenceGetAction($demAction) {
+    public function referenceGetAction($demAction)
+    {
         $result = MageType::REF_ACTION_NO_ACTION;
-        if($demAction == DemType::REF_ACTION_RESTRICT) {
+        if ($demAction == DemType::REF_ACTION_RESTRICT) {
             $result = MageType::REF_ACTION_RESTRICT;
         } else {
-            if($demAction == DemType::REF_ACTION_CASCADE) {
+            if ($demAction == DemType::REF_ACTION_CASCADE) {
                 $result = MageType::REF_ACTION_CASCADE;
             }
         }

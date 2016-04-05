@@ -9,14 +9,13 @@ namespace Praxigento\Core\Setup\Dem;
 
 use Flancer32\Lib\DataObject;
 use Praxigento\Core\Config as Cfg;
-use Praxigento\Core\Lib\Setup\Db\Dem as Dem;
-use Praxigento\Core\Lib\Setup\Db\Dem\Type as DemType;
+use Praxigento\Core\Setup\Dem\Cfg as DemCfg;
 
 class Tool
 {
     /** Path separator between packages. */
     const PS = Cfg::DEM_PS;
-    /** @var \Praxigento\Core\Lib\Setup\Db\Dem\Parser */
+    /** @var \Praxigento\Core\Setup\Dem\Parser */
     private $_parser;
     /** @var \Magento\Framework\App\ResourceConnection */
     private $_resource;
@@ -26,7 +25,7 @@ class Tool
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\Lib\Setup\Db\Dem\Parser $parser
+        \Praxigento\Core\Setup\Dem\Parser $parser
     ) {
         $this->_parser = $parser;
         $this->_resource = $resource;
@@ -55,25 +54,25 @@ class Tool
         $tblName = $this->_getTableName($entityAlias);
         /* init new object to create table in DB */
         $tbl = $conn->newTable($tblName);
-        if (isset($demEntity[Dem::COMMENT])) {
-            $tbl->setComment($demEntity[Dem::COMMENT]);
+        if (isset($demEntity[DemCfg::COMMENT])) {
+            $tbl->setComment($demEntity[DemCfg::COMMENT]);
         }
-        $indexes = isset($demEntity[Dem::INDEX]) ? $demEntity[Dem::INDEX] : null;
-        $relations = isset($demEntity[Dem::RELATION]) ? $demEntity[Dem::RELATION] : null;
+        $indexes = isset($demEntity[DemCfg::INDEX]) ? $demEntity[DemCfg::INDEX] : null;
+        $relations = isset($demEntity[DemCfg::RELATION]) ? $demEntity[DemCfg::RELATION] : null;
         /* parse attributes */
-        foreach ($demEntity[Dem::ATTRIBUTE] as $key => $attr) {
-            $attrName = $attr[Dem::ALIAS];
-            $attrType = $this->_parser->entityGetAttrType($attr[Dem::TYPE]);
-            $attrSize = $this->_parser->entityGetAttrSize($attr[Dem::TYPE]);
+        foreach ($demEntity[DemCfg::ATTRIBUTE] as $key => $attr) {
+            $attrName = $attr[DemCfg::ALIAS];
+            $attrType = $this->_parser->entityGetAttrType($attr[DemCfg::TYPE]);
+            $attrSize = $this->_parser->entityGetAttrSize($attr[DemCfg::TYPE]);
             $attrOpts = $this->_parser->entityGetAttrOptions($attr, $indexes);
-            $attrComment = isset($attr[Dem::COMMENT]) ? $attr[Dem::COMMENT] : null;
+            $attrComment = isset($attr[DemCfg::COMMENT]) ? $attr[DemCfg::COMMENT] : null;
             $tbl->addColumn($attrName, $attrType, $attrSize, $attrOpts, $attrComment);
         }
         /* parse indexes */
         if ($indexes) {
             foreach ($indexes as $key => $ndx) {
                 /* PRIMARY indexes are processed as columns options */
-                if ($ndx[Dem::TYPE] == DemType::INDEX_PRIMARY) {
+                if ($ndx[DemCfg::TYPE] == DemType::INDEX_PRIMARY) {
                     continue;
                 }
                 /* process not PRIMARY indexes */
@@ -90,13 +89,13 @@ class Tool
         if ($relations) {
             foreach ($relations as $one) {
                 /* one only column FK is supported by Magento FW */
-                $ownColumn = reset($one[Dem::OWN][Dem::ALIASES]);
-                $refTableAlias = $one[Dem::REFERENCE][Dem::ENTITY][Dem::COMPLETE_ALIAS];
+                $ownColumn = reset($one[DemCfg::OWN][DemCfg::ALIASES]);
+                $refTableAlias = $one[DemCfg::REFERENCE][DemCfg::ENTITY][DemCfg::COMPLETE_ALIAS];
                 $refTable = $this->_getTableName($refTableAlias);
-                $refColumn = reset($one[Dem::REFERENCE][Dem::ALIASES]);
-                $onDelete = $this->_parser->referenceGetAction($one[Dem::ACTION][Dem::DELETE]);
+                $refColumn = reset($one[DemCfg::REFERENCE][DemCfg::ALIASES]);
+                $onDelete = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::DELETE]);
                 /* there is no onUpdate in M2, $purge is used instead. Set default value 'false' for purge. */
-                //$onUpdate = $this->_parser->referenceGetAction($one[Dem::ACTION][Dem::UPDATE]);
+                //$onUpdate = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::UPDATE]);
                 $onUpdate = false;
                 $fkName = $conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
                 $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
