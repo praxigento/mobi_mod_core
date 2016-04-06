@@ -10,13 +10,12 @@ namespace Praxigento\Core\Lib\Test;
 
 use Magento\Framework\App\ObjectManager;
 use Praxigento\Core\Config as Cfg;
-
 use Praxigento\Core\Tool\IPeriod;
 use Praxigento\Downline\Data\Entity\Customer;
 use Praxigento\Downline\Lib\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Lib\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
-abstract class BaseIntegrationTest extends BaseTestCase
+abstract class BaseIntegrationTest extends BaseMockeryCase
 {
     const DATE_PERIOD_BEGIN = '20151201';
     const DEFAULT_DOWNLINE_COUNTRY_CODE = 'LV';
