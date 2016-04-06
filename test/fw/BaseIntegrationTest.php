@@ -25,32 +25,6 @@ abstract class BaseIntegrationTest extends BaseTestCase
     const DEF_WEBSITE_ID_ADMIN = Cfg::DEF_WEBSITE_ID_ADMIN;
     /** Default 'base' website ID for empty Magento instance */
     const DEF_WEBSITE_ID_BASE = Cfg::DEF_WEBSITE_ID_BASE;
-    /** @var \Praxigento\Downline\Lib\Service\ICustomer */
-    protected $_callDownlineCustomer;
-    /** @var \Praxigento\Downline\Lib\Service\ISnap */
-    protected $_callDownlineSnap;
-    /** @var  \Praxigento\Core\Lib\Context\Dba\IConnection */
-    protected $_conn;
-    /** @var  \Psr\Log\LoggerInterface */
-    protected $_logger;
-    /**
-     * Map index by Magento ID (index started from 1).
-     *
-     * @var array [ $entityId  => $index, ... ]
-     */
-    protected $_mapCustomerIndexByMageId = [];
-    /**
-     * Map Magento ID by index (index started from 1).
-     *
-     * @var array [ $index  => $entityId, ... ]
-     */
-    protected $_mapCustomerMageIdByIndex = [];
-    /** @var  \Praxigento\Core\Lib\Context\IObjectManager */
-    protected $_manObj;
-    /** @var \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
-    protected $_resource;
-    /** @var  \Praxigento\Core\Lib\IToolbox */
-    protected $_toolbox;
     /**
      * Downline tree default dependencies.
      * @var array
@@ -70,6 +44,32 @@ abstract class BaseIntegrationTest extends BaseTestCase
         12 => 10,
         13 => 10
     ];
+    /** @var \Praxigento\Downline\Lib\Service\ICustomer */
+    protected $_callDownlineCustomer;
+    /** @var \Praxigento\Downline\Lib\Service\ISnap */
+    protected $_callDownlineSnap;
+    /** @var  \Praxigento\Core\Lib\Context\Dba\IConnection */
+    protected $_conn;
+    /** @var  \Psr\Log\LoggerInterface */
+    protected $_logger;
+    /** @var  \Praxigento\Core\Lib\Context\IObjectManager */
+    protected $_manObj;
+    /**
+     * Map index by Magento ID (index started from 1).
+     *
+     * @var array [ $entityId  => $index, ... ]
+     */
+    protected $_mapCustomerIndexByMageId = [];
+    /**
+     * Map Magento ID by index (index started from 1).
+     *
+     * @var array [ $index  => $entityId, ... ]
+     */
+    protected $_mapCustomerMageIdByIndex = [];
+    /** @var \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
+    protected $_resource;
+    /** @var  \Praxigento\Core\Lib\IToolbox */
+    protected $_toolbox;
 
     public function __construct()
     {
@@ -80,28 +80,29 @@ abstract class BaseIntegrationTest extends BaseTestCase
         /* toolbox */
         /* TODO: remove it */
         $this->_toolbox = $this->_manObj->get(\Praxigento\Core\Lib\IToolbox::class);
+
         /* base services */
         $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ISnap::class);
     }
 
     /**
-     * Reset cache for services and repos that use the cache.
+     * Reset cache for classes that use internal cache.
      */
     protected function _cacheReset()
     {
-        /** @var  $obj \Praxigento\Accounting\Lib\Repo\IModule */
+        /** @var  $obj \Praxigento\Core\ICached */
+        // old services
         $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Repo\IModule::class);
         $obj->cacheReset();
-        /** @var  $obj \Praxigento\Accounting\Lib\Service\IAccount */
         $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Service\IAccount::class);
         $obj->cacheReset();
-        /** @var  $call \Praxigento\Pv\Lib\Service\ISale */
         $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ISale::class);
         $obj->cacheReset();
-        /** @var  $call \Praxigento\Pv\Lib\Service\ITransfer */
         $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ITransfer::class);
         $obj->cacheReset();
+        // fresh classes
+        $this->_manObj->get(\Praxigento\Core\Tool\Def\Period::class)->cacheReset();
     }
 
     /**
