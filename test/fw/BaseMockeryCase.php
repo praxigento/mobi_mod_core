@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Lib\Test;
 
 use Mockery as m;
-use Praxigento\Core\Lib\Context;
+
 
 abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 {

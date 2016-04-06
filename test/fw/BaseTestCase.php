@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Lib\Test;
 
 
-use Praxigento\Core\Lib\Context;
+
 
 abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
 {

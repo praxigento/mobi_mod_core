@@ -9,7 +9,7 @@ namespace Praxigento\Core\Setup\Data;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Praxigento\Core\Lib\Context;
+
 
 abstract class Base implements InstallDataInterface
 {
