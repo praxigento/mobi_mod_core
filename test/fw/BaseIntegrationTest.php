@@ -11,6 +11,7 @@ namespace Praxigento\Core\Lib\Test;
 use Magento\Framework\App\ObjectManager;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Lib\Context;
+use Praxigento\Core\Tool\IPeriod;
 use Praxigento\Downline\Data\Entity\Customer;
 use Praxigento\Downline\Lib\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Lib\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
@@ -68,8 +69,8 @@ abstract class BaseIntegrationTest extends BaseTestCase
     protected $_mapCustomerMageIdByIndex = [];
     /** @var \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
     protected $_resource;
-    /** @var  \Praxigento\Core\Lib\IToolbox */
-    protected $_toolbox;
+    /** @var  IPeriod */
+    protected $_toolPeriod;
 
     public function __construct()
     {
@@ -77,10 +78,7 @@ abstract class BaseIntegrationTest extends BaseTestCase
         $this->_logger = $this->_manObj->get(\Psr\Log\LoggerInterface::class);
         $this->_resource = $this->_manObj->get(\Magento\Framework\App\ResourceConnection::class);
         $this->_conn = $this->_resource->getConnection();
-        /* toolbox */
-        /* TODO: remove it */
-        $this->_toolbox = $this->_manObj->get(\Praxigento\Core\Lib\IToolbox::class);
-
+        $this->_toolPeriod = $this->_manObj->get(IPeriod::class);
         /* base services */
         $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ISnap::class);
@@ -112,8 +110,6 @@ abstract class BaseIntegrationTest extends BaseTestCase
      */
     protected function _createDownlineCustomers($dateBegin = self::DATE_PERIOD_BEGIN, $swithDateOnNewCustomer = true)
     {
-        /** @var  $period \Praxigento\Core\Lib\Tool\Period */
-        $period = $this->_toolbox->getPeriod();
         $dtToday = $dateBegin;
         foreach ($this->DEFAULT_DWNL_TREE as $customerRef => $parentRef) {
             $customerMageId = $this->_mapCustomerMageIdByIndex[$customerRef];
@@ -123,10 +119,10 @@ abstract class BaseIntegrationTest extends BaseTestCase
             $request->setParentId($this->_mapCustomerMageIdByIndex[$parentRef]);
             $request->setReference($this->_mapCustomerMageIdByIndex[$customerRef]);
             $request->setCountryCode(self::DEFAULT_DOWNLINE_COUNTRY_CODE);
-            $request->setDate($period->getTimestampFrom($dtToday));
+            $request->setDate($this->_toolPeriod->getTimestampFrom($dtToday));
             /* Create customer per day or all customers in the same day. */
             if ($swithDateOnNewCustomer) {
-                $dtToday = $this->_toolbox->getPeriod()->getPeriodNext($dtToday);
+                $dtToday = $this->_toolPeriod->getPeriodNext($dtToday);
             }
             $response = $this->_callDownlineCustomer->add($request);
             if ($response->isSucceed()) {
