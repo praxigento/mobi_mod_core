@@ -6,7 +6,6 @@
  */
 namespace Praxigento\Core\Tool\Def;
 
-use Praxigento\Core\Lib\Context as Ctx;
 use Praxigento\Core\Tool\IDate;
 use Praxigento\Core\Tool\IFormat;
 

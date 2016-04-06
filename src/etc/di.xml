@@ -2,17 +2,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
 
-    <!-- Context -->
-    <preference for="Praxigento\Core\Lib\Context\IDbAdapter"
-                type="Praxigento\Core\Lib\Context\DbAdapter"/>
+    <!-- Repos -->
+    <preference for="Praxigento\Core\Repo\IBasic"
+                type="Praxigento\Core\Repo\Def\Basic"/>
     <preference for="Praxigento\Core\Repo\ITransactionManager"
                 type="\Praxigento\Core\Repo\Def\TransactionManager"/>
     <preference for="Praxigento\Core\Repo\ITransactionDefinition"
                 type="Praxigento\Core\Repo\Def\TransactionDefinition"/>
-
-    <!-- Repos -->
-    <preference for="Praxigento\Core\Repo\IBasic"
-                type="Praxigento\Core\Repo\Def\Basic"/>
 
     <!-- Services -->
 

@@ -9,6 +9,7 @@
 namespace Praxigento\Core\Lib\Test;
 
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\ObjectManagerInterface;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Tool\IPeriod;
 use Praxigento\Downline\Data\Entity\Customer;
@@ -48,11 +49,11 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
     protected $_callDownlineCustomer;
     /** @var \Praxigento\Downline\Lib\Service\ISnap */
     protected $_callDownlineSnap;
-    /** @var  \Praxigento\Core\Lib\Context\Dba\IConnection */
+    /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
     /** @var  \Psr\Log\LoggerInterface */
     protected $_logger;
-    /** @var  \Praxigento\Core\Lib\Context\IObjectManager */
+    /** @var  ObjectManagerInterface */
     protected $_manObj;
     /**
      * Map index by Magento ID (index started from 1).
