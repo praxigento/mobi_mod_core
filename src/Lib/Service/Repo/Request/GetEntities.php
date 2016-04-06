@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Lib\Service\Repo\Request;
 
 
-class GetEntities extends \Praxigento\Core\Lib\Service\Base\Request {
+class GetEntities extends \Praxigento\Core\Service\Base\Request {
     /**
      * (string) Name of the entity to select (Account::ENTITY_NAME).
      */

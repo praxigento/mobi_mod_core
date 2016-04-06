@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Lib\Service\Repo\Response;
 
 
-class AddEntity extends \Praxigento\Core\Lib\Service\Base\Response {
+class AddEntity extends \Praxigento\Core\Service\Base\Response {
     const ID_INSERTED = 'latest_id';
 
     public function getIdInserted() {

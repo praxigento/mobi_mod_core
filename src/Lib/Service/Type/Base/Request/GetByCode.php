@@ -8,7 +8,7 @@ namespace Praxigento\Core\Lib\Service\Type\Base\Request;
  * @method string getCode()
  * @method void setCode(string $data)
  */
-abstract class GetByCode extends \Praxigento\Core\Lib\Service\Base\Request {
+abstract class GetByCode extends \Praxigento\Core\Service\Base\Request {
     const CODE = 'Code';
 
     /**

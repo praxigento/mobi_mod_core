@@ -3,12 +3,13 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Service\Base;
+namespace Praxigento\Core\Service\Base;
 
 
 use Flancer32\Lib\DataObject;
 
-class Response extends DataObject {
+class Response extends DataObject
+{
     const ERR_NO_ERROR = 'no_error';
     const ERR_UNDEFINED = 'undefined';
     private $_errorCode = self::ERR_UNDEFINED;
@@ -18,14 +19,16 @@ class Response extends DataObject {
     /**
      * @return mixed
      */
-    public function getErrorCode() {
+    public function getErrorCode()
+    {
         return $this->_errorCode;
     }
 
     /**
      * @return string
      */
-    public function getErrorMessage() {
+    public function getErrorMessage()
+    {
         return $this->_errorMessage;
     }
 
@@ -33,7 +36,8 @@ class Response extends DataObject {
      * Return 'true' if this response is corresponded to successfully completed operation.
      * @return bool
      */
-    public function isSucceed() {
+    public function isSucceed()
+    {
         $result = ($this->_errorCode == self::ERR_NO_ERROR);
         return $result;
     }
@@ -41,7 +45,8 @@ class Response extends DataObject {
     /**
      * Mark response as succeed.
      */
-    public function setAsSucceed() {
+    public function setAsSucceed()
+    {
         $this->_errorCode = self::ERR_NO_ERROR;
 
     }
@@ -49,14 +54,16 @@ class Response extends DataObject {
     /**
      * @param mixed $code
      */
-    public function setErrorCode($code) {
+    public function setErrorCode($code)
+    {
         $this->_errorCode = $code;
     }
 
     /**
      * @param string $message
      */
-    public function setErrorMessage($message) {
+    public function setErrorMessage($message)
+    {
         $this->_errorMessage = $message;
     }
 }

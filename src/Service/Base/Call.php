@@ -1,12 +1,11 @@
 <?php
 /**
- * Base class to create service calls.
- * These services use logging.
+ * Base class to create service calls. These services use logging.
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Service\Base;
+namespace Praxigento\Core\Service\Base;
 
 abstract class Call
 {

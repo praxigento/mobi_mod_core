@@ -13,7 +13,7 @@ namespace Praxigento\Core\Lib\Service\Repo\Request;
  * @method mixed getWhere() WHERE clause for the selection (string or array, see '$where' in \Zend_Db_Adapter_Abstract::update).
  * @method void setWhere(mixed $data)
  */
-class UpdateEntity extends \Praxigento\Core\Lib\Service\Base\Request {
+class UpdateEntity extends \Praxigento\Core\Service\Base\Request {
 
     /**
      * UpdateEntity constructor.

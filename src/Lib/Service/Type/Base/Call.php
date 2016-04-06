@@ -6,7 +6,7 @@ namespace Praxigento\Core\Lib\Service\Type\Base;
 
 use Praxigento\Core\Data\Entity\Type\Base as BaseTypeEntity;
 use Praxigento\Core\Repo\IBasic;
-use Praxigento\Core\Lib\Service\Base\Call as BaseCall;
+use Praxigento\Core\Service\Base\Call as BaseCall;
 use Praxigento\Core\Lib\Service\ITypeBase;
 use Praxigento\Core\Lib\Service\Type\Base\Request;
 use Praxigento\Core\Lib\Service\Type\Base\Response;

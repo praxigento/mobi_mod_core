@@ -6,7 +6,7 @@ namespace Praxigento\Core\Lib\Service\Type\Base\Response;
 
 use Praxigento\Core\Data\Entity\Type\Base as BaseType;
 
-abstract class GetByCode extends \Praxigento\Core\Lib\Service\Base\Response {
+abstract class GetByCode extends \Praxigento\Core\Service\Base\Response {
     /**
      * @return int|null
      */

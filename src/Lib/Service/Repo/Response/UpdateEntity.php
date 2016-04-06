@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Lib\Service\Repo\Response;
 
 
-class UpdateEntity extends \Praxigento\Core\Lib\Service\Base\Response {
+class UpdateEntity extends \Praxigento\Core\Service\Base\Response {
     const ROWS_UPDATED = 'rows_updated';
 
     public function  getRowsUpdated() {

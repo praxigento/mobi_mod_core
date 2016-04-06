@@ -6,6 +6,6 @@
 namespace Praxigento\Core\Lib\Service\Repo\Response;
 
 
-class GetEntities extends \Praxigento\Core\Lib\Service\Base\Response {
+class GetEntities extends \Praxigento\Core\Service\Base\Response {
 
 }

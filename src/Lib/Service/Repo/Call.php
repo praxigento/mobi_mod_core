@@ -1,7 +1,7 @@
 <?php
 /**
  * Core service to perform common DB operations.
- * This service does NOT extend \Praxigento\Core\Lib\Service\Base\Call
+ * This service does NOT extend \Praxigento\Core\Service\Base\Call
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
