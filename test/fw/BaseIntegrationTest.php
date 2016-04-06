@@ -72,8 +72,9 @@ abstract class BaseIntegrationTest extends BaseTestCase
     /** @var  IPeriod */
     protected $_toolPeriod;
 
-    public function __construct()
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
+        parent::__construct($name, $data, $dataName);
         $this->_manObj = ObjectManager::getInstance();
         $this->_logger = $this->_manObj->get(\Psr\Log\LoggerInterface::class);
         $this->_resource = $this->_manObj->get(\Magento\Framework\App\ResourceConnection::class);

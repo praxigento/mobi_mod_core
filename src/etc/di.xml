@@ -15,8 +15,6 @@
                 type="Praxigento\Core\Repo\Def\Basic"/>
 
     <!-- Services -->
-    <preference for="Praxigento\Core\Lib\Service\IRepo"
-                type="Praxigento\Core\Lib\Service\Repo\Call"/>
 
     <!-- Tools -->
     <preference for="Praxigento\Core\Tool\IConvert"

@@ -8,42 +8,49 @@ namespace Praxigento\Core\Lib\Test;
 
 use Praxigento\Core\Lib\Context;
 
-abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
-
-    /**
-     * Default mock for 'Praxigento\Core\Lib\Service\IRepo'.
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function _mockCallRepo() {
-        $result = $this->_mockFor(\Praxigento\Core\Lib\Service\IRepo::class);
-        return $result;
-    }
-
+abstract class BaseTestCase extends \PHPUnit_Framework_TestCase
+{
     /**
      * Default mock for 'Magento\Framework\DB\Adapter\Pdo\Mysql'.
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockConnection($methods = null) {
-        if(is_null($methods)) {
+    protected function _mockConnection($methods = null)
+    {
+        if (is_null($methods)) {
             $methods = [
-                'query', 'select', 'insert', 'insertArray', 'update', 'delete',
-                'fetchRow', 'fetchOne', 'fetchAll',
-                'beginTransaction', 'commit', 'rollBack',
-                'quote', 'lastInsertId', 'getIndexName',
-                'newTable', 'createTable', 'getForeignKeyName', 'addForeignKey', 'addColumn'
+                'query',
+                'select',
+                'insert',
+                'insertArray',
+                'update',
+                'delete',
+                'fetchRow',
+                'fetchOne',
+                'fetchAll',
+                'beginTransaction',
+                'commit',
+                'rollBack',
+                'quote',
+                'lastInsertId',
+                'getIndexName',
+                'newTable',
+                'createTable',
+                'getForeignKeyName',
+                'addForeignKey',
+                'addColumn'
             ];
         }
         $result = $this->_mockFor(\Magento\Framework\DB\Adapter\Pdo\Mysql::class, $methods);
         return $result;
     }
 
-    protected function _mockDbAdapter($mResource, $mConnection) {
+    protected function _mockDbAdapter($mResource, $mConnection)
+    {
         $result = $this
             ->getMockBuilder(\Praxigento\Core\Lib\Context\IDbAdapter::class)
             ->disableOriginalConstructor()
-            ->setMethods([ 'getDefaultConnection', 'getResource', 'getTableName' ])
+            ->setMethods(['getDefaultConnection', 'getResource', 'getTableName'])
             ->getMock();
         $result
             ->expects($this->any())
@@ -61,7 +68,8 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockDbSelect() {
+    protected function _mockDbSelect()
+    {
         $result = $this->_mockFor(\Zend_Db_Select::class);
         return $result;
     }
@@ -71,7 +79,8 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockDemSetupDb() {
+    protected function _mockDemSetupDb()
+    {
         $result = $this->_mockFor(\Praxigento\Core\Lib\Setup\Db::class);
         return $result;
     }
@@ -84,11 +93,12 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockFor($name, $methods = null) {
+    protected function _mockFor($name, $methods = null)
+    {
         $builder = $this
             ->getMockBuilder($name)
             ->disableOriginalConstructor();
-        if(!is_null($methods)) {
+        if (!is_null($methods)) {
             $builder->setMethods($methods);
         }
         $result = $builder->getMock();
@@ -100,12 +110,14 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockLogger() {
+    protected function _mockLogger()
+    {
         $result = $this->_mockFor(\Psr\Log\LoggerInterface::class);
         return $result;
     }
 
-    protected function _mockRepoBasic($mDba) {
+    protected function _mockRepoBasic($mDba)
+    {
         $result = $this
             ->getMockBuilder(\Praxigento\Core\Repo\IBasic::class)
             ->getMock();
@@ -121,10 +133,12 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function _mockResource($methods = null) {
-        if(is_null($methods)) {
+    protected function _mockResource($methods = null)
+    {
+        if (is_null($methods)) {
             $methods = [
-                'getConnection', 'getTableName'
+                'getConnection',
+                'getTableName'
             ];
         }
         $result = $this->_mockFor(\Magento\Framework\App\ResourceConnection::class, $methods);
@@ -138,25 +152,25 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
         $mPeriod = null
     ) {
         $result = $this->_mockFor(\Praxigento\Core\Lib\IToolbox::class);
-        if(!is_null($mConvert)) {
+        if (!is_null($mConvert)) {
             $result
                 ->expects($this->any())
                 ->method('getConvert')
                 ->willReturn($mConvert);
         }
-        if(!is_null($mDate)) {
+        if (!is_null($mDate)) {
             $result
                 ->expects($this->any())
                 ->method('getDate')
                 ->willReturn($mDate);
         }
-        if(!is_null($mFormat)) {
+        if (!is_null($mFormat)) {
             $result
                 ->expects($this->any())
                 ->method('getFormat')
                 ->willReturn($mFormat);
         }
-        if(!is_null($mPeriod)) {
+        if (!is_null($mPeriod)) {
             $result
                 ->expects($this->any())
                 ->method('getPeriod')
@@ -172,7 +186,8 @@ abstract class BaseTestCase extends \PHPUnit_Framework_TestCase {
      *
      * @return \PHPUnit_Framework_MockObject_MockBuilder
      */
-    public function getMockBuilder($className) {
+    public function getMockBuilder($className)
+    {
         $mappedClassName = Context::getMappedClassName($className);
         return parent::getMockBuilder($mappedClassName);
     }
