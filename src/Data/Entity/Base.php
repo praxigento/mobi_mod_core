@@ -12,5 +12,11 @@ use Praxigento\Core\Data\IEntity;
 
 abstract class Base extends DataObject implements IEntity
 {
-
+    /**
+     * @inheritdoc
+     */
+    public function getEntityName()
+    {
+        return self::ENTITY_NAME;
+    }
 }
