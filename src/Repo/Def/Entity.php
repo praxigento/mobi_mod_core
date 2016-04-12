@@ -20,9 +20,6 @@ class Entity implements IEntity
     /** @var \Praxigento\Core\Repo\IBasic */
     protected $_repoBasic;
 
-    /**
-     * Basic constructor.
-     */
     public function __construct(
         \Praxigento\Core\Repo\IBasic $repoBasic,
         IDataEntity $entity
@@ -34,12 +31,42 @@ class Entity implements IEntity
         $this->_idFieldName = reset($ids);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function create($data)
     {
         $result = $this->_repoBasic->addEntity($this->_entityName, $data);
         return $result;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function deleteById($id)
+    {
+        if (is_array($id)) {
+            /* probably this is complex PK */
+            $pk = $id;
+        } else {
+            $pk = [$this->_idFieldName => $id];
+        }
+        $result = $this->_repoBasic->deleteEntityByPk($this->_entityName, $pk);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function get($where = null, $order = null, $limit = null, $offset = null)
+    {
+        $result = $this->_repoBasic->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getById($id)
     {
         if (is_array($id)) {
@@ -52,11 +79,17 @@ class Entity implements IEntity
         return $result;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getRef()
     {
         return $this->_refEntity;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function update($data, $id)
     {
         if (is_array($id)) {

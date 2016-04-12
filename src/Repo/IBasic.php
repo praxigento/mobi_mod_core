@@ -19,6 +19,13 @@ interface IBasic
     public function addEntity($entity, $bind);
 
     /**
+     * @param string $entity Entity name (not table name).
+     * @param array $pk [COL_NAME=>$value, ...]
+     * @return int
+     */
+    public function deleteEntityByPk($entity, $pk);
+
+    /**
      * @param string $entity Entity name (not table name)
      * @param array|string|Zend_Db_Expr $cols The columns to select from the table.
      * @param string $where The WHERE condition.
@@ -31,26 +38,26 @@ interface IBasic
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null);
 
     /**
-     * @param        $entity
-     * @param        $pk
-     * @param string $fields
+     * @param string $entity Entity name (not table name).
+     * @param array $pk [COL_NAME=>$value, ...]
+     * @param array|string $fields
      *
      * @return bool|array 'false' or selected data ([...])
      */
     public function getEntityByPk($entity, $pk, $fields = '*');
 
     /**
-     * @param $entity
-     * @param $bind
+     * @param string $entity Entity name (not table name).
+     * @param array $bind [COL_NAME=>$value, ...]
      *
      * @return mixed
      */
     public function replaceEntity($entity, $bind);
 
     /**
-     * @param      $entity
-     * @param      $bind
-     * @param null $where
+     * @param string $entity Entity name (not table name).
+     * @param array $bind [COL_NAME=>$value, ...]
+     * @param mixed $where
      *
      * @return int Count of the updated rows.
      */

@@ -11,6 +11,9 @@ use Praxigento\Core\Repo\IBasic;
 
 class  Basic extends Base implements IBasic
 {
+    /**
+     * @inheritdoc
+     */
     public function addEntity($entity, $bind)
     {
         $result = null;
@@ -27,6 +30,23 @@ class  Basic extends Base implements IBasic
         return $result;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function deleteEntityByPk($entity, $pk)
+    {
+        $tbl = $this->_conn->getTableName($entity);
+        $where = [];
+        foreach ($pk as $field => $value) {
+            $where["$field=?"] = $value;
+        }
+        $result = $this->_conn->delete($tbl, $where);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -44,11 +64,13 @@ class  Basic extends Base implements IBasic
         if ($limit) {
             $query->limit($limit, $offset);
         }
-        // $sql = (string)$query;
         $result = $this->_conn->fetchAll($query);
         return $result;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getEntityByPk($entity, $pk, $fields = '*')
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -63,6 +85,9 @@ class  Basic extends Base implements IBasic
         return $result;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function replaceEntity($entity, $bind)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -73,6 +98,9 @@ class  Basic extends Base implements IBasic
         $this->_conn->query($query, $bind);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function updateEntity($entity, $bind, $where = null)
     {
         $tbl = $this->_conn->getTableName($entity);
