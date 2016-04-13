@@ -102,6 +102,7 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         $obj->cacheReset();
         // fresh classes
         $this->_manObj->get(\Praxigento\Core\Tool\Def\Period::class)->cacheReset();
+        $this->_manObj->get(\Praxigento\Odoo\Repo\Odoo\Connector\Api\Def\Login::class)->cacheReset();
     }
 
     /**
