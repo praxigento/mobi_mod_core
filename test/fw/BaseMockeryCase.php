@@ -44,18 +44,38 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $this->_mockConn();
     }
 
+    /**
+     * @return m\MockInterface
+     */
     protected function _mockLogger()
     {
         $result = $this->_mock(\Psr\Log\LoggerInterface::class);
         return $result;
     }
 
+    /**
+     * @return m\MockInterface
+     */
+    protected function _mockObjectManager()
+    {
+        $result = $this->_mock(\Magento\Framework\ObjectManagerInterface::class);
+        return $result;
+    }
+
+    /**
+     * @return m\MockInterface
+     */
     protected function _mockRepoBasic()
     {
         $result = $this->_mock(\Praxigento\Core\Repo\IBasic::class);
         return $result;
     }
 
+    /**
+     * @param $class
+     * @param null $mRepoBasic
+     * @return m\MockInterface
+     */
     protected function _mockRepoMod($class, $mRepoBasic = null)
     {
         $result = $this->_mock($class);
