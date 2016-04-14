@@ -17,6 +17,6 @@ abstract class Base extends DataObject implements IEntity
      */
     public function getEntityName()
     {
-        return self::ENTITY_NAME;
+        return static::ENTITY_NAME;
     }
 }
