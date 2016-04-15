@@ -15,6 +15,7 @@ interface  IHasId
 
     /**
      * @param int $data
+     * @return null
      */
     public function setId($data);
 }
