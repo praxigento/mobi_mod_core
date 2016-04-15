@@ -5,19 +5,18 @@
 
 namespace Praxigento\Core\Service\Base;
 
-
 use Flancer32\Lib\DataObject;
+use Praxigento\Core\Service\IResponse;
 
-class Response extends DataObject
+class Response extends DataObject implements IResponse
 {
-    const ERR_NO_ERROR = 'no_error';
-    const ERR_UNDEFINED = 'undefined';
-    private $_errorCode = self::ERR_UNDEFINED;
+
+    private $_errorCode = IResponse::ERR_UNDEFINED;
     /** @var  string */
     private $_errorMessage;
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
     public function getErrorCode()
     {
@@ -25,7 +24,7 @@ class Response extends DataObject
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getErrorMessage()
     {
@@ -33,8 +32,7 @@ class Response extends DataObject
     }
 
     /**
-     * Return 'true' if this response is corresponded to successfully completed operation.
-     * @return bool
+     * @inheritdoc
      */
     public function isSucceed()
     {
@@ -43,16 +41,25 @@ class Response extends DataObject
     }
 
     /**
+     * @inheritdoc
+     */
+    public function markSucceed()
+    {
+        $this->_errorCode = IResponse::ERR_NO_ERROR;
+    }
+
+    /**
      * Mark response as succeed.
+     * @deprecated use markSucceed() instead.
      */
     public function setAsSucceed()
     {
-        $this->_errorCode = self::ERR_NO_ERROR;
+        $this->markSucceed();
 
     }
 
     /**
-     * @param mixed $code
+     * @inheritdoc
      */
     public function setErrorCode($code)
     {
@@ -60,7 +67,7 @@ class Response extends DataObject
     }
 
     /**
-     * @param string $message
+     * @inheritdoc
      */
     public function setErrorMessage($message)
     {
