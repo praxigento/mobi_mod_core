@@ -109,6 +109,15 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     /**
      * @return m\MockInterface
      */
+    protected function _mockTransactionDefinition()
+    {
+        $result = $this->_mock(\Praxigento\Core\Repo\ITransactionDefinition::class);
+        return $result;
+    }
+
+    /**
+     * @return m\MockInterface
+     */
     protected function _mockTransactionManager()
     {
         $result = $this->_mock(\Praxigento\Core\Repo\ITransactionManager::class);
