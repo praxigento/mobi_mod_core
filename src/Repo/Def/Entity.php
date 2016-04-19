@@ -90,7 +90,16 @@ class Entity implements IEntity
     /**
      * @inheritdoc
      */
-    public function update($data, $id)
+    public function update($data, $where)
+    {
+        $result = $this->_repoBasic->updateEntity($this->_entityName, $data, $where);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateById($data, $id)
     {
         if (is_array($id)) {
             /* probably this is complex PK */
