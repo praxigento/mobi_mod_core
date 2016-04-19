@@ -85,21 +85,33 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
-    protected function _mockResourceConnection($mDba)
+    protected function _mockResourceConnection($mConn)
     {
         $result = $this->_mock(\Magento\Framework\App\ResourceConnection::class);
         $result
             ->shouldReceive('getConnection')
-            ->andReturn($mDba);
+            ->andReturn($mConn);
         return $result;
     }
 
+    /**
+     * @deprecated use _mockResourceConnection instead.
+     */
     protected function _mockRsrcConnOld($mConnection)
     {
         $result = $this->_mock(\Praxigento\Core\Lib\Context\IDbAdapter::class);
         $result
             ->shouldReceive('getDefaultConnection')
             ->andReturn($mConnection);
+        return $result;
+    }
+
+    /**
+     * @return m\MockInterface
+     */
+    protected function _mockTransactionManager()
+    {
+        $result = $this->_mock(\Praxigento\Core\Repo\ITransactionManager::class);
         return $result;
     }
 }

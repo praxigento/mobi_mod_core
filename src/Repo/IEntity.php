@@ -1,6 +1,6 @@
 <?php
 /**
- * Interface for types codifiers repository.
+ * Interface for repository that operates with entities data.
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
