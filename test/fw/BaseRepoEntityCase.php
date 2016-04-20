@@ -9,7 +9,22 @@ namespace Praxigento\Core\Test;
 
 use Mockery as m;
 
-abstract class BaseEntityCase extends BaseMockeryCase
+abstract class BaseRepoEntityCase extends BaseMockeryCase
 {
+    /** @var  \Mockery\MockInterface */
+    protected $mConn;
+    /** @var  \Mockery\MockInterface */
+    protected $mRepoGeneric;
+    /** @var  \Mockery\MockInterface */
+    protected $mResource;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        /* create mocks */
+        $this->mConn = $this->_mockConn();
+        $this->mResource = $this->_mockResourceConnection($this->mConn);
+        $this->mRepoGeneric = $this->_mockRepoGeneric();
+    }
 
 }
