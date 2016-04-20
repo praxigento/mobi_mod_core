@@ -18,7 +18,7 @@ class Response_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         $this->assertEquals('code', $obj->getErrorCode());
         $this->assertEquals('message', $obj->getErrorMessage());
         $this->assertFalse($obj->isSucceed());
-        $obj->setAsSucceed();
+        $obj->markSucceed();
         $this->assertTrue($obj->isSucceed());
     }
 
