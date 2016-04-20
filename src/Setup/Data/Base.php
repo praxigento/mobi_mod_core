@@ -13,7 +13,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 
 abstract class Base implements InstallDataInterface
 {
-    /** @var \Praxigento\Core\Repo\IBasic */
+    /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoBasic;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $_resource;
@@ -28,7 +28,7 @@ abstract class Base implements InstallDataInterface
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\Repo\IBasic $repoBasic
+        \Praxigento\Core\Repo\IGeneric $repoBasic
     ) {
         $this->_resource = $resource;
         $this->_conn = $resource->getConnection();

@@ -54,6 +54,11 @@ interface IEntity
      */
     public function getRef();
 
+    /**
+     * @param array $data [COL_NAME=>$value, ...]
+     * @param mixed $where
+     * @return int Count of the updated rows.
+     */
     public function update($data, $where);
 
     /**

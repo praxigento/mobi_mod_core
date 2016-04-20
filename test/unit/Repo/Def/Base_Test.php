@@ -18,7 +18,7 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         parent::setUp();
         /* create mocks */
         $this->mConn = $this->_mockConn();
-        $this->mRepoBasic = $this->_mockRepoBasic();
+        $this->mRepoGeneric = $this->_mockRepoGeneric();
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
         $this->obj = new ChildToTestBase($mResource);

@@ -1,6 +1,6 @@
 <?php
 /**
- * Interface for basic repository to do universal operations with data (CRUD).
+ * Interface for generic repository to do universal operations with data (CRUD).
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
@@ -8,7 +8,7 @@
 namespace Praxigento\Core\Repo;
 
 
-interface IBasic
+interface IGeneric
 {
     /**
      * @param string $entity Entity name (not table name).

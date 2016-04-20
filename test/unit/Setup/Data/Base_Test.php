@@ -15,7 +15,7 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
-    private $mRepoBasic;
+    private $mRepoGeneric;
     /** @var  ChildToTest */
     private $obj;
 
@@ -24,12 +24,12 @@ class Base_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
         parent::setUp();
         /* create mocks */
         $this->mConn = $this->_mockConn();
-        $this->mRepoBasic = $this->_mockRepoBasic();
+        $this->mRepoGeneric = $this->_mockRepoGeneric();
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTest($mResource, $this->mRepoBasic);
+        $this->obj = new ChildToTest($mResource, $this->mRepoGeneric);
     }
 
     public function test_install()

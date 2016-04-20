@@ -13,13 +13,13 @@ include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 class Main_ManualTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 {
 
-    /** @var  \Praxigento\Core\Repo\Def\Basic */
+    /** @var  \Praxigento\Core\Repo\Def\Generic */
     private $_obj;
 
     public function setUp()
     {
         parent::setUp();
-        $this->_obj = ObjectManager::getInstance()->get(\Praxigento\Core\Repo\Def\Basic::class);
+        $this->_obj = ObjectManager::getInstance()->get(\Praxigento\Core\Repo\Def\Generic::class);
 
     }
 
@@ -36,7 +36,7 @@ class Main_ManualTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
 
     public function test_construct()
     {
-        $this->assertTrue($this->_obj instanceof \Praxigento\Core\Repo\Def\Basic);
+        $this->assertTrue($this->_obj instanceof \Praxigento\Core\Repo\Def\Generic);
     }
 
     public function test_getEntities()

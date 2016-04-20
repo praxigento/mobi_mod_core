@@ -65,23 +65,23 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     /**
      * @return m\MockInterface
      */
-    protected function _mockRepoBasic()
+    protected function _mockRepoGeneric()
     {
-        $result = $this->_mock(\Praxigento\Core\Repo\IBasic::class);
+        $result = $this->_mock(\Praxigento\Core\Repo\IGeneric::class);
         return $result;
     }
 
     /**
      * @param $class
-     * @param null $mRepoBasic
+     * @param null $mRepoGeneric
      * @return m\MockInterface
      */
-    protected function _mockRepoMod($class, $mRepoBasic = null)
+    protected function _mockRepoMod($class, $mRepoGeneric = null)
     {
         $result = $this->_mock($class);
         $result
             ->shouldReceive('getBasicRepo')
-            ->andReturn($mRepoBasic);
+            ->andReturn($mRepoGeneric);
         return $result;
     }
 
@@ -91,18 +91,6 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         $result
             ->shouldReceive('getConnection')
             ->andReturn($mConn);
-        return $result;
-    }
-
-    /**
-     * @deprecated use _mockResourceConnection instead.
-     */
-    protected function _mockRsrcConnOld($mConnection)
-    {
-        $result = $this->_mock(\Praxigento\Core\Lib\Context\IDbAdapter::class);
-        $result
-            ->shouldReceive('getDefaultConnection')
-            ->andReturn($mConnection);
         return $result;
     }
 

@@ -9,7 +9,7 @@ namespace Praxigento\Core\Repo\Def;
 use Praxigento\Core\Data\IEntity as IDataEntity;
 use Praxigento\Core\Repo\IEntity;
 
-class Entity implements IEntity
+class Entity extends Base implements IEntity
 {
     /** @var  string */
     protected $_entityName;
@@ -17,14 +17,16 @@ class Entity implements IEntity
     protected $_idFieldName;
     /** @var  IDataEntity */
     protected $_refEntity;
-    /** @var \Praxigento\Core\Repo\IBasic */
-    protected $_repoBasic;
+    /** @var \Praxigento\Core\Repo\IGeneric */
+    protected $_repoGeneric;
 
     public function __construct(
-        \Praxigento\Core\Repo\IBasic $repoBasic,
+        \Magento\Framework\App\ResourceConnection $resource,
+        \Praxigento\Core\Repo\IGeneric $repoGeneric,
         IDataEntity $entity
     ) {
-        $this->_repoBasic = $repoBasic;
+        parent::__construct($resource);
+        $this->_repoGeneric = $repoGeneric;
         $this->_refEntity = $entity;
         $this->_entityName = $entity->getEntityName();
         $ids = $entity->getPrimaryKeyAttrs();
@@ -36,7 +38,7 @@ class Entity implements IEntity
      */
     public function create($data)
     {
-        $result = $this->_repoBasic->addEntity($this->_entityName, $data);
+        $result = $this->_repoGeneric->addEntity($this->_entityName, $data);
         return $result;
     }
 
@@ -51,7 +53,7 @@ class Entity implements IEntity
         } else {
             $pk = [$this->_idFieldName => $id];
         }
-        $result = $this->_repoBasic->deleteEntityByPk($this->_entityName, $pk);
+        $result = $this->_repoGeneric->deleteEntityByPk($this->_entityName, $pk);
         return $result;
     }
 
@@ -60,7 +62,7 @@ class Entity implements IEntity
      */
     public function get($where = null, $order = null, $limit = null, $offset = null)
     {
-        $result = $this->_repoBasic->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
+        $result = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
         return $result;
     }
 
@@ -75,7 +77,7 @@ class Entity implements IEntity
         } else {
             $pk = [$this->_idFieldName => $id];
         }
-        $result = $this->_repoBasic->getEntityByPk($this->_entityName, $pk);
+        $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
         return $result;
     }
 
@@ -92,7 +94,7 @@ class Entity implements IEntity
      */
     public function update($data, $where)
     {
-        $result = $this->_repoBasic->updateEntity($this->_entityName, $data, $where);
+        $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
         return $result;
     }
 
@@ -109,9 +111,10 @@ class Entity implements IEntity
             }
             $where .= '1'; // WHERE ... AND 1;
         } else {
-            $where = $this->_idFieldName . '=' . (int)$id;
+            $val = is_int($id) ? $id : $this->_conn->quote($id);
+            $where = $this->_idFieldName . '=' . $val;
         }
-        $result = $this->_repoBasic->updateEntity($this->_entityName, $data, $where);
+        $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
         return $result;
     }
 }
