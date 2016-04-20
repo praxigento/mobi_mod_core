@@ -19,7 +19,7 @@ class ChildToTestType extends Type
 
 }
 
-class Type_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;

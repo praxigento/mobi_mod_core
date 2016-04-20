@@ -6,7 +6,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Test;
+namespace Praxigento\Core\Test;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;

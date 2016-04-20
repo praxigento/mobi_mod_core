@@ -8,7 +8,7 @@ use Praxigento\Core\Data\IEntity;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Entity_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     private $ENTITY_NAME = 'entity name';
     private $PK = []; // [$this->PK_ATTR]

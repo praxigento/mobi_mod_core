@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class TransactionManager_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;

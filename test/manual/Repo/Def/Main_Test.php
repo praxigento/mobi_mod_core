@@ -10,7 +10,7 @@ use Praxigento\Bonus\Base\Lib\Entity\Type\Calc;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Main_ManualTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Main_ManualTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
 
     /** @var  \Praxigento\Core\Repo\Def\Generic */

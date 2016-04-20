@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Lib\Test;
+namespace Praxigento\Core\Test;
 
 use Mockery as m;
 

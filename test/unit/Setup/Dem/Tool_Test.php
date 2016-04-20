@@ -8,7 +8,7 @@ use Praxigento\Core\Setup\Dem\Cfg as DemCfg;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Tool_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mSetup;

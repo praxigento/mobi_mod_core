@@ -16,7 +16,7 @@
     ],
     "psr-4": {
       "Praxigento\\Core\\": "src/",
-      "Praxigento\\Core\\Lib\\Test\\": "test/fw"
+      "Praxigento\\Core\\Test\\": "test/fw"
     }
   },
   "require": {

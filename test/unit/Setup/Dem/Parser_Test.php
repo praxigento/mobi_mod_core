@@ -9,7 +9,7 @@ use Praxigento\Core\Setup\Dem\Cfg as Dem;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Parser_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Parser_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     const ALIAS = 'alias';
     const DEFAULT_VALUE = 'default value';

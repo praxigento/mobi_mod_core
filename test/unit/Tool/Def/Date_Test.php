@@ -6,7 +6,7 @@ namespace Praxigento\Core\Tool\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Date_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Date_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     const OFFSET = 36000;
     /** @var  \Mockery\MockInterface */

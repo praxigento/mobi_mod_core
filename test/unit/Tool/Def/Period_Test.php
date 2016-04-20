@@ -6,7 +6,7 @@ namespace Praxigento\Core\Tool\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Period_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class Period_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     const OFFSET = -25200; // -7 * 3600 (UTC-7)
     /** @var  \Mockery\MockInterface */

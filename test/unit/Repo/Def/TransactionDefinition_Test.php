@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class TransactionDefinition_UnitTest extends \Praxigento\Core\Lib\Test\BaseMockeryCase
+class TransactionDefinition_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  TransactionDefinition */
     private $obj;
