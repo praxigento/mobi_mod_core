@@ -178,6 +178,44 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals($UPDATED, $res);
     }
 
+    public function test_updateById_array()
+    {
+        /* === Test Data === */
+        $ID = ['key1' => 43, 'key2' => 'string'];
+        $DATA = [[1], [2]];
+        $UPDATED = 'rows updated';
+        /* === Setup Mocks === */
+        // $val = is_int($value) ? $value : $this->_conn->quote($value);
+        $this->mConn
+            ->shouldReceive('quote')->once()
+            ->andReturn("'string'");
+        // $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
+        $this->mRepoGeneric
+            ->shouldReceive('updateEntity')->once()
+            ->with($this->ENTITY_NAME, $DATA, "(key1=43) AND (key2='string') AND 1")
+            ->andReturn($UPDATED);
+        /* === Call and asserts  === */
+        $res = $this->obj->updateById($DATA, $ID);
+        $this->assertEquals($UPDATED, $res);
+    }
+
+    public function test_updateById_int()
+    {
+        /* === Test Data === */
+        $ID = 32;
+        $DATA = [[1], [2]];
+        $UPDATED = 'rows updated';
+        /* === Setup Mocks === */
+        // $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
+        $this->mRepoGeneric
+            ->shouldReceive('updateEntity')->once()
+            ->with($this->ENTITY_NAME, $DATA, $this->PK_ATTR . "=$ID")
+            ->andReturn($UPDATED);
+        /* === Call and asserts  === */
+        $res = $this->obj->updateById($DATA, $ID);
+        $this->assertEquals($UPDATED, $res);
+    }
+
     public function test_updateById_string()
     {
         /* === Test Data === */

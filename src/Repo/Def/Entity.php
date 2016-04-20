@@ -107,7 +107,8 @@ class Entity extends Base implements IEntity
             /* probably this is complex PK */
             $where = '';
             foreach ($id as $key => $value) {
-                $where = "($key=$value) AND ";
+                $val = is_int($value) ? $value : $this->_conn->quote($value);
+                $where .= "($key=$val) AND ";
             }
             $where .= '1'; // WHERE ... AND 1;
         } else {
