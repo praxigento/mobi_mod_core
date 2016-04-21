@@ -83,6 +83,8 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         /* base services */
         $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ISnap::class);
+        /* set up application */
+        $this->_setAreaCode();
     }
 
     /**
@@ -176,6 +178,22 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         $memPeak = number_format(memory_get_peak_usage(), 0, '.', ',');
         $memCurrent = number_format(memory_get_usage(), 0, '.', ',');
         $this->_logger->debug("Current memory usage: $memCurrent bytes (peak: $memPeak bytes).");
+    }
+
+    private function _setAreaCode()
+    {
+        /** @var \Magento\Framework\App\State $appState */
+        $appState = $this->_manObj->get(\Magento\Framework\App\State::class);
+        try {
+            $appState->getAreaCode();
+        } catch (\Exception $e) {
+            $areaCode = 'adminhtml';
+            $appState->setAreaCode($areaCode);
+            /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
+            $configLoader = $this->_manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
+            $config = $configLoader->load($areaCode);
+            $this->_manObj->configure($config);
+        }
     }
 
     protected function setUp()
