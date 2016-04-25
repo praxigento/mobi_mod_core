@@ -104,6 +104,17 @@ class Entity extends Base implements IEntity
     /**
      * @inheritdoc
      */
+    public function getQueryToSelectCount()
+    {
+        $result = $this->_conn->select();
+        $tbl = $this->_conn->getTableName($this->_entityName);
+        $result->from($tbl, "COUNT({$this->_idFieldName})");
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getRef()
     {
         return $this->_refEntity;

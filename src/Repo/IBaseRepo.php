@@ -43,4 +43,11 @@ interface IBaseRepo
      */
     public function getQueryToSelect();
 
+    /**
+     * Compose COUNT SELECT query for the simple entity or aggregate.
+     *
+     * @return ISelect
+     */
+    public function getQueryToSelectCount();
+
 }
