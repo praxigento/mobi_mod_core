@@ -45,6 +45,15 @@ class Entity extends Base implements IEntity
     /**
      * @inheritdoc
      */
+    public function delete($where)
+    {
+        $result = $this->_repoGeneric->delete($this->_entityName, $where);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function deleteById($id)
     {
         if (is_array($id)) {
@@ -78,6 +87,17 @@ class Entity extends Base implements IEntity
             $pk = [$this->_idFieldName => $id];
         }
         $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
+        return $result;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getQueryToSelect()
+    {
+        $result = $this->_conn->select();
+        $tbl = $this->_conn->getTableName($this->_entityName);
+        $result->from($tbl);
         return $result;
     }
 

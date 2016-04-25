@@ -10,7 +10,7 @@ namespace Praxigento\Core\Repo;
 
 use Flancer32\Lib\DataObject;
 
-interface IEntity
+interface IEntity extends IBaseRepo
 {
     /**
      * Create instance in the DB.
@@ -40,7 +40,7 @@ interface IEntity
     public function get($where = null, $order = null, $limit = null, $offset = null);
 
     /**
-     * Delete the instance by ID (ID can be an array for complex primary keys).
+     * Get the instance by ID (ID can be an array for complex primary keys).
      *
      * @param int|array $id
      * @return mixed

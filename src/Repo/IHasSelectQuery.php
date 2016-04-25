@@ -7,13 +7,13 @@
 namespace Praxigento\Core\Repo;
 
 
-interface  IHasQuery
+interface  IHasSelectQuery
 {
     /**
      * Get SELECT query.
      *
-     * @return \Magento\Framework\DB\Select
+     * @return \Praxigento\Core\Repo\ISelect
      */
-    public function getQuery();
+    public function getSelectQuery();
 
 }

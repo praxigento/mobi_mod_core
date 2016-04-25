@@ -12,7 +12,9 @@ use Praxigento\Core\Repo\IGeneric;
 class  Generic extends Base implements IGeneric
 {
     /**
-     * @inheritdoc
+     * @param string $entity
+     * @param array $bind
+     * @return null
      */
     public function addEntity($entity, $bind)
     {
@@ -27,6 +29,13 @@ class  Generic extends Base implements IGeneric
         if ($rowsAdded) {
             $result = $this->_conn->lastInsertId($tbl);
         }
+        return $result;
+    }
+
+    public function deleteEntity($entity, $where)
+    {
+        $tbl = $this->_conn->getTableName($entity);
+        $result = $this->_conn->delete($tbl, $where);
         return $result;
     }
 
@@ -71,11 +80,11 @@ class  Generic extends Base implements IGeneric
     /**
      * @inheritdoc
      */
-    public function getEntityByPk($entity, $pk, $fields = '*')
+    public function getEntityByPk($entity, $pk, $cols = null)
     {
         $tbl = $this->_conn->getTableName($entity);
         /* columns to select */
-        $cols = ($fields) ? $fields : '*';
+        $cols = ($cols) ? $cols : '*';
         $query = $this->_conn->select();
         $query->from($tbl, $cols);
         foreach ($pk as $field => $value) {

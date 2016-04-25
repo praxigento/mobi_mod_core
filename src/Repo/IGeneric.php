@@ -1,33 +1,49 @@
 <?php
 /**
- * Interface for generic repository to do universal operations with data (CRUD).
+ * Interface for generic repository to do universal operations (CRUD) with simple entities (not aggregates).
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
 
 namespace Praxigento\Core\Repo;
 
+use Flancer32\Lib\DataObject;
 
 interface IGeneric
 {
     /**
-     * @param string $entity Entity name (not table name).
-     * @param array $bind [COL_NAME=>$value, ...]
+     * Create new $entity instance using $data.
      *
-     * @return int ID of the inserted record.
+     * @param string $entity Entity name (not table name).
+     * @param array|DataObject $bind [COL_NAME=>$value, ...]
+     *
+     * @return int|null ID of the inserted record or nothing.
      */
     public function addEntity($entity, $bind);
 
     /**
+     * Delete one or more simple entities by $where condition.
+     *
+     * @param string $entity Entity name (not table name).
+     * @param mixed $where condition to select entites for delete.
+     * @return int number of deleted rows
+     */
+    public function deleteEntity($entity, $where);
+
+    /**
+     * Delete one simple entity using primary key.
+     *
      * @param string $entity Entity name (not table name).
      * @param array $pk [COL_NAME=>$value, ...]
-     * @return int
+     * @return int number of deleted rows
      */
     public function deleteEntityByPk($entity, $pk);
 
     /**
+     * Get list of simple entities according to given conditions ($cols, $where, $order, ...).
+     *
      * @param string $entity Entity name (not table name)
-     * @param array|string|Zend_Db_Expr $cols The columns to select from the table.
+     * @param array|null $cols The columns to select from the table or null to select all columns.
      * @param string $where The WHERE condition.
      * @param array|string $order The column(s) and direction to order by.
      * @param int $limit The number of rows to return.
@@ -40,15 +56,15 @@ interface IGeneric
     /**
      * @param string $entity Entity name (not table name).
      * @param array $pk [COL_NAME=>$value, ...]
-     * @param array|string $fields
+     * @param array|null $cols The columns to select from the table or null to select all columns.
      *
      * @return bool|array 'false' or selected data ([...])
      */
-    public function getEntityByPk($entity, $pk, $fields = '*');
+    public function getEntityByPk($entity, $pk, $cols = null);
 
     /**
      * @param string $entity Entity name (not table name).
-     * @param array $bind [COL_NAME=>$value, ...]
+     * @param array|DataObject $bind [COL_NAME=>$value, ...]
      *
      * @return mixed
      */
@@ -56,7 +72,7 @@ interface IGeneric
 
     /**
      * @param string $entity Entity name (not table name).
-     * @param array $bind [COL_NAME=>$value, ...]
+     * @param array|DataObject $bind [COL_NAME=>$value, ...]
      * @param mixed $where
      *
      * @return int Count of the updated rows.

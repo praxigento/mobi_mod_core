@@ -8,10 +8,10 @@ namespace Praxigento\Core\Repo\Def;
 
 abstract class Base
 {
-    /** @var \Magento\Framework\App\ResourceConnection */
-    protected $_resource;
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $_resource;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource
