@@ -50,4 +50,11 @@ interface IBaseRepo
      */
     public function getQueryToSelectCount();
 
+    /**
+     * Referenced data object to address attributes.
+     *
+     * @return object
+     */
+    public function getRef();
+
 }

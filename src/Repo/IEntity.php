@@ -47,12 +47,6 @@ interface IEntity extends IBaseRepo
      */
     public function getById($id);
 
-    /**
-     * Referenced entity to address attributes.
-     *
-     * @return object
-     */
-    public function getRef();
 
     /**
      * @param array $data [COL_NAME=>$value, ...]

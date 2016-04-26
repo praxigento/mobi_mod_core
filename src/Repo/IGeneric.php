@@ -25,7 +25,7 @@ interface IGeneric
      * Delete one or more simple entities by $where condition.
      *
      * @param string $entity Entity name (not table name).
-     * @param mixed $where condition to select entites for delete.
+     * @param mixed $where condition to select entities for delete.
      * @return int number of deleted rows
      */
     public function deleteEntity($entity, $where);
