@@ -42,8 +42,6 @@ class Base extends DataProvider
         RequestInterface $request,
         FilterBuilder $filterBuilder,
         $name,
-        $primaryFieldName = 'entity_id',
-        $requestFieldName = 'id',
         array $meta = [],
         array $data = []
     ) {
@@ -54,8 +52,8 @@ class Base extends DataProvider
         }
         parent::__construct(
             $name,
-            $primaryFieldName,
-            $requestFieldName,
+            'entity_id',
+            'id',
             $reporting,
             $searchCriteriaBuilder,
             $request,
