@@ -12,6 +12,7 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
 use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 use Magento\Store\Model\StoreManagerInterface;
+use Praxigento\Core\Repo\Criteria\IAdapter as ICriteriaAdapter;
 use Praxigento\Core\Repo\IBaseRepo as IBaseRepo;
 
 class Base extends DataProvider
@@ -26,7 +27,8 @@ class Base extends DataProvider
     const UIC_CONFIG = 'config';
     const UIC_UPDATE_URL = 'update_url';
     /**#@-*/
-
+    /** @var  ICriteriaAdapter */
+    protected $_criteriaAdapter;
     /**
      * Repository to select data for grid.
      *
@@ -36,6 +38,7 @@ class Base extends DataProvider
 
     public function __construct(
         UrlInterface $url,
+        ICriteriaAdapter $criteriaAdapter,
         IBaseRepo $repo,
         Reporting $reporting,
         SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -62,86 +65,36 @@ class Base extends DataProvider
             $data
         );
         /* post construction setup */
+        $this->_criteriaAdapter = $criteriaAdapter;
         $this->_repo = $repo;
     }
 
     public function getData()
     {
         $criteria = $this->getSearchCriteria();
-        $pageSize = $criteria->getPageSize();
-        $pageIndx = $criteria->getCurrentPage();
-        $where = null;
-        /** @var \Magento\Framework\Api\SortOrder[] $apiOrder */
-        $apiOrder = $criteria->getSortOrders();
-        $order = [];
-        foreach ($apiOrder as $item) {
-            $field = $item->getField();
-            $direction = $item->getDirection();
-            if ($field) {
-                $order[] = "$field $direction";
-            }
-        }
+        $where = $this->_criteriaAdapter->getWhereFromApiCriteria($criteria);
+        /* get query for total count */
         /** @var \Magento\Framework\DB\Select $queryTotal */
         $queryTotal = $this->_repo->getQueryToSelectCount();
+        $queryTotal->where($where);
         $total = $queryTotal->getConnection()->fetchOne($queryTotal);
+        /* get query to select data */
         /** @var \Magento\Framework\DB\Select $query */
         $query = $this->_repo->getQueryToSelect();
+        $query->where($where);
+        /* set order */
+        $order = $this->_criteriaAdapter->getOrderFromApiCriteria($criteria);
+        $query->order($order);
+        /* limit pages */
+        $pageSize = $criteria->getPageSize();
+        $pageIndx = $criteria->getCurrentPage();
         $query->limitPage($pageIndx, $pageSize);
-        if (count($order) > 0) {
-            $query->order($order);
-        }
         $data = $query->getConnection()->fetchAll($query);
         $result = [
             static::JSON_ATTR_TOTAL_RECORDS => $total,
             static::JSON_ATTR_ITEMS => $data
         ];
         return $result;
-    }
-
-    public function getFieldMetaInfo($fieldSetName, $fieldName)
-    {
-        return parent::getFieldMetaInfo($fieldSetName, $fieldName);
-    }
-
-    public function getFieldSetMetaInfo($fieldSetName)
-    {
-        return parent::getFieldSetMetaInfo($fieldSetName);
-    }
-
-    public function getFieldsMetaInfo($fieldSetName)
-    {
-        return parent::getFieldsMetaInfo($fieldSetName);
-    }
-
-    public function getMeta()
-    {
-        return parent::getMeta();
-    }
-
-
-    public function getPrimaryFieldName()
-    {
-        return parent::getPrimaryFieldName();
-    }
-
-    public function getRequestFieldName()
-    {
-        return parent::getRequestFieldName();
-    }
-
-    public function getSearchCriteria()
-    {
-        return parent::getSearchCriteria();
-    }
-
-    public function getSearchResult()
-    {
-        return parent::getSearchResult();
-    }
-
-    public function setConfigData($config)
-    {
-        return parent::setConfigData($config);
     }
 
 }
