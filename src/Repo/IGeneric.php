@@ -17,7 +17,7 @@ interface IGeneric
      * @param string $entity Entity name (not table name).
      * @param array|DataObject $bind [COL_NAME=>$value, ...]
      *
-     * @return int|null ID of the inserted record or nothing.
+     * @return int|null ID of the inserted record or nothing (in case of complex primary key, for example).
      */
     public function addEntity($entity, $bind);
 

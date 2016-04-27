@@ -11,11 +11,7 @@ use Praxigento\Core\Repo\IGeneric;
 
 class  Generic extends Base implements IGeneric
 {
-    /**
-     * @param string $entity
-     * @param array $bind
-     * @return null
-     */
+    /** @inheritdoc */
     public function addEntity($entity, $bind)
     {
         $result = null;
@@ -32,6 +28,7 @@ class  Generic extends Base implements IGeneric
         return $result;
     }
 
+    /** @inheritdoc */
     public function deleteEntity($entity, $where)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -39,9 +36,7 @@ class  Generic extends Base implements IGeneric
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function deleteEntityByPk($entity, $pk)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -53,9 +48,7 @@ class  Generic extends Base implements IGeneric
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -77,9 +70,7 @@ class  Generic extends Base implements IGeneric
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getEntityByPk($entity, $pk, $cols = null)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -94,9 +85,7 @@ class  Generic extends Base implements IGeneric
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function replaceEntity($entity, $bind)
     {
         $tbl = $this->_conn->getTableName($entity);
@@ -107,9 +96,7 @@ class  Generic extends Base implements IGeneric
         $this->_conn->query($query, $bind);
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function updateEntity($entity, $bind, $where = null)
     {
         $tbl = $this->_conn->getTableName($entity);

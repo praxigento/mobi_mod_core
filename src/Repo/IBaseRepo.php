@@ -13,10 +13,11 @@ use Flancer32\Lib\DataObject;
 interface IBaseRepo
 {
     /**
-     * Create new entity (simple or aggregate) using $data.
+     * Create new entity (simple or aggregate) using $data. Exception is thrown in case of any error.
      *
      * @param DataObject|array $data
-     * @return DataObject|array|int|null Created entity, ID or nothing
+     * @return bool|int|string|array|DataObject ID (integer|string|array) or 'true|false' (if insertion is failed)
+     * or array|DataObject (if newly created object is returned).
      */
     public function create($data);
 
@@ -32,7 +33,7 @@ interface IBaseRepo
      * Get the data instance by ID (ID can be an array for complex primary keys).
      *
      * @param int|array $id
-     * @return DataObject|array|null Found instance data
+     * @return DataObject|array|bool Found instance data or 'false'
      */
     public function getById($id);
 

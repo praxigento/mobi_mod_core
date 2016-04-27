@@ -10,9 +10,9 @@ include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
-    private $ENTITY_NAME = 'entity name';
-    private $PK = []; // [$this->PK_ATTR]
-    private $PK_ATTR = 'id';
+    private $ENTITY_NAME = TestEntity::ENTITY_NAME;
+    private $PK = [TestEntity::ATTR_ID];
+    private $PK_ATTR = TestEntity::ATTR_ID;
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
@@ -28,24 +28,14 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /* create mocks */
         $this->mConn = $this->_mockConn();
         $this->mRepoGeneric = $this->_mockRepoGeneric();
-        $this->mEntity = $this->_mock(\Praxigento\Core\Data\IEntity::class);
         /* setup mocks for constructor */
         // parent::__construct($resource);
         $mResource = $this->_mockResourceConnection($this->mConn);
-        // $this->_entityName = $entity->getEntityName();
-        $this->mEntity
-            ->shouldReceive('getEntityName')->once()
-            ->andReturn($this->ENTITY_NAME);
-        // $ids = $entity->getPrimaryKeyAttrs();
-        $this->PK = [$this->PK_ATTR];
-        $this->mEntity
-            ->shouldReceive('getPrimaryKeyAttrs')->once()
-            ->andReturn($this->PK);
         /* create object */
         $this->obj = new Entity(
             $mResource,
             $this->mRepoGeneric,
-            $this->mEntity
+            TestEntity::class
         );
     }
 
@@ -235,6 +225,18 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /* === Call and asserts  === */
         $res = $this->obj->updateById($DATA, $ID);
         $this->assertEquals($UPDATED, $res);
+    }
+
+}
+
+class TestEntity extends \Praxigento\Core\Data\Entity\Base
+{
+    const ATTR_ID = 'pkey';
+    const ENTITY_NAME = 'test entity';
+
+    public function getPrimaryKeyAttrs()
+    {
+        return [static::ATTR_ID];
     }
 
 }

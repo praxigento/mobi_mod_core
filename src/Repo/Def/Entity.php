@@ -11,49 +11,62 @@ use Praxigento\Core\Repo\IEntity;
 
 class Entity extends Base implements IEntity
 {
-    /** @var  string */
+    /** @var  string Class name for the related entity. */
+    protected $_entityClassName;
+    /** @var  string Entity name (table name w/o prefix) */
     protected $_entityName;
-    /** @var  string */
+    /** @var  string Name of the first attribute from primary key */
     protected $_idFieldName;
-    /** @var  IDataEntity */
+    /** @var  IDataEntity instance */
     protected $_refEntity;
     /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoGeneric;
 
+    /**
+     * Entity constructor.
+     * @param \Magento\Framework\App\ResourceConnection $resource
+     * @param \Praxigento\Core\Repo\IGeneric $repoGeneric
+     * @param string $entityClassName
+     */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
         \Praxigento\Core\Repo\IGeneric $repoGeneric,
-        IDataEntity $entity
+        $entityClassName
     ) {
         parent::__construct($resource);
         $this->_repoGeneric = $repoGeneric;
-        $this->_refEntity = $entity;
-        $this->_entityName = $entity->getEntityName();
-        $ids = $entity->getPrimaryKeyAttrs();
-        $this->_idFieldName = reset($ids);
+        $this->_entityClassName = $entityClassName;
+        /* init entity that is related for the repo */
+        $this->_initRefEntity();
     }
 
-    /**
-     * @inheritdoc
-     */
+    protected function _initRefEntity()
+    {
+        if (is_null($this->_refEntity)) {
+            $this->_refEntity = new $this->_entityClassName();
+            $this->_entityName = $this->_refEntity->getEntityName();
+            $ids = $this->_refEntity->getPrimaryKeyAttrs();
+            /* get first field (and alone for one-field primary keys)*/
+            $this->_idFieldName = reset($ids);
+        }
+
+    }
+
+    /** @inheritdoc */
     public function create($data)
     {
         $result = $this->_repoGeneric->addEntity($this->_entityName, $data);
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function delete($where)
     {
         $result = $this->_repoGeneric->delete($this->_entityName, $where);
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function deleteById($id)
     {
         if (is_array($id)) {
@@ -66,18 +79,14 @@ class Entity extends Base implements IEntity
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function get($where = null, $order = null, $limit = null, $offset = null)
     {
         $result = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getById($id)
     {
         if (is_array($id)) {
@@ -90,9 +99,7 @@ class Entity extends Base implements IEntity
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getQueryToSelect()
     {
         $result = $this->_conn->select();
@@ -101,9 +108,7 @@ class Entity extends Base implements IEntity
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getQueryToSelectCount()
     {
         $result = $this->_conn->select();
@@ -112,26 +117,20 @@ class Entity extends Base implements IEntity
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getRef()
     {
         return $this->_refEntity;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function update($data, $where)
     {
         $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function updateById($data, $id)
     {
         if (is_array($id)) {
