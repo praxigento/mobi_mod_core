@@ -37,6 +37,20 @@ abstract class Aggregate extends Base implements IAggregate
     }
 
     /** @inheritdoc */
+    public function get(
+        $where = null,
+        $order = null,
+        $limit = null,
+        $offset = null,
+        $columns = null,
+        $group = null,
+        $having = null
+    ) {
+        /* override this method in child class */
+        throw new \Exception('Method is not implemented.');
+    }
+
+    /** @inheritdoc */
     public function getRef()
     {
         return $this->_refDataObject;

@@ -125,7 +125,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->andReturn($DATA);
         /* === Call and asserts  === */
         $res = $this->obj->getById($ID);
-        $this->assertEquals($DATA, $res);
+        $this->assertEquals($DATA, $res->getData());
     }
 
     public function test_getById_notArray()
@@ -141,7 +141,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->andReturn($DATA);
         /* === Call and asserts  === */
         $res = $this->obj->getById($ID);
-        $this->assertEquals($DATA, $res);
+        $this->assertEquals($DATA, $res->getData());
     }
 
     public function test_getRef()

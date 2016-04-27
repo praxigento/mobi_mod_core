@@ -6,6 +6,7 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
+use Flancer32\Lib\DataObject;
 use Praxigento\Core\Data\IEntity as IDataEntity;
 use Praxigento\Core\Repo\IEntity;
 
@@ -40,6 +41,20 @@ class Entity extends Base implements IEntity
         $this->_initRefEntity();
     }
 
+    /**
+     * @param array $data
+     * @return DataObject
+     */
+    protected function _createEntityInstance($data = null)
+    {
+        /** @var DataObject $result */
+        $result = new $this->_entityClassName();
+        if ($data) {
+            $result->setData($data);
+        }
+        return $result;
+    }
+
     protected function _initRefEntity()
     {
         if (is_null($this->_refEntity)) {
@@ -49,7 +64,6 @@ class Entity extends Base implements IEntity
             /* get first field (and alone for one-field primary keys)*/
             $this->_idFieldName = reset($ids);
         }
-
     }
 
     /** @inheritdoc */
@@ -80,8 +94,15 @@ class Entity extends Base implements IEntity
     }
 
     /** @inheritdoc */
-    public function get($where = null, $order = null, $limit = null, $offset = null)
-    {
+    public function get(
+        $where = null,
+        $order = null,
+        $limit = null,
+        $offset = null,
+        $columns = null,
+        $group = null,
+        $having = null
+    ) {
         $result = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
         return $result;
     }
@@ -96,6 +117,9 @@ class Entity extends Base implements IEntity
             $pk = [$this->_idFieldName => $id];
         }
         $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
+        if ($result) {
+            $result = $this->_createEntityInstance($result);
+        }
         return $result;
     }
 

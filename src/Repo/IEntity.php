@@ -12,40 +12,6 @@ use Flancer32\Lib\DataObject;
 
 interface IEntity extends IBaseRepo
 {
-    /**
-     * Create instance in the DB.
-     *
-     * @param array|DataObject $data fields and bound values
-     * @return int|null ID for new instance (if ID is autoincrement)
-     */
-    public function create($data);
-
-    /**
-     * Search for the instance by ID (ID can be an array for complex primary keys).
-     *
-     * @param int|array $id
-     * @return mixed
-     */
-    public function deleteById($id);
-
-    /**
-     * Get list of the entities according to given conditions.
-     *
-     * @param null $where
-     * @param null $order
-     * @param null $limit
-     * @param null $offset
-     * @return mixed
-     */
-    public function get($where = null, $order = null, $limit = null, $offset = null);
-
-    /**
-     * Get the instance by ID (ID can be an array for complex primary keys).
-     *
-     * @param int|array $id
-     * @return mixed
-     */
-    public function getById($id);
 
 
     /**
