@@ -155,7 +155,7 @@ class Entity extends Base implements IEntity
     }
 
     /** @inheritdoc */
-    public function updateById($data, $id)
+    public function updateById($id, $data)
     {
         if (is_array($id)) {
             /* probably this is complex PK */

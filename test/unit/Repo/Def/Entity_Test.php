@@ -185,7 +185,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->with($this->ENTITY_NAME, $DATA, "(key1=43) AND (key2='string') AND 1")
             ->andReturn($UPDATED);
         /* === Call and asserts  === */
-        $res = $this->obj->updateById($DATA, $ID);
+        $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }
 
@@ -202,7 +202,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->with($this->ENTITY_NAME, $DATA, $this->PK_ATTR . "=$ID")
             ->andReturn($UPDATED);
         /* === Call and asserts  === */
-        $res = $this->obj->updateById($DATA, $ID);
+        $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }
 
@@ -223,7 +223,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->with($this->ENTITY_NAME, $DATA, $this->PK_ATTR . "='$ID'")
             ->andReturn($UPDATED);
         /* === Call and asserts  === */
-        $res = $this->obj->updateById($DATA, $ID);
+        $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }
 

@@ -21,13 +21,6 @@ interface IEntity extends IBaseRepo
      */
     public function update($data, $where);
 
-    /**
-     * Update instance in the DB (look up by ID values).
-     *
-     * @param array|DataObject $data
-     * @param int|array $id
-     * @return int number of the rows affected
-     */
-    public function updateById($data, $id);
+    
 
 }

@@ -80,4 +80,13 @@ interface IBaseRepo
      */
     public function getRef();
 
+    /**
+     * Update instance in the DB (look up by ID values).
+     *
+     * @param int|string|array $id
+     * @param array|DataObject $data
+     * @return int number of the rows affected
+     */
+    public function updateById($id, $data);
+
 }

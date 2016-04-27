@@ -56,4 +56,11 @@ abstract class Aggregate extends Base implements IAggregate
         return $this->_refDataObject;
     }
 
+    /** @inheritdoc */
+    public function updateById($id, $data)
+    {
+        /* override this method in child class */
+        throw new \Exception('Method is not implemented.');
+    }
+
 }
