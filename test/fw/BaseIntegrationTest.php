@@ -94,7 +94,7 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
     {
         /** @var  $obj \Praxigento\Core\ICached */
         // old services
-        $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Repo\IModule::class);
+        $obj = $this->_manObj->get(\Praxigento\Accounting\Repo\IModule::class);
         $obj->cacheReset();
         $obj = $this->_manObj->get(\Praxigento\Accounting\Lib\Service\IAccount::class);
         $obj->cacheReset();
