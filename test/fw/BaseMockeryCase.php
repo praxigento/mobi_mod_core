@@ -50,6 +50,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     protected function _mockLogger()
     {
         $result = $this->_mock(\Psr\Log\LoggerInterface::class);
+        $result->shouldReceive('alert', 'critical', 'debug', 'emergency', 'error', 'info', 'log', 'notice', 'warning');
         return $result;
     }
 
