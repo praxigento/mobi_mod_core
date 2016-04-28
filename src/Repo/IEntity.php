@@ -8,8 +8,6 @@
 namespace Praxigento\Core\Repo;
 
 
-use Flancer32\Lib\DataObject;
-
 interface IEntity extends IBaseRepo
 {
 
@@ -21,6 +19,5 @@ interface IEntity extends IBaseRepo
      */
     public function update($data, $where);
 
-    
 
 }

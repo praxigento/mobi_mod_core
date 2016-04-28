@@ -8,7 +8,7 @@
 namespace Praxigento\Core\Repo;
 
 
-interface IType
+interface IType extends IEntity
 {
     /**
      * @param string $code

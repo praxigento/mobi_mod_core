@@ -49,7 +49,7 @@ interface IGeneric
      * @param int $limit The number of rows to return.
      * @param int $offset Start returning after this many rows.
      *
-     * @return bool|array 'false' or selected data ( [[...], ...]).
+     * @return array selected data ( [[...], ...]) or empty array ([]) if no data found.
      */
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null);
 

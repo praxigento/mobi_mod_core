@@ -10,11 +10,23 @@ include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class ChildToTestType extends Type
 {
-    const ENTITY = 'entity';
+    public function __construct(
+        \Magento\Framework\App\ResourceConnection $resource,
+        \Praxigento\Core\Repo\IGeneric $repoGeneric
+    ) {
+        parent::__construct($resource, $repoGeneric, TestTypeEntity::class);
+    }
 
-    protected function _getEntityName()
+}
+
+class TestTypeEntity extends \Praxigento\Core\Data\Entity\Base
+{
+    const ATTR_ID = 'pkey';
+    const ENTITY_NAME = 'test entity';
+
+    public function getPrimaryKeyAttrs()
     {
-        return self::ENTITY;
+        return [static::ATTR_ID];
     }
 
 }
@@ -23,6 +35,8 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
+    /** @var  \Mockery\MockInterface */
+    private $mRepoGeneric;
     /** @var  ChildToTestType */
     private $obj;
 
@@ -34,7 +48,11 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTestType($mResource);
+        $this->obj = new ChildToTestType(
+            $mResource,
+            $this->mRepoGeneric,
+            TestTypeEntity::class
+        );
     }
 
     public function test_getIdByCode()
@@ -42,27 +60,16 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /* === Test Data === */
         $CODE = 'code';
         $ID = 43;
-        $TABLE = 'table';
+        $DATA = [EntityTypeBase::ATTR_ID => $ID];
         /* === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
+        // $where = EntityTypeBase::ATTR_CODE . '=' . $this->_conn->quote($code);
         $this->mConn
-            ->shouldReceive('getTableName')->once()
-            ->with(ChildToTestType::ENTITY)
-            ->andReturn($TABLE);
-        // $query = $this->_conn->select();
-        $mQuery = $this->_mockDbSelect();
-        $this->mConn
-            ->shouldReceive('select')->once()
-            ->andReturn($mQuery);
-        // $query->from($tbl);
-        $mQuery->shouldReceive('from')->once();
-        // $query->where(EntityTypeBase::ATTR_CODE . '=:code');
-        $mQuery->shouldReceive('where')->once();
-        // $data = $this->_conn->fetchRow($query, ['code' => $code]);
-        $this->mConn
-            ->shouldReceive('fetchRow')->once()
-            ->andReturn($mQuery)
-            ->andReturn([EntityTypeBase::ATTR_ID => $ID]);
+            ->shouldReceive('quote')->once()
+            ->andReturn("'$CODE'");
+        // $data = $this->_repoGeneric->getEntities($this->_entityName, null, $where);
+        $this->mRepoGeneric
+            ->shouldReceive('getEntities')->once()
+            ->andReturn([$DATA]);
         /* === Call and asserts  === */
         $res = $this->obj->getIdByCode($CODE);
         $this->assertEquals($ID, $res);
