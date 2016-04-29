@@ -152,8 +152,8 @@ class Period implements IPeriod, ICached
             $result = date_format($dt, 'Ymd');
         } else {
             if ($this->isPeriodMonth($periodValue)) {
-                $dt = date_create_from_format('Ym', $periodValue);
-                $ts = strtotime('first day of this month', $dt->getTimestamp());
+                $dt = date_create_from_format('Ymd', $periodValue . '01');
+                $ts = strtotime('first day of', $dt->getTimestamp());
                 $dt = $this->_toolConvert->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
             }
@@ -178,8 +178,8 @@ class Period implements IPeriod, ICached
             $result = date_format($dt, 'Ymd');
         } else {
             if ($this->isPeriodMonth($periodValue)) {
-                $dt = date_create_from_format('Ym', $periodValue);
-                $ts = strtotime('last day of this month', $dt->getTimestamp());
+                $dt = date_create_from_format('Ymd', $periodValue . '01');
+                $ts = strtotime('last day of', $dt->getTimestamp());
                 $dt = $this->_toolConvert->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
             }
@@ -207,7 +207,7 @@ class Period implements IPeriod, ICached
                 break;
             case self::TYPE_MONTH:
                 $truncated = substr($periodValue, 0, 6);
-                $dt = date_create_from_format('Ym', $truncated);
+                $dt = date_create_from_format('Ymd', $truncated . '01');
                 $ts = strtotime('next month', $dt->getTimestamp());
                 $dt = $this->_toolConvert->toDateTime($ts);
                 $result = date_format($dt, 'Ym');
