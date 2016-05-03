@@ -98,9 +98,9 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         $obj->cacheReset();
         $obj = $this->_manObj->get(\Praxigento\Accounting\Service\IAccount::class);
         $obj->cacheReset();
-        $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ISale::class);
+        $obj = $this->_manObj->get(\Praxigento\Pv\Service\ISale::class);
         $obj->cacheReset();
-        $obj = $this->_manObj->get(\Praxigento\Pv\Lib\Service\ITransfer::class);
+        $obj = $this->_manObj->get(\Praxigento\Pv\Service\ITransfer::class);
         $obj->cacheReset();
         // fresh classes
         $this->_manObj->get(\Praxigento\Core\Tool\Def\Period::class)->cacheReset();
