@@ -109,10 +109,10 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
 
     /**
      * @param string $dateBegin datestamp (YYYYMMDD) for the date when the first customer should be created.
-     * @param bool $swithDateOnNewCustomer 'true' - create customers day by day, 'false' - create all customers
+     * @param bool $switchDateOnNewCustomer 'true' - create customers day by day, 'false' - create all customers
      * in one day.
      */
-    protected function _createDownlineCustomers($dateBegin = self::DATE_PERIOD_BEGIN, $swithDateOnNewCustomer = true)
+    protected function _createDownlineCustomers($dateBegin = self::DATE_PERIOD_BEGIN, $switchDateOnNewCustomer = true)
     {
         $dtToday = $dateBegin;
         foreach ($this->DEFAULT_DWNL_TREE as $customerRef => $parentRef) {
@@ -125,7 +125,7 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
             $request->setCountryCode(self::DEFAULT_DOWNLINE_COUNTRY_CODE);
             $request->setDate($this->_toolPeriod->getTimestampFrom($dtToday));
             /* Create customer per day or all customers in the same day. */
-            if ($swithDateOnNewCustomer) {
+            if ($switchDateOnNewCustomer) {
                 $dtToday = $this->_toolPeriod->getPeriodNext($dtToday);
             }
             $response = $this->_callDownlineCustomer->add($request);
