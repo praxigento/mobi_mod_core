@@ -20,7 +20,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         parent::setUp();
         /** create mocks */
         $this->mConn = $this->_mockConn();
-        /* create object */
+        /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
         $this->obj = new Generic($mResource);
     }

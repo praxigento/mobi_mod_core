@@ -27,7 +27,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
-        /* create object */
+        /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
         $this->obj = new ChildToTest($mResource, $this->mRepoGeneric);
     }

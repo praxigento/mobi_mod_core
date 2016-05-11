@@ -22,7 +22,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** create mocks */
         $this->mConn = $this->_mockConn();
         $this->mManObj = $this->_mock(\Magento\Framework\ObjectManagerInterface::class);
-        /* create object */
+        /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
         $this->obj = new TransactionManager($mResource, $this->mManObj);
     }

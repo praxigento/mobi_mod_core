@@ -31,7 +31,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** setup mocks for constructor */
         // parent::__construct($resource);
         $mResource = $this->_mockResourceConnection($this->mConn);
-        /* create object */
+        /** create object to test */
         $this->obj = new Entity(
             $mResource,
             $this->mRepoGeneric,
