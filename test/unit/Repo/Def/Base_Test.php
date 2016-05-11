@@ -16,7 +16,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mConn = $this->_mockConn();
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         /* create object */
@@ -26,9 +26,9 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_constructor()
     {
-        /* === Test Data === */
-        /* === Setup Mocks === */
-        /* === Call and asserts  === */
+        /** === Test Data === */
+        /** === Setup Mocks === */
+        /** === Call and asserts  === */
         $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\Def\Base);
     }
 

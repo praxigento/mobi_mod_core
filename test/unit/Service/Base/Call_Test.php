@@ -18,7 +18,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mLogger = $this->_mockLogger();
         /* create object */
         $this->obj = new ChildToTest($this->mLogger);
@@ -26,10 +26,10 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_logMemoryUsage()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         $this->mLogger
             ->shouldReceive('debug')->once();
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->obj->oper();
     }
 

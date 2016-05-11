@@ -23,19 +23,19 @@ class Format_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $FORMATTED = 'formatted datetime';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         $mDt = $this->_mock(\DateTime::class);
         $mDt->shouldReceive('format')->once()
             ->with(Cfg::FORMAT_DATETIME)
             ->andReturn($FORMATTED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->dateTimeForDb($mDt);
         $this->assertEquals($FORMATTED, $res);
     }
 
     public function test_roundBonus()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->roundBonus(10.236);
         $this->assertEquals(10.24, $res);
     }

@@ -33,40 +33,40 @@ class Date_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_getMageNow()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $dt = $this->obj->getMageNow();
         $this->assertInstanceOf(\DateTime::class, $dt);
     }
 
     public function test_getMageNowForDb()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DB_TIMESTAMP = '2015-01-21 14:34:45';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         $this->mFormat
             ->shouldReceive('dateTimeForDb')->once()
             ->andReturn($DB_TIMESTAMP);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $ts = $this->obj->getMageNowForDb();
         $this->assertEquals($DB_TIMESTAMP, $ts);
     }
 
     public function test_getUtcNow()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $dt = $this->obj->getUtcNow();
         $this->assertInstanceOf(\DateTime::class, $dt);
     }
 
     public function test_getUtcNowForDb()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DB_TIMESTAMP = '2015-01-21 14:34:45';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         $this->mFormat
             ->shouldReceive('dateTimeForDb')->once()
             ->andReturn($DB_TIMESTAMP);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $ts = $this->obj->getUtcNowForDb();
         $this->assertEquals($DB_TIMESTAMP, $ts);
     }

@@ -24,7 +24,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mConn = $this->_mockConn();
         $this->mParser = $this->_mock(\Praxigento\Core\Setup\Dem\Parser::class);
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
@@ -36,7 +36,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_createEntity()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ENTITY = 'entity_alias';
         $TABLE = 'table_name';
         $TABLE_FK = 'fk_table';
@@ -65,7 +65,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
                 ]
             ]
         ];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tblName = $conn->getTableName($entityAlias);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -120,17 +120,17 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         // $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
         $this->mConn
             ->shouldReceive('addForeignKey')->once();
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->obj->createEntity($ENTITY, $DEM);
     }
 
     public function test_readDemPackage()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $pathToFile = __DIR__ . '/data/dem.json';
         $pathToNode = '/path/to/node';
-        /* === Setup Mocks === */
-        /* === Call and asserts  === */
+        /** === Setup Mocks === */
+        /** === Call and asserts  === */
         $res = $this->obj->readDemPackage($pathToFile, $pathToNode);
         $this->assertEquals('DEM', $res->getData('data'));
     }
@@ -140,11 +140,11 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
      */
     public function test_readDemPackage_exception()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $pathToFile = __DIR__ . '/data/dem.json';
         $pathToNode = '/no/path/to/node';
-        /* === Setup Mocks === */
-        /* === Call and asserts  === */
+        /** === Setup Mocks === */
+        /** === Call and asserts  === */
         $res = $this->obj->readDemPackage($pathToFile, $pathToNode);
         $this->assertEquals('DEM', $res->getData('data'));
     }

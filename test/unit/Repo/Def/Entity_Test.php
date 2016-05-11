@@ -25,10 +25,10 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mConn = $this->_mockConn();
         $this->mRepoGeneric = $this->_mockRepoGeneric();
-        /* setup mocks for constructor */
+        /** setup mocks for constructor */
         // parent::__construct($resource);
         $mResource = $this->_mockResourceConnection($this->mConn);
         /* create object */
@@ -41,140 +41,140 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_constructor()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\IEntity);
     }
 
     public function test_create()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DATA = ['field' => 'value'];
         $ID = 'inserted';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->addEntity($this->_entityName, $data);
         $this->mRepoGeneric
             ->shouldReceive('addEntity')->once()
             ->with($this->ENTITY_NAME, $DATA)
             ->andReturn($ID);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->create($DATA);
         $this->assertEquals($ID, $res);
     }
 
     public function test_deleteById_array()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = ['pk1' => 'value1', 'pk2' => 'value2'];
         $DELETED = 1;
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoBasic->deleteEntityByPk($this->_entityName, $pk);
         $this->mRepoGeneric
             ->shouldReceive('deleteEntityByPk')->once()
             ->with($this->ENTITY_NAME, $ID)
             ->andReturn($DELETED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->deleteById($ID);
         $this->assertEquals($DELETED, $res);
     }
 
     public function test_deleteById_notArray()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = 'simple';
         $DELETED = 1;
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoBasic->deleteEntityByPk($this->_entityName, $pk);
         $this->mRepoGeneric
             ->shouldReceive('deleteEntityByPk')->once()
             ->with($this->ENTITY_NAME, [$this->PK_ATTR => $ID])
             ->andReturn($DELETED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->deleteById($ID);
         $this->assertEquals($DELETED, $res);
     }
 
     public function test_get()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $WHERE = 'where';
         $ORDER = 'order';
         $LIMIT = 'limit';
         $OFFSET = 'offset';
         $DATA = [[1], [2]];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
         $this->mRepoGeneric
             ->shouldReceive('getEntities')->once()
             ->with($this->ENTITY_NAME, null, $WHERE, $ORDER, $LIMIT, $OFFSET)
             ->andReturn($DATA);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->get($WHERE, $ORDER, $LIMIT, $OFFSET);
         $this->assertEquals($DATA, $res);
     }
 
     public function test_getById_array()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = ['pk1' => 'value1', 'pk2' => 'value2'];
         $DATA = [[1], [2]];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
         $this->mRepoGeneric
             ->shouldReceive('getEntityByPk')->once()
             ->with($this->ENTITY_NAME, $ID)
             ->andReturn($DATA);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
         $this->assertEquals($DATA, $res->getData());
     }
 
     public function test_getById_notArray()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = 'simple';
         $DATA = [[1], [2]];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
         $this->mRepoGeneric
             ->shouldReceive('getEntityByPk')->once()
             ->with($this->ENTITY_NAME, [$this->PK_ATTR => $ID])
             ->andReturn($DATA);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
         $this->assertEquals($DATA, $res->getData());
     }
 
     public function test_getRef()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->getRef();
         $this->assertInstanceOf(IEntity::class, $res);
     }
 
     public function test_update()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DATA = ['field' => 'value'];
         $WHERE = 'where';
         $UPDATED = 'rows updated';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
         $this->mRepoGeneric
             ->shouldReceive('updateEntity')->once()
             ->with($this->ENTITY_NAME, $DATA, $WHERE)
             ->andReturn($UPDATED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->update($DATA, $WHERE);
         $this->assertEquals($UPDATED, $res);
     }
 
     public function test_updateById_array()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = ['key1' => 43, 'key2' => 'string'];
         $DATA = [[1], [2]];
         $UPDATED = 'rows updated';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $val = is_int($value) ? $value : $this->_conn->quote($value);
         $this->mConn
             ->shouldReceive('quote')->once()
@@ -184,35 +184,35 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('updateEntity')->once()
             ->with($this->ENTITY_NAME, $DATA, "(key1=43) AND (key2='string') AND 1")
             ->andReturn($UPDATED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }
 
     public function test_updateById_int()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = 32;
         $DATA = [[1], [2]];
         $UPDATED = 'rows updated';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
         $this->mRepoGeneric
             ->shouldReceive('updateEntity')->once()
             ->with($this->ENTITY_NAME, $DATA, $this->PK_ATTR . "=$ID")
             ->andReturn($UPDATED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }
 
     public function test_updateById_string()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ID = 'simple';
         $DATA = [[1], [2]];
         $UPDATED = 'rows updated';
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $val = is_int($id) ? $id : $this->_conn->quote($id);
         $this->mConn
             ->shouldReceive('quote')->once()
@@ -222,7 +222,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('updateEntity')->once()
             ->with($this->ENTITY_NAME, $DATA, $this->PK_ATTR . "='$ID'")
             ->andReturn($UPDATED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->updateById($ID, $DATA);
         $this->assertEquals($UPDATED, $res);
     }

@@ -54,9 +54,9 @@ class Period_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_getPeriodCurrent()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DATE = '2015-01-05 18:00:00';
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->assertEquals('20150105', $this->obj->getPeriodCurrent($DATE, Period::TYPE_DAY, false));
         $this->assertEquals('20150106', $this->obj->getPeriodCurrent($DATE, Period::TYPE_DAY));
         $this->assertEquals('20150111', $this->obj->getPeriodCurrent($DATE, Period::TYPE_WEEK));

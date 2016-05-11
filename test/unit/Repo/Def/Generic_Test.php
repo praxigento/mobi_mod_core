@@ -18,7 +18,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mConn = $this->_mockConn();
         /* create object */
         $mResource = $this->_mockResourceConnection($this->mConn);
@@ -28,7 +28,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_addEntity()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -43,14 +43,14 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('lastInsertId')->once()
             ->with('table')
             ->andReturn('inserted');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->addEntity('entity', []);
         $this->assertEquals('inserted', $resp);
     }
 
     public function test_addEntity_dataObject()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -65,25 +65,25 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('lastInsertId')->once()
             ->with('table')
             ->andReturn('inserted');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->addEntity('entity', new DataObject([]));
         $this->assertEquals('inserted', $resp);
     }
 
     public function test_constructor()
     {
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\IGeneric);
     }
 
     public function test_deleteEntityByPk()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $ENTITY = 'entity';
         $TABLE = 'table';
         $PK = ['field' => 'value'];
         $ROWS_AFFECTED = 1;
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -94,13 +94,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('delete')->once()
             ->with($TABLE, ['field=?' => 'value'])
             ->andReturn($ROWS_AFFECTED);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->deleteEntityByPk($ENTITY, $PK);
     }
 
     public function test_getEntities()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -126,18 +126,18 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('fetchAll')->once()
             ->andReturn('result');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->getEntities('entity', null, 'where', 'order', 'limit', 'offset');
         $this->assertEquals('result', $resp);
     }
 
     public function test_getEntityByPk()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $PK = [
             'field' => 'value'
         ];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -157,16 +157,16 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('fetchRow')->once()
             ->andReturn('result');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->getEntityByPk('entity', $PK);
         $this->assertEquals('result', $resp);
     }
 
     public function test_replaceEntity()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $BIND = ['key' => 'value'];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -176,13 +176,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('query')->once()
             ->with('REPLACE table (key) VALUES (:key)', anything())
             ->andReturn('result');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $this->obj->replaceEntity('entity', $BIND);
     }
 
     public function test_updateEntity()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -192,14 +192,14 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('update')->once()
             ->with('table', [], null)
             ->andReturn('result');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->updateEntity('entity', []);
         $this->assertEquals('result', $resp);
     }
 
     public function test_updateEntity_dataObject()
     {
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $tbl = $this->_conn->getTableName($entity);
         $this->mConn
             ->shouldReceive('getTableName')->once()
@@ -209,7 +209,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('update')->once()
             ->with('table', [], null)
             ->andReturn('result');
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $resp = $this->obj->updateEntity('entity', new DataObject([]));
         $this->assertEquals('result', $resp);
     }

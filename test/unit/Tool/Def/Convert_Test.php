@@ -25,9 +25,9 @@ class Convert_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_toDateTime()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $DATE = '2015-08-23 21:32:43';
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         /* string */
         $dt = $this->obj->toDateTime($DATE);
         $this->assertTrue($dt instanceof \DateTime);

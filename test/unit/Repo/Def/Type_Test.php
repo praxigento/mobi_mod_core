@@ -43,7 +43,7 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     protected function setUp()
     {
         parent::setUp();
-        /* create mocks */
+        /** create mocks */
         $this->mConn = $this->_mockConn();
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         /* create object */
@@ -57,11 +57,11 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_getIdByCode()
     {
-        /* === Test Data === */
+        /** === Test Data === */
         $CODE = 'code';
         $ID = 43;
         $DATA = [EntityTypeBase::ATTR_ID => $ID];
-        /* === Setup Mocks === */
+        /** === Setup Mocks === */
         // $where = EntityTypeBase::ATTR_CODE . '=' . $this->_conn->quote($code);
         $this->mConn
             ->shouldReceive('quote')->once()
@@ -70,7 +70,7 @@ class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mRepoGeneric
             ->shouldReceive('getEntities')->once()
             ->andReturn([$DATA]);
-        /* === Call and asserts  === */
+        /** === Call and asserts  === */
         $res = $this->obj->getIdByCode($CODE);
         $this->assertEquals($ID, $res);
     }
