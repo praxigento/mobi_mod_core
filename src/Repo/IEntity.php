@@ -11,6 +11,13 @@ namespace Praxigento\Core\Repo;
 interface IEntity extends IBaseRepo
 {
 
+    /**
+     * Replace data for the entity.
+     *
+     * @param array $data [COL_NAME=>$value, ...]
+     * @return int Count of the updated rows.
+     */
+    public function replace($data);
 
     /**
      * @param array $data [COL_NAME=>$value, ...]

@@ -32,7 +32,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 
     protected function _mockDbSelect()
     {
-        $result = $this->_mock(\Magento\Framework\DB\Select::class);
+        $result = $this->_mock(\Magento\Framework\DB\Select::class, null);
         return $result;
     }
 
@@ -88,7 +88,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
 
     protected function _mockResourceConnection($mConn)
     {
-        $result = $this->_mock(\Magento\Framework\App\ResourceConnection::class);
+        $result = m::mock(\Magento\Framework\App\ResourceConnection::class);
         $result
             ->shouldReceive('getConnection')
             ->andReturn($mConn);
