@@ -76,6 +76,28 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\IGeneric);
     }
 
+    public function test_deleteEntity()
+    {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $WHERE = 'where';
+        $TABLE = 'table';
+        $DELETED = 32;
+        /** === Setup Mocks === */
+        // $tbl = $this->_conn->getTableName($entity);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
+            ->andReturn($TABLE);
+        // $result = $this->_conn->delete($tbl, $where);
+        $this->mConn
+            ->shouldReceive('delete')->once()
+            ->with($TABLE, $WHERE)
+            ->andReturn($DELETED);
+        /** === Call and asserts  === */
+        $resp = $this->obj->deleteEntity($ENTITY, $WHERE);
+        $this->assertEquals($DELETED, $resp);
+    }
+
     public function test_deleteEntityByPk()
     {
         /** === Test Data === */

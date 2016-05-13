@@ -59,6 +59,22 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals($ID, $res);
     }
 
+    public function test_delete()
+    {
+        /** === Test Data === */
+        $WHERE = 'where';
+        $DELETED = 1;
+        /** === Setup Mocks === */
+        // $result = $this->_repoGeneric->delete($this->_entityName, $where);
+        $this->mRepoGeneric
+            ->shouldReceive('delete')->once()
+            ->with($this->ENTITY_NAME, $WHERE)
+            ->andReturn($DELETED);
+        /** === Call and asserts  === */
+        $res = $this->obj->delete($WHERE);
+        $this->assertEquals($DELETED, $res);
+    }
+
     public function test_deleteById_array()
     {
         /** === Test Data === */
@@ -140,6 +156,63 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
         $this->assertEquals($DATA, $res->getData());
+    }
+
+    public function test_getQueryToSelect()
+    {
+        /** === Test Data === */
+        $TABLE_NAME = 'table';
+        /** === Setup Mocks === */
+        // $result = $this->_conn->select();
+        $mResult = $this->_mockDbSelect();
+        $this->mConn
+            ->shouldReceive('select')->once()
+            ->andReturn($mResult);
+        // $tbl = $this->_conn->getTableName($this->_entityName);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
+            ->andReturn($TABLE_NAME);
+        // $result->from($tbl);
+        $mResult->shouldReceive('from')->once();
+        /** === Call and asserts  === */
+        $res = $this->obj->getQueryToSelect();
+        $this->assertEquals($mResult, $res);
+    }
+    public function test_getQueryToSelectCount()
+    {
+        /** === Test Data === */
+        $TABLE_NAME = 'table';
+        /** === Setup Mocks === */
+        // $result = $this->_conn->select();
+        $mResult = $this->_mockDbSelect();
+        $this->mConn
+            ->shouldReceive('select')->once()
+            ->andReturn($mResult);
+        // $tbl = $this->_conn->getTableName($this->_entityName);
+        $this->mConn
+            ->shouldReceive('getTableName')->once()
+            ->andReturn($TABLE_NAME);
+        // $result->from($tbl);
+        $mResult->shouldReceive('from')->once();
+        /** === Call and asserts  === */
+        $res = $this->obj->getQueryToSelectCount();
+        $this->assertEquals($mResult, $res);
+    }
+
+    public function test_replace()
+    {
+        /** === Test Data === */
+        $DATA = ['field' => 'value'];
+        $UPDATED = 'rows updated';
+        /** === Setup Mocks === */
+        // $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
+        $this->mRepoGeneric
+            ->shouldReceive('replaceEntity')->once()
+            ->with($this->ENTITY_NAME, $DATA)
+            ->andReturn($UPDATED);
+        /** === Call and asserts  === */
+        $res = $this->obj->replace($DATA);
+        $this->assertEquals($UPDATED, $res);
     }
 
     public function test_update()

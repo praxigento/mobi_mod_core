@@ -5,12 +5,7 @@
 
 namespace Praxigento\Core\Ui\DataProvider;
 
-use Magento\Framework\Api\FilterBuilder;
-use Magento\Framework\Api\Search\SearchCriteriaBuilder;
-use Magento\Framework\App\RequestInterface;
-use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
-use Magento\Framework\View\Element\UiComponent\DataProvider\Reporting;
 use Magento\Store\Model\StoreManagerInterface;
 use Praxigento\Core\Repo\Criteria\IAdapter as ICriteriaAdapter;
 use Praxigento\Core\Repo\IBaseRepo as IBaseRepo;
@@ -37,13 +32,13 @@ class Base extends DataProvider
     protected $_repo;
 
     public function __construct(
-        UrlInterface $url,
-        ICriteriaAdapter $criteriaAdapter,
-        IBaseRepo $repo,
-        Reporting $reporting,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        RequestInterface $request,
-        FilterBuilder $filterBuilder,
+        \Magento\Framework\UrlInterface $url,
+        \Praxigento\Core\Repo\Criteria\IAdapter $criteriaAdapter,
+        \Praxigento\Core\Repo\IBaseRepo $repo,
+        \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $reporting,
+        \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\App\RequestInterface $request,
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
         $name,
         array $meta = [],
         array $data = []
@@ -77,7 +72,8 @@ class Base extends DataProvider
         /** @var \Magento\Framework\DB\Select $queryTotal */
         $queryTotal = $this->_repo->getQueryToSelectCount();
         $queryTotal->where($where);
-        $total = $queryTotal->getConnection()->fetchOne($queryTotal);
+        $conn = $queryTotal->getConnection();
+        $total = $conn->fetchOne($queryTotal);
         /* get query to select data */
         /** @var \Magento\Framework\DB\Select $query */
         $query = $this->_repo->getQueryToSelect();
@@ -89,7 +85,7 @@ class Base extends DataProvider
         $pageSize = $criteria->getPageSize();
         $pageIndx = $criteria->getCurrentPage();
         $query->limitPage($pageIndx, $pageSize);
-        $data = $query->getConnection()->fetchAll($query);
+        $data = $conn->fetchAll($query);
         $result = [
             static::JSON_ATTR_TOTAL_RECORDS => $total,
             static::JSON_ATTR_ITEMS => $data
