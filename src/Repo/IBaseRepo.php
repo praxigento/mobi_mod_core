@@ -77,6 +77,7 @@ interface IBaseRepo
      * Referenced data object to address attributes.
      *
      * @return object
+     * @deprecated This is not a good idea :( Use class names instead.
      */
     public function getRef();
 
