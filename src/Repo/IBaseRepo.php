@@ -74,14 +74,6 @@ interface IBaseRepo
     public function getQueryToSelectCount();
 
     /**
-     * Referenced data object to address attributes.
-     *
-     * @return object
-     * @deprecated This is not a good idea :( Use class names instead.
-     */
-    public function getRef();
-
-    /**
      * Update instance in the DB (look up by ID values).
      *
      * @param int|string|array $id

@@ -141,12 +141,6 @@ class Entity extends Base implements IEntity
         return $result;
     }
 
-    /** @inheritdoc */
-    public function getRef()
-    {
-        return $this->_refEntity;
-    }
-
     public function replace($data)
     {
         $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);

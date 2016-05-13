@@ -50,12 +50,7 @@ abstract class Aggregate extends Base implements IAggregate
         throw new \Exception('Method is not implemented.');
     }
 
-    /** @inheritdoc */
-    public function getRef()
-    {
-        return $this->_refDataObject;
-    }
-
+    
     /** @inheritdoc */
     public function updateById($id, $data)
     {

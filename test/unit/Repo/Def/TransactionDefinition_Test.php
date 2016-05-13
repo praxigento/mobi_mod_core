@@ -15,7 +15,6 @@ class TransactionDefinition_UnitTest extends \Praxigento\Core\Test\BaseMockeryCa
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
         /** create object to test */
         $this->obj = new TransactionDefinition();
     }

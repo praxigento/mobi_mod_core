@@ -26,10 +26,8 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
     public function test_constructor()
     {
-        /** === Test Data === */
-        /** === Setup Mocks === */
         /** === Call and asserts  === */
-        $this->assertTrue($this->obj instanceof \Praxigento\Core\Repo\Def\Base);
+        $this->assertInstanceOf(\Praxigento\Core\Repo\Def\Base::class, $this->obj);
     }
 
 }

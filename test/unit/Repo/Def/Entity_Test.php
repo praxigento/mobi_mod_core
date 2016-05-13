@@ -4,8 +4,6 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
-use Praxigento\Core\Data\IEntity;
-
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
@@ -142,13 +140,6 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
         $this->assertEquals($DATA, $res->getData());
-    }
-
-    public function test_getRef()
-    {
-        /** === Call and asserts  === */
-        $res = $this->obj->getRef();
-        $this->assertInstanceOf(IEntity::class, $res);
     }
 
     public function test_update()
