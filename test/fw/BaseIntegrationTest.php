@@ -13,8 +13,8 @@ use Magento\Framework\ObjectManagerInterface;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Tool\IPeriod;
 use Praxigento\Downline\Data\Entity\Customer;
-use Praxigento\Downline\Lib\Service\Customer\Request\Add as CustomerAddRequest;
-use Praxigento\Downline\Lib\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
+use Praxigento\Downline\Service\Customer\Request\Add as CustomerAddRequest;
+use Praxigento\Downline\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
 abstract class BaseIntegrationTest extends BaseMockeryCase
 {
@@ -45,9 +45,9 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         12 => 10,
         13 => 10
     ];
-    /** @var \Praxigento\Downline\Lib\Service\ICustomer */
+    /** @var \Praxigento\Downline\Service\ICustomer */
     protected $_callDownlineCustomer;
-    /** @var \Praxigento\Downline\Lib\Service\ISnap */
+    /** @var \Praxigento\Downline\Service\ISnap */
     protected $_callDownlineSnap;
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
@@ -81,8 +81,8 @@ abstract class BaseIntegrationTest extends BaseMockeryCase
         $this->_conn = $this->_resource->getConnection();
         $this->_toolPeriod = $this->_manObj->get(IPeriod::class);
         /* base services */
-        $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ICustomer::class);
-        $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Lib\Service\ISnap::class);
+        $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Service\ICustomer::class);
+        $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
         /* set up application */
         $this->_setAreaCode();
     }
