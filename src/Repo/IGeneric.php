@@ -40,6 +40,14 @@ interface IGeneric
     public function deleteEntityByPk($entity, $pk);
 
     /**
+     * Retrieve connection to resource specified by $name
+     *
+     * @param string $name
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     */
+    public function getConnection($name = null);
+
+    /**
      * Get list of simple entities according to given conditions ($cols, $where, $order, ...).
      *
      * @param string $entity Entity name (not table name)

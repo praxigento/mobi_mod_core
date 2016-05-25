@@ -60,6 +60,14 @@ interface IBaseRepo
     public function getById($id);
 
     /**
+     * Retrieve connection to resource specified by $name
+     *
+     * @param string $name
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     */
+    public function getConnection($name);
+
+    /**
      * Compose SELECT query for the simple entity or aggregate.
      *
      * @return ISelect

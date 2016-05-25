@@ -20,4 +20,18 @@ abstract class Base
         $this->_conn = $resource->getConnection();
     }
 
+    /**
+     * Retrieve connection to resource specified by $name
+     *
+     * @param string $name
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     */
+    public function getConnection($name = null)
+    {
+        if (is_null($name)) {
+            $name = \Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION;
+        }
+        $result = $this->_resource->getConnection($name);
+        return $result;
+    }
 }

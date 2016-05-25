@@ -24,6 +24,7 @@ class Config
      * Magento entities as defined in version 2.
      */
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = 'cataloginventory_stock';
+    const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
@@ -34,6 +35,9 @@ class Config
     const E_CATINV_STOCK_A_STOCK_ID = 'stock_id';
     const E_CATINV_STOCK_A_STOCK_NAME = 'stock_name';
     const E_CATINV_STOCK_A_WEBSITE_ID = 'website_id';
+    const E_CATINV_STOCK_ITEM_A_ITEM_ID = 'item_id';
+    const E_CATINV_STOCK_ITEM_A_PROD_ID = 'product_id';
+    const E_CATINV_STOCK_ITEM_A_STOCK_ID = 'stock_id';
     const E_COMMON_A_ENTITY_ID = 'entity_id';
     const E_CUSTOMER_A_EMAIL = 'email';
     const E_CUSTOMER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
