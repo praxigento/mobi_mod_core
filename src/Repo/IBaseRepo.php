@@ -23,10 +23,14 @@ interface IBaseRepo
 
     /**
      * @param $where
-     * @return mixed
+     * @return int The number of affected rows.
      */
     public function delete($where);
 
+    /**
+     * @param int|string|array $id
+     * @return int The number of affected rows.
+     */
     public function deleteById($id);
 
     /**
@@ -86,7 +90,7 @@ interface IBaseRepo
      *
      * @param int|string|array $id
      * @param array|DataObject $data
-     * @return int number of the rows affected
+     * @return int The number of affected rows.
      */
     public function updateById($id, $data);
 
