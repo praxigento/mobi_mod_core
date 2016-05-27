@@ -24,15 +24,17 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
-    protected function _mockConn()
+    protected function _mockConn($mockedMethods = [])
     {
         $result = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
+        $result = $this->_populateMock($result, $mockedMethods);
         return $result;
     }
 
-    protected function _mockDbSelect()
+    protected function _mockDbSelect($mockedMethods = [])
     {
         $result = $this->_mock(\Magento\Framework\DB\Select::class, null);
+        $result = $this->_populateMock($result, $mockedMethods);
         return $result;
     }
 
@@ -111,5 +113,18 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     {
         $result = $this->_mock(\Praxigento\Core\Repo\ITransactionManager::class);
         return $result;
+    }
+
+    private function _populateMock($mock, $methods)
+    {
+        if (
+            is_array($methods) &&
+            count($methods)
+        ) {
+            foreach ($methods as $method) {
+                $mock->shouldReceive($method);
+            }
+        }
+        return $mock;
     }
 }
