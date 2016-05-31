@@ -30,6 +30,13 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertInstanceOf(\Praxigento\Core\Repo\Def\Base::class, $this->obj);
     }
 
+    public function test_getConnection()
+    {
+        /** === Call and asserts  === */
+        $res = $this->obj->getConnection();
+        $this->assertInstanceOf(\Magento\Framework\DB\Adapter\AdapterInterface::class, $res);
+    }
+
 }
 
 class ChildToTestBase extends Base
