@@ -143,6 +143,9 @@ class Entity extends Base implements IEntity
 
     public function replace($data)
     {
+        if ($data instanceof DataObject) {
+            $data = $data->getData();
+        }
         $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
         return $result;
     }
