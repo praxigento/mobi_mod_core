@@ -88,6 +88,8 @@ interface IBaseRepo
     /**
      * Update instance in the DB (look up by ID values).
      *
+     * TODO: add update() & updateWhere() methods
+     *
      * @param int|string|array $id
      * @param array|DataObject $data
      * @return int The number of affected rows.
