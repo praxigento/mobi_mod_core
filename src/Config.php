@@ -25,6 +25,7 @@ class Config
      */
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = 'cataloginventory_stock';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
+    const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
@@ -32,6 +33,9 @@ class Config
     /**
      * Codifier for entities' attributes.
      */
+    const E_CATCAT_EAV_INT_ATTR_ID = 'attribute_id';
+    const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
+    const E_CATCAT_EAV_INT_VALUE = 'value';
     const E_CATINV_STOCK_A_STOCK_ID = 'stock_id';
     const E_CATINV_STOCK_A_STOCK_NAME = 'stock_name';
     const E_CATINV_STOCK_A_WEBSITE_ID = 'website_id';
