@@ -21,7 +21,7 @@
   },
   "require": {
     "symfony/filesystem": "~2.8",
-    "flancer32/php_data_object": "~0.1",
+    "flancer32/php_data_object": "dev-master",
     "praxigento/mage2_ext_logging": "~0.1.0"
   },
   "minimum-stability": "dev"
