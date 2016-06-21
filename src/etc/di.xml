@@ -29,15 +29,5 @@
     <!-- Other -->
     <preference for="Psr\Log\LoggerInterface"
                 type="Praxigento\Logging\Logger"/>
-    <!-- Bind M2 DB proxe to MOBI DBA -->
-    <type name="Praxigento\Core\Lib\Context\DbAdapter">
-        <arguments>
-            <argument name="m2Resource" xsi:type="object">Magento\Framework\App\ResourceConnection\Proxy</argument>
-        </arguments>
-    </type>
 
-
-    <!-- API Data -->
-    <preference for="Praxigento\Core\Api\Data\BaseInterface"
-                type="Praxigento\Core\Api\Data\Def\Base"/>
 </config>
