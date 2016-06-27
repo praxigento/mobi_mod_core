@@ -6,8 +6,9 @@
  */
 namespace Praxigento\Core;
 
-use \Magento\CatalogInventory\Model\Stock as ModelStock;
-use \Magento\CatalogInventory\Model\Stock\Status as ModelStockStatus;
+use Magento\CatalogInventory\Model\Stock as ModelStock;
+use Magento\CatalogInventory\Model\Stock\Status as ModelStockStatus;
+use Magento\Sales\Api\Data\OrderItemInterface as ModelOrderItem;
 
 class Config
 {
@@ -66,6 +67,8 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
+    const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
+    const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
     /**
      * other
      */
