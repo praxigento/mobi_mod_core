@@ -15,7 +15,7 @@ interface IResponse
      */
     const ERR_NO_ERROR = 'no_error';
     const ERR_UNDEFINED = 'undefined';
-    /**#@-*/
+    /**#@- */
 
     /**
      * @return string

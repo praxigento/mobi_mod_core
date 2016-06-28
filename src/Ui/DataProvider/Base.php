@@ -21,7 +21,8 @@ class Base extends DataProvider
     const UICD_UPDATE_URL = 'mui/index/render';
     const UIC_CONFIG = 'config';
     const UIC_UPDATE_URL = 'update_url';
-    /**#@-*/
+    /**#@- */
+    
     /** @var  ICriteriaAdapter */
     protected $_criteriaAdapter;
     /**
