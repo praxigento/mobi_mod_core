@@ -1,12 +1,12 @@
 <?php
 /**
- * MOBI-273: Proto for interface for SELECT QUERIES in Aggregates.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
 namespace Praxigento\Core\Repo;
 
-
+/**
+ * MOBI-273: Proto for interface for SELECT QUERIES in Aggregates.
+ */
 interface  IHasSelectQuery
 {
     /**

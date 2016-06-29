@@ -1,14 +1,13 @@
 <?php
 /**
- * Transaction Manager interface for MOBI implementation of the Transaction Manager.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\Core\Repo;
 
 /**
- * Transaction manager to use in the services.
+ * Transaction Manager interface for MOBI implementation of the Transaction Manager.
+ *
+ * TODO: move interface to ...\Transaction\IManager
  */
 interface ITransactionManager
 {

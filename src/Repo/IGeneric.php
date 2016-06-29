@@ -1,14 +1,14 @@
 <?php
 /**
- * Interface for generic repository to do universal operations (CRUD) with simple entities (not aggregates).
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\Core\Repo;
 
 use Flancer32\Lib\DataObject;
 
+/**
+ * Interface for generic repository to do universal operations (CRUD) with simple entities (not aggregates).
+ */
 interface IGeneric
 {
     /**

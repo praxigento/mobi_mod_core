@@ -1,15 +1,16 @@
 <?php
 /**
- * Basic repository interface.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\Core\Repo;
-
 
 use Flancer32\Lib\DataObject;
 
+/**
+ * Basic repository interface.
+ *
+ * TODO: rename to IBaseCrud and create IBaseDataSource
+ */
 interface IBaseRepo
 {
     /**
