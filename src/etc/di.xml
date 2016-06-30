@@ -4,7 +4,7 @@
 
     <!-- Repos -->
     <preference for="Praxigento\Core\Repo\Query\ISelect"
-                type="Praxigento\Core\Repo\Def\Select"/>
+                type="Praxigento\Core\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric"
                 type="Praxigento\Core\Repo\Def\Generic"/>
     <preference for="Praxigento\Core\Repo\Transaction\IManager"

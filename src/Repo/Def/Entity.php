@@ -7,10 +7,10 @@
 namespace Praxigento\Core\Repo\Def;
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Core\Data\IEntity as IDataEntity;
-use Praxigento\Core\Repo\IEntity;
 
-class Entity extends Base implements IEntity
+class Entity
+    extends \Praxigento\Core\Repo\Def\BaseCrud
+    implements \Praxigento\Core\Repo\IEntity
 {
     /** @var  string Class name for the related entity. */
     protected $_entityClassName;
@@ -18,7 +18,7 @@ class Entity extends Base implements IEntity
     protected $_entityName;
     /** @var  string Name of the first attribute from primary key */
     protected $_idFieldName;
-    /** @var  IDataEntity instance */
+    /** @var  \Praxigento\Core\Data\IEntity entity instance */
     protected $_refEntity;
     /** @var \Praxigento\Core\Repo\IGeneric */
     protected $_repoGeneric;

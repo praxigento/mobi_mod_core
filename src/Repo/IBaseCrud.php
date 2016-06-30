@@ -10,6 +10,7 @@ use Flancer32\Lib\DataObject;
  * Base interface for CRUD repositories (general Create-Read-Update-Delete operations).
  */
 interface IBaseCrud
+    extends \Praxigento\Core\Repo\IBaseDataSource
 {
     /**
      * Create new data instance (simple entity or aggregate) using $data. Exception is thrown in case of any error.
@@ -33,66 +34,26 @@ interface IBaseCrud
     public function deleteById($id);
 
     /**
-     * Generic method to get data from repository.
+     * Replace data for the entity.
      *
-     * @param null $where
-     * @param null $order
-     * @param null $limit
-     * @param null $offset
-     * @param null $columns
-     * @param null $group
-     * @param null $having
-     * @return array Found data or empty array if no data found.
+     * @param array $data [COL_NAME=>$value, ...]
+     * @return int Count of the updated rows.
      */
-    public function get(
-        $where = null,
-        $order = null,
-        $limit = null,
-        $offset = null,
-        $columns = null,
-        $group = null,
-        $having = null
-    );
+    public function replace($data);
 
     /**
-     * Get the data instance by ID (ID can be an array for complex primary keys).
-     *
-     * @param int|string|array $id
-     * @return DataObject|array|bool Found instance data or 'false'
+     * @param array $data [COL_NAME=>$value, ...]
+     * @param mixed $where
+     * @return int Count of the updated rows.
      */
-    public function getById($id);
-
-    /**
-     * Retrieve connection to resource specified by $name
-     *
-     * @param string $name
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface
-     */
-    public function getConnection($name);
-
-    /**
-     * Compose SELECT query for the simple entity or aggregate.
-     *
-     * @return ISelect
-     */
-    public function getQueryToSelect();
-
-    /**
-     * Compose COUNT SELECT query for the simple entity or aggregate.
-     *
-     * @return ISelect
-     */
-    public function getQueryToSelectCount();
+    public function update($data, $where);
 
     /**
      * Update instance in the DB (look up by ID values).
-     *
-     * TODO: add update() & updateWhere() methods
      *
      * @param int|string|array $id
      * @param array|DataObject $data
      * @return int The number of affected rows.
      */
     public function updateById($id, $data);
-
 }

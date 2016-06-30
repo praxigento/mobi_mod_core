@@ -7,9 +7,10 @@
 namespace Praxigento\Core\Repo\Def;
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Core\Repo\IGeneric;
 
-class  Generic extends Base implements IGeneric
+class  Generic
+    extends \Praxigento\Core\Repo\Def\Base
+    implements \Praxigento\Core\Repo\IGeneric
 {
     /** @inheritdoc */
     public function addEntity($entity, $bind)

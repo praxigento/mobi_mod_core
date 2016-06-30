@@ -2,11 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\Repo\Entity\Def;
 
 use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
 
-include_once(__DIR__ . '/../../phpunit_bootstrap.php');
+include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
 class ChildToTestType extends Type
 {

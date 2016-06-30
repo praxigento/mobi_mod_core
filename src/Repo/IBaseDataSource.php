@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo;
 use Flancer32\Lib\DataObject;
 
 /**
- * Basic interface for data sources repository (read-only mode).
+ * Base interface for data sources repository (read-only mode).
  */
 interface IBaseDataSource
 {

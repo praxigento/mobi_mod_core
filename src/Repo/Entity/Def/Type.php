@@ -1,17 +1,18 @@
 <?php
 /**
- * Base implementation for types codifiers repository.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\Repo\Entity\Def;
 
 use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
-use Praxigento\Core\Repo\Entity\IType;
 
-abstract class  Type extends Entity implements IType
+/**
+ * Base implementation for types codifiers repository.
+ */
+abstract class Type
+    extends \Praxigento\Core\Repo\Def\Entity
+    implements \Praxigento\Core\Repo\Entity\IType
 {
-
     /** @inheritdoc */
     public function getIdByCode($code)
     {

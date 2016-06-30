@@ -1,11 +1,12 @@
 <?php
 /**
- * Base class for repositories implementations.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
 namespace Praxigento\Core\Repo\Def;
 
+/**
+ * Base class for DB repositories implementations.
+ */
 abstract class Base
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
