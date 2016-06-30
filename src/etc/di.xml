@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
     <!-- Repos -->
-    <preference for="Praxigento\Core\Repo\ISelect"
+    <preference for="Praxigento\Core\Repo\Query\ISelect"
                 type="Praxigento\Core\Repo\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric"
                 type="Praxigento\Core\Repo\Def\Generic"/>
@@ -11,8 +11,8 @@
                 type="\Praxigento\Core\Repo\Transaction\Def\Manager"/>
     <preference for="Praxigento\Core\Repo\Transaction\IDefinition"
                 type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
-    <preference for="Praxigento\Core\Repo\Criteria\IAdapter"
-                type="Praxigento\Core\Repo\Criteria\Def\Adapter"/>
+    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter"
+                type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 
     <!-- Services -->
 

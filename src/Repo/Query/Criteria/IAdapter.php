@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Repo\Criteria;
+namespace Praxigento\Core\Repo\Query\Criteria;
 
 use Magento\Framework\Api\Search\SearchCriteriaInterface;
 

@@ -31,7 +31,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         parent::setUp();
         /** create mocks */
         $this->mUrl = $this->_mock(\Magento\Framework\UrlInterface::class);
-        $this->mCriteriaAdapter = $this->_mock(\Praxigento\Core\Repo\Criteria\IAdapter::class);
+        $this->mCriteriaAdapter = $this->_mock(\Praxigento\Core\Repo\Query\Criteria\IAdapter::class);
         $this->mRepo = $this->_mock(\Praxigento\Core\Repo\IBaseCrud::class);
         $this->mReporting = $this->_mock(\Magento\Framework\View\Element\UiComponent\DataProvider\Reporting::class);
         $this->mSearchCriteriaBuilder = $this->_mock(\Magento\Framework\Api\Search\SearchCriteriaBuilder::class);

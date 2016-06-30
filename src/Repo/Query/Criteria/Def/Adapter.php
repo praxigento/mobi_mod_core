@@ -3,11 +3,11 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Repo\Criteria\Def;
+namespace Praxigento\Core\Repo\Query\Criteria\Def;
 
 use Magento\Framework\Api\Search\SearchCriteriaInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface as IDbAdapter;
-use Praxigento\Core\Repo\Criteria\IAdapter;
+use Praxigento\Core\Repo\Query\Criteria\IAdapter;
 
 class Adapter implements IAdapter
 {

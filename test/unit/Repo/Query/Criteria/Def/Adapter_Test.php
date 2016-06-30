@@ -2,9 +2,9 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Criteria\Def;
+namespace Praxigento\Core\Repo\Query\Criteria\Def;
 
-include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
+include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
 class Adapter_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
@@ -26,7 +26,7 @@ class Adapter_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_constructor()
     {
         /** === Call and asserts  === */
-        $this->assertInstanceOf(\Praxigento\Core\Repo\Criteria\Def\Adapter::class, $this->obj);
+        $this->assertInstanceOf(\Praxigento\Core\Repo\Query\Criteria\Def\Adapter::class, $this->obj);
     }
 
     public function test_getOrderFromApiCriteria()
