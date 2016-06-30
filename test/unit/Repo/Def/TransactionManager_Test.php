@@ -35,7 +35,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         // $this->_conn->beginTransaction();
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
-        // $result = $this->manObj->create(ITransactionDefinition::class);
+        // $result = $this->manObj->create(IDefinition::class);
         $mTrans = new TransactionDefinition();
         $this->mManObj
             ->shouldReceive('create')->once()

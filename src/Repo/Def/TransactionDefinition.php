@@ -5,11 +5,9 @@
 
 namespace Praxigento\Core\Repo\Def;
 
-
-use Flancer32\Lib\DataObject;
-use Praxigento\Core\Repo\ITransactionDefinition;
-
-class TransactionDefinition extends DataObject implements ITransactionDefinition
+class TransactionDefinition
+    extends \Flancer32\Lib\DataObject
+    implements \Praxigento\Core\Repo\Transaction\IDefinition
 {
     public function getLevel()
     {

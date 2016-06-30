@@ -2,14 +2,12 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo;
+namespace Praxigento\Core\Repo\Transaction;
 
 /**
- * Transaction definition to use in Transaction Manager.
- *
- * TODO: move interface to ...\Transaction\IDefinition
+ * Transaction definition to use in DB Transaction Manager.
  */
-interface ITransactionDefinition
+interface IDefinition
 {
     /**
      * @return int

@@ -7,9 +7,9 @@
                 type="Praxigento\Core\Repo\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric"
                 type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\ITransactionManager"
+    <preference for="Praxigento\Core\Repo\Transaction\IManager"
                 type="\Praxigento\Core\Repo\Def\TransactionManager"/>
-    <preference for="Praxigento\Core\Repo\ITransactionDefinition"
+    <preference for="Praxigento\Core\Repo\Transaction\IDefinition"
                 type="Praxigento\Core\Repo\Def\TransactionDefinition"/>
     <preference for="Praxigento\Core\Repo\Criteria\IAdapter"
                 type="Praxigento\Core\Repo\Criteria\Def\Adapter"/>

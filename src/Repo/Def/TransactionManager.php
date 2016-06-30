@@ -7,10 +7,10 @@ namespace Praxigento\Core\Repo\Def;
 
 
 use Flancer32\Lib\DataObject;
-use Praxigento\Core\Repo\ITransactionDefinition;
-use Praxigento\Core\Repo\ITransactionManager;
+use Praxigento\Core\Repo\Transaction\IDefinition;
+use Praxigento\Core\Repo\Transaction\IManager;
 
-class TransactionManager extends DataObject implements ITransactionManager
+class TransactionManager extends DataObject implements IManager
 {
     /**
      * Current Transaction Level
@@ -38,7 +38,7 @@ class TransactionManager extends DataObject implements ITransactionManager
     {
         $this->_transactionLevel++;
         $this->_conn->beginTransaction();
-        $result = $this->manObj->create(ITransactionDefinition::class);
+        $result = $this->manObj->create(IDefinition::class);
         $result->setLevel($this->_transactionLevel);
         return $result;
     }
@@ -46,7 +46,7 @@ class TransactionManager extends DataObject implements ITransactionManager
     /**
      * @inheritdoc
      */
-    public function transactionClose(ITransactionDefinition $data)
+    public function transactionClose(IDefinition $data)
     {
         $level = $data->getLevel();
         $levelUp = $level - 1;
@@ -63,7 +63,7 @@ class TransactionManager extends DataObject implements ITransactionManager
     /**
      * @inheritdoc
      */
-    public function transactionCommit(ITransactionDefinition $data)
+    public function transactionCommit(IDefinition $data)
     {
         $level = $data->getLevel();
         if ($level == $this->_transactionLevel) {
@@ -75,7 +75,7 @@ class TransactionManager extends DataObject implements ITransactionManager
     /**
      * @inheritdoc
      */
-    public function transactionRollback(ITransactionDefinition $data)
+    public function transactionRollback(IDefinition $data)
     {
         $level = $data->getLevel();
         if ($level == $this->_transactionLevel) {
