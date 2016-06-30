@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo;
 /**
  * Interface for repository that operates with aggregates data.
  */
-interface IAggregate extends IBaseRepo
+interface IAggregate extends IBaseCrud
 {
 
 

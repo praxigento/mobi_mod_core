@@ -2,18 +2,18 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\Repo\Transaction\Def;
 
 
-include_once(__DIR__ . '/../../phpunit_bootstrap.php');
+include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Manager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
     private $mManObj;
-    /** @var  TransactionManager */
+    /** @var  Manager */
     private $obj;
 
     protected function setUp()
@@ -24,7 +24,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mManObj = $this->_mock(\Magento\Framework\ObjectManagerInterface::class);
         /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new TransactionManager($mResource, $this->mManObj);
+        $this->obj = new Manager($mResource, $this->mManObj);
     }
 
     public function test_begin()
@@ -36,7 +36,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
         // $result = $this->manObj->create(IDefinition::class);
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $this->mManObj
             ->shouldReceive('create')->once()
             ->andReturn($mTrans);
@@ -50,7 +50,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $LEVEL = 1;
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $mTrans->setLevel($LEVEL);
         /** === Setup Mocks === */
         // $this->_conn->rollBack();
@@ -63,7 +63,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $LEVEL = 2;
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $mTrans->setLevel($LEVEL);
         /** === Setup Mocks === */
         $this->mConn
@@ -76,7 +76,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $LEVEL = 0;
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $mTrans->setLevel($LEVEL);
         /** === Setup Mocks === */
         // $this->_conn->rollBack();
@@ -90,7 +90,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $LEVEL = 0;
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $mTrans->setLevel($LEVEL);
         /** === Setup Mocks === */
         // $this->_conn->commit();
@@ -104,7 +104,7 @@ class TransactionManager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $LEVEL = 0;
-        $mTrans = new TransactionDefinition();
+        $mTrans = new Definition();
         $mTrans->setLevel($LEVEL);
         /** === Setup Mocks === */
         // $this->_conn->rollBack();

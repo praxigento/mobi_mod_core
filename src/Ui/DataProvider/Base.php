@@ -8,7 +8,7 @@ namespace Praxigento\Core\Ui\DataProvider;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
 use Magento\Store\Model\StoreManagerInterface;
 use Praxigento\Core\Repo\Criteria\IAdapter as ICriteriaAdapter;
-use Praxigento\Core\Repo\IBaseRepo as IBaseRepo;
+use Praxigento\Core\Repo\IBaseCrud as IBaseRepo;
 
 class Base extends DataProvider
 {
@@ -28,14 +28,14 @@ class Base extends DataProvider
     /**
      * Repository to select data for grid.
      *
-     * @var IBaseRepo
+     * @var IBaseCrud
      */
     protected $_repo;
 
     public function __construct(
         \Magento\Framework\UrlInterface $url,
         \Praxigento\Core\Repo\Criteria\IAdapter $criteriaAdapter,
-        \Praxigento\Core\Repo\IBaseRepo $repo,
+        \Praxigento\Core\Repo\IBaseCrud $repo,
         \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $reporting,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\App\RequestInterface $request,

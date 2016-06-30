@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo;
 /**
  * Interface for repository that operates with entities data.
  */
-interface IEntity extends IBaseRepo
+interface IEntity extends IBaseCrud
 {
 
     /**

@@ -7,7 +7,7 @@
 namespace Praxigento\Core\Repo\Def;
 
 use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
-use Praxigento\Core\Repo\IType;
+use Praxigento\Core\Repo\Entity\IType;
 
 abstract class  Type extends Entity implements IType
 {

@@ -3,15 +3,13 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Repo;
+namespace Praxigento\Core\Repo\Entity;
 
 /**
- * Interface for types codifiers repository.
- *
- * TODO: move interface to ...\Entity\IType namespace
+ * Interface for type codifier repository.
  */
-
-interface IType extends IEntity
+interface IType
+    extends \Praxigento\Core\Repo\IEntity
 {
     /**
      * @param string $code

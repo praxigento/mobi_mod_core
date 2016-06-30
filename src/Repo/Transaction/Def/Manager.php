@@ -2,15 +2,13 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+namespace Praxigento\Core\Repo\Transaction\Def;
 
-namespace Praxigento\Core\Repo\Def;
-
-
-use Flancer32\Lib\DataObject;
 use Praxigento\Core\Repo\Transaction\IDefinition;
-use Praxigento\Core\Repo\Transaction\IManager;
 
-class TransactionManager extends DataObject implements IManager
+class Manager
+    extends \Flancer32\Lib\DataObject
+    implements \Praxigento\Core\Repo\Transaction\IManager
 {
     /**
      * Current Transaction Level

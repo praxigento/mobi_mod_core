@@ -7,11 +7,9 @@ namespace Praxigento\Core\Repo;
 use Flancer32\Lib\DataObject;
 
 /**
- * Basic repository interface.
- *
- * TODO: rename to IBaseCrud and create IBaseDataSource
+ * Base interface for CRUD repositories (general Create-Read-Update-Delete operations).
  */
-interface IBaseRepo
+interface IBaseCrud
 {
     /**
      * Create new data instance (simple entity or aggregate) using $data. Exception is thrown in case of any error.

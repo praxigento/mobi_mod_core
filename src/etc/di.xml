@@ -8,9 +8,9 @@
     <preference for="Praxigento\Core\Repo\IGeneric"
                 type="Praxigento\Core\Repo\Def\Generic"/>
     <preference for="Praxigento\Core\Repo\Transaction\IManager"
-                type="\Praxigento\Core\Repo\Def\TransactionManager"/>
+                type="\Praxigento\Core\Repo\Transaction\Def\Manager"/>
     <preference for="Praxigento\Core\Repo\Transaction\IDefinition"
-                type="Praxigento\Core\Repo\Def\TransactionDefinition"/>
+                type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
     <preference for="Praxigento\Core\Repo\Criteria\IAdapter"
                 type="Praxigento\Core\Repo\Criteria\Def\Adapter"/>
 

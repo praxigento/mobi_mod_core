@@ -3,9 +3,9 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\Repo\Transaction\Def;
 
-class TransactionDefinition
+class Definition
     extends \Flancer32\Lib\DataObject
     implements \Praxigento\Core\Repo\Transaction\IDefinition
 {

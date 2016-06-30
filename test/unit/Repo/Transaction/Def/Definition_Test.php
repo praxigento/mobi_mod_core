@@ -2,21 +2,21 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\Repo\Transaction\Def;
 
 
-include_once(__DIR__ . '/../../phpunit_bootstrap.php');
+include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class TransactionDefinition_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Definition_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
-    /** @var  TransactionDefinition */
+    /** @var  Definition */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
         /** create object to test */
-        $this->obj = new TransactionDefinition();
+        $this->obj = new Definition();
     }
 
 
