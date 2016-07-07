@@ -67,6 +67,7 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
+    /** @deprecated Use ModelOrderItem::... directly where it is possible */
     const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
     const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
     const E_SALE_ORDER_ITEM_A_PRODUCT_ID = ModelOrderItem::PRODUCT_ID;

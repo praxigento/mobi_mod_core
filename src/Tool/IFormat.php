@@ -26,4 +26,14 @@ interface IFormat
      * @return string
      */
     public function roundBonus($val, $precision = 2);
+
+    /**
+     * Format $val as float number with $precision
+     * @param $val
+     * @param int $precision
+     * @param string $decimal
+     * @param string $group
+     * @return float
+     */
+    public function toNumber($val, $precision = 2, $decimal = '.', $group = '');
 }
