@@ -31,7 +31,8 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new Tool($mResource, $this->mParser);
+        $logger = $this->_mockLogger();
+        $this->obj = new Tool($mResource, $logger, $this->mParser);
     }
 
     public function test_createEntity()
