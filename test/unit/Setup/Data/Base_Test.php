@@ -15,6 +15,8 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
+    private $mResource;
+    /** @var  \Mockery\MockInterface */
     private $mRepoGeneric;
     /** @var  ChildToTest */
     private $obj;
@@ -24,12 +26,12 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         parent::setUp();
         /** create mocks */
         $this->mConn = $this->_mockConn();
+        $this->mResource = $this->_mockResourceConnection($this->mConn);
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTest($mResource, $this->mRepoGeneric);
+        $this->obj = new ChildToTest($this->mResource, $this->mRepoGeneric);
     }
 
     public function test_install()
@@ -40,8 +42,8 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mSetup
             ->shouldReceive('startSetup')->once();
         // $this->_setup();
-        // $this->_conn->getTableName('test entity');
-        $this->mConn
+        // $this->_resource->getTableName('test entity');
+        $this->mResource
             ->shouldReceive('getTableName')->once();
         // $setup->endSetup();
         $this->mSetup
@@ -56,7 +58,7 @@ class ChildToTest extends Base
 {
     protected function _setup()
     {
-        $this->_conn->getTableName('test entity');
+        $this->_resource->getTableName('test entity');
     }
 
 }

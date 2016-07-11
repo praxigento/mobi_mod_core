@@ -12,6 +12,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
+    /** @var  \Mockery\MockInterface */
+    private $mResource;
     /** @var  Generic */
     private $obj;
 
@@ -20,17 +22,17 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         parent::setUp();
         /** create mocks */
         $this->mConn = $this->_mockConn();
+        $this->mResource = $this->_mockResourceConnection($this->mConn);
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new Generic($mResource);
+        $this->obj = new Generic($this->mResource);
     }
 
 
     public function test_addEntity()
     {
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
@@ -51,8 +53,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_addEntity_dataObject()
     {
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
@@ -84,8 +86,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $TABLE = 'table';
         $DELETED = 32;
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn($TABLE);
         // $result = $this->_conn->delete($tbl, $where);
@@ -106,8 +108,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $PK = ['field' => 'value'];
         $ROWS_AFFECTED = 1;
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->with($ENTITY)
             ->andReturn($TABLE);
@@ -123,8 +125,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_getEntities()
     {
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $query = $this->_conn->select();
@@ -160,8 +162,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             'field' => 'value'
         ];
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $query = $conn->select();
@@ -189,8 +191,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** === Test Data === */
         $BIND = ['key' => 'value'];
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $this->_conn->query($query, $bind);
@@ -205,8 +207,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_updateEntity()
     {
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $result = $this->_conn->update($tbl, $bind, $where);
@@ -222,8 +224,8 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_updateEntity_dataObject()
     {
         /** === Setup Mocks === */
-        // $tbl = $this->_conn->getTableName($entity);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn('table');
         // $result = $this->_conn->update($tbl, $bind, $where);

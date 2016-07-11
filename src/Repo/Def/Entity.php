@@ -127,7 +127,7 @@ class Entity
     public function getQueryToSelect()
     {
         $result = $this->_conn->select();
-        $tbl = $this->_conn->getTableName($this->_entityName);
+        $tbl = $this->_resource->getTableName($this->_entityName);
         $result->from($tbl);
         return $result;
     }
@@ -136,7 +136,7 @@ class Entity
     public function getQueryToSelectCount()
     {
         $result = $this->_conn->select();
-        $tbl = $this->_conn->getTableName($this->_entityName);
+        $tbl = $this->_resource->getTableName($this->_entityName);
         $result->from($tbl, "COUNT({$this->_idFieldName})");
         return $result;
     }

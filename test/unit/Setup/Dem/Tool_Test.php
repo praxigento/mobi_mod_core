@@ -17,6 +17,8 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
+    private $mResource;
+    /** @var  \Mockery\MockInterface */
     private $mParser;
     /** @var  Tool */
     private $obj;
@@ -26,13 +28,13 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         parent::setUp();
         /** create mocks */
         $this->mConn = $this->_mockConn();
+        $this->mResource = $this->_mockResourceConnection($this->mConn);
         $this->mParser = $this->_mock(\Praxigento\Core\Setup\Dem\Parser::class);
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
         $logger = $this->_mockLogger();
-        $this->obj = new Tool($mResource, $logger, $this->mParser);
+        $this->obj = new Tool($this->mResource, $logger, $this->mParser);
     }
 
     public function test_createEntity()
@@ -67,8 +69,8 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ]
         ];
         /** === Setup Mocks === */
-        // $tblName = $conn->getTableName($entityAlias);
-        $this->mConn
+        // $tblName = $resource->getTableName($entityAlias);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->with($ENTITY)
             ->andReturn($TABLE);
@@ -108,8 +110,8 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         // $conn->createTable($tbl);
         $this->mConn
             ->shouldReceive('createTable')->once();
-        // $refTable = $this->_conn->getTableName($refTableAlias);
-        $this->mConn
+        // $refTable = $this->_resource->getTableName($refTableAlias);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn($TABLE_FK);
         // $onDelete = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::DELETE]);

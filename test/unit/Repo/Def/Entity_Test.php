@@ -14,7 +14,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
-    private $mEntity;
+    private $mResource;
     /** @var  \Mockery\MockInterface */
     private $mRepoGeneric;
     /** @var  Entity */
@@ -28,10 +28,10 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         /** setup mocks for constructor */
         // parent::__construct($resource);
-        $mResource = $this->_mockResourceConnection($this->mConn);
+        $this->mResource = $this->_mockResourceConnection($this->mConn);
         /** create object to test */
         $this->obj = new Entity(
-            $mResource,
+            $this->mResource,
             $this->mRepoGeneric,
             TestEntity::class
         );
@@ -168,8 +168,8 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mResult);
-        // $tbl = $this->_conn->getTableName($this->_entityName);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($this->_entityName);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn($TABLE_NAME);
         // $result->from($tbl);
@@ -178,6 +178,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $res = $this->obj->getQueryToSelect();
         $this->assertEquals($mResult, $res);
     }
+
     public function test_getQueryToSelectCount()
     {
         /** === Test Data === */
@@ -188,8 +189,8 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mResult);
-        // $tbl = $this->_conn->getTableName($this->_entityName);
-        $this->mConn
+        // $tbl = $this->_resource->getTableName($this->_entityName);
+        $this->mResource
             ->shouldReceive('getTableName')->once()
             ->andReturn($TABLE_NAME);
         // $result->from($tbl);

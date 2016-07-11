@@ -16,7 +16,7 @@ class  Generic
     public function addEntity($entity, $bind)
     {
         $result = null;
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         if ($bind instanceof DataObject) {
             $data = $bind->getData();
         } else {
@@ -32,7 +32,7 @@ class  Generic
     /** @inheritdoc */
     public function deleteEntity($entity, $where)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         $result = $this->_conn->delete($tbl, $where);
         return $result;
     }
@@ -40,7 +40,7 @@ class  Generic
     /** @inheritdoc */
     public function deleteEntityByPk($entity, $pk)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         $where = [];
         foreach ($pk as $field => $value) {
             $where["$field=?"] = $value;
@@ -52,7 +52,7 @@ class  Generic
     /** @inheritdoc */
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         $query = $this->_conn->select();
         if (is_null($cols)) {
             $cols = '*';
@@ -74,7 +74,7 @@ class  Generic
     /** @inheritdoc */
     public function getEntityByPk($entity, $pk, $cols = null)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         /* columns to select */
         $cols = ($cols) ? $cols : '*';
         $query = $this->_conn->select();
@@ -89,7 +89,7 @@ class  Generic
     /** @inheritdoc */
     public function replaceEntity($entity, $bind)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         $keys = array_keys($bind);
         $columns = implode(',', $keys);
         $values = ":" . implode(',:', $keys);
@@ -100,7 +100,7 @@ class  Generic
     /** @inheritdoc */
     public function updateEntity($entity, $bind, $where = null)
     {
-        $tbl = $this->_conn->getTableName($entity);
+        $tbl = $this->_resource->getTableName($entity);
         if ($bind instanceof DataObject) {
             $data = $bind->getData();
         } else {

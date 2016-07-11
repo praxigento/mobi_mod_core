@@ -44,7 +44,7 @@ class Tool
     public function createEntity($entityAlias, $demEntity)
     {
         $conn = $this->_conn;
-        $tblName = $conn->getTableName($entityAlias);
+        $tblName = $this->_resource->getTableName($entityAlias);
         $this->_logger->info("Create new table: $tblName.");
         /* init new object to create table in DB */
         $tbl = $conn->newTable($tblName);
@@ -86,7 +86,7 @@ class Tool
                 /* one only column FK is supported by Magento FW */
                 $ownColumn = reset($one[DemCfg::OWN][DemCfg::ALIASES]);
                 $refTableAlias = $one[DemCfg::REFERENCE][DemCfg::ENTITY][DemCfg::COMPLETE_ALIAS];
-                $refTable = $this->_conn->getTableName($refTableAlias);
+                $refTable = $this->_resource->getTableName($refTableAlias);
                 $refColumn = reset($one[DemCfg::REFERENCE][DemCfg::ALIASES]);
                 $onDelete = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::DELETE]);
                 /* there is no onUpdate in M2, $purge is used instead. Set default value 'false' for purge. */
