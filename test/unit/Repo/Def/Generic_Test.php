@@ -32,18 +32,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
-            ->with('table', [])
             ->andReturn('added');
         // $result = $this->_conn->lastInsertId($tbl);
         $this->mConn
             ->shouldReceive('lastInsertId')->once()
-            ->with('table')
             ->andReturn('inserted');
         /** === Call and asserts  === */
         $resp = $this->obj->addEntity('entity', []);
@@ -54,18 +49,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
-            ->with('table', [])
             ->andReturn('added');
         // $result = $this->_conn->lastInsertId($tbl);
         $this->mConn
             ->shouldReceive('lastInsertId')->once()
-            ->with('table')
             ->andReturn('inserted');
         /** === Call and asserts  === */
         $resp = $this->obj->addEntity('entity', new DataObject([]));
@@ -87,13 +77,9 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $DELETED = 32;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn($TABLE);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
-            ->with($TABLE, $WHERE)
             ->andReturn($DELETED);
         /** === Call and asserts  === */
         $resp = $this->obj->deleteEntity($ENTITY, $WHERE);
@@ -109,14 +95,9 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $ROWS_AFFECTED = 1;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
-            ->with($TABLE, ['field=?' => 'value'])
             ->andReturn($ROWS_AFFECTED);
         /** === Call and asserts  === */
         $resp = $this->obj->deleteEntityByPk($ENTITY, $PK);
@@ -126,17 +107,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $query = $this->_conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mQuery);
         // $query->from($tbl, $cols);
-        $mQuery->shouldReceive('from')->once()
-            ->with('table', \Zend_Db_Select::SQL_WILDCARD);
+        $mQuery->shouldReceive('from')->once();
         // $query->where($where);
         $mQuery->shouldReceive('where')->once()
             ->with('where');
@@ -163,17 +140,13 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         ];
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $query = $conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
             ->shouldReceive('select')->once()
             ->andReturn($mQuery);
         // $query->from($tbl, $cols);
-        $mQuery->shouldReceive('from')->once()
-            ->with('table', \Zend_Db_Select::SQL_WILDCARD);
+        $mQuery->shouldReceive('from')->once();
         // $query->where($where);
         $mQuery->shouldReceive('where')->once()
             ->with('field=:field');
@@ -192,13 +165,9 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $BIND = ['key' => 'value'];
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $this->_conn->query($query, $bind);
         $this->mConn
             ->shouldReceive('query')->once()
-            ->with('REPLACE table (key) VALUES (:key)', anything())
             ->andReturn('result');
         /** === Call and asserts  === */
         $this->obj->replaceEntity('entity', $BIND);
@@ -208,13 +177,9 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
-            ->with('table', [], null)
             ->andReturn('result');
         /** === Call and asserts  === */
         $resp = $this->obj->updateEntity('entity', []);
@@ -225,13 +190,9 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn('table');
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
-            ->with('table', [], null)
             ->andReturn('result');
         /** === Call and asserts  === */
         $resp = $this->obj->updateEntity('entity', new DataObject([]));

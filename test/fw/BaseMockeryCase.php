@@ -88,12 +88,14 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
-    protected function _mockResourceConnection($mConn)
+    protected function _mockResourceConnection($mConn = null)
     {
         $result = m::mock(\Magento\Framework\App\ResourceConnection::class);
         $result
             ->shouldReceive('getConnection')
             ->andReturn($mConn);
+        $result
+            ->shouldReceive('getTableName');
         return $result;
     }
 

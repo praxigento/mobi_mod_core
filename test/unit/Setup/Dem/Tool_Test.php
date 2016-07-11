@@ -41,7 +41,6 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $ENTITY = 'entity_alias';
-        $TABLE = 'table_name';
         $TABLE_FK = 'fk_table';
         $DEM = [
             DemCfg::COMMENT => 'comment',
@@ -70,15 +69,10 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         ];
         /** === Setup Mocks === */
         // $tblName = $resource->getTableName($entityAlias);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
         // $tbl = $conn->newTable($tblName);
         $mTbl = $this->_mock(\Magento\Framework\DB\Ddl\Table::class);
         $this->mConn
             ->shouldReceive('newTable')->once()
-            ->with($TABLE)
             ->andReturn($mTbl);
         // $tbl->setComment($demEntity[DemCfg::COMMENT]);
         $mTbl->shouldReceive('setComment')->once();
