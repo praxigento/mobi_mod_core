@@ -19,17 +19,21 @@ class Tool
     private $_parser;
     /** @var \Magento\Framework\App\ResourceConnection */
     private $_resource;
+    /** @var \Psr\Log\LoggerInterface */
+    private $_logger;
 
     /**
      * Tool constructor.
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
+        \Psr\Log\LoggerInterface $logger,
         \Praxigento\Core\Setup\Dem\Parser $parser
     ) {
-        $this->_parser = $parser;
         $this->_resource = $resource;
         $this->_conn = $resource->getConnection();
+        $this->_logger = $logger;
+        $this->_parser = $parser;
     }
 
     /**
@@ -41,6 +45,7 @@ class Tool
     {
         $conn = $this->_conn;
         $tblName = $conn->getTableName($entityAlias);
+        $this->_logger->info("Create new table: $tblName.");
         /* init new object to create table in DB */
         $tbl = $conn->newTable($tblName);
         if (isset($demEntity[DemCfg::COMMENT])) {
@@ -69,6 +74,7 @@ class Tool
                 $ndxType = $this->_parser->entityGetIndexType($ndx);
                 $ndxOpts = $this->_parser->entityGetIndexOptions($ndx);
                 $ndxName = $conn->getIndexName($entityAlias, $ndxFields, $ndxType);
+                $this->_logger->info("Create new index: $ndxName.");
                 $tbl->addIndex($ndxName, $ndxFields, $ndxOpts);
             }
         }
@@ -87,6 +93,7 @@ class Tool
                 //$onUpdate = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::UPDATE]);
                 $onUpdate = false;
                 $fkName = $conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
+                $this->_logger->info("Create new relation: $fkName.");
                 $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
             }
         }
