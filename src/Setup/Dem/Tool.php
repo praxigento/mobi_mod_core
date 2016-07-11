@@ -93,8 +93,13 @@ class Tool
                 //$onUpdate = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::UPDATE]);
                 $onUpdate = false;
                 $fkName = $conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
-                $this->_logger->info("Create new relation: $fkName.");
-                $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
+                $this->_logger->info("Create new relation '$fkName' from '$tblName:$ownColumn' to '$refTable:$refColumn'.");
+                try {
+                    $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
+                } catch (\Exception $e) {
+                    $msg = "Cannot create FK '$fkName'. Error: " . $e->getMessage();
+                    $this->_logger->error($msg);
+                }
             }
         }
     }
