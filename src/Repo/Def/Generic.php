@@ -87,6 +87,13 @@ class  Generic
     }
 
     /** @inheritdoc */
+    public function getTableName($entityName)
+    {
+        $result = $this->_resource->getTableName($entityName);
+        return $result;
+    }
+
+    /** @inheritdoc */
     public function replaceEntity($entity, $bind)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -95,6 +102,8 @@ class  Generic
         $values = ":" . implode(',:', $keys);
         $query = "REPLACE $tbl ($columns) VALUES ($values)";
         $this->_conn->query($query, $bind);
+        $result = $this->_conn->lastInsertId($tbl);
+        return $result;
     }
 
     /** @inheritdoc */

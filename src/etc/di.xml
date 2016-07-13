@@ -1,49 +1,23 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
-    <!-- Logger -->
-    <virtualType name="loggerSetup" type="Praxigento\Logging\Logger">
-        <arguments>
-            <!-- Config file path is related to Magento 2 base directory. Absolute path can be used too. -->
-            <argument name="configFile" xsi:type="string">var/log/logging.yaml</argument>
-            <!-- Name of the logger in configuration file. Default: "odoo".  -->
-            <argument name="loggerName" xsi:type="string">setup</argument>
-        </arguments>
-    </virtualType>
-    <type name="Praxigento\Core\Setup\Dem\Tool">
-        <arguments>
-            <argument name="logger" xsi:type="object">loggerSetup</argument>
-        </arguments>
-    </type>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
 
     <!-- Repos -->
-    <preference for="Praxigento\Core\Repo\Query\ISelect"
-                type="Praxigento\Core\Repo\Query\Def\Select"/>
-    <preference for="Praxigento\Core\Repo\IGeneric"
-                type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\Transaction\IManager"
-                type="\Praxigento\Core\Repo\Transaction\Def\Manager"/>
-    <preference for="Praxigento\Core\Repo\Transaction\IDefinition"
-                type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
-    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter"
-                type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
+    <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
+    <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
+    <preference for="Praxigento\Core\Repo\Transaction\IManager" type="\Praxigento\Core\Repo\Transaction\Def\Manager"/>
+    <preference for="Praxigento\Core\Repo\Transaction\IDefinition" type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
+    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 
     <!-- Services -->
 
     <!-- Tools -->
-    <preference for="Praxigento\Core\Tool\IConvert"
-                type="Praxigento\Core\Tool\Def\Convert"/>
-    <preference for="Praxigento\Core\Tool\IDate"
-                type="Praxigento\Core\Tool\Def\Date"/>
-    <preference for="Praxigento\Core\Tool\IFormat"
-                type="Praxigento\Core\Tool\Def\Format"/>
-    <preference for="Praxigento\Core\Tool\IPeriod"
-                type="Praxigento\Core\Tool\Def\Period"/>
+    <preference for="Praxigento\Core\Tool\IConvert" type="Praxigento\Core\Tool\Def\Convert"/>
+    <preference for="Praxigento\Core\Tool\IDate" type="Praxigento\Core\Tool\Def\Date"/>
+    <preference for="Praxigento\Core\Tool\IFormat" type="Praxigento\Core\Tool\Def\Format"/>
+    <preference for="Praxigento\Core\Tool\IPeriod" type="Praxigento\Core\Tool\Def\Period"/>
 
     <!-- Other -->
-    <preference for="Psr\Log\LoggerInterface"
-                type="Praxigento\Logging\Logger"/>
+    <preference for="Psr\Log\LoggerInterface" type="Praxigento\Logging\Logger"/>
 
 </config>

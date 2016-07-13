@@ -16,13 +16,12 @@ class Config
     /** Default stock ID for empty Magento instance. */
     const DEF_STOCK_ID = 1;
     /** Default 'admin' website ID for empty Magento instance */
-    const DEF_WEBSITE_ID_ADMIN = 0; // default '0' to use in floats comparison: ($val>Cfg::DEF_ZERO) instead of "($val>0)"
+    const DEF_WEBSITE_ID_ADMIN = 0;
     /** Default 'base' website ID for empty Magento instance */
     const DEF_WEBSITE_ID_BASE = 1;
+    /** Default '0' to use in floats comparison: ($val>Cfg::DEF_ZERO) instead of "($val>0)" */
     const DEF_ZERO = 0.000001;
-    /**
-     * Path separator for nodes to address package in DEM.
-     */
+    /** Path separator for nodes to address package in DEM. */
     const DEM_PS = '/';
     /**
      * Magento entities as defined in version 2.
@@ -31,12 +30,17 @@ class Config
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
     const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
+    const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
+    const ENTITY_MAGE_TAX_CALC = 'tax_calculation';
+    const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
+    const ENTITY_MAGE_TAX_CALC_RULE = 'tax_calculation_rule';
     /**
      * Codifier for entities' attributes.
+     * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
      */
     const E_CATCAT_EAV_INT_ATTR_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
@@ -51,6 +55,10 @@ class Config
     const E_CATINV_STOCK_STATUS_A_STOCK_ID = ModelStockStatus::KEY_STOCK_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = ModelStockStatus::KEY_STOCK_STATUS;
     const E_COMMON_A_ENTITY_ID = 'entity_id';
+    const E_CONFIG_A_PATH = 'path';
+    const E_CONFIG_A_SCOPE = 'scope';
+    const E_CONFIG_A_SCOPE_ID = 'scope_id';
+    const E_CONFIG_A_VALUE = 'value';
     const E_CUSTOMER_A_EMAIL = 'email';
     const E_CUSTOMER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';
@@ -67,17 +75,23 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
-    /** @deprecated Use ModelOrderItem::... directly where it is possible */
     const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
     const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
     const E_SALE_ORDER_ITEM_A_PRODUCT_ID = ModelOrderItem::PRODUCT_ID;
-
+    const E_TAX_CALC_A_CUST_TAX_CLASS_ID = 'customer_tax_class_id';
+    const E_TAX_CALC_A_ID = 'tax_calculation_id';
+    const E_TAX_CALC_A_PROD_TAX_CLASS_ID = 'product_tax_class_id';
+    const E_TAX_CALC_A_RATE_ID = 'tax_calculation_rate_id';
+    const E_TAX_CALC_A_RULE_ID = 'tax_calculation_rule_id';
+    const E_TAX_CALC_RATE_A_ID = 'tax_calculation_rate_id';
+    const E_TAX_CALC_RULE_A_ID = 'tax_calculation_rule_id';
     /**
      * other
      */
     const FORMAT_DATETIME = 'Y-m-d H:i:s';
     const MODULE = 'Praxigento_Core';
-
-    /* \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE */
-    const TYPE_PRODUCT_SIMPLE = 'simple';
+    const SCOPE_CFG_DEFAULT = \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT;
+    const SCOPE_CFG_STORES = \Magento\Config\Block\System\Config\Form::SCOPE_STORES;
+    const SCOPE_CFG_WEBSITE = \Magento\Config\Block\System\Config\Form::SCOPE_WEBSITES;
+    const TYPE_PRODUCT_SIMPLE = \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE;
 }
