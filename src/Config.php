@@ -71,7 +71,7 @@ class Config
     const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
     const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
     const E_SALE_ORDER_ITEM_A_PRODUCT_ID = ModelOrderItem::PRODUCT_ID;
-    const E_SALE_ORDER_ITEM_A_QTY_INVOICED = ModelOrderItem::QTY_INVOICED;
+
     /**
      * other
      */
