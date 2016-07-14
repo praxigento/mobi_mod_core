@@ -7,16 +7,13 @@
 
 namespace Praxigento\Core\Data\Entity;
 
-use Flancer32\Lib\DataObject;
-use Praxigento\Core\Data\IEntity;
-
-abstract class Base extends DataObject implements IEntity
+abstract class Base
+    extends \Flancer32\Lib\DataObject
+    implements \Praxigento\Core\Data\IEntity
 {
-    /**
-     * @inheritdoc
-     */
+    /** @inheritdoc */
     public function getEntityName()
     {
-        return static::ENTITY_NAME;
+        return static::ENTITY_NAME; // "static::" will use child attribute value
     }
 }
