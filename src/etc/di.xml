@@ -11,6 +11,10 @@
 
     <!-- Services -->
 
+    <!-- Transaction -->
+    <preference for="Praxigento\Core\Transaction\Business\IManager" type="Praxigento\Core\Transaction\Business\Def\Manager"/>
+    <preference for="Praxigento\Core\Transaction\Business\IFactory" type="Praxigento\Core\Transaction\Business\Def\Factory"/>
+
     <!-- Tools -->
     <preference for="Praxigento\Core\Tool\IConvert" type="Praxigento\Core\Tool\Def\Convert"/>
     <preference for="Praxigento\Core\Tool\IDate" type="Praxigento\Core\Tool\Def\Date"/>
