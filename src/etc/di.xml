@@ -5,7 +5,7 @@
     <!-- Repos -->
     <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\Transaction\IManager" type="\Praxigento\Core\Repo\Transaction\Def\Manager"/>
+    <preference for="Praxigento\Core\Transaction\Database\IManager" type="\Praxigento\Core\Transaction\Database\Def\Manager"/>
     <preference for="Praxigento\Core\Repo\Transaction\IDefinition" type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
     <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 

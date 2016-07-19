@@ -36,10 +36,10 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mConn
             ->shouldReceive('beginTransaction')->once();
         // $result = $this->manObj->create(IDefinition::class);
-        $mTrans = new Definition();
+        $mDef = new Definition();
         $this->mManObj
             ->shouldReceive('create')->once()
-            ->andReturn($mTrans);
+            ->andReturn($mDef);
         // $result->setLevel($this->_transactionLevel);
         /** === Call and asserts  === */
         $res = $this->obj->transactionBegin();

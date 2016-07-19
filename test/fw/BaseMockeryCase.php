@@ -104,7 +104,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
      */
     protected function _mockTransactionDefinition()
     {
-        $result = $this->_mock(\Praxigento\Core\Repo\Transaction\IDefinition::class);
+        $result = $this->_mock(\Praxigento\Core\Transaction\Database\IDefinition::class);
         return $result;
     }
 
@@ -113,7 +113,7 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
      */
     protected function _mockTransactionManager()
     {
-        $result = $this->_mock(\Praxigento\Core\Repo\Transaction\IManager::class);
+        $result = $this->_mock(\Praxigento\Core\Transaction\Database\IManager::class);
         return $result;
     }
 
