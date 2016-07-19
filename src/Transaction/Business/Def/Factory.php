@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Transaction\Business\Def;
 
-
+/**
+ * Default implementation for Transaction items factory used by Business Transaction Manager.
+ */
 final class Factory
     implements \Praxigento\Core\Transaction\Business\IFactory
 {

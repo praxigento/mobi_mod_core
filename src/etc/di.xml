@@ -12,8 +12,12 @@
     <!-- Services -->
 
     <!-- Transaction -->
-    <preference for="Praxigento\Core\Transaction\Business\IManager" type="Praxigento\Core\Transaction\Business\Def\Manager"/>
     <preference for="Praxigento\Core\Transaction\Business\IFactory" type="Praxigento\Core\Transaction\Business\Def\Factory"/>
+    <preference for="Praxigento\Core\Transaction\Business\IItem" type="Praxigento\Core\Transaction\Business\Def\Item"/>
+    <preference for="Praxigento\Core\Transaction\Business\IManager" type="Praxigento\Core\Transaction\Business\Def\Manager"/>
+    <preference for="Praxigento\Core\Transaction\Database\IFactory" type="Praxigento\Core\Transaction\Database\Def\Factory"/>
+    <preference for="Praxigento\Core\Transaction\Database\IItem" type="Praxigento\Core\Transaction\Database\Def\Item"/>
+    <preference for="Praxigento\Core\Transaction\Database\IManager" type="Praxigento\Core\Transaction\Database\Def\Manager"/>
 
     <!-- Tools -->
     <preference for="Praxigento\Core\Tool\IConvert" type="Praxigento\Core\Tool\Def\Convert"/>

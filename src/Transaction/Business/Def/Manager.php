@@ -9,11 +9,14 @@ namespace Praxigento\Core\Transaction\Business\Def;
 final class Manager
     implements \Praxigento\Core\Transaction\Business\IManager
 {
+    /**
+     * Starting level for the first transaction.
+     */
     const ZERO_LEVEL = 0;
     /** @var \Praxigento\Core\Transaction\Business\IFactory */
     private $_factoryTrans;
     /**
-     * @var array
+     * @var array [$transactionName][$level] => \Praxigento\Core\Transaction\Business\IItem
      */
     private $_registry = [];
 

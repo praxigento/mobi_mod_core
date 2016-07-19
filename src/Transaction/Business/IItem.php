@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Transaction\Business;
 
-
+/**
+ * Business Transaction.
+ */
 interface IItem
 {
     public function addCommitCall($callable);

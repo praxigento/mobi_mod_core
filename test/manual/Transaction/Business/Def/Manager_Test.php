@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Transaction\Business\Business\Def;
+namespace Praxigento\Core\Transaction\Business\Def;
 
 use Magento\Framework\App\ObjectManager;
 

@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Transaction\Business;
 
-
+/**
+ * Transaction items factory used by Business Transaction Manager.
+ */
 interface IFactory
 {
     /**
