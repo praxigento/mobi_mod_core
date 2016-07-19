@@ -163,14 +163,20 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     {
         /** === Test Data === */
         $BIND = ['key' => 'value'];
+        $ID = 321;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         // $this->_conn->query($query, $bind);
         $this->mConn
             ->shouldReceive('query')->once()
             ->andReturn('result');
+        // $result = $this->_conn->lastInsertId($tbl);
+        $this->mConn
+            ->shouldReceive('lastInsertId')->once()
+            ->andReturn($ID);
         /** === Call and asserts  === */
-        $this->obj->replaceEntity('entity', $BIND);
+        $id = $this->obj->replaceEntity('entity', $BIND);
+        $this->assertEquals($ID, $id);
     }
 
     public function test_updateEntity()
