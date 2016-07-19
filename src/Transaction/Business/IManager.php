@@ -21,16 +21,25 @@ interface IManager
     /**
      * Commit this transaction if it does not contain nested uncommitted transactions.
      *
-     * @param \Praxigento\Core\Transaction\Business\IItem $transactionItem
-     * @return mixed
+     * @param string $transactionName
+     * @param int $transactionlevel
      */
-    public function commit(\Praxigento\Core\Transaction\Business\IItem $transactionItem);
+    public function commit($transactionName, $transactionlevel);
 
     /**
-     * Close transaction (rollback all uncommitted transactions).
+     * Close transaction (rollback all uncommitted transactions or do nothing if all nested transactions were committed).
      *
      * @param string $transactionName
      */
     public function end($transactionName);
+
+    /**
+     * Rollback all transactions with given name from given level (including this level).
+     *
+     * @param string $transactionName
+     * @param int $transactionLevel
+     * @return mixed
+     */
+    public function rollback($transactionName, $transactionLevel);
 
 }

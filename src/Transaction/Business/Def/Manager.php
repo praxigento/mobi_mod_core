@@ -38,27 +38,25 @@ final class Manager
     }
 
     /** @inheritdoc */
-    public function commit(\Praxigento\Core\Transaction\Business\IItem $transactionItem)
+    public function commit($transactionName, $transactionLevel)
     {
-        $name = $transactionItem->getName();
-        if (isset($this->_registry[$name])) {
-            $regData = $this->_registry[$name];
-            $level = $transactionItem->getLevel();
+        if (isset($this->_registry[$transactionLevel])) {
+            $regData = $this->_registry[$transactionLevel];
             $count = count($regData);
-            if ($count > ($level + 1)) {
+            if ($count > ($transactionLevel + 1)) {
                 /* rollback all nested levels and current level */
-                for ($i = $count - 1; $i >= $level; $i--) {
+                for ($i = $count - 1; $i >= $transactionLevel; $i--) {
                     $tran = $regData[$i];
                     $tran->rollback();
                     unset($regData[$i]);
                 }
             } else {
                 /* commit current level */
-                $regData[$level]->commit();
-                unset($regData[$level]);
+                $regData[$transactionLevel]->commit();
+                unset($regData[$transactionLevel]);
             }
         } else {
-            throw new\Exception("There is no transaction named as '$name'.");
+            throw new\Exception("There is no transaction named as '$transactionName'.");
         }
     }
 
@@ -81,4 +79,20 @@ final class Manager
         }
     }
 
+    /** @inheritdoc */
+    public function rollback($transactionName, $transactionLevel)
+    {
+        if (isset($this->_registry[$transactionLevel])) {
+            $regData = $this->_registry[$transactionLevel];
+            $count = count($regData);
+            /* rollback all nested levels and current level */
+            for ($i = $count - 1; $i >= $transactionLevel; $i--) {
+                $tran = $regData[$i];
+                $tran->rollback();
+                unset($regData[$i]);
+            }
+        } else {
+            throw new\Exception("There is no transaction named as '$transactionName'.");
+        }
+    }
 }
