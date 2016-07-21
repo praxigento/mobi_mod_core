@@ -24,6 +24,10 @@ class Config
     /** Path separator for nodes to address package in DEM. */
     const DEM_PS = '/';
     /**
+     * Names for Data Sources.
+     */
+    const DS_SALES_ORDERS_GRID = 'sales_order_grid_data_source';
+    /**
      * Magento entities as defined in version 2.
      */
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = ModelStock::ENTITY;
