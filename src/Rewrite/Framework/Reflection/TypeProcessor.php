@@ -11,23 +11,8 @@ namespace Praxigento\Core\Rewrite\Framework\Reflection;
 class TypeProcessor
     extends \Magento\Framework\Reflection\TypeProcessor
 {
-    const TYPE_ARRAY_ITERATOR = '\ArrayIterator';
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
-
-    /**
-     * Expand number of simple classes.
-     *
-     * @param string $type
-     * @return bool
-     */
-    public function isTypeSimple($type)
-    {
-        $result = parent::isTypeSimple($type);
-        if ($type == self::TYPE_ARRAY_ITERATOR) {
-            $result = true;
-        }
-        return $result;
-    }
+    const TYPE_ARRAY_ITERATOR = '\ArrayIterator';
 
     /**
      * Add annotation processing for accessors (get/set methods).
@@ -65,6 +50,36 @@ class TypeProcessor
                     }
                 }
                 $result = $this->_types[$typeName];
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Expand number of simple classes.
+     *
+     * @param string $type
+     * @return bool
+     */
+    public function isTypeSimple($type)
+    {
+        $result = parent::isTypeSimple($type);
+        if ($type == self::TYPE_ARRAY_ITERATOR) {
+            $result = true;
+        }
+        return $result;
+    }
+
+    public function translateTypeName($class)
+    {
+        try {
+            $result = parent::translateTypeName($class);
+        } catch (\InvalidArgumentException $e) {
+            if (preg_match('/\\\\?(Praxigento)\\\\([A-Za-z0-9]*)\\\\(.*)/', $class, $matches)) {
+                $moduleNamespace = 'Praxigento';
+                $moduleName = $matches[2];
+                $typeNameParts = explode('\\', $matches[3]);
+                $result = ucfirst($moduleNamespace . $moduleName . implode('', $typeNameParts));
             }
         }
         return $result;
