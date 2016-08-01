@@ -1,11 +1,21 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- ******* -->
+    <!-- Plugins -->
+    <!-- ******* -->
 
+
+    <!-- ******** -->
+    <!-- REWRITES -->
+    <!-- ******** -->
+    <preference for="Magento\Framework\Reflection\TypeProcessor" type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
+
+    <!-- ***** -->
     <!-- Repos -->
+    <!-- ***** -->
     <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Transaction\Database\IManager" type="\Praxigento\Core\Transaction\Database\Def\Manager"/>
     <preference for="Praxigento\Core\Repo\Transaction\IDefinition" type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
     <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 
@@ -26,6 +36,7 @@
     <preference for="Praxigento\Core\Tool\IPeriod" type="Praxigento\Core\Tool\Def\Period"/>
 
     <!-- Other -->
+    <!-- TODO: where this definition should be placed - in core or on app level (generic app module)? -->
     <preference for="Psr\Log\LoggerInterface" type="Praxigento\Logging\Logger"/>
 
 </config>
