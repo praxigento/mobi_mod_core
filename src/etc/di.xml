@@ -8,6 +8,10 @@
         <!-- Process annotated methods in API data objects -->
         <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor" sortOrder="100" disabled="false"/>
     </type>
+    <type name="Magento\Framework\Webapi\ServiceOutputProcessor">
+        <!-- Process annotated methods in API data objects -->
+        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Webapi\ServiceOutputProcessor" sortOrder="100" disabled="false"/>
+    </type>
 
 
     <!-- ******** -->

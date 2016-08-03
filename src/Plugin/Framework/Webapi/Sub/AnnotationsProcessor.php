@@ -3,14 +3,11 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor;
+namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
 
 
 class AnnotationsProcessor
 {
-    const ATTR_NAME = 'name';
-    const ATTR_REQUIRED = 'required';
-    const ATTR_TYPE = 'type';
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
     /** @var array registry for processed types. Full type name is the key ("\ArrayIterator"). */
     protected $_registry = [];
@@ -33,6 +30,7 @@ class AnnotationsProcessor
                 $key = $reflection->getName();
                 $docBlock = $reflection->getDocBlock();
                 if ($docBlock) {
+                    /* process annotated methods */
                     $docBlockLines = $docBlock->getContents();
                     $docBlockLines = explode("\n", $docBlockLines);
                     foreach ($docBlockLines as $line) {
@@ -44,17 +42,33 @@ class AnnotationsProcessor
                                 $attrType = str_replace('|null', '', $attrType);
                                 $attrRequired = false;
                             }
-                            $paramData = [
-                                self::ATTR_NAME => $attrName,
-                                self::ATTR_TYPE => $attrType,
-                                self::ATTR_REQUIRED => $attrRequired
-                            ];
+                            $paramData = new PropertyData();
+                            $paramData->setName($attrName);
+                            $paramData->setIsRequired($attrRequired);
+                            $paramData->setType($attrType);
                             $this->_registry[$key][$attrName] = $paramData;
                             $this->register($attrType);
                         }
                     }
                 }
-
+                /* process normal methods (not annotated) */
+                $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
+                foreach ($methods as $method) {
+                    $methodName = $method->getName();
+                    $isGetter = (strpos($methodName, 'get') === 0);
+                    /* only getters w/o parameters will be proceeded */
+                    if ($isGetter && !$method->getNumberOfParameters() && $methodName != 'getIterator') {
+                        $attrName = substr($methodName, 3);
+                        $typeData = $this->_typeProcessor->getGetterReturnType($method);
+                        $attrType = $typeData['type'];
+                        $paramData = new PropertyData();
+                        $paramData->setName($attrName);
+                        $paramData->setIsRequired($typeData['isRequired']);
+                        $paramData->setType($attrType);
+                        $this->_registry[$key][$attrName] = $paramData;
+                        $this->register($attrType);
+                    }
+                }
             }
         }
         return $this->_registry[$key];

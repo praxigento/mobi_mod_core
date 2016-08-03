@@ -29,7 +29,7 @@ interface IResponse
 
     /**
      * Return 'true' if this response is corresponded to successfully completed operation.
-     * @return bool
+     * @return boolean
      */
     public function isSucceed();
 

@@ -16,7 +16,7 @@ class Response extends DataObject implements IResponse
     private $_errorMessage;
 
     /**
-     * @inheritdoc
+     * @return string (required for Magento API transformations)
      */
     public function getErrorCode()
     {
@@ -24,7 +24,7 @@ class Response extends DataObject implements IResponse
     }
 
     /**
-     * @inheritdoc
+     * @return string (required for Magento API transformations)
      */
     public function getErrorMessage()
     {

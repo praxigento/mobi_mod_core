@@ -7,6 +7,7 @@ namespace Praxigento\Core\Plugin\Framework\Webapi;
 
 
 use Magento\Framework\Api\SimpleDataObjectConverter;
+use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
 
 class ServiceInputProcessor
 {
@@ -14,13 +15,13 @@ class ServiceInputProcessor
     protected $_objectManager;
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
-    /** @var ServiceInputProcessor\AnnotationsProcessor */
+    /** @var Sub\AnnotationsProcessor */
     protected $_typeProcessorAnnotated;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor\AnnotationsProcessor $typeProcessorAnnotated
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\AnnotationsProcessor $typeProcessorAnnotated
     ) {
         $this->_objectManager = $objectManager;
         $this->_typeProcessor = $typeProcessor;
@@ -36,7 +37,9 @@ class ServiceInputProcessor
             foreach ($data as $propertyName => $value) {
                 $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToUpperCamelCase($propertyName);
                 if (isset($typeData[$camelCaseProperty])) {
-                    $propertyType = $typeData[$camelCaseProperty][ServiceInputProcessor\AnnotationsProcessor::ATTR_TYPE];
+                    /** @var PropertyData $propertyData */
+                    $propertyData = $typeData[$camelCaseProperty];
+                    $propertyType = $propertyData->getType();
                     if ($this->_typeProcessor->isTypeSimple($propertyType)) {
                         $result->setData($camelCaseProperty, $value);
                     } else {
@@ -83,7 +86,6 @@ class ServiceInputProcessor
                     $result = $this->_createFromArray($type, $data);
                 }
             }
-            return $result;
         } else {
             $result = $proceed($data, $type);
         }
