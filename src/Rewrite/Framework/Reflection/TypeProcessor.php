@@ -12,6 +12,9 @@ class TypeProcessor
     extends \Magento\Framework\Reflection\TypeProcessor
 {
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
+    /**
+     * Full names of the types for the internal registry.
+     */
     const TYPE_ARRAY_ITERATOR = '\ArrayIterator';
 
     /**
@@ -55,6 +58,16 @@ class TypeProcessor
         return $result;
     }
 
+    public function getTypeData($typeName)
+    {
+        if ($typeName == self::TYPE_ARRAY_ITERATOR) {
+            $result = parent::getTypeData(\ArrayIterator::class);
+        } else {
+            $result = parent::getTypeData($typeName);
+        }
+        return $result;
+    }
+
     /**
      * Expand number of simple classes.
      *
@@ -65,6 +78,9 @@ class TypeProcessor
     {
         $result = parent::isTypeSimple($type);
         if ($type == self::TYPE_ARRAY_ITERATOR) {
+            if (!isset($this->_types[\ArrayIterator::class])) {
+                $this->_types[\ArrayIterator::class] = []; // class name w/o leading slash ('ArrayIterator')
+            }
             $result = true;
         }
         return $result;
