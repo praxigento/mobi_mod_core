@@ -51,7 +51,8 @@ class ServiceOutputProcessor
              */
             foreach ($typeData as $propertyName => $propertyData) {
                 $name = \Magento\Framework\Api\SimpleDataObjectConverter::camelCaseToSnakeCase($propertyName);
-                $value = $data->getData($propertyName);
+                $getterMethod = 'get' . ucfirst($propertyName);
+                $value = call_user_func([$data, $getterMethod]);
                 $isRequired = $propertyData->getIsRequired();
                 $propertyType = $propertyData->getType();
                 if ($isRequired || $value) {

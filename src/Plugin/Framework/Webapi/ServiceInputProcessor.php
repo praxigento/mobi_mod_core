@@ -35,7 +35,7 @@ class ServiceInputProcessor
             $typeData = $this->_typeProcessorAnnotated->register($type);
             $result = $this->_objectManager->create($type);
             foreach ($data as $propertyName => $value) {
-                $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToUpperCamelCase($propertyName);
+                $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToCamelCase($propertyName);
                 if (isset($typeData[$camelCaseProperty])) {
                     /** @var PropertyData $propertyData */
                     $propertyData = $typeData[$camelCaseProperty];

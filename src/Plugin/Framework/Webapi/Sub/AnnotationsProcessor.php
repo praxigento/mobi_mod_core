@@ -24,10 +24,10 @@ class AnnotationsProcessor
     {
         $key = $type; // leading slash can be omitted
         if (!isset($this->_registry[$key])) {
-            $this->_registry[$key] = [];
             if (!$this->_typeProcessor->isTypeSimple($type)) {
                 $reflection = new \Zend\Code\Reflection\ClassReflection($type);
                 $key = $reflection->getName();
+                $this->_registry[$key] = [];
                 $docBlock = $reflection->getDocBlock();
                 if ($docBlock) {
                     /* process annotated methods */
@@ -37,7 +37,7 @@ class AnnotationsProcessor
                         if (preg_match(self::PATTERN_METHOD_GET, $line, $matches)) {
                             $attrRequired = true;
                             $attrType = $matches[1];
-                            $attrName = $matches[2];
+                            $attrName = lcfirst($matches[2]);
                             if (substr($attrType, -0, strlen('null'))) {
                                 $attrType = str_replace('|null', '', $attrType);
                                 $attrRequired = false;
@@ -58,7 +58,7 @@ class AnnotationsProcessor
                     $isGetter = (strpos($methodName, 'get') === 0);
                     /* only getters w/o parameters will be proceeded */
                     if ($isGetter && !$method->getNumberOfParameters() && $methodName != 'getIterator') {
-                        $attrName = substr($methodName, 3);
+                        $attrName = lcfirst(substr($methodName, 3));
                         $typeData = $this->_typeProcessor->getGetterReturnType($method);
                         $attrType = $typeData['type'];
                         $paramData = new PropertyData();
@@ -69,6 +69,8 @@ class AnnotationsProcessor
                         $this->register($attrType);
                     }
                 }
+            } else {
+                $this->_registry[$key] = [];
             }
         }
         return $this->_registry[$key];
