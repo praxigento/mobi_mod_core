@@ -5,24 +5,25 @@
 
 namespace Praxigento\Core\Rewrite\Framework\Reflection;
 
+use Zend\Code\Reflection\MethodReflection;
+
 /**
  * Override "\Magento\Framework\Reflection\TypeProcessor" to add parsing of the annotated accessors (get/set methods) for MOBI app.
  */
 class TypeProcessor
     extends \Magento\Framework\Reflection\TypeProcessor
 {
-    const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
+    const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)\s*(.*)/";
+    const PATTERN_NULL = '|null';
+    const LEN_NULL = 5;
+    const SKIP_DATA = 'getData';
+    const SKIP_ITERATOR = 'getIterator';
     /**
      * Full names of the types for the internal registry.
      */
     const TYPE_ARRAY_ITERATOR = '\ArrayIterator';
 
-    /**
-     * Add annotation processing for accessors (get/set methods).
-     *
-     * @param string $class
-     * @return array
-     */
+    /** @inheritdoc */
     protected function _processComplexType($class)
     {
         /* run parent method to analyze coded methods */
@@ -40,15 +41,17 @@ class TypeProcessor
                         $attrRequired = true;
                         $attrType = $matches[1];
                         $attrName = lcfirst($matches[2]);
-                        if (substr($attrType, -0, strlen('null'))) {
-                            $attrType = str_replace('|null', '', $attrType);
+                        $documentation = $matches[3];
+                        $lenType = strlen($attrType);
+                        if (substr($attrType, $lenType - self::LEN_NULL) == self::PATTERN_NULL) {
+                            $attrType = str_replace(self::PATTERN_NULL, '', $attrType);
                             $attrRequired = false;
                         }
                         /* see docs for \Magento\Framework\Reflection\TypeProcessor::$_types */
                         $this->_types[$typeName]['parameters'][$attrName] = [
                             'type' => $this->register($attrType),
                             'required' => $attrRequired,
-                            'documentation' => 'this is annotated property (see MOBI-329).',
+                            'documentation' => $documentation,
                         ];
                     }
                 }
@@ -58,34 +61,41 @@ class TypeProcessor
         return $result;
     }
 
-    public function getTypeData($typeName)
+    /** @inheritdoc */
+    protected function _processMethod(MethodReflection $methodReflection, $typeName)
     {
-        if ($typeName == self::TYPE_ARRAY_ITERATOR) {
-            $result = parent::getTypeData(\ArrayIterator::class);
-        } else {
-            $result = parent::getTypeData($typeName);
+        /* skip basic methods of the DataObjects */
+        $name = $methodReflection->getName();
+        if ($name != self::SKIP_DATA && $name != self::SKIP_ITERATOR) {
+            parent::_processMethod($methodReflection, $typeName);
         }
-        return $result;
     }
 
-    /**
-     * Expand number of simple classes.
-     *
-     * @param string $type
-     * @return bool
-     */
-    public function isTypeSimple($type)
-    {
-        $result = parent::isTypeSimple($type);
-        if ($type == self::TYPE_ARRAY_ITERATOR) {
-            if (!isset($this->_types[\ArrayIterator::class])) {
-                $this->_types[\ArrayIterator::class] = []; // class name w/o leading slash ('ArrayIterator')
-            }
-            $result = true;
-        }
-        return $result;
-    }
+//    /** @inheritdoc */
+//    public function getTypeData($typeName)
+//    {
+//        if ($typeName == self::TYPE_ARRAY_ITERATOR) {
+//            $result = parent::getTypeData(\ArrayIterator::class);
+//        } else {
+//            $result = parent::getTypeData($typeName);
+//        }
+//        return $result;
+//    }
 
+//    /** @inheritdoc */
+//    public function isTypeSimple($type)
+//    {
+//        $result = parent::isTypeSimple($type);
+//        if ($type == self::TYPE_ARRAY_ITERATOR) {
+//            if (!isset($this->_types[\ArrayIterator::class])) {
+//                $this->_types[\ArrayIterator::class] = []; // class name w/o leading slash ('ArrayIterator')
+//            }
+//            $result = true;
+//        }
+//        return $result;
+//    }
+
+    /** @inheritdoc */
     public function translateTypeName($class)
     {
         try {
@@ -100,5 +110,4 @@ class TypeProcessor
         }
         return $result;
     }
-
 }
