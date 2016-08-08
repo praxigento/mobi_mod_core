@@ -25,7 +25,9 @@ class AnnotationsProcessor
         $key = $type; // leading slash can be omitted
         if (!isset($this->_registry[$key])) {
             if (!$this->_typeProcessor->isTypeSimple($type)) {
-                $reflection = new \Zend\Code\Reflection\ClassReflection($type);
+                $typeNorm = str_replace('[', '', $type);
+                $typeNorm = str_replace(']', '', $typeNorm);
+                $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
                 $key = $reflection->getName();
                 $this->_registry[$key] = [];
                 $docBlock = $reflection->getDocBlock();

@@ -30,24 +30,41 @@ class ServiceInputProcessor
 
     protected function _createFromArray($type, $data)
     {
+        $result = $data;
+        $isArray = false;
+        if (substr($type, -2) === "[]") {
+            $type = substr($type, 0, -2);
+            $isArray = true;
+        }
         if (is_subclass_of($type, \Flancer32\Lib\DataObject::class)) {
             /* Process data object separately. Register annotated class and parse parameters types. */
             $typeData = $this->_typeProcessorAnnotated->register($type);
-            $result = $this->_objectManager->create($type);
-            foreach ($data as $propertyName => $value) {
-                $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToCamelCase($propertyName);
-                if (isset($typeData[$camelCaseProperty])) {
-                    /** @var PropertyData $propertyData */
-                    $propertyData = $typeData[$camelCaseProperty];
-                    $propertyType = $propertyData->getType();
-                    if ($this->_typeProcessor->isTypeSimple($propertyType)) {
-                        $result->setData($camelCaseProperty, $value);
-                    } else {
-                        $complex = $this->_createFromArray($propertyType, $value);
-                        $result->setData($camelCaseProperty, $complex);
+            if ($isArray) {
+                /* process $data as array of $types */
+                $result = [];
+                foreach ($data as $key => $item) {
+                    $result[$key] = $this->_createFromArray($type, $item);
+                }
+            } else {
+                /* process $data as data object of $type */
+                $result = $this->_objectManager->create($type);
+                foreach ($data as $propertyName => $value) {
+                    $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToCamelCase($propertyName);
+                    if (isset($typeData[$camelCaseProperty])) {
+                        /** @var PropertyData $propertyData */
+                        $propertyData = $typeData[$camelCaseProperty];
+                        $propertyType = $propertyData->getType();
+                        if ($this->_typeProcessor->isTypeSimple($propertyType)) {
+                            $result->setData($camelCaseProperty, $value);
+                        } else {
+                            $complex = $this->_createFromArray($propertyType, $value);
+                            $result->setData($camelCaseProperty, $complex);
+                        }
                     }
                 }
             }
+        } else {
+            $result = $data;
         }
         return $result;
     }

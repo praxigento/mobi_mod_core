@@ -80,7 +80,7 @@ final class Manager
             /** @var \Praxigento\Core\Transaction\Database\Def\Item $item */
             $item = $this->_registry[$conn][$trans];
             $maxLevel = $item->getLevel();
-            if ($maxLevel > $level) {
+            if ($maxLevel >= $level) {
                 /* rollback all nested levels and current level */
                 for ($i = $maxLevel; $i >= $level; $i--) {
                     $conn = $item->getConnection();
