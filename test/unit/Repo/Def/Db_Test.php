@@ -6,7 +6,12 @@ namespace Praxigento\Core\Repo\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class ChildToTestDb extends Db
+{
+
+}
+
+class Db_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
@@ -37,9 +42,11 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertInstanceOf(\Magento\Framework\DB\Adapter\AdapterInterface::class, $res);
     }
 
-}
-
-class ChildToTestDb extends Db
-{
+    public function test_getResource()
+    {
+        /** === Call and asserts  === */
+        $res = $this->obj->getResource();
+        $this->assertInstanceOf(\Magento\Framework\App\ResourceConnection::class, $res);
+    }
 
 }
