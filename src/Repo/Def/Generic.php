@@ -87,13 +87,6 @@ class  Generic
     }
 
     /** @inheritdoc */
-    public function getTableName($entityName)
-    {
-        $result = $this->_resource->getTableName($entityName);
-        return $result;
-    }
-
-    /** @inheritdoc */
     public function replaceEntity($entity, $bind)
     {
         $tbl = $this->_resource->getTableName($entity);

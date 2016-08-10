@@ -71,14 +71,6 @@ interface IGeneric
     public function getEntityByPk($entity, $pk, $cols = null);
 
     /**
-     * Return table name for the entity name (with prefix).
-     *
-     * @param $entityName
-     * @return string
-     */
-    public function getTableName($entityName);
-
-    /**
      * @param string $entity Entity name (not table name).
      * @param array|DataObject $bind [COL_NAME=>$value, ...]
      *

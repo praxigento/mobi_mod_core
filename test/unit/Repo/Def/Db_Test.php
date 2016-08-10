@@ -32,7 +32,7 @@ class Db_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_constructor()
     {
         /** === Call and asserts  === */
-        $this->assertInstanceOf(\Praxigento\Core\Repo\Def\Db::class, $this->obj);
+        $this->assertInstanceOf(\Praxigento\Core\Repo\IDb::class, $this->obj);
     }
 
     public function test_getConnection()

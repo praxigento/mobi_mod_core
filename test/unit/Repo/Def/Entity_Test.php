@@ -4,12 +4,13 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
+use Flancer32\Lib\DataObject;
+
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
 class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     private $ENTITY_NAME = TestEntity::ENTITY_NAME;
-    private $PK = [TestEntity::ATTR_ID];
     private $PK_ATTR = TestEntity::ATTR_ID;
     /** @var  \Mockery\MockInterface */
     private $mConn;
@@ -203,13 +204,13 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
     public function test_replace()
     {
         /** === Test Data === */
-        $DATA = ['field' => 'value'];
+        $DATA = new DataObject(['field' => 'value']);
         $UPDATED = 'rows updated';
         /** === Setup Mocks === */
         // $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
         $this->mRepoGeneric
             ->shouldReceive('replaceEntity')->once()
-            ->with($this->ENTITY_NAME, $DATA)
+            ->with($this->ENTITY_NAME, $DATA->getData())
             ->andReturn($UPDATED);
         /** === Call and asserts  === */
         $res = $this->obj->replace($DATA);
