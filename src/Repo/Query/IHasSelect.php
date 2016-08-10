@@ -5,7 +5,7 @@
 namespace Praxigento\Core\Repo\Query;
 
 /**
- * MOBI-273: Proto for interface for SELECT QUERIES in Aggregates.
+ * Interface for DB selection queries generators (MOBI-273).
  */
 interface  IHasSelect
 {
@@ -14,13 +14,13 @@ interface  IHasSelect
      *
      * @return \Praxigento\Core\Repo\Query\ISelect
      */
-    public function getSelectCountQuery();
+    public function getQueryToSelectCount();
 
     /**
      * Get SELECT query.
      *
      * @return \Praxigento\Core\Repo\Query\ISelect
      */
-    public function getSelectQuery();
+    public function getQueryToSelect();
 
 }

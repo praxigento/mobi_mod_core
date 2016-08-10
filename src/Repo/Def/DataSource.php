@@ -10,7 +10,7 @@ namespace Praxigento\Core\Repo\Def;
  */
 class DataSource
     extends \Praxigento\Core\Repo\Def\Db
-    implements \Praxigento\Core\Repo\IDataSource
+    implements \Praxigento\Core\Repo\IDataSource, \Praxigento\Core\Repo\Query\IHasSelect
 {
     /** @inheritdoc */
     public function get(

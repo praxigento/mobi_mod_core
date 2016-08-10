@@ -8,6 +8,7 @@ namespace Praxigento\Core\Repo\Def;
  * Base class for DB repositories implementations.
  */
 abstract class Db
+    implements \Praxigento\Core\Repo\IDb
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
@@ -21,12 +22,7 @@ abstract class Db
         $this->_conn = $resource->getConnection();
     }
 
-    /**
-     * Retrieve connection to resource specified by $name
-     *
-     * @param string $name
-     * @return \Magento\Framework\DB\Adapter\AdapterInterface
-     */
+    /** @inheritdoc */
     public function getConnection($name = null)
     {
         if (is_null($name)) {
@@ -34,5 +30,11 @@ abstract class Db
         }
         $result = $this->_resource->getConnection($name);
         return $result;
+    }
+
+    /** @inheritdoc */
+    public function getResource()
+    {
+        return $this->_resource;
     }
 }
