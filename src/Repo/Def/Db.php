@@ -7,7 +7,7 @@ namespace Praxigento\Core\Repo\Def;
 /**
  * Base class for DB repositories implementations.
  */
-abstract class Base
+abstract class Db
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;

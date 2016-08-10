@@ -10,7 +10,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
-    /** @var  Base */
+    /** @var  Db */
     private $obj;
 
     protected function setUp()
@@ -21,13 +21,13 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTestBase($mResource);
+        $this->obj = new ChildToTestDb($mResource);
     }
 
     public function test_constructor()
     {
         /** === Call and asserts  === */
-        $this->assertInstanceOf(\Praxigento\Core\Repo\Def\Base::class, $this->obj);
+        $this->assertInstanceOf(\Praxigento\Core\Repo\Def\Db::class, $this->obj);
     }
 
     public function test_getConnection()
@@ -39,7 +39,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 
 }
 
-class ChildToTestBase extends Base
+class ChildToTestDb extends Db
 {
 
 }

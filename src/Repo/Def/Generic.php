@@ -9,7 +9,7 @@ namespace Praxigento\Core\Repo\Def;
 use Flancer32\Lib\DataObject;
 
 class  Generic
-    extends \Praxigento\Core\Repo\Def\Base
+    extends \Praxigento\Core\Repo\Def\Db
     implements \Praxigento\Core\Repo\IGeneric
 {
     /** @inheritdoc */

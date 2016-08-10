@@ -8,7 +8,7 @@ namespace Praxigento\Core\Repo;
  * Marker interface for repository that operates with entities data.
  */
 interface IEntity
-    extends \Praxigento\Core\Repo\IBaseCrud
+    extends \Praxigento\Core\Repo\ICrud
 {
 
 }

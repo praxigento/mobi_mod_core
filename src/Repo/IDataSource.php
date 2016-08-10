@@ -9,7 +9,7 @@ use Flancer32\Lib\DataObject;
 /**
  * Base interface for data sources repository (read-only mode).
  */
-interface IBaseDataSource
+interface IDataSource
 {
 
     /**
@@ -53,14 +53,14 @@ interface IBaseDataSource
     /**
      * Compose SELECT query for the simple entity or aggregate.
      *
-     * @return ISelect
+     * @return \Magento\Framework\DB\Select
      */
     public function getQueryToSelect();
 
     /**
      * Compose COUNT SELECT query for the simple entity or aggregate.
      *
-     * @return ISelect
+     * @return \Magento\Framework\DB\Select
      */
     public function getQueryToSelectCount();
 

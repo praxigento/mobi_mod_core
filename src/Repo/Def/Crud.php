@@ -7,9 +7,9 @@ namespace Praxigento\Core\Repo\Def;
 /**
  * Default implementation for CRUD repository to do read-write operations with database. All methods throw exceptions.
  */
-class BaseCrud
-    extends \Praxigento\Core\Repo\Def\BaseDataSource
-    implements \Praxigento\Core\Repo\IBaseCrud
+class Crud
+    extends \Praxigento\Core\Repo\Def\DataSource
+    implements \Praxigento\Core\Repo\ICrud
 {
     /** @inheritdoc */
     public function create($data)

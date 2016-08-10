@@ -8,9 +8,9 @@ namespace Praxigento\Core\Repo\Def;
 /**
  * Default implementation for Data Source repository to do read-only operations with database. All methods throw exceptions.
  */
-class BaseDataSource
-    extends \Praxigento\Core\Repo\Def\Base
-    implements \Praxigento\Core\Repo\IBaseDataSource
+class DataSource
+    extends \Praxigento\Core\Repo\Def\Db
+    implements \Praxigento\Core\Repo\IDataSource
 {
     /** @inheritdoc */
     public function get(

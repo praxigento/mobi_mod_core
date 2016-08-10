@@ -9,8 +9,8 @@ use Flancer32\Lib\DataObject;
 /**
  * Base interface for CRUD repositories (general Create-Read-Update-Delete operations).
  */
-interface IBaseCrud
-    extends \Praxigento\Core\Repo\IBaseDataSource
+interface ICrud
+    extends \Praxigento\Core\Repo\IDataSource
 {
     /**
      * Create new data instance (simple entity or aggregate) using $data. Exception is thrown in case of any error.
