@@ -5,19 +5,24 @@
 namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
 
 /**
- *
+ * Analyze and registry types properties (annotated and generally coded).
  */
 class TypePropertiesRegistry
 {
+    /** Pattern to extract property data from getter. */
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
-    /** @var array registry for processed types. Full type name is the key ("\ArrayIterator"). */
+    /** @var \Magento\Framework\ObjectManagerInterface */
+    protected $_manObj;
+    /** @var array Registry for processed types. Type name w/o leading slash is the key ("Praxigento\Core\..."). */
     protected $_registry = [];
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
 
     public function __construct(
+        \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor
     ) {
+        $this->_manObj = $manObj;
         $this->_typeProcessor = $typeProcessor;
     }
 
@@ -30,41 +35,16 @@ class TypePropertiesRegistry
     public function _processDocBlock($type, \Zend\Code\Reflection\DocBlockReflection $block)
     {
         if ($block) {
-            /* process annotated methods */
             $docBlockLines = $block->getContents();
             $docBlockLines = explode("\n", $docBlockLines);
             foreach ($docBlockLines as $line) {
-                $paramData = $this->_processDocLine($line);
-                if ($paramData) {
-                    $attrName = $paramData->getName();
-                    $attrType = $paramData->getType();
-                    $this->_registry[$type][$attrName] = $paramData;
-                    $this->register($attrType);
+                $propData = $this->_processDocLine($line);
+                if ($propData) {
+                    $propName = $propData->getName();
+                    $propType = $propData->getType();
+                    $this->_registry[$type][$propName] = $propData;
+                    $this->register($propType);
                 }
-            }
-        }
-    }
-
-    /**
-     * @param string $type Normalized type name.
-     * @param \Zend\Code\Reflection\MethodReflection[] $methods reflection of the type's methods.
-     */
-    public function _processMethods($type, $methods)
-    {
-        foreach ($methods as $method) {
-            $methodName = $method->getName();
-            $isGetter = (strpos($methodName, 'get') === 0);
-            /* only getters w/o parameters will be proceeded */
-            if ($isGetter && !$method->getNumberOfParameters() && $methodName != 'getIterator') {
-                $attrName = lcfirst(substr($methodName, 3));
-                $typeData = $this->_typeProcessor->getGetterReturnType($method);
-                $attrType = $typeData['type'];
-                $propData = new PropertyData();
-                $propData->setName($attrName);
-                $propData->setIsRequired($typeData['isRequired']);
-                $propData->setType($attrType);
-                $this->_registry[$type][$attrName] = $propData;
-                $this->register($attrType);
             }
         }
     }
@@ -78,19 +58,49 @@ class TypePropertiesRegistry
     {
         $result = null;
         if (preg_match(self::PATTERN_METHOD_GET, $line, $matches)) {
-            $attrRequired = true;
-            $attrType = $matches[1];
-            $attrName = lcfirst($matches[2]);
-            if (substr($attrType, -0, strlen('|null'))) {
-                $attrType = str_replace('|null', '', $attrType);
-                $attrRequired = false;
+            $propRequired = true;
+            $propType = $matches[1];
+            $propName = lcfirst($matches[2]);
+            if (substr($propType, -0, strlen('|null'))) {
+                $propType = str_replace('|null', '', $propType);
+                $propRequired = false;
             }
             $result = new PropertyData();
-            $result->setName($attrName);
-            $result->setIsRequired($attrRequired);
-            $result->setType($attrType);
+            $result->setName($propName);
+            $result->setIsRequired($propRequired);
+            $propType = $this->normalizeType($propType);
+            $result->setType($propType);
         }
         return $result;
+    }
+
+    /**
+     * Process generally coded methods ("public function getProp()").
+     *
+     * @param string $type Normalized type name.
+     * @param \Zend\Code\Reflection\MethodReflection[] $methods Reflection of the type's methods.
+     */
+    public function _processMethods($type, $methods)
+    {
+        foreach ($methods as $method) {
+            $methodName = $method->getName();
+            $isGetter = (strpos($methodName, 'get') === 0);
+            $hasParams = $method->getNumberOfParameters() > 0;
+            $isIterator = ($methodName == 'getIterator');
+            /* only getters w/o parameters will be proceeded */
+            if ($isGetter && !$hasParams && !$isIterator) {
+                $propName = lcfirst(substr($methodName, 3));
+                $typeData = $this->_typeProcessor->getGetterReturnType($method);
+                $propType = $typeData['type'];
+                $propData = new PropertyData();
+                $propData->setName($propName);
+                $propData->setIsRequired($typeData['isRequired']);
+                $propType = $this->normalizeType($propType);
+                $propData->setType($propType);
+                $this->_registry[$type][$propName] = $propData;
+                $this->register($propType);
+            }
+        }
     }
 
     /**
@@ -126,7 +136,8 @@ class TypePropertiesRegistry
                 /* analyze properties for complex type */
                 $this->_registry[$typeNorm] = [];
                 /* process annotated methods */
-                $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
+                /** @var \Zend\Code\Reflection\ClassReflection $reflection */
+                $reflection = $this->_manObj->create(\Zend\Code\Reflection\ClassReflection::class, [$typeNorm]);
                 $docBlock = $reflection->getDocBlock();
                 $this->_processDocBlock($typeNorm, $docBlock);
                 /* process normal methods (not annotated) */
