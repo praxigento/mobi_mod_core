@@ -8,7 +8,7 @@ use Magento\Framework\Api\SimpleDataObjectConverter;
 use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
 
 /**
- *
+ * Plugin to process annotated data objects.
  */
 class ServiceInputProcessor
 {
@@ -17,16 +17,16 @@ class ServiceInputProcessor
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
     /** @var Sub\TypePropertiesRegistry */
-    protected $_typeProcessorAnnotated;
+    protected $_typePropsRegistry;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typeProcessorAnnotated
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropsRegistry
     ) {
         $this->_objectManager = $objectManager;
         $this->_typeProcessor = $typeProcessor;
-        $this->_typeProcessorAnnotated = $typeProcessorAnnotated;
+        $this->_typePropsRegistry = $typePropsRegistry;
     }
 
     protected function _createFromArray($type, $data)
@@ -39,7 +39,7 @@ class ServiceInputProcessor
         }
         if (is_subclass_of($type, \Flancer32\Lib\DataObject::class)) {
             /* Process data object separately. Register annotated class and parse parameters types. */
-            $typeData = $this->_typeProcessorAnnotated->register($type);
+            $typeData = $this->_typePropsRegistry->register($type);
             if ($isArray) {
                 /* process $data as array of $types */
                 $result = [];
@@ -50,7 +50,7 @@ class ServiceInputProcessor
                 /* process $data as data object of $type */
                 $result = $this->_objectManager->create($type);
                 foreach ($data as $propertyName => $value) {
-                    $camelCaseProperty = SimpleDataObjectConverter::snakeCaseToCamelCase($propertyName);
+                    $camelCaseProperty = \Magento\Framework\Api\SimpleDataObjectConverter::snakeCaseToCamelCase($propertyName);
                     if (isset($typeData[$camelCaseProperty])) {
                         /** @var PropertyData $propertyData */
                         $propertyData = $typeData[$camelCaseProperty];

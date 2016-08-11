@@ -1,0 +1,74 @@
+<?php
+/**
+ * User: Alex Gusev <alex@flancer64.com>
+ */
+namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
+
+use Flancer32\Lib\DataObject;
+
+/**
+ * Parse associative array and convert it into the DataObject according to given type.
+ * Given type must be child of the \Flancer32\Lib\DataObject class or simple type (string, int, ...).
+ */
+class Parser
+{
+    /** @var \Magento\Framework\ObjectManagerInterface */
+    protected $_manObj;
+    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    protected $_toolType;
+    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
+    protected $_typePropsRegistry;
+
+    public function __construct(
+        \Magento\Framework\ObjectManagerInterface $manObj,
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropsRegistry,
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolType
+    ) {
+        $this->_manObj = $manObj;
+        $this->_typePropsRegistry = $typePropsRegistry;
+        $this->_toolType = $toolType;
+    }
+
+    /**
+     * @param string $type
+     * @param array $data
+     * @return DataObject|mixed
+     */
+    public function parseArrayData($type, $data)
+    {
+        $isArray = $this->_toolType->isArray($type);
+        $typeNorm = $this->_toolType->normalizeType($type);
+        if (is_subclass_of($typeNorm, \Flancer32\Lib\DataObject::class)) {
+            /* Process data object separately. Register annotated class and parse parameters types. */
+            $typeData = $this->_typePropsRegistry->register($typeNorm);
+            if ($isArray) {
+                /* process $data as array of $types */
+                $result = [];
+                foreach ($data as $key => $item) {
+                    $result[$key] = $this->parseArrayData($typeNorm, $item);
+                }
+            } else {
+                /* process $data as data object of $type */
+                $result = $this->_manObj->create($typeNorm);
+                foreach ($data as $key => $value) {
+                    $propName = $this->_toolType->formatPropertyName($key);
+                    if (isset($typeData[$propName])) {
+                        /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData $propertyData */
+                        $propertyData = $typeData[$propName];
+                        $propertyType = $propertyData->getType();
+                        if ($this->_toolType->isSimple($propertyType)) {
+                            $result->setData($propName, $value);
+                        } else {
+                            $complex = $this->parseArrayData($propertyType, $value);
+                            $result->setData($propName, $complex);
+                        }
+                    }
+                }
+            }
+        } else {
+            $result = $data;
+        }
+        return $result;
+    }
+
+}

@@ -9,11 +9,15 @@ include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
-    private $mTypeProcessor;
-    /** @var  \Mockery\MockInterface */
     private $mManObj;
+    /** @var  \Mockery\MockInterface */
+    private $mToolsType;
+    /** @var  \Mockery\MockInterface */
+    private $mTypeProcessor;
     /** @var  TypePropertiesRegistry */
     private $obj;
+    /** @var array Constructor arguments for object mocking */
+    private $objArgs = [];
 
     protected function setUp()
     {
@@ -21,11 +25,19 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         /** create mocks */
         $this->mManObj = $this->_mockObjectManager();
         $this->mTypeProcessor = $this->_mock(\Magento\Framework\Reflection\TypeProcessor::class);
+        $this->mToolsType = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool::class);
         /** create object to test */
         $this->obj = new TypePropertiesRegistry(
             $this->mManObj,
-            $this->mTypeProcessor
+            $this->mTypeProcessor,
+            $this->mToolsType
         );
+        /** reset args. to create mock of the tested object */
+        $this->objArgs = [
+            $this->mManObj,
+            $this->mTypeProcessor,
+            $this->mToolsType
+        ];
     }
 
     public function test_constructor()
@@ -45,10 +57,7 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $PROP_DATA->setIsRequired(true);
         $PROP_DATA->setType($PROP_TYPE);
         /** === Mock object itself === */
-        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[_processDocLine, register]', [
-            $this->mManObj,
-            $this->mTypeProcessor
-        ]);
+        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[_processDocLine, register]', $this->objArgs);
         /** === Setup Mocks === */
         $mBlock = $this->_mock(\Zend\Code\Reflection\DocBlockReflection::class);
         // $docBlockLines = $block->getContents();
@@ -74,14 +83,9 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $TYPE_NORM = 'Type\Name\Here';
         $NAME = 'SomeData';
         $LINE = "@method $TYPE|null get$NAME() Comment.";
-        /** === Mock object itself === */
-        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[normalizeType]', [
-            $this->mManObj,
-            $this->mTypeProcessor
-        ]);
         /** === Setup Mocks === */
-        // $propType = $this->normalizeType($propType);
-        $this->obj
+        // $propType = $this->_toolsType->normalizeType($propType);
+        $this->mToolsType
             ->shouldReceive('normalizeType')->once()
             ->with($TYPE)
             ->andReturn($TYPE_NORM);
@@ -105,10 +109,7 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $METHODS = [$mMethod];
         $TYPE_DATA = ['type' => $PROP_TYPE_FULL, 'isRequired' => true];
         /** === Mock object itself === */
-        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[normalizeType,register]', [
-            $this->mManObj,
-            $this->mTypeProcessor
-        ]);
+        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[register]', $this->objArgs);
         /** === Setup Mocks === */
         // $methodName = $method->getName();
         $mMethod
@@ -122,8 +123,8 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $this->mTypeProcessor
             ->shouldReceive('getGetterReturnType')->once()
             ->andReturn($TYPE_DATA);
-        // $propType = $this->normalizeType($propType);
-        $this->obj
+        // $propType = $this->_toolsType->normalizeType($propType);
+        $this->mToolsType
             ->shouldReceive('normalizeType')->once()
             ->with($PROP_TYPE_FULL)
             ->andReturn($PROP_TYPE);
@@ -135,21 +136,6 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $this->obj->_processMethods($TYPE, $METHODS);
     }
 
-    public function test_normalizeType()
-    {
-        /** === Test Data === */
-        $TYPE_FULL = '\Some\Type\Here[]';
-        $TYPE = 'Some\Type\Here';
-        /** === Setup Mocks === */
-        // $result = $this->_typeProcessor->normalizeType($type);
-        $this->mTypeProcessor
-            ->shouldReceive('normalizeType')->once()
-            ->andReturn($TYPE_FULL);
-        /** === Call and asserts  === */
-        $res = $this->obj->normalizeType($TYPE_FULL);
-        $this->assertEquals($TYPE, $res);
-    }
-
     public function test_register_complex()
     {
         /** === Test Data === */
@@ -157,14 +143,13 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $TYPE = 'Some\Type\Here';
         $METHODS = ['method data'];
         /** === Mock object itself === */
-        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[normalizeType,_processDocBlock,_processMethods]',
-            [
-                $this->mManObj,
-                $this->mTypeProcessor
-            ]);
+        $this->obj = \Mockery::mock(
+            TypePropertiesRegistry::class . '[_processDocBlock,_processMethods]',
+            $this->objArgs
+        );
         /** === Setup Mocks === */
-        // $typeNorm = $this->normalizeType($type);
-        $this->obj
+        // $typeNorm = $this->_toolsType->normalizeType($type);
+        $this->mToolsType
             ->shouldReceive('normalizeType')->once()
             ->with($TYPE_FULL)
             ->andReturn($TYPE);
@@ -197,20 +182,20 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $res = $this->obj->register($TYPE_FULL);
         $this->assertTrue(is_array($res));
     }
+
     public function test_register_simple()
     {
         /** === Test Data === */
         $TYPE_FULL = '\Some\Type\Here[]';
         $TYPE = 'Some\Type\Here';
         /** === Mock object itself === */
-        $this->obj = \Mockery::mock(TypePropertiesRegistry::class . '[normalizeType,_processDocBlock,_processMethods]',
-            [
-                $this->mManObj,
-                $this->mTypeProcessor
-            ]);
+        $this->obj = \Mockery::mock(
+            TypePropertiesRegistry::class . '[normalizeType,_processDocBlock,_processMethods]',
+            $this->objArgs
+        );
         /** === Setup Mocks === */
-        // $typeNorm = $this->normalizeType($type);
-        $this->obj
+        // $typeNorm = $this->_toolsType->normalizeType($type);
+        $this->mToolsType
             ->shouldReceive('normalizeType')->once()
             ->with($TYPE_FULL)
             ->andReturn($TYPE);

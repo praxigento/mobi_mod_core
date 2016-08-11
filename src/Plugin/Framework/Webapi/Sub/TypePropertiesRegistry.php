@@ -17,13 +17,17 @@ class TypePropertiesRegistry
     protected $_registry = [];
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
+    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    protected $_toolsType;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Magento\Framework\Reflection\TypeProcessor $typeProcessor
+        \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolsType
     ) {
         $this->_manObj = $manObj;
         $this->_typeProcessor = $typeProcessor;
+        $this->_toolsType = $toolsType;
     }
 
     /**
@@ -68,7 +72,7 @@ class TypePropertiesRegistry
             $result = new PropertyData();
             $result->setName($propName);
             $result->setIsRequired($propRequired);
-            $propType = $this->normalizeType($propType);
+            $propType = $this->_toolsType->normalizeType($propType);
             $result->setType($propType);
         }
         return $result;
@@ -95,7 +99,7 @@ class TypePropertiesRegistry
                 $propData = new PropertyData();
                 $propData->setName($propName);
                 $propData->setIsRequired($typeData['isRequired']);
-                $propType = $this->normalizeType($propType);
+                $propType = $this->_toolsType->normalizeType($propType);
                 $propData->setType($propType);
                 $this->_registry[$type][$propName] = $propData;
                 $this->register($propType);
@@ -103,23 +107,6 @@ class TypePropertiesRegistry
         }
     }
 
-    /**
-     * All types names should be absolute (include namespace) in the registry.
-     * First '\' will be removed if exists.
-     * Array types (\Some\Type[]) will be converted into simple types (Some\Type).
-     * Simple types names will be converted to it's canonical versions (bool => boolean).
-     */
-    public function normalizeType($type)
-    {
-        $result = $this->_typeProcessor->normalizeType($type);
-        if ($result && $result[0] == '\\') {
-            $result = substr($result, 1); // remove leading slash
-        }
-        if (strstr($result, '[]')) {
-            $result = substr($result, 0, -2); // remove '[]' at the end
-        }
-        return $result;
-    }
 
     /**
      * Analyze $type and save type properties into the registry.
@@ -129,7 +116,7 @@ class TypePropertiesRegistry
      */
     public function register($type)
     {
-        $typeNorm = $this->normalizeType($type); // strip leading slash if exist
+        $typeNorm = $this->_toolsType->normalizeType($type);
         $isSimple = $this->_typeProcessor->isTypeSimple($typeNorm);
         if (!isset($this->_registry[$typeNorm])) {
             if (!$isSimple) {
