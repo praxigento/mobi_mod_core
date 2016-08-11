@@ -14,13 +14,13 @@ class ServiceOutputProcessor
     protected $_objectManager;
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
-    /** @var Sub\AnnotationsProcessor */
+    /** @var Sub\TypePropertiesRegistry */
     protected $_typeProcessorAnnotated;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\AnnotationsProcessor $typeProcessorAnnotated
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typeProcessorAnnotated
     ) {
         $this->_objectManager = $objectManager;
         $this->_typeProcessor = $typeProcessor;
