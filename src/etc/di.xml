@@ -14,23 +14,17 @@
     </type>
 
 
-    <!-- ******** -->
-    <!-- REWRITES -->
-    <!-- ******** -->
-    <preference for="Magento\Framework\Reflection\TypeProcessor" type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
-
-
     <!-- ***** -->
     <!-- Repos -->
     <!-- ***** -->
     <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\Transaction\IDefinition" type="Praxigento\Core\Repo\Transaction\Def\Definition"/>
     <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 
-    <!-- Services -->
 
+    <!-- *********** -->
     <!-- Transaction -->
+    <!-- *********** -->
     <preference for="Praxigento\Core\Transaction\Business\IFactory" type="Praxigento\Core\Transaction\Business\Def\Factory"/>
     <preference for="Praxigento\Core\Transaction\Business\IItem" type="Praxigento\Core\Transaction\Business\Def\Item"/>
     <preference for="Praxigento\Core\Transaction\Business\IManager" type="Praxigento\Core\Transaction\Business\Def\Manager"/>
@@ -38,14 +32,18 @@
     <preference for="Praxigento\Core\Transaction\Database\IItem" type="Praxigento\Core\Transaction\Database\Def\Item"/>
     <preference for="Praxigento\Core\Transaction\Database\IManager" type="Praxigento\Core\Transaction\Database\Def\Manager"/>
 
+    <!-- ***** -->
     <!-- Tools -->
+    <!-- ***** -->
     <preference for="Praxigento\Core\Tool\IConvert" type="Praxigento\Core\Tool\Def\Convert"/>
     <preference for="Praxigento\Core\Tool\IDate" type="Praxigento\Core\Tool\Def\Date"/>
     <preference for="Praxigento\Core\Tool\IFormat" type="Praxigento\Core\Tool\Def\Format"/>
     <preference for="Praxigento\Core\Tool\IPeriod" type="Praxigento\Core\Tool\Def\Period"/>
 
+    <!-- ***** -->
     <!-- Other -->
-    <!-- TODO: where this definition should be placed - in core or on app level (generic app module)? -->
+    <!-- ***** -->
+    <!-- Replace Magento logger by Praxigento Logger (see application di.xml for more) -->
     <preference for="Psr\Log\LoggerInterface" type="Praxigento\Logging\Logger"/>
 
 </config>
