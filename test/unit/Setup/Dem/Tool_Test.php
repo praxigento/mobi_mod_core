@@ -64,6 +64,17 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
                     DemCfg::ACTION => [
                         DemCfg::DELETE => 'on delete'
                     ]
+                ],
+                /* this foreign key is not exist */
+                [
+                    DemCfg::OWN => [DemCfg::ALIASES => ['own_alias']],
+                    DemCfg::REFERENCE => [
+                        DemCfg::ENTITY => [DemCfg::COMPLETE_ALIAS => 'fk_tbl_alias_not_exist'],
+                        DemCfg::ALIASES => ['fk_col_alias']
+                    ],
+                    DemCfg::ACTION => [
+                        DemCfg::DELETE => 'on delete'
+                    ]
                 ]
             ]
         ];
@@ -117,6 +128,10 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         // $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
         $this->mConn
             ->shouldReceive('addForeignKey')->once();
+        // second iteration will throw exception
+        $this->mConn
+            ->shouldReceive('addForeignKey')
+            ->andThrow(new \Exception());
         /** === Call and asserts  === */
         $this->obj->createEntity($ENTITY, $DEM);
     }
