@@ -10,21 +10,21 @@ use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
 
 class ServiceOutputProcessor
 {
-    /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $_objectManager;
-    /** @var \Magento\Framework\Reflection\TypeProcessor */
-    protected $_typeProcessor;
-    /** @var Sub\TypePropertiesRegistry */
-    protected $_typeProcessorAnnotated;
+    /** @var \Praxigento\Core\Tool\IConvert */
+    protected $_toolConvert;
+    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    protected $_toolType;
+    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
+    protected $_typePropertiesRegistry;
 
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $objectManager,
-        \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typeProcessorAnnotated
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropertiesRegistry,
+        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolType,
+        \Praxigento\Core\Tool\IConvert $toolConvert
     ) {
-        $this->_objectManager = $objectManager;
-        $this->_typeProcessor = $typeProcessor;
-        $this->_typeProcessorAnnotated = $typeProcessorAnnotated;
+        $this->_typePropertiesRegistry = $typePropertiesRegistry;
+        $this->_toolType = $toolType;
+        $this->_toolConvert = $toolConvert;
     }
 
     /**
@@ -44,22 +44,22 @@ class ServiceOutputProcessor
     ) {
         if ($data instanceof \Flancer32\Lib\DataObject) {
             $result = [];
-            $typeData = $this->_typeProcessorAnnotated->register($type);
+            $typeData = $this->_typePropertiesRegistry->register($type);
             /**
              * @var string $propertyName
              * @var PropertyData $propertyData
              */
             foreach ($typeData as $propertyName => $propertyData) {
-                $name = \Magento\Framework\Api\SimpleDataObjectConverter::camelCaseToSnakeCase($propertyName);
-                $getterMethod = 'get' . ucfirst($propertyName);
-                $value = call_user_func([$data, $getterMethod]);
+                $attrName = $this->_toolConvert->camelCaseToSnakeCase($propertyName);
+                $getter = 'get' . ucfirst($propertyName);
+                $value = call_user_func([$data, $getter]);
                 $isRequired = $propertyData->getIsRequired();
                 $propertyType = $propertyData->getType();
                 if ($isRequired || $value) {
-                    if ($this->_typeProcessor->isTypeSimple($propertyType)) {
-                        $result[$name] = $value;
+                    if ($this->_toolType->isSimple($propertyType)) {
+                        $result[$attrName] = $value;
                     } else {
-                        $result[$name] = $proceed($value, $propertyType);
+                        $result[$attrName] = $proceed($value, $propertyType);
                     }
                 }
             }

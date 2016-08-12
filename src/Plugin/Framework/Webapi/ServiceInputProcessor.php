@@ -9,24 +9,16 @@ namespace Praxigento\Core\Plugin\Framework\Webapi;
  */
 class ServiceInputProcessor
 {
-    /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $_objectManager;
     /** @var  \Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser */
     protected $_parser;
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
-    /** @var Sub\TypePropertiesRegistry */
-    protected $_typePropsRegistry;
 
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $objectManager,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropsRegistry,
         \Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser $parser
     ) {
-        $this->_objectManager = $objectManager;
         $this->_typeProcessor = $typeProcessor;
-        $this->_typePropsRegistry = $typePropsRegistry;
         $this->_parser = $parser;
     }
 
