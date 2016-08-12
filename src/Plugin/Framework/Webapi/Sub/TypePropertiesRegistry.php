@@ -124,7 +124,10 @@ class TypePropertiesRegistry
                 $this->_registry[$typeNorm] = [];
                 /* process annotated methods */
                 /** @var \Zend\Code\Reflection\ClassReflection $reflection */
-                $reflection = $this->_manObj->create(\Zend\Code\Reflection\ClassReflection::class, [$typeNorm]);
+                $reflection = $this->_manObj->create(
+                    \Zend\Code\Reflection\ClassReflection::class,
+                    ['argument' => $typeNorm]
+                );
                 $docBlock = $reflection->getDocBlock();
                 $this->_processDocBlock($typeNorm, $docBlock);
                 /* process normal methods (not annotated) */
