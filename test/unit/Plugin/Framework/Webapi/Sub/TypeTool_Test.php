@@ -40,6 +40,16 @@ class TypeTool_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals($PROPERTY_VALID, $res);
     }
 
+    public function test_getTypeAsArrayOfTypes()
+    {
+        /** === Test Data === */
+        $TYPE = 'SomeType';
+        $TYPE_ARR = 'SomeType[]';
+        /** === Call and asserts  === */
+        $res = $this->obj->getTypeAsArrayOfTypes($TYPE);
+        $this->assertEquals($TYPE_ARR, $res);
+    }
+
     public function test_isArray()
     {
         /** === Test Data === */

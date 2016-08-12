@@ -84,6 +84,10 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $NAME = 'SomeData';
         $LINE = "@method $TYPE|null get$NAME() Comment.";
         /** === Setup Mocks === */
+        // $propIsArray = $this->_toolsType->isArray($propType);
+        $this->mToolsType
+            ->shouldReceive('isArray')->once()
+            ->andReturn(true);
         // $propType = $this->_toolsType->normalizeType($propType);
         $this->mToolsType
             ->shouldReceive('normalizeType')->once()
@@ -123,6 +127,10 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
         $this->mTypeProcessor
             ->shouldReceive('getGetterReturnType')->once()
             ->andReturn($TYPE_DATA);
+        // $propIsArray = $this->_toolsType->isArray($propType);
+        $this->mToolsType
+            ->shouldReceive('isArray')->once()
+            ->andReturn(true);
         // $propType = $this->_toolsType->normalizeType($propType);
         $this->mToolsType
             ->shouldReceive('normalizeType')->once()
