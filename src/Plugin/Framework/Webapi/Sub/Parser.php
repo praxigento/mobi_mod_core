@@ -30,6 +30,18 @@ class Parser
     }
 
     /**
+     * This method is a wrapper to be used in the unit tests.
+     *
+     * @param $type
+     * @param $data
+     * @return DataObject|mixed
+     */
+    public function parseArrayDataRecursive($type, $data)
+    {
+        return $this->parseArrayData($type, $data);
+    }
+
+    /**
      * @param string $type
      * @param array $data
      * @return DataObject|mixed
@@ -45,7 +57,7 @@ class Parser
                 /* process $data as array of $types */
                 $result = [];
                 foreach ($data as $key => $item) {
-                    $result[$key] = $this->parseArrayData($typeNorm, $item);
+                    $result[$key] = $this->parseArrayDataRecursive($typeNorm, $item);
                 }
             } else {
                 /* process $data as data object of $type */
@@ -59,7 +71,7 @@ class Parser
                         if ($this->_toolType->isSimple($propertyType)) {
                             $result->setData($propName, $value);
                         } else {
-                            $complex = $this->parseArrayData($propertyType, $value);
+                            $complex = $this->parseArrayDataRecursive($propertyType, $value);
                             $result->setData($propName, $complex);
                         }
                     }

@@ -46,6 +46,114 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertInstanceOf(\Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser::class, $this->obj);
     }
 
+    public function test_parseArrayData_isDataObject_isArray()
+    {
+        /** === Test Data === */
+        $TYPE = '\Praxigento\Core\Service\Base\Response[]';
+        $TYPE_NORM = 'Praxigento\Core\Service\Base\Response';
+        $TYPE_DATA = [];
+        $DATA = ['data for parsing'];
+        $PARSED = 'parsed item';
+        /** === Mock object itself === */
+        $this->obj = \Mockery::mock(
+            \Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser::class . '[parseArrayDataRecursive]',
+            $this->objArgs
+        );
+        /** === Setup Mocks === */
+        // $isArray = $this->_toolType->isArray($type);
+        $this->mToolType
+            ->shouldReceive('isArray')->once()
+            ->andReturn(true);
+        // $typeNorm = $this->_toolType->normalizeType($type);
+        $this->mToolType
+            ->shouldReceive('normalizeType')->once()
+            ->andReturn($TYPE_NORM);
+        // $typeData = $this->_typePropsRegistry->register($typeNorm);
+        $this->mTypePropsRegistry
+            ->shouldReceive('register')->once()
+            ->andReturn($TYPE_DATA);
+        // $result[$key] = $this->parseArrayDataRecursive($typeNorm, $item);
+        $this->obj
+            ->shouldReceive('parseArrayDataRecursive')->once()
+            ->andReturn($PARSED);
+        /** === Call and asserts  === */
+        $res = $this->obj->parseArrayData($TYPE, $DATA);
+        $this->assertEquals($PARSED, $res[0]);
+    }
+
+    public function test_parseArrayData_isDataObject_notArray()
+    {
+        /** === Test Data === */
+        $KEY_CODE = 'error_code';
+        $KEY_MSG = 'error_message';
+        $PROP_CODE = 'errorCode';
+        $PROP_MSG = 'errorMessage';
+        $TYPE = '\Praxigento\Core\Service\Base\Response[]';
+        $TYPE_NORM = 'Praxigento\Core\Service\Base\Response';
+        $TYPE_DATA = [
+            $PROP_CODE => new PropertyData(['type' => 'int']),
+            $PROP_MSG => new PropertyData(['type' => 'complex'])
+        ];
+        $ERR_CODE = 32;
+        $DATA = [
+            $KEY_CODE => $ERR_CODE,
+            $KEY_MSG => 'complex type here'
+        ];
+        /** === Mock object itself === */
+        $this->obj = \Mockery::mock(
+            \Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser::class . '[parseArrayDataRecursive]',
+            $this->objArgs
+        );
+        /** === Setup Mocks === */
+        // $isArray = $this->_toolType->isArray($type);
+        $this->mToolType
+            ->shouldReceive('isArray')->once()
+            ->andReturn(false);
+        // $typeNorm = $this->_toolType->normalizeType($type);
+        $this->mToolType
+            ->shouldReceive('normalizeType')->once()
+            ->andReturn($TYPE_NORM);
+        $this->mTypePropsRegistry
+            ->shouldReceive('register')->once()
+            ->andReturn($TYPE_DATA);
+        // $result = $this->_manObj->create($typeNorm);
+        $this->mManObj
+            ->shouldReceive('create')->once()
+            ->andReturn(new \Praxigento\Core\Service\Base\Response());
+        //
+        // First iteration
+        //
+        // $propName = $this->_toolType->formatPropertyName($key);
+        $this->mToolType
+            ->shouldReceive('formatPropertyName')->once()
+            ->with($KEY_CODE)
+            ->andReturn($PROP_CODE);
+        // if ($this->_toolType->isSimple($propertyType)) {
+        $this->mToolType
+            ->shouldReceive('isSimple')->once()
+            ->andReturn(true);
+        //
+        // Second iteration
+        //
+        // $propName = $this->_toolType->formatPropertyName($key);
+        $this->mToolType
+            ->shouldReceive('formatPropertyName')->once()
+            ->with($KEY_MSG)
+            ->andReturn($PROP_MSG);
+        // if ($this->_toolType->isSimple($propertyType)) {
+        $this->mToolType
+            ->shouldReceive('isSimple')->once()
+            ->andReturn(false);
+        // $complex = $this->parseArrayDataRecursive($propertyType, $value);
+        $this->obj
+            ->shouldReceive('parseArrayDataRecursive')->once()
+            ->andReturn('complex object here');
+        /** === Call and asserts  === */
+        $res = $this->obj->parseArrayData($TYPE, $DATA);
+        $this->assertTrue($res instanceof $TYPE_NORM);
+        $this->assertEquals($ERR_CODE, $res->getData($PROP_CODE));
+    }
+
     public function test_parseArrayData_notDataObject()
     {
         /** === Test Data === */
@@ -66,36 +174,23 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals($DATA, $res);
     }
 
-    public function test_parseArrayData_isDataObject_isArray()
+    public function test_parseArrayDataRecursive()
     {
         /** === Test Data === */
-        $TYPE = '\Praxigento\Core\Service\Base\Response[]';
-        $TYPE_NORM = 'Praxigento\Core\Service\Base\Response';
-        $TYPE_DATA = [];
-        $DATA = [new \Praxigento\Core\Service\Base\Response()];
+        $TYPE_NORM = 'Exception';
+        $DATA = 'data';
+        $RESULT = 'result';
+        /** === Mock object itself === */
+        $this->obj = \Mockery::mock(
+            \Praxigento\Core\Plugin\Framework\Webapi\Sub\Parser::class . '[parseArrayData]',
+            $this->objArgs
+        );
         /** === Setup Mocks === */
-        // $isArray = $this->_toolType->isArray($type);
-        $this->mToolType
-            ->shouldReceive('isArray')->once()
-            ->andReturn(true);
-        // $typeNorm = $this->_toolType->normalizeType($type);
-        $this->mToolType
-            ->shouldReceive('normalizeType')->once()
-            ->andReturn($TYPE_NORM);
-        // $typeData = $this->_typePropsRegistry->register($typeNorm);
-        $this->mTypePropsRegistry
-            ->shouldReceive('register')->once()
-            ->andReturn($TYPE_DATA);
-        //
-        // SECOND ITERATION
-        //
-        // $isArray = $this->_toolType->isArray($type);
-        $this->mToolType
-            ->shouldReceive('isArray')->once()
-            ->andReturn(false);
+        $this->obj
+            ->shouldReceive('parseArrayData')->once()
+            ->andReturn($RESULT);
         /** === Call and asserts  === */
-        $res = $this->obj->parseArrayData($TYPE, $DATA);
-        $this->assertEquals($DATA, $res);
+        $res = $this->obj->parseArrayDataRecursive($TYPE_NORM, $DATA);
+        $this->assertEquals($RESULT, $res);
     }
-
 }
