@@ -51,7 +51,7 @@ class Parser
         $isArray = $this->_toolType->isArray($type);
         $typeNorm = $this->_toolType->normalizeType($type);
         if (is_subclass_of($typeNorm, \Flancer32\Lib\DataObject::class)) {
-            /* Process data object separately. Register annotated class and parse parameters types. */
+            /* Process data objects separately. Register annotated class and parse parameters types. */
             $typeData = $this->_typePropsRegistry->register($typeNorm);
             if ($isArray) {
                 /* process $data as array of $types */
@@ -68,11 +68,21 @@ class Parser
                         /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData $propertyData */
                         $propertyData = $typeData[$propName];
                         $propertyType = $propertyData->getType();
-                        if ($this->_toolType->isSimple($propertyType)) {
-                            $result->setData($propName, $value);
-                        } else {
+                        $propertyIsArray = $propertyData->getIsArray();
+                        if ($propertyIsArray) {
+                            /* property is the array of types */
+                            $propertyType = $this->_toolType->getTypeAsArrayOfTypes($propertyType);
                             $complex = $this->parseArrayDataRecursive($propertyType, $value);
                             $result->setData($propName, $complex);
+                        } else {
+                            if ($this->_toolType->isSimple($propertyType)) {
+                                /* property is the simple type */
+                                $result->setData($propName, $value);
+                            } else {
+                                /* property is the complex type, we need to convert recursively */
+                                $complex = $this->parseArrayDataRecursive($propertyType, $value);
+                                $result->setData($propName, $complex);
+                            }
                         }
                     }
                 }

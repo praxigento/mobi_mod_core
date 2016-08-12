@@ -34,6 +34,18 @@ class TypeTool
     }
 
     /**
+     * Add 'array of' suffix to the type name (\Some\Type => \Some\Type[]).
+     *
+     * @param string $type
+     * @return string
+     */
+    public function getTypeAsArrayOfTypes($type)
+    {
+        $result = $type . '[]';
+        return $result;
+    }
+
+    /**
      * Return 'true' if $type is ended with '[]', 'false' - otherwise.
      *
      * @param string $type

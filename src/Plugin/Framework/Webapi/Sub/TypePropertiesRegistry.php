@@ -9,6 +9,9 @@ namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
  */
 class TypePropertiesRegistry
 {
+    const SKIP_DATA = 'data';
+    const SKIP_ITERATOR = 'iterator';
+
     /** Pattern to extract property data from getter. */
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
     /** @var \Magento\Framework\ObjectManagerInterface */
@@ -46,6 +49,8 @@ class TypePropertiesRegistry
                 if ($propData) {
                     $propName = $propData->getName();
                     $propType = $propData->getType();
+                    /* skip methods specific for DataObject */
+                    if (($propName == self::SKIP_DATA) || ($propName == self::SKIP_ITERATOR)) continue;
                     $this->_registry[$type][$propName] = $propData;
                     $this->register($propType);
                 }
@@ -69,10 +74,12 @@ class TypePropertiesRegistry
                 $propType = str_replace('|null', '', $propType);
                 $propRequired = false;
             }
+            $propIsArray = $this->_toolsType->isArray($propType);
+            $propType = $this->_toolsType->normalizeType($propType);
             $result = new PropertyData();
             $result->setName($propName);
             $result->setIsRequired($propRequired);
-            $propType = $this->_toolsType->normalizeType($propType);
+            $result->setIsArray($propIsArray);
             $result->setType($propType);
         }
         return $result;
@@ -96,10 +103,13 @@ class TypePropertiesRegistry
                 $propName = lcfirst(substr($methodName, 3));
                 $typeData = $this->_typeProcessor->getGetterReturnType($method);
                 $propType = $typeData['type'];
+                $propIsRequired = $typeData['isRequired'];
+                $propIsArray = $this->_toolsType->isArray($propType);
+                $propType = $this->_toolsType->normalizeType($propType);
                 $propData = new PropertyData();
                 $propData->setName($propName);
-                $propData->setIsRequired($typeData['isRequired']);
-                $propType = $this->_toolsType->normalizeType($propType);
+                $propData->setIsRequired($propIsRequired);
+                $propData->setIsArray($propIsArray);
                 $propData->setType($propType);
                 $this->_registry[$type][$propName] = $propData;
                 $this->register($propType);
