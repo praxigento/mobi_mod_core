@@ -7,7 +7,7 @@ namespace Praxigento\Core\Transaction\Database\Def;
 /**
  * Default implementation for Database Transaction Item.
  */
-final class Item
+class Item
     implements \Praxigento\Core\Transaction\Database\IItem
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */

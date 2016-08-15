@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Transaction\Database\Def;
 
 
-final class Definition
+class Definition
     implements \Praxigento\Core\Transaction\Database\IDefinition
 {
 

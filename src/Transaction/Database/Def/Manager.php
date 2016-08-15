@@ -8,7 +8,7 @@ namespace Praxigento\Core\Transaction\Database\Def;
 /**
  * Default implementation for Database Transaction Manager.
  */
-final class Manager
+class Manager
     implements \Praxigento\Core\Transaction\Database\IManager
 {
     /** @var  \Praxigento\Core\Transaction\Database\IFactory */

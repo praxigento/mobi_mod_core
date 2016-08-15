@@ -8,7 +8,7 @@ namespace Praxigento\Core\Transaction\Database\Def;
 /**
  * Default implementation for Transaction items factory used by Database Transaction Manager.
  */
-final class Factory
+class Factory
     implements \Praxigento\Core\Transaction\Database\IFactory
 {
     /** @var \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactoryInterface */
