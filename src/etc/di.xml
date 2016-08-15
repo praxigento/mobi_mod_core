@@ -4,6 +4,10 @@
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
+    <type name="Magento\Framework\Reflection\TypeProcessor">
+        <!-- Add "\Praxigento\" namespace to available for web service schema generation -->
+        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor" sortOrder="100" disabled="false"/>
+    </type>
     <type name="Magento\Framework\Webapi\ServiceInputProcessor">
         <!-- Process annotated methods in API data objects -->
         <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor" sortOrder="100" disabled="false"/>
@@ -20,6 +24,12 @@
     <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
     <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
+
+
+    <!-- ******** -->
+    <!-- REWRITES -->
+    <!-- ******** -->
+    <preference for="Magento\Framework\Reflection\TypeProcessor" type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
 
 
     <!-- *********** -->
