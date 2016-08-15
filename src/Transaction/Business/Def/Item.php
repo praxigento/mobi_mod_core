@@ -5,14 +5,28 @@
 
 namespace Praxigento\Core\Transaction\Business\Def;
 
-
-final class Item
+/**
+ * Business transaction item.
+ */
+class Item
     implements \Praxigento\Core\Transaction\Business\IItem
 {
+    /**
+     * Registry for commit functions.
+     * @var array
+     */
     private $_callsCommit = [];
+    /**
+     * Registry for rollback functions.
+     * @var array
+     */
     private $_callsRollback = [];
+    /** @var  int */
+    private $_level = \Praxigento\Core\Transaction\Business\Def\Manager::ZERO_LEVEL;
     /** @var \Psr\Log\LoggerInterface */
     protected $_logger;
+    /** @var  string */
+    private $_name;
 
     public function __construct(
         \Psr\Log\LoggerInterface $logger
@@ -23,6 +37,11 @@ final class Item
     public function addCommitCall($callable)
     {
         $this->_callsCommit[] = $callable;
+    }
+
+    public function addRollbackCall($callable)
+    {
+        $this->_callsRollback[] = $callable;
     }
 
     public function commit()
@@ -37,6 +56,16 @@ final class Item
         }
     }
 
+    public function getLevel()
+    {
+        return $this->_level;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
+    }
+
     public function rollback()
     {
         $reversed = array_reverse($this->_callsRollback);
@@ -49,39 +78,14 @@ final class Item
         }
     }
 
-    public function addRollbackCall($callable)
-    {
-        $this->_callsRollback[] = $callable;
-    }
-
-    /** @var  string */
-    private $_name;
-    /** @var  int */
-    private $_level = \Praxigento\Core\Transaction\Business\Def\Manager::ZERO_LEVEL;
-
-    public function setName($data)
-    {
-        $this->_name = $data;
-    }
-
-    public function getName()
-    {
-        return $this->_name;
-    }
-
-    public function getLevel()
-    {
-        return $this->_level;
-    }
-
     public function setLevel($data)
     {
         $this->_level = $data;
     }
 
-    public function getResource($resourceName)
+    public function setName($data)
     {
-        // TODO: Implement getResource() method.
+        $this->_name = $data;
     }
 
 

@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Transaction\Business\Def;
 
 
-final class Manager
+class Manager
     implements \Praxigento\Core\Transaction\Business\IManager
 {
     /**
@@ -43,12 +43,12 @@ final class Manager
     /** @inheritdoc */
     public function commit($transactionName, $transactionLevel)
     {
-        if (isset($this->_registry[$transactionLevel])) {
-            $regData = $this->_registry[$transactionLevel];
+        if (isset($this->_registry[$transactionName])) {
+            $regData = $this->_registry[$transactionName];
             $count = count($regData);
             if ($count > ($transactionLevel + 1)) {
                 /* rollback all nested levels and current level */
-                for ($i = $count - 1; $i >= $transactionLevel; $i--) {
+                for ($i = $count - 1; $i > $transactionLevel; $i--) {
                     $tran = $regData[$i];
                     $tran->rollback();
                     unset($regData[$i]);
@@ -69,9 +69,9 @@ final class Manager
         if (isset($this->_registry[$transactionName])) {
             $regData = $this->_registry[$transactionName];
             $count = count($regData);
-            if ($count > 1) {
+            if ($count > 0) {
                 /* rollback all nested levels and current level */
-                for ($i = $count - 1; $i >= 1; $i--) {
+                for ($i = $count - 1; $i >= 0; $i--) {
                     $tran = $regData[$i];
                     $tran->rollback();
                     unset($regData[$i]);
@@ -85,8 +85,8 @@ final class Manager
     /** @inheritdoc */
     public function rollback($transactionName, $transactionLevel)
     {
-        if (isset($this->_registry[$transactionLevel])) {
-            $regData = $this->_registry[$transactionLevel];
+        if (isset($this->_registry[$transactionName])) {
+            $regData = $this->_registry[$transactionName];
             $count = count($regData);
             /* rollback all nested levels and current level */
             for ($i = $count - 1; $i >= $transactionLevel; $i--) {

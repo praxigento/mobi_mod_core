@@ -1,7 +1,5 @@
 <?php
 /**
- * Datetime tool default implementation.
- *
  * User: Alex Gusev <alex@flancer64.com>
  */
 namespace Praxigento\Core\Tool\Def;

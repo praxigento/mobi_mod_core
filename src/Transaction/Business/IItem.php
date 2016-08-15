@@ -28,12 +28,6 @@ interface IItem
      */
     public function getName();
 
-    /**
-     * @param string $resourceName
-     * @return mixed
-     */
-    public function getResource($resourceName);
-
     public function rollback();
 
 }

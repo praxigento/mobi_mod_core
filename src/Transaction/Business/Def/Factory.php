@@ -8,7 +8,7 @@ namespace Praxigento\Core\Transaction\Business\Def;
 /**
  * Default implementation for Transaction items factory used by Business Transaction Manager.
  */
-final class Factory
+class Factory
     implements \Praxigento\Core\Transaction\Business\IFactory
 {
 
@@ -23,7 +23,7 @@ final class Factory
 
     /**
      * @param string $name
-     * @return \Praxigento\Core\Transaction\Business\Def\Item
+     * @return \Praxigento\Core\Transaction\Business\IItem
      */
     public function create($name)
     {
