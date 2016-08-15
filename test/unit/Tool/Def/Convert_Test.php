@@ -41,4 +41,32 @@ class Convert_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertTrue($dt instanceof \DateTime);
         $this->assertEquals($DATE, $dt->format(Cfg::FORMAT_DATETIME));
     }
+
+    public function test_camelCaseToSnakeCase()
+    {
+        /** === Test Data === */
+        $INPUT = 'CamelCase';
+        $EXPECTED = 'camel_case';
+        /** === Call and asserts  === */
+        $res = $this->obj->camelCaseToSnakeCase($INPUT);
+        $this->assertEquals($EXPECTED, $res);
+    }
+    public function test_snakeCaseToCamelCase()
+    {
+        /** === Test Data === */
+        $INPUT = 'snake_case';
+        $EXPECTED = 'snakeCase';
+        /** === Call and asserts  === */
+        $res = $this->obj->snakeCaseToCamelCase($INPUT);
+        $this->assertEquals($EXPECTED, $res);
+    }
+    public function test_snakeCaseToUpperCamelCase()
+    {
+        /** === Test Data === */
+        $INPUT = 'snake_case';
+        $EXPECTED = 'SnakeCase';
+        /** === Call and asserts  === */
+        $res = $this->obj->snakeCaseToUpperCamelCase($INPUT);
+        $this->assertEquals($EXPECTED, $res);
+    }
 }

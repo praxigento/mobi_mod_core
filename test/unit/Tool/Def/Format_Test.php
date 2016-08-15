@@ -40,4 +40,12 @@ class Format_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals(10.24, $res);
     }
 
+    public function test_toNumber()
+    {
+        /** === Call and asserts  === */
+        $res = $this->obj->toNumber('12.242');
+        $this->assertTrue(is_float($res));
+        $this->assertEquals(12.24, $res);
+    }
+
 }
