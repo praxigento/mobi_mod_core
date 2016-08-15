@@ -6,32 +6,13 @@
 namespace Praxigento\Core\Plugin\Framework\Reflection;
 
 /**
- * Allow TypeProcessor to handle DataObject & "\Praxigento\" namespace.
+ * Allow TypeProcessor to handle DataObject in "\Praxigento\" namespace.
  */
 class TypeProcessor
 {
-    /**
-     * Allow to handle DataObject.
-     *
-     * @param \Magento\Framework\Reflection\TypeProcessor $subject
-     * @param \Closure $proceed
-     * @param $type
-     * @return bool
-     */
-    public function aroundIsTypeSimple(
-        \Magento\Framework\Reflection\TypeProcessor $subject,
-        \Closure $proceed,
-        $type
-    ) {
-        $result = $proceed($type);
-        if (!$result && $type == '\ArrayIterator') {
-            $result = true;
-        }
-        return $result;
-    }
 
     /**
-     * Add "\Praxigneto\..." namespace to available set to process classes as web service enabled.
+     * Add "\Praxigento\..." namespace to available set to process classes as web service enabled.
      *
      * @param \Magento\Framework\Reflection\TypeProcessor $subject
      * @param \Closure $proceed
