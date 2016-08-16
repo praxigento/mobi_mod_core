@@ -26,6 +26,7 @@ class Config
     /**
      * Names for Data Sources.
      */
+    const DS_CUSTOMERS_GRID = 'customer_listing_data_source';
     const DS_SALES_ORDERS_GRID = 'sales_order_grid_data_source';
     /**
      * Magento entities as defined in version 2.
