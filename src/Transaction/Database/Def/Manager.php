@@ -98,10 +98,14 @@ class Manager
     {
         $trans = $definition->getTransactionName();
         $conn = $definition->getConnectionName();
-        $result =
-            (isset($this->_registry[$conn][$trans]))
-                ? $this->_registry[$conn][$trans]
-                : null;
+
+        if (isset($this->_registry[$conn][$trans])) {
+            /** @var \Praxigento\Core\Transaction\Database\IItem $registered */
+            $registered = $this->_registry[$conn][$trans];
+            $result = $registered->getConnection();
+        } else {
+            $result = null;
+        }
         return $result;
     }
 
