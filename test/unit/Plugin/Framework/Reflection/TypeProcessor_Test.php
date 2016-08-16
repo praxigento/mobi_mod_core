@@ -8,10 +8,10 @@ include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
 class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
 {
-    /** @var  TypeProcessor */
-    private $obj;
     /** @var  \Magento\Framework\Reflection\TypeProcessor */
     private $mSubject;
+    /** @var  TypeProcessor */
+    private $obj;
 
     protected function setUp()
     {
@@ -22,23 +22,23 @@ class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->obj = new TypeProcessor();
     }
 
-    public function test_TranslateTypeName_proceed()
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function test_TranslateTypeName_isNotPraxigentoNamespace()
     {
         /** === Test Data === */
-        $CLASS = 'classname to translate';
-        $RESULT = 'transaltion result';
+        $CLASS = '\Vendor\Core\Data\Object\Some\Element';
         /** === Setup Mocks === */
-        $mProceed = function ($classIn) use ($CLASS, $RESULT) {
-            $this->assertEquals($CLASS, $classIn);
-            return $RESULT;
+        $mProceed = function ($classIn) {
+            throw new \InvalidArgumentException();
         };
         /** === Call and asserts  === */
-        $res = $this->obj->aroundTranslateTypeName(
+        $this->obj->aroundTranslateTypeName(
             $this->mSubject,
             $mProceed,
             $CLASS
         );
-        $this->assertEquals($RESULT, $res);
     }
 
     public function test_TranslateTypeName_isPraxigentoNamespace()
@@ -59,16 +59,15 @@ class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         $this->assertEquals($RESULT, $res);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function test_TranslateTypeName_isNotPraxigentoNamespace()
+    public function test_TranslateTypeName_proceed()
     {
         /** === Test Data === */
-        $CLASS = '\Vendor\Core\Data\Object\Some\Element';
+        $CLASS = 'classname to translate';
+        $RESULT = 'transaltion result';
         /** === Setup Mocks === */
-        $mProceed = function ($classIn) {
-            throw new \InvalidArgumentException();
+        $mProceed = function ($classIn) use ($CLASS, $RESULT) {
+            $this->assertEquals($CLASS, $classIn);
+            return $RESULT;
         };
         /** === Call and asserts  === */
         $res = $this->obj->aroundTranslateTypeName(
@@ -76,5 +75,6 @@ class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             $mProceed,
             $CLASS
         );
+        $this->assertEquals($RESULT, $res);
     }
 }
