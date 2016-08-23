@@ -11,16 +11,17 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
 
-abstract class Base implements InstallDataInterface
+abstract class Base
+    implements InstallDataInterface
 {
-    /** @var \Praxigento\Core\Repo\IGeneric */
-    protected $_repoBasic;
-    /** @var \Magento\Framework\App\ResourceConnection */
-    protected $_resource;
     /** @var \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
     /** @var  \Magento\Framework\Setup\ModuleContextInterface */
     protected $_context;
+    /** @var \Praxigento\Core\Repo\IGeneric */
+    protected $_repoGeneric;
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $_resource;
 
     /**
      * Base constructor.
@@ -28,11 +29,11 @@ abstract class Base implements InstallDataInterface
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\Repo\IGeneric $repoBasic
+        \Praxigento\Core\Repo\IGeneric $repoGeneric
     ) {
         $this->_resource = $resource;
         $this->_conn = $resource->getConnection();
-        $this->_repoBasic = $repoBasic;
+        $this->_repoGeneric = $repoGeneric;
     }
 
     /**

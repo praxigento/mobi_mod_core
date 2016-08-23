@@ -144,12 +144,12 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         // $conn = $item->getConnection();
         $mConn = $this->_mockConn(['rollBack']);
         $this->mTransItem
-            ->shouldReceive('getConnection')->once()
+            ->shouldReceive('getConnection')->twice()
             ->andReturn($mConn);
         // $conn->rollBack();
         // $item->levelDecrease();
         $this->mTransItem
-            ->shouldReceive('levelDecrease')->once();
+            ->shouldReceive('levelDecrease')->twice();
         /** === Call and asserts  === */
         $this->obj->commit($def);
     }
@@ -225,11 +225,6 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $LEVEL = 4;
         $def = new \Praxigento\Core\Transaction\Database\Def\Definition($TRANS_NAME, $CONN_NAME, $LEVEL);
         /** === Setup Mocks === */
-        // $result = $registered->getConnection();
-        $mResult = $this->_mockConn();
-        $this->mTransItem
-            ->shouldReceive('getConnection')->once()
-            ->andReturn($mResult);
         /** === Call and asserts  === */
         $res = $this->obj->getConnection($def);
         $this->assertNull($res);

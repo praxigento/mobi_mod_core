@@ -11,22 +11,19 @@ class ChildToTestCrud extends Crud
 
 }
 
-class Crud_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Crud_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Repo
 {
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
     /** @var  Crud */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mRepoGeneric = $this->_mockRepoGeneric();
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTestCrud($mResource);
+        $this->obj = new ChildToTestCrud(
+            $this->mResource
+        );
     }
 
     public function test_constructor()

@@ -32,6 +32,10 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mParser = $this->_mock(\Praxigento\Core\Setup\Dem\Parser::class);
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
+        /** setup mocks for constructor */
+        $this->mResource
+            ->shouldReceive('getConnection')->once()
+            ->andReturn($this->mConn);
         /** create object to test */
         $logger = $this->_mockLogger();
         $this->obj = new Tool($this->mResource, $logger, $this->mParser);
@@ -41,6 +45,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         /** === Test Data === */
         $ENTITY = 'entity_alias';
+        $TABLE = 'main table';
         $TABLE_FK = 'fk_table';
         $DEM = [
             DemCfg::COMMENT => 'comment',
@@ -79,8 +84,12 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ]
         ];
         /** === Setup Mocks === */
-        // $tblName = $resource->getTableName($entityAlias);
-        // $tbl = $conn->newTable($tblName);
+        // $tblName = $this->_resource->getTableName($entityAlias);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
+        // $tbl = $this->_conn->newTable($tblName);
         $mTbl = $this->_mock(\Magento\Framework\DB\Ddl\Table::class);
         $this->mConn
             ->shouldReceive('newTable')->once()
@@ -115,22 +124,25 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         // $conn->createTable($tbl);
         $this->mConn
             ->shouldReceive('createTable')->once();
+        //
+        // REFERENCES (2 iterations)
+        //
         // $refTable = $this->_resource->getTableName($refTableAlias);
         $this->mResource
-            ->shouldReceive('getTableName')->once()
+            ->shouldReceive('getTableName')->twice()
             ->andReturn($TABLE_FK);
         // $onDelete = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::DELETE]);
         $this->mParser
-            ->shouldReceive('referenceGetAction')->once();
+            ->shouldReceive('referenceGetAction')->twice();
         // $fkName = $conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
         $this->mConn
-            ->shouldReceive('getForeignKeyName')->once();
+            ->shouldReceive('getForeignKeyName')->twice();
         // $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
         $this->mConn
             ->shouldReceive('addForeignKey')->once();
         // second iteration will throw exception
         $this->mConn
-            ->shouldReceive('addForeignKey')
+            ->shouldReceive('addForeignKey')->once()
             ->andThrow(new \Exception());
         /** === Call and asserts  === */
         $this->obj->createEntity($ENTITY, $DEM);

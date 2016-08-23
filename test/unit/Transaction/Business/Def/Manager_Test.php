@@ -32,11 +32,11 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         // $result = $this->_factoryTrans->create($transactionName);
         $mResult = $this->_mock(\Praxigento\Core\Transaction\Business\IItem::class);
         $this->mFactoryTrans
-            ->shouldReceive('create')->once()
+            ->shouldReceive('create')->twice()
             ->with($TRANS_NAME)
             ->andReturn($mResult);
         // $result->setLevel($level);
-        $mResult->shouldReceive('setLevel')->once();
+        $mResult->shouldReceive('setLevel')->twice();
         /** === Call and asserts  === */
         $this->obj->begin($TRANS_NAME);
         $res = $this->obj->begin($TRANS_NAME);

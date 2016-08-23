@@ -8,30 +8,33 @@ use Flancer32\Lib\DataObject;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Generic_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Repo
 {
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
-    /** @var  \Mockery\MockInterface */
-    private $mResource;
     /** @var  Generic */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mResource = $this->_mockResourceConnection($this->mConn);
         /** create object to test */
-        $this->obj = new Generic($this->mResource);
+        $this->obj = new Generic(
+            $this->mResource
+        );
     }
 
 
     public function test_addEntity()
     {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
@@ -41,14 +44,21 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('lastInsertId')->once()
             ->andReturn('inserted');
         /** === Call and asserts  === */
-        $resp = $this->obj->addEntity('entity', []);
+        $resp = $this->obj->addEntity($ENTITY, []);
         $this->assertEquals('inserted', $resp);
     }
 
     public function test_addEntity_dataObject()
     {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
@@ -58,7 +68,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('lastInsertId')->once()
             ->andReturn('inserted');
         /** === Call and asserts  === */
-        $resp = $this->obj->addEntity('entity', new DataObject([]));
+        $resp = $this->obj->addEntity($ENTITY, new DataObject([]));
         $this->assertEquals('inserted', $resp);
     }
 
@@ -77,6 +87,10 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $DELETED = 32;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
@@ -95,6 +109,10 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $ROWS_AFFECTED = 1;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
@@ -105,8 +123,15 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 
     public function test_getEntities()
     {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $query = $this->_conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
@@ -128,7 +153,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('fetchAll')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->getEntities('entity', null, 'where', 'order', 'limit', 'offset');
+        $resp = $this->obj->getEntities($ENTITY, null, 'where', 'order', 'limit', 'offset');
         $this->assertEquals('result', $resp);
     }
 
@@ -138,8 +163,14 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $PK = [
             'field' => 'value'
         ];
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $query = $conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
@@ -155,7 +186,7 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('fetchRow')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->getEntityByPk('entity', $PK);
+        $resp = $this->obj->getEntityByPk($ENTITY, $PK);
         $this->assertEquals('result', $resp);
     }
 
@@ -164,8 +195,14 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Test Data === */
         $BIND = ['key' => 'value'];
         $ID = 321;
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $this->_conn->query($query, $bind);
         $this->mConn
             ->shouldReceive('query')->once()
@@ -175,33 +212,47 @@ class Generic_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('lastInsertId')->once()
             ->andReturn($ID);
         /** === Call and asserts  === */
-        $id = $this->obj->replaceEntity('entity', $BIND);
+        $id = $this->obj->replaceEntity($ENTITY, $BIND);
         $this->assertEquals($ID, $id);
     }
 
     public function test_updateEntity()
     {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->updateEntity('entity', []);
+        $resp = $this->obj->updateEntity($ENTITY, []);
         $this->assertEquals('result', $resp);
     }
 
     public function test_updateEntity_dataObject()
     {
+        /** === Test Data === */
+        $ENTITY = 'entity';
+        $TABLE = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($ENTITY)
+            ->andReturn($TABLE);
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->updateEntity('entity', new DataObject([]));
+        $resp = $this->obj->updateEntity($ENTITY, new DataObject([]));
         $this->assertEquals('result', $resp);
     }
 

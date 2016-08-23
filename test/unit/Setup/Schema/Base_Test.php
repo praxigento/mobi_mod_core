@@ -6,30 +6,20 @@ namespace Praxigento\Core\Setup\Schema;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Base_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Setup\Schema
 {
-    /** @var  \Mockery\MockInterface */
-    private $mSetup;
-    /** @var  \Mockery\MockInterface */
-    private $mContext;
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
-    /** @var  \Mockery\MockInterface */
-    private $mToolDem;
     /** @var  ChildToTest */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mToolDem = $this->_mock(\Praxigento\Core\Setup\Dem\Tool::class);
-        $this->mSetup = $this->_mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
-        $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTest($mResource, $this->mToolDem);
+        $this->obj = new ChildToTest(
+            $this->mResource,
+            $this->mToolDem
+        );
     }
 
     public function test_install()

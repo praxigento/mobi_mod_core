@@ -11,22 +11,19 @@ class ChildToTestDb extends Db
 
 }
 
-class Db_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Db_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Repo
 {
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
     /** @var  Db */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mRepoGeneric = $this->_mockRepoGeneric();
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
-        $this->obj = new ChildToTestDb($mResource);
+        $this->obj = new ChildToTestDb(
+            $this->mResource
+        );
     }
 
     public function test_constructor()
@@ -37,6 +34,10 @@ class Db_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 
     public function test_getConnection()
     {
+        /** === Setup Mocks === */
+        $this->mResource
+            ->shouldReceive('getConnection')->once()
+            ->andReturn($this->mConn);
         /** === Call and asserts  === */
         $res = $this->obj->getConnection();
         $this->assertInstanceOf(\Magento\Framework\DB\Adapter\AdapterInterface::class, $res);

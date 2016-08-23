@@ -6,7 +6,8 @@ namespace Praxigento\Core\Repo\Query\Criteria\Def;
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
-class Adapter_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Adapter_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;
@@ -18,8 +19,10 @@ class Adapter_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         parent::setUp();
         /** create mocks */
         $this->mConn = $this->_mockConn();
-        /** create object to test */
         $mResource = $this->_mockResourceConnection($this->mConn);
+        $mResource->shouldReceive('getConnection')->once()
+            ->andReturn($this->mConn);
+        /** create object to test */
         $this->obj = new Adapter($mResource);
     }
 

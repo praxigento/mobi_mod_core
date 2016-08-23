@@ -53,7 +53,7 @@ class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $mMethodReflection = $this->_mock(\Zend\Code\Reflection\MethodReflection::class);
         // $name = $methodReflection->getName();
         $mMethodReflection
-            ->shouldReceive('getName')->once()
+            ->shouldReceive('getName')->times(4)
             ->andReturn($NAME);
         /** === Call and asserts  === */
         $this->obj->processMethod(

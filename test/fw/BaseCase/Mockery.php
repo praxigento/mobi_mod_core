@@ -54,12 +54,16 @@ abstract class Mockery
     }
 
     /**
+     * @param $withAllMethods
      * @return m\MockInterface
      */
-    protected function _mockLogger()
+    protected function _mockLogger($withAllMethods = true)
     {
         $result = $this->_mock(\Psr\Log\LoggerInterface::class);
-        $result->shouldReceive('alert', 'critical', 'debug', 'emergency', 'error', 'info', 'log', 'notice', 'warning');
+        if ($withAllMethods) {
+            $result->shouldReceive('alert', 'critical', 'debug', 'emergency', 'error', 'info', 'log', 'notice',
+                'warning');
+        }
         return $result;
     }
 

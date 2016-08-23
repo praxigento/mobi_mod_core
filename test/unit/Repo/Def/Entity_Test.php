@@ -173,9 +173,9 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->shouldReceive('select')->once()
             ->andReturn($mResult);
         // $tbl = $this->_resource->getTableName($this->_entityName);
-//        $this->mResource
-//            ->shouldReceive('getTableName')->once()
-//            ->andReturn($TABLE_NAME);
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->andReturn($TABLE_NAME);
         // $result->from($tbl);
         $mResult->shouldReceive('from')->once();
         /** === Call and asserts  === */

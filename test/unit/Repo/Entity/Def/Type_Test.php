@@ -8,7 +8,8 @@ use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class ChildToTestType extends Type
+class ChildToTestType
+    extends Type
 {
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
@@ -19,7 +20,8 @@ class ChildToTestType extends Type
 
 }
 
-class TestTypeEntity extends \Praxigento\Core\Data\Entity\Base
+class TestTypeEntity
+    extends \Praxigento\Core\Data\Entity\Base
 {
     const ATTR_ID = 'pkey';
     const ENTITY_NAME = 'test entity';
@@ -31,25 +33,18 @@ class TestTypeEntity extends \Praxigento\Core\Data\Entity\Base
 
 }
 
-class Type_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Type_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Repo\Entity
 {
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
-    /** @var  \Mockery\MockInterface */
-    private $mRepoGeneric;
     /** @var  ChildToTestType */
     private $obj;
 
     protected function setUp()
     {
         parent::setUp();
-        /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mRepoGeneric = $this->_mockRepoGeneric();
         /** create object to test */
-        $mResource = $this->_mockResourceConnection($this->mConn);
         $this->obj = new ChildToTestType(
-            $mResource,
+            $this->mResource,
             $this->mRepoGeneric,
             TestTypeEntity::class
         );

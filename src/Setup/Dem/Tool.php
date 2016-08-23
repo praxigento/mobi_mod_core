@@ -43,11 +43,10 @@ class Tool
      */
     public function createEntity($entityAlias, $demEntity)
     {
-        $conn = $this->_conn;
         $tblName = $this->_resource->getTableName($entityAlias);
         $this->_logger->info("Create new table: $tblName.");
         /* init new object to create table in DB */
-        $tbl = $conn->newTable($tblName);
+        $tbl = $this->_conn->newTable($tblName);
         if (isset($demEntity[DemCfg::COMMENT])) {
             $tbl->setComment($demEntity[DemCfg::COMMENT]);
         }
@@ -73,13 +72,13 @@ class Tool
                 $ndxFields = $this->_parser->entityGetIndexFields($ndx);
                 $ndxType = $this->_parser->entityGetIndexType($ndx);
                 $ndxOpts = $this->_parser->entityGetIndexOptions($ndx);
-                $ndxName = $conn->getIndexName($entityAlias, $ndxFields, $ndxType);
+                $ndxName = $this->_conn->getIndexName($entityAlias, $ndxFields, $ndxType);
                 $this->_logger->info("Create new index: $ndxName.");
                 $tbl->addIndex($ndxName, $ndxFields, $ndxOpts);
             }
         }
         /* create new table */
-        $conn->createTable($tbl);
+        $this->_conn->createTable($tbl);
         /* parse relations */
         if ($relations) {
             foreach ($relations as $one) {
@@ -92,10 +91,11 @@ class Tool
                 /* there is no onUpdate in M2, $purge is used instead. Set default value 'false' for purge. */
                 //$onUpdate = $this->_parser->referenceGetAction($one[DemCfg::ACTION][DemCfg::UPDATE]);
                 $onUpdate = false;
-                $fkName = $conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
+                $fkName = $this->_conn->getForeignKeyName($tblName, $ownColumn, $refTable, $refColumn);
                 $this->_logger->info("Create new relation '$fkName' from '$tblName:$ownColumn' to '$refTable:$refColumn'.");
                 try {
-                    $conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete, $onUpdate);
+                    $this->_conn->addForeignKey($fkName, $tblName, $ownColumn, $refTable, $refColumn, $onDelete,
+                        $onUpdate);
                 } catch (\Exception $e) {
                     $msg = "Cannot create FK '$fkName'. Error: " . $e->getMessage();
                     $this->_logger->error($msg);

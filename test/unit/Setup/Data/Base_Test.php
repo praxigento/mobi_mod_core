@@ -6,16 +6,9 @@ namespace Praxigento\Core\Setup\Data;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Base_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Setup\Schema
 {
-    /** @var  \Mockery\MockInterface */
-    private $mSetup;
-    /** @var  \Mockery\MockInterface */
-    private $mContext;
-    /** @var  \Mockery\MockInterface */
-    private $mConn;
-    /** @var  \Mockery\MockInterface */
-    private $mResource;
     /** @var  \Mockery\MockInterface */
     private $mRepoGeneric;
     /** @var  ChildToTest */
@@ -25,8 +18,6 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         /** create mocks */
-        $this->mConn = $this->_mockConn();
-        $this->mResource = $this->_mockResourceConnection($this->mConn);
         $this->mRepoGeneric = $this->_mockRepoGeneric();
         $this->mSetup = $this->_mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mContext = $this->_mock(\Magento\Framework\Setup\ModuleContextInterface::class);

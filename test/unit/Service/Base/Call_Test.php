@@ -19,7 +19,7 @@ class Call_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         /** create mocks */
-        $this->mLogger = $this->_mockLogger();
+        $this->mLogger = $this->_mockLogger(false);
         /** create object to test */
         $this->obj = new ChildToTest($this->mLogger);
     }
