@@ -145,5 +145,5 @@ abstract class Controller
 
 /* create localization function stub */
 if (!function_exists('__')) {
-    include_once(__DIR__ . '/../../../../magento/magento2-base/app/functions.php');
+    include_once(__DIR__ . '/../../../../../magento/magento2-base/app/functions.php');
 }
