@@ -22,7 +22,7 @@ class TypeProcessorToTest extends TypeProcessor
     }
 }
 
-class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  TypeProcessorToTest */
     private $obj;

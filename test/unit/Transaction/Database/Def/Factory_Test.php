@@ -6,7 +6,7 @@ namespace Praxigento\Core\Transaction\Database\Def;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class Factory_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
 
     /** @var  \Mockery\MockInterface */

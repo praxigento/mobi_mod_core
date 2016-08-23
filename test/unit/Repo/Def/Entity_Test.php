@@ -8,7 +8,7 @@ use Flancer32\Lib\DataObject;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     private $ENTITY_NAME = TestEntity::ENTITY_NAME;
     private $PK_ATTR = TestEntity::ATTR_ID;

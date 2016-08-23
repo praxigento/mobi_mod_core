@@ -11,7 +11,7 @@ class ChildToTestDb extends Db
 
 }
 
-class Db_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Db_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;

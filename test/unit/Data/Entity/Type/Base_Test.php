@@ -9,7 +9,7 @@ include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
 define('ENTITY_NAME', 'test_entity');
 
-class Base_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     const DEF_CODE = 'test code';
     const DEF_ID = 21;

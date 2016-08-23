@@ -8,7 +8,7 @@ use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class ServiceOutputProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class ServiceOutputProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mToolConvert;

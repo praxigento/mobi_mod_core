@@ -10,7 +10,7 @@ use Mockery as m;
  * Base class to create units to test repositories based on \Praxigento\Core\Repo\Def\Db.
  */
 abstract class Repo
-    extends \Praxigento\Core\Test\BaseMockeryCase
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     protected $mConn;

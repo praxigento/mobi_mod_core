@@ -3,12 +3,12 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Test;
+namespace Praxigento\Core\Test\BaseCase;
 
 use Mockery as m;
 
-
-abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
+abstract class Mockery
+    extends \PHPUnit_Framework_TestCase
 {
 
     /**

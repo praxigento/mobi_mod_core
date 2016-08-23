@@ -31,7 +31,7 @@ class TestTypeEntity extends \Praxigento\Core\Data\Entity\Base
 
 }
 
-class Type_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Type_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;

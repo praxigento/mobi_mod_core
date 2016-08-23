@@ -9,7 +9,7 @@ namespace Praxigento\Core\Test\BaseCase;
 use Mockery as m;
 
 abstract class Controller
-    extends \Praxigento\Core\Test\BaseMockeryCase
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     protected $mContext;

@@ -8,7 +8,7 @@ use Praxigento\Core\Config as Cfg;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Format_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Format_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  Format */
     private $obj;

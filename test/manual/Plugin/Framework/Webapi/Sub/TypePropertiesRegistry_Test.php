@@ -8,7 +8,7 @@ use Magento\Framework\App\ObjectManager;
 
 include_once(__DIR__ . '/../../../../phpunit_bootstrap.php');
 
-class TypePropertiesRegistry_ManualTest extends \Praxigento\Core\Test\BaseMockeryCase
+class TypePropertiesRegistry_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
 
     /** @var  \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */

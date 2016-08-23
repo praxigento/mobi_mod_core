@@ -11,7 +11,7 @@ class ChildToTestCrud extends Crud
 
 }
 
-class Crud_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Crud_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mConn;

@@ -6,7 +6,7 @@ namespace Praxigento\Core\Transaction\Database\Def;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class Item_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Item_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     const CONN = 'connection name';
     const LEVEL = 'level';

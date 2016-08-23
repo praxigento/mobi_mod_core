@@ -10,7 +10,7 @@ use Praxigento\Accounting\Data\Entity\Operation as DataEntityOther;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Entity_ManualTest extends \Praxigento\Core\Test\BaseMockeryCase
+class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
 
     /** @var  \Praxigento\Core\Repo\Def\Entity */
