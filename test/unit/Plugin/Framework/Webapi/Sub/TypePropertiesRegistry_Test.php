@@ -66,11 +66,11 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseMockeryC
             ->andReturn($CONTENTS);
         // $propData = $this->_processDocLine($line);
         $this->obj
-            ->shouldReceive('_processDocLine')->once()
+            ->shouldReceive('_processDocLine')->twice()
             ->andReturn($PROP_DATA);
         // $this->register($propType);
         $this->obj
-            ->shouldReceive('register')->once()
+            ->shouldReceive('register')->twice()
             ->with($PROP_TYPE);
         /** === Call and asserts  === */
         $this->obj->_processDocBlock($TYPE, $mBlock);

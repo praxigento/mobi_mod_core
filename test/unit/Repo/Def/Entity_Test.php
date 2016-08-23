@@ -30,6 +30,9 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
         /** setup mocks for constructor */
         // parent::__construct($resource);
         $this->mResource = $this->_mockResourceConnection($this->mConn);
+        $this->mResource
+            ->shouldReceive('getConnection')->once()
+            ->andReturn($this->mConn);
         /** create object to test */
         $this->obj = new Entity(
             $this->mResource,
@@ -170,9 +173,9 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseMockeryCase
             ->shouldReceive('select')->once()
             ->andReturn($mResult);
         // $tbl = $this->_resource->getTableName($this->_entityName);
-        $this->mResource
-            ->shouldReceive('getTableName')->once()
-            ->andReturn($TABLE_NAME);
+//        $this->mResource
+//            ->shouldReceive('getTableName')->once()
+//            ->andReturn($TABLE_NAME);
         // $result->from($tbl);
         $mResult->shouldReceive('from')->once();
         /** === Call and asserts  === */

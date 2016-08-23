@@ -63,10 +63,6 @@ class ServiceInputProcessor_UnitTest extends \Praxigento\Core\Test\BaseMockeryCa
         $this->mParser
             ->shouldReceive('parseArrayData')->once()
             ->andReturn($ITEM_TRANSFORMED);
-        // $result = $this->_parser->parseArrayData($type, $data);
-        $this->mParser
-            ->shouldReceive('parseArrayData')->once()
-            ->andReturn($RESULT);
         /** === Call and asserts  === */
         $res = $this->obj->aroundConvertValue(
             $mSubject,

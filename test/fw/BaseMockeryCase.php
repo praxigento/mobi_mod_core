@@ -24,6 +24,13 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
         return $result;
     }
 
+    /**
+     * Mock database connection (\Magento\Framework\DB\Adapter\AdapterInterface).
+     * TODO: delete _populateMock() from the method
+     *
+     * @param array $mockedMethods
+     * @return m\MockInterface
+     */
     protected function _mockConn($mockedMethods = [])
     {
         $result = $this->_mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
@@ -91,11 +98,6 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     protected function _mockResourceConnection($mConn = null)
     {
         $result = m::mock(\Magento\Framework\App\ResourceConnection::class);
-        $result
-            ->shouldReceive('getConnection')
-            ->andReturn($mConn);
-        $result
-            ->shouldReceive('getTableName');
         return $result;
     }
 
@@ -106,6 +108,12 @@ abstract class BaseMockeryCase extends \PHPUnit_Framework_TestCase
     {
         $result = $this->_mock(\Praxigento\Core\Transaction\Database\IDefinition::class);
         return $result;
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        \Mockery::close();
     }
 
     /**
