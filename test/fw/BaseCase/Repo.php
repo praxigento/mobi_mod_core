@@ -2,15 +2,15 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Test;
+namespace Praxigento\Core\Test\BaseCase;
 
 use Mockery as m;
 
 /**
  * Base class to create units to test repositories based on \Praxigento\Core\Repo\Def\Db.
  */
-abstract class BaseRepoCase
-    extends BaseMockeryCase
+abstract class Repo
+    extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     protected $mConn;

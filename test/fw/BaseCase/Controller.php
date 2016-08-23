@@ -4,12 +4,12 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-
-namespace Praxigento\Core\Test;
+namespace Praxigento\Core\Test\BaseCase;
 
 use Mockery as m;
 
-abstract class BaseControllerCase extends BaseMockeryCase
+abstract class Controller
+    extends \Praxigento\Core\Test\BaseMockeryCase
 {
     /** @var  \Mockery\MockInterface */
     protected $mContext;
