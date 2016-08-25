@@ -10,7 +10,7 @@ class TypeTool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Mockery\MockInterface */
     private $mTypeProcessor;
-    /** @var  \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    /** @var  \Praxigento\Core\Reflection\Tool\Type */
     private $obj;
 
     protected function setUp()
@@ -19,7 +19,7 @@ class TypeTool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** create mocks */
         $this->mTypeProcessor = $this->_mock(\Magento\Framework\Reflection\TypeProcessor::class);
         /** create object to test */
-        $this->obj = new \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool(
+        $this->obj = new \Praxigento\Core\Reflection\Tool\Type(
             $this->mTypeProcessor
         );
     }
@@ -27,7 +27,7 @@ class TypeTool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_constructor()
     {
         /** === Call and asserts  === */
-        $this->assertInstanceOf(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool::class, $this->obj);
+        $this->assertInstanceOf(\Praxigento\Core\Reflection\Tool\Type::class, $this->obj);
     }
 
     public function test_formatPropertyName()

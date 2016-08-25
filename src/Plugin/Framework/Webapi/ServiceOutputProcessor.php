@@ -12,14 +12,14 @@ class ServiceOutputProcessor
 {
     /** @var \Praxigento\Core\Tool\IConvert */
     protected $_toolConvert;
-    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    /** @var \Praxigento\Core\Reflection\Tool\Type */
     protected $_toolType;
     /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
     protected $_typePropertiesRegistry;
 
     public function __construct(
         \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropertiesRegistry,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolType,
+        \Praxigento\Core\Reflection\Tool\Type $toolType,
         \Praxigento\Core\Tool\IConvert $toolConvert
     ) {
         $this->_typePropertiesRegistry = $typePropertiesRegistry;
@@ -59,6 +59,11 @@ class ServiceOutputProcessor
                     if ($this->_toolType->isSimple($propertyType)) {
                         $result[$attrName] = $value;
                     } else {
+                        // the last 2 chars will be removed for arrays
+                        // in \Magento\Framework\Webapi\ServiceOutputProcessor::convertValue
+                        if (is_array($value)) {
+                            $propertyType = $this->_toolType->getTypeAsArrayOfTypes($propertyType);
+                        }
                         $result[$attrName] = $proceed($value, $propertyType);
                     }
                 }

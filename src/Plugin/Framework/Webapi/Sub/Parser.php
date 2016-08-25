@@ -14,7 +14,7 @@ class Parser
 {
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    /** @var \Praxigento\Core\Reflection\Tool\Type */
     protected $_toolType;
     /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
     protected $_typePropsRegistry;
@@ -22,7 +22,7 @@ class Parser
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropsRegistry,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolType
+        \Praxigento\Core\Reflection\Tool\Type $toolType
     ) {
         $this->_manObj = $manObj;
         $this->_typePropsRegistry = $typePropsRegistry;

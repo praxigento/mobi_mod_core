@@ -20,13 +20,13 @@ class TypePropertiesRegistry
     protected $_registry = [];
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
-    /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool */
+    /** @var \Praxigento\Core\Reflection\Tool\Type */
     protected $_toolsType;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool $toolsType
+        \Praxigento\Core\Reflection\Tool\Type $toolsType
     ) {
         $this->_manObj = $manObj;
         $this->_typeProcessor = $typeProcessor;

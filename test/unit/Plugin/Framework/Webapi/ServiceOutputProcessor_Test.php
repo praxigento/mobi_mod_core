@@ -24,7 +24,7 @@ class ServiceOutputProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Moc
         parent::setUp();
         /** create mocks */
         $this->mTypePropsRegistry = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry::class);
-        $this->mToolType = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool::class);
+        $this->mToolType = $this->_mock(\Praxigento\Core\Reflection\Tool\Type::class);
         $this->mToolConvert = $this->_mock(\Praxigento\Core\Tool\IConvert::class);
         /** create object to test */
         $this->obj = new ServiceOutputProcessor(

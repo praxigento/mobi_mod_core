@@ -25,7 +25,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** create mocks */
         $this->mManObj = $this->_mockObjectManager();
         $this->mTypePropsRegistry = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry::class);
-        $this->mToolType = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool::class);
+        $this->mToolType = $this->_mock(\Praxigento\Core\Reflection\Tool\Type::class);
         /** reset args. to create mock of the tested object */
         $this->objArgs = [
             $this->mManObj,

@@ -2,13 +2,12 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
+namespace Praxigento\Core\Reflection\Tool;
 
 /**
- * Tools for types processing.
- * TODO: should we move this class to the Reflection package in the Praxigento Core?
+ * Tools for types processing (helpers, utilities).
  */
-class TypeTool
+class Type
 {
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;

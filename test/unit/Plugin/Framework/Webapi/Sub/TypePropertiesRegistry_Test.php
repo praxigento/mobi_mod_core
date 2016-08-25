@@ -25,7 +25,7 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseCase\Moc
         /** create mocks */
         $this->mManObj = $this->_mockObjectManager();
         $this->mTypeProcessor = $this->_mock(\Magento\Framework\Reflection\TypeProcessor::class);
-        $this->mToolsType = $this->_mock(\Praxigento\Core\Plugin\Framework\Webapi\Sub\TypeTool::class);
+        $this->mToolsType = $this->_mock(\Praxigento\Core\Reflection\Tool\Type::class);
         /** create object to test */
         $this->obj = new TypePropertiesRegistry(
             $this->mManObj,
