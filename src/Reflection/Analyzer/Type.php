@@ -104,7 +104,6 @@ class Type
                 $returnType = str_replace('|null', '', $returnType);
                 $isRequired = false;
             }
-            $returnType = $this->_toolsType->normalizeType($returnType);
             $methodName = lcfirst($matches[2]);
             $paramsCount = $this->_getRequiredParamsCount($matches[3]);
             $desc = $matches[4]??'';
@@ -170,7 +169,6 @@ class Type
                 $returnTag = current($returnAnnotations);
                 $types = $returnTag->getTypes();
                 $returnType = current($types);
-                $returnType = $this->_toolsType->normalizeType($returnType);
                 $nullable = in_array('null', $types);
                 $desc = $returnTag->getDescription();
                 $result->setType($returnType);
