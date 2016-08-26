@@ -34,7 +34,7 @@ class MethodsMap
      * @param $interfaceName
      * @return array
      */
-    public function aroundQQQQGetMethodsMap(
+    public function aroundGetMethodsMap(
         \Magento\Framework\Reflection\MethodsMap $subject,
         \Closure $proceed,
         $interfaceName

@@ -4,18 +4,13 @@
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
-    <type name="Magento\Framework\Reflection\FieldNamer">
-        <!-- Filter DataObject specific methods in DO2JSON conversion. -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\FieldNamer" sortOrder="100" disabled="false"/>
-    </type>
-
     <type name="Magento\Framework\Reflection\MethodsMap">
-        <!-- Filter DataObject specific methods in DO2JSON conversion. -->
+        <!-- Replace Magento mapper to get full methods map (including annotated) used in DO2JSON conversion. -->
         <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\MethodsMap" sortOrder="100" disabled="false"/>
     </type>
 
     <type name="Magento\Framework\Reflection\TypeProcessor">
-        <!-- Add "\Praxigento\" namespace to available for web service schema generation -->
+        <!-- Add "\Praxigento\*" namespace to available namespaces for web service schema generation -->
         <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor" sortOrder="100" disabled="false"/>
     </type>
 

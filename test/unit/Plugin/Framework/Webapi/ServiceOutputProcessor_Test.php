@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Plugin\Framework\Webapi;
 
-use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
+use \Praxigento\Core\Reflection\Data\Property;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 

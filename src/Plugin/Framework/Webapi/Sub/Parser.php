@@ -52,7 +52,6 @@ class Parser
         $typeNorm = $this->_toolType->normalizeType($type);
         if (is_subclass_of($typeNorm, \Flancer32\Lib\DataObject::class)) {
             /* Process data objects separately. Register annotated class and parse parameters types. */
-            $typeData = $this->_typePropsRegistry->register($typeNorm);
             if ($isArray) {
                 /* process $data as array of $types */
                 $result = [];
@@ -61,11 +60,12 @@ class Parser
                 }
             } else {
                 /* process $data as data object of $type */
+                $typeData = $this->_typePropsRegistry->register($typeNorm);
                 $result = $this->_manObj->create($typeNorm);
                 foreach ($data as $key => $value) {
                     $propName = $this->_toolType->formatPropertyName($key);
                     if (isset($typeData[$propName])) {
-                        /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData $propertyData */
+                        /** @var \\Praxigento\Core\Reflection\Data\Property $propertyData */
                         $propertyData = $typeData[$propName];
                         $propertyType = $propertyData->getType();
                         $propertyIsArray = $propertyData->getIsArray();

@@ -70,6 +70,24 @@ class Type
     }
 
     /**
+     * Get count of the required parameters.
+     *
+     * @param $paramsDef "\Type $arg1, $arg2, $arg3=null"
+     * @return int
+     */
+    public function _getRequiredParamsCount($paramsDef)
+    {
+        $result = 0;
+        if ($paramsDef) {
+            $result = 1;
+            $commas = substr_count($paramsDef, ',');
+            $equals = substr_count($paramsDef, '=');
+            $result += ($commas - $equals);
+        }
+        return $result;
+    }
+
+    /**
      * Analyze class level documentation line and extract method data.
      *
      * @param string $line
@@ -88,7 +106,7 @@ class Type
             }
             $returnType = $this->_toolsType->normalizeType($returnType);
             $methodName = lcfirst($matches[2]);
-            $paramsCount = 0; // TODO: params count & desc
+            $paramsCount = $this->_getRequiredParamsCount($matches[3]);
             $desc = $matches[4]??'';
             /* compose result  */
             /** @var \Praxigento\Core\Reflection\Data\Method $result */
@@ -171,6 +189,7 @@ class Type
      */
     public function getMethods($type)
     {
+        $result = [];
         $typeNorm = $this->_toolsType->normalizeType($type);
         /** @var \Zend\Code\Reflection\ClassReflection $reflection */
         $reflection = $this->_manObj->create(
@@ -182,7 +201,18 @@ class Type
         /* process normal methods (not annotated) */
         $publicMethods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
         $generalMethods = $this->_processClassMethods($publicMethods);
-        $result = array_merge($generalMethods, $annotatedMethods);
+        $merged = array_merge($generalMethods, $annotatedMethods);
+        /* convert results to array form according Magento requirements to be saved in the cache */
+        foreach ($merged as $item) {
+            $methodName = $item->getName();
+            $entry = [
+                'type' => $item->getType(),
+                'isRequired' => $item->getIsRequired(),
+                'description' => $item->getDescription(),
+                'parameterCount' => $item->getParameterCount()
+            ];
+            $result[$methodName] = $entry;
+        }
         return $result;
     }
 }

@@ -2,11 +2,8 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\Core\Plugin\Framework\Webapi;
 
-
-use Praxigento\Core\Plugin\Framework\Webapi\Sub\PropertyData;
 
 class ServiceOutputProcessor
 {
@@ -30,7 +27,7 @@ class ServiceOutputProcessor
     /**
      * Add separate flow for annotated data objects.
      *
-     * @param \Magento\Framework\Webapi\ServiceInputProcessor $subject
+     * @param \Magento\Framework\Webapi\ServiceOutputProcessor $subject
      * @param \Closure $proceed
      * @param $data
      * @param $type
@@ -47,7 +44,7 @@ class ServiceOutputProcessor
             $typeData = $this->_typePropertiesRegistry->register($type);
             /**
              * @var string $propertyName
-             * @var PropertyData $propertyData
+             * @var \Praxigento\Core\Reflection\Data\Property $propertyData
              */
             foreach ($typeData as $propertyName => $propertyData) {
                 $attrName = $this->_toolConvert->camelCaseToSnakeCase($propertyName);

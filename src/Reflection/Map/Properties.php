@@ -5,11 +5,13 @@
 namespace Praxigento\Core\Reflection\Map;
 
 /**
- * Create and cache methods map used in DO2JSON conversion.
- * (see \Magento\Framework\Reflection\MethodsMap)
+ * Create and cache methods map used in JSON2DO conversion.
+ * (see \Magento\Framework\Reflection\TypeProcessor::register)
+ *
+ * TODO: this is reserved class for Reflection optimization (see MOBI-416)
  *
  */
-class Methods
+class Properties
     extends \Praxigento\Core\Reflection\Map\Base
 {
     /**
@@ -36,17 +38,10 @@ class Methods
      */
     protected $_map = [];
 
-    public function __construct(
-        \Magento\Framework\App\Cache\Type\Reflection $cache,
-        \Praxigento\Core\Reflection\Analyzer\Type $analyzer
-    ) {
-        $this->_cache = $cache;
-        $this->_analyzer = $analyzer;
-    }
-
     /** @inheritdoc */
     public function _parseMetaData($saved)
     {
-        return $saved;
+        $result = 'na';
+        return $result;
     }
 }

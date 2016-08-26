@@ -17,6 +17,8 @@ namespace Praxigento\Core\Reflection\Data;
  * @method void setDescription(string $data)
  * @method int getParameterCount() Number of the input parameters for the method.
  * @method void setParameterCount(int $data)
+ * @method string getParamsDefinition() Parameters definition ("type $attr='value', ...")
+ * @method void setParamsDefinition(string $data)
  */
 class Method
     extends \Flancer32\Lib\DataObject

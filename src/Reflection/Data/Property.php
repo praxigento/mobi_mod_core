@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
+namespace Praxigento\Core\Reflection\Data;
 
 /**
  * Property Data Object for TypePropertiesRegistry.
@@ -17,7 +17,7 @@ namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
  * @method boolean getIsArray() 'true' if property is an array of $types.
  * @method void setIsArray(boolean $data)
  */
-class PropertyData
+class Property
     extends \Flancer32\Lib\DataObject
 {
 

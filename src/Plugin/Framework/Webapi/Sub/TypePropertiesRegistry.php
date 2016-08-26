@@ -61,7 +61,7 @@ class TypePropertiesRegistry
     /**
      * Analyze documentation line and extract property data according to getter's pattern.
      * @param string $line
-     * @return PropertyData|null
+     * @return \Praxigento\Core\Reflection\Data\Property|null
      */
     public function _processDocLine($line)
     {
@@ -76,7 +76,7 @@ class TypePropertiesRegistry
             }
             $propIsArray = $this->_toolsType->isArray($propType);
             $propType = $this->_toolsType->normalizeType($propType);
-            $result = new PropertyData();
+            $result = new \Praxigento\Core\Reflection\Data\Property();
             $result->setName($propName);
             $result->setIsRequired($propRequired);
             $result->setIsArray($propIsArray);
@@ -106,7 +106,7 @@ class TypePropertiesRegistry
                 $propIsRequired = $typeData['isRequired'];
                 $propIsArray = $this->_toolsType->isArray($propType);
                 $propType = $this->_toolsType->normalizeType($propType);
-                $propData = new PropertyData();
+                $propData = new \Praxigento\Core\Reflection\Data\Property();
                 $propData->setName($propName);
                 $propData->setIsRequired($propIsRequired);
                 $propData->setIsArray($propIsArray);
@@ -122,7 +122,7 @@ class TypePropertiesRegistry
      * Analyze $type and save type properties into the registry.
      *
      * @param string $type
-     * @return PropertyData[] array with type properties or empty array for simple types.
+     * @return \Praxigento\Core\Reflection\Data\Property[] array with type properties or empty array for simple types.
      */
     public function register($type)
     {
