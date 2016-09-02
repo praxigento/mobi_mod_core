@@ -86,4 +86,14 @@ interface IGeneric
      * @return int Count of the updated rows.
      */
     public function updateEntity($entity, $bind, $where = null);
+
+    /**
+     * Update instance in the DB (look up by ID values).
+     *
+     * @param string $entity Entity name (not table name).
+     * @param array $bind
+     * @param array $id [COL_NAME=>$value, ...]
+     * @return int The number of affected rows.
+     */
+    public function updateEntityById($entity, $bind, $id);
 }

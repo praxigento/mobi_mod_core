@@ -37,6 +37,7 @@ class Config
     const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
     const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
+    const ENTITY_MAGE_CUSTOMER_GROUP = 'customer_group';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
@@ -64,6 +65,9 @@ class Config
     const E_CONFIG_A_SCOPE = 'scope';
     const E_CONFIG_A_SCOPE_ID = 'scope_id';
     const E_CONFIG_A_VALUE = 'value';
+    const E_CUSTGROUP_A_CODE = 'customer_group_code';
+    const E_CUSTGROUP_A_ID = 'customer_group_id';
+    const E_CUSTGROUP_A_TAX_CLASS_ID = 'tax_class_id';
     const E_CUSTOMER_A_EMAIL = 'email';
     const E_CUSTOMER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';

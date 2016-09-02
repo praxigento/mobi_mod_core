@@ -51,6 +51,8 @@ interface ICrud
     /**
      * Update instance in the DB (look up by ID values).
      *
+     * TODO: change ($id, $data) to ($data, $id)
+     *
      * @param int|string|array $id
      * @param array|DataObject $data
      * @return int The number of affected rows.

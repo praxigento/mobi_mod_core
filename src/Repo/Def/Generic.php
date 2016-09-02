@@ -74,6 +74,7 @@ class  Generic
     /** @inheritdoc */
     public function getEntityByPk($entity, $pk, $cols = null)
     {
+        // TODO: rename PK to ID
         $tbl = $this->_resource->getTableName($entity);
         /* columns to select */
         $cols = ($cols) ? $cols : '*';
@@ -107,6 +108,23 @@ class  Generic
             $data = $bind->getData();
         } else {
             $data = $bind;
+        }
+        $result = $this->_conn->update($tbl, $data, $where);
+        return $result;
+    }
+
+    /** @inheritdoc */
+    public function updateEntityById($entity, $bind, $id)
+    {
+        $tbl = $this->_resource->getTableName($entity);
+        if ($bind instanceof DataObject) {
+            $data = $bind->getData();
+        } else {
+            $data = $bind;
+        }
+        $where = '1';
+        foreach ($id as $field => $value) {
+            $where .= " AND $field=" . $this->_conn->quote($value);
         }
         $result = $this->_conn->update($tbl, $data, $where);
         return $result;
