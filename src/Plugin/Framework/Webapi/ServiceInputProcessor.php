@@ -57,7 +57,11 @@ class ServiceInputProcessor
                         }
                     }
                 } else {
-                    $result = $this->_parser->parseArrayData($type, $data);
+                    if (is_null($data)) {
+                        // do nothing, result is null
+                    } else {
+                        $result = $this->_parser->parseArrayData($type, $data);
+                    }
                 }
             }
         } else {
