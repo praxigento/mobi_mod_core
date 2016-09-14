@@ -51,7 +51,6 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Test Data === */
         $TYPE = '\Praxigento\Core\Service\Base\Response[]';
         $TYPE_NORM = 'Praxigento\Core\Service\Base\Response';
-        $TYPE_DATA = [];
         $DATA = ['data for parsing'];
         $PARSED = 'parsed item';
         /** === Mock object itself === */
@@ -68,10 +67,6 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mToolType
             ->shouldReceive('normalizeType')->once()
             ->andReturn($TYPE_NORM);
-        // $typeData = $this->_typePropsRegistry->register($typeNorm);
-        $this->mTypePropsRegistry
-            ->shouldReceive('register')->once()
-            ->andReturn($TYPE_DATA);
         // $result[$key] = $this->parseArrayDataRecursive($typeNorm, $item);
         $this->obj
             ->shouldReceive('parseArrayDataRecursive')->once()
@@ -91,8 +86,8 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $TYPE = '\Praxigento\Core\Service\Base\Response';
         $TYPE_NORM = 'Praxigento\Core\Service\Base\Response';
         $TYPE_DATA = [
-            $PROP_CODE => new PropertyData(['type' => 'int']),
-            $PROP_MSG => new PropertyData(['type' => 'complex'])
+            $PROP_CODE => new \Praxigento\Core\Reflection\Data\Property(['type' => 'int']),
+            $PROP_MSG => new \Praxigento\Core\Reflection\Data\Property(['type' => 'complex'])
         ];
         $ERR_CODE = 32;
         $DATA = [
@@ -166,7 +161,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $PROP_TYPE = 'int';
         $PROP_TYPE_ARR = 'int[]';
         $TYPE_DATA = [
-            $PROP_CODE => new PropertyData(['type' => $PROP_TYPE, 'isArray' => true])
+            $PROP_CODE => new \Praxigento\Core\Reflection\Data\Property(['type' => $PROP_TYPE, 'isArray' => true])
         ];
         $ERR_CODE = 32;
         $DATA = [

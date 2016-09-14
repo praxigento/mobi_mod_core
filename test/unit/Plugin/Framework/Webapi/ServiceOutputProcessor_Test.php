@@ -51,8 +51,8 @@ class ServiceOutputProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Moc
         ]);
         $TYPE = \Praxigento\Core\Service\Base\Response::class;
         $TYPE_DATA = [
-            $PROP_SIMPLE => new PropertyData(['type' => $TYPE_SIMPLE]),
-            $PROP_COMPLEX => new PropertyData(['type' => $TYPE_COMPLEX])
+            $PROP_SIMPLE => new \Praxigento\Core\Reflection\Data\Property(['type' => $TYPE_SIMPLE]),
+            $PROP_COMPLEX => new \Praxigento\Core\Reflection\Data\Property(['type' => $TYPE_COMPLEX])
         ];
         /** === Setup Mocks === */
         $mSubject = $this->_mock(\Magento\Framework\Webapi\ServiceOutputProcessor::class);

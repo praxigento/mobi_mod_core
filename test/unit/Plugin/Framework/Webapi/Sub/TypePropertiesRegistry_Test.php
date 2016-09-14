@@ -52,7 +52,7 @@ class TypePropertiesRegistry_UnitTest extends \Praxigento\Core\Test\BaseCase\Moc
         $TYPE = 'type name';
         $CONTENTS = "line1\nline2";
         $PROP_TYPE = 'property type';
-        $PROP_DATA = new PropertyData();
+        $PROP_DATA = new \Praxigento\Core\Reflection\Data\Property();
         $PROP_DATA->setName('name');
         $PROP_DATA->setIsRequired(true);
         $PROP_DATA->setType($PROP_TYPE);
