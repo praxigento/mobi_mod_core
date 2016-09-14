@@ -16,7 +16,8 @@ use Praxigento\Downline\Data\Entity\Customer;
 use Praxigento\Downline\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
-abstract class BaseIntegrationTest extends BaseMockeryCase
+abstract class BaseIntegrationTest
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     const DATE_PERIOD_BEGIN = '20151201';
     const DEFAULT_DOWNLINE_COUNTRY_CODE = 'LV';
