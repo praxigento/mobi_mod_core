@@ -2,15 +2,13 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-
 namespace Praxigento\Core\Ui\DataProvider;
 
-use Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider;
-use Magento\Store\Model\StoreManagerInterface;
-use Praxigento\Core\Repo\Query\Criteria\IAdapter as ICriteriaAdapter;
-use Praxigento\Core\Repo\ICrud as IBaseRepo;
-
-class Base extends DataProvider
+/**
+ * Base data provider for own grids.
+ */
+class Base
+    extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
     const JSON_ATTR_ITEMS = 'items';
     const JSON_ATTR_TOTAL_RECORDS = 'totalRecords';
@@ -22,19 +20,22 @@ class Base extends DataProvider
     const UIC_CONFIG = 'config';
     const UIC_UPDATE_URL = 'update_url';
     /**#@- */
-    
-    /** @var  ICriteriaAdapter */
+
+    /** @var  \Praxigento\Core\Repo\Query\Criteria\IAdapter */
     protected $_criteriaAdapter;
+    /** @var  \Praxigento\Core\Repo\Query\Criteria\IMapper */
+    protected $_api2sqlMapper;
     /**
      * Repository to select data for grid.
      *
-     * @var IBaseCrud
+     * @var \Praxigento\Core\Repo\ICrud
      */
     protected $_repo;
 
     public function __construct(
         \Magento\Framework\UrlInterface $url,
         \Praxigento\Core\Repo\Query\Criteria\IAdapter $criteriaAdapter,
+        \Praxigento\Core\Repo\Query\Criteria\IMapper $api2sqlMapper = null,
         \Praxigento\Core\Repo\ICrud $repo,
         \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $reporting,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -62,13 +63,14 @@ class Base extends DataProvider
         );
         /* post construction setup */
         $this->_criteriaAdapter = $criteriaAdapter;
+        $this->_api2sqlMapper = $api2sqlMapper;
         $this->_repo = $repo;
     }
 
     public function getData()
     {
         $criteria = $this->getSearchCriteria();
-        $where = $this->_criteriaAdapter->getWhereFromApiCriteria($criteria);
+        $where = $this->_criteriaAdapter->getWhereFromApiCriteria($criteria, $this->_api2sqlMapper);
         /* get query for total count */
         /** @var \Magento\Framework\DB\Select $queryTotal */
         $queryTotal = $this->_repo->getQueryToSelectCount();

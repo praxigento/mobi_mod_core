@@ -5,13 +5,11 @@
 
 namespace Praxigento\Core\Repo\Query\Criteria\Def;
 
-use Magento\Framework\Api\Search\SearchCriteriaInterface;
-use Magento\Framework\DB\Adapter\AdapterInterface as IDbAdapter;
-use Praxigento\Core\Repo\Query\Criteria\IAdapter;
 
-class Adapter implements IAdapter
+class Adapter
+    implements \Praxigento\Core\Repo\Query\Criteria\IAdapter
 {
-    /** @var  IDbAdapter */
+    /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $_conn;
 
     public function __construct(
@@ -20,7 +18,7 @@ class Adapter implements IAdapter
         $this->_conn = $resource->getConnection();
     }
 
-    public function getOrderFromApiCriteria(SearchCriteriaInterface $criteria)
+    public function getOrderFromApiCriteria(\Magento\Framework\Api\Search\SearchCriteriaInterface $criteria)
     {
         $result = [];
         $orders = $criteria->getSortOrders();
@@ -37,8 +35,10 @@ class Adapter implements IAdapter
         return $result;
     }
 
-    public function getWhereFromApiCriteria(SearchCriteriaInterface $criteria)
-    {
+    public function getWhereFromApiCriteria(
+        \Magento\Framework\Api\Search\SearchCriteriaInterface $criteria,
+        \Praxigento\Core\Repo\Query\Criteria\IMapper $mapper = null
+    ) {
         $result = '';
         $filterGroups = $criteria->getFilterGroups();
         foreach ($filterGroups as $filterGroup) {
@@ -46,6 +46,9 @@ class Adapter implements IAdapter
             /** @var \Magento\Framework\Api\Filter $item */
             foreach ($filterGroup->getFilters() as $item) {
                 $field = $item->getField();
+                if ($mapper) {
+                    $field = $mapper->get($field);
+                }
                 $cond = $item->getConditionType();
                 $value = $item->getValue();
                 $where = $this->_conn->prepareSqlCondition($field, [$cond => $value]);
@@ -58,4 +61,5 @@ class Adapter implements IAdapter
         $result .= '1';
         return $result;
     }
+
 }
