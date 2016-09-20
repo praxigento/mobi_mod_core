@@ -44,6 +44,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->obj = new ChildToTestBase(
             $this->mUrl,
             $this->mCriteriaAdapter,
+            null,
             $this->mRepo,
             $this->mReporting,
             $this->mSearchCriteriaBuilder,
