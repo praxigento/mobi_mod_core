@@ -11,10 +11,12 @@ namespace Praxigento\Core\Repo\Query\Criteria\Def;
 class Mapper
     implements \Praxigento\Core\Repo\Query\Criteria\IMapper
 {
+    /** @var array */
+    protected $_map = [];
 
     public function get($key)
     {
-        return $key;
+        $result = $this->_map[$key]??$key;
+        return $result;
     }
-
 }
