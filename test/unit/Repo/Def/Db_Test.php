@@ -36,7 +36,7 @@ class Db_UnitTest
     {
         /** === Setup Mocks === */
         $this->mResource
-            ->shouldReceive('getConnection')->once()
+            ->shouldReceive('getConnection')
             ->andReturn($this->mConn);
         /** === Call and asserts  === */
         $res = $this->obj->getConnection();

@@ -25,7 +25,7 @@ abstract class Repo
         $this->mResource = m::mock(\Magento\Framework\App\ResourceConnection::class);
         /** setup mocks for constructor */
         $this->mResource
-            ->shouldReceive('getConnection')->once()
+            ->shouldReceive('getConnection')
             ->andReturn($this->mConn);
     }
 
