@@ -22,7 +22,6 @@ abstract class Db
         $this->_conn = $resource->getConnection();
     }
 
-    /** @inheritdoc */
     public function getConnection($name = null)
     {
         if (is_null($name)) {
@@ -32,7 +31,6 @@ abstract class Db
         return $result;
     }
 
-    /** @inheritdoc */
     public function getResource()
     {
         return $this->_resource;
