@@ -8,6 +8,10 @@ namespace Praxigento\Core\Test\BaseCase;
 
 use Mockery as m;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 abstract class Controller
     extends \Praxigento\Core\Test\BaseCase\Mockery
 {

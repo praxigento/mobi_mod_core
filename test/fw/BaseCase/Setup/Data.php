@@ -7,7 +7,8 @@ namespace Praxigento\Core\Test\BaseCase\Setup;
 use Mockery as m;
 
 /**
- * Base class to create units to test data install classes base on \Praxigento\Core\Setup\Data\Base.
+ * Base class to create units to test data install classes
+ * bases on \Praxigento\Core\Setup\Data\Base.
  */
 abstract class Data
     extends \Praxigento\Core\Test\BaseCase\Mockery

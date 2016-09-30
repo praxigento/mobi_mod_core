@@ -7,7 +7,8 @@ namespace Praxigento\Core\Test\BaseCase\Setup;
 use Mockery as m;
 
 /**
- * Base class to create units to test schema install classes base on \Praxigento\Core\Setup\Schema\Base.
+ * Base class to create units to test schema install classes
+ * based on \Praxigento\Core\Setup\Schema\Base.
  */
 abstract class Schema
     extends \Praxigento\Core\Test\BaseCase\Mockery

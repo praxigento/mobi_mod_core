@@ -7,7 +7,8 @@ namespace Praxigento\Core\Test\BaseCase\Repo;
 use Mockery as m;
 
 /**
- * Base class to create units to test entities repositories based on \Praxigento\Core\Repo\Def\Entity.
+ * Base class to create units to test entities repositories
+ * based on \Praxigento\Core\Repo\Def\Entity.
  */
 abstract class Entity
     extends \Praxigento\Core\Test\BaseCase\Repo

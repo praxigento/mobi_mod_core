@@ -6,6 +6,8 @@ namespace Praxigento\Core\Ui\DataProvider;
 
 /**
  * Base data provider for own grids.
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Base
     extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
@@ -32,13 +34,18 @@ class Base
      */
     protected $_repo;
 
+    /**
+     * @inheritdoc
+     *
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         \Magento\Framework\UrlInterface $url,
-        \Praxigento\Core\Repo\Query\Criteria\IAdapter $criteriaAdapter,
+        \Praxigento\Core\Repo\Query\Criteria\IAdapter $critAdapter,
         \Praxigento\Core\Repo\Query\Criteria\IMapper $api2sqlMapper = null,
         \Praxigento\Core\Repo\ICrud $repo,
         \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $reporting,
-        \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
+        \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCritBuilder,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
         $name,
@@ -55,14 +62,14 @@ class Base
             'entity_id',
             'id',
             $reporting,
-            $searchCriteriaBuilder,
+            $searchCritBuilder,
             $request,
             $filterBuilder,
             $meta,
             $data
         );
         /* post construction setup */
-        $this->_criteriaAdapter = $criteriaAdapter;
+        $this->_criteriaAdapter = $critAdapter;
         $this->_api2sqlMapper = $api2sqlMapper;
         $this->_repo = $repo;
     }
