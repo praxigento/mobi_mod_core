@@ -6,6 +6,8 @@ namespace Praxigento\Core\Repo\Def;
 
 /**
  * Default implementation for aggregate repository to do read-write operations with database.
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 abstract class Agg
     extends Crud
