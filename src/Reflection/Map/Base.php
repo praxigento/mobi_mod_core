@@ -8,6 +8,8 @@ namespace Praxigento\Core\Reflection\Map;
  * Base class for mappers that create and cache maps used in JSON-DO-JSON conversion.
  * (see \Magento\Framework\Reflection\MethodsMap)
  *
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 abstract class Base
 {
