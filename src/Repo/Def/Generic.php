@@ -12,7 +12,7 @@ class  Generic
     extends \Praxigento\Core\Repo\Def\Db
     implements \Praxigento\Core\Repo\IGeneric
 {
-    /** @inheritdoc */
+
     public function addEntity($entity, $bind)
     {
         $result = null;
@@ -29,7 +29,6 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
     public function deleteEntity($entity, $where)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -37,7 +36,11 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
     public function deleteEntityByPk($entity, $pk)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -49,7 +52,6 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -71,7 +73,11 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
     public function getEntityByPk($entity, $pk, $cols = null)
     {
         // TODO: rename PK to ID
@@ -80,14 +86,13 @@ class  Generic
         $cols = ($cols) ? $cols : '*';
         $query = $this->_conn->select();
         $query->from($tbl, $cols);
-        foreach ($pk as $field => $value) {
+        foreach (array_keys($pk) as $field) {
             $query->where("$field=:$field");
         }
         $result = $this->_conn->fetchRow($query, $pk);
         return $result;
     }
 
-    /** @inheritdoc */
     public function replaceEntity($entity, $bind)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -100,7 +105,6 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
     public function updateEntity($entity, $bind, $where = null)
     {
         $tbl = $this->_resource->getTableName($entity);
@@ -113,7 +117,11 @@ class  Generic
         return $result;
     }
 
-    /** @inheritdoc */
+    /**
+     * @inheritdoc
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
     public function updateEntityById($entity, $bind, $id)
     {
         $tbl = $this->_resource->getTableName($entity);

@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Repo\Query\Criteria\Def;
 
-
+/**
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
+ */
 class Adapter
     implements \Praxigento\Core\Repo\Query\Criteria\IAdapter
 {

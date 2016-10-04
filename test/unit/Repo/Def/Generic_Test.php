@@ -8,6 +8,10 @@ use Flancer32\Lib\DataObject;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
+/**
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
 class Generic_UnitTest
     extends \Praxigento\Core\Test\BaseCase\Repo
 {
@@ -27,14 +31,14 @@ class Generic_UnitTest
     public function test_addEntity()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
@@ -44,21 +48,21 @@ class Generic_UnitTest
             ->shouldReceive('lastInsertId')->once()
             ->andReturn('inserted');
         /** === Call and asserts  === */
-        $resp = $this->obj->addEntity($ENTITY, []);
+        $resp = $this->obj->addEntity($entity, []);
         $this->assertEquals('inserted', $resp);
     }
 
     public function test_addEntity_dataObject()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $rowsAdded = $this->_conn->insert($tbl, $bind);
         $this->mConn
             ->shouldReceive('insert')->once()
@@ -68,7 +72,7 @@ class Generic_UnitTest
             ->shouldReceive('lastInsertId')->once()
             ->andReturn('inserted');
         /** === Call and asserts  === */
-        $resp = $this->obj->addEntity($ENTITY, new DataObject([]));
+        $resp = $this->obj->addEntity($entity, new DataObject([]));
         $this->assertEquals('inserted', $resp);
     }
 
@@ -81,57 +85,58 @@ class Generic_UnitTest
     public function test_deleteEntity()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $WHERE = 'where';
-        $TABLE = 'table';
-        $DELETED = 32;
+        $entity = 'entity';
+        $where = 'where';
+        $table = 'table';
+        $deleted = 32;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
-            ->andReturn($DELETED);
+            ->andReturn($deleted);
         /** === Call and asserts  === */
-        $resp = $this->obj->deleteEntity($ENTITY, $WHERE);
-        $this->assertEquals($DELETED, $resp);
+        $resp = $this->obj->deleteEntity($entity, $where);
+        $this->assertEquals($deleted, $resp);
     }
 
     public function test_deleteEntityByPk()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
-        $PK = ['field' => 'value'];
-        $ROWS_AFFECTED = 1;
+        $ent = 'entity';
+        $table = 'table';
+        $pkey = ['field' => 'value'];
+        $rowsAffected = 1;
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($ent)
+            ->andReturn($table);
         // $result = $this->_conn->delete($tbl, $where);
         $this->mConn
             ->shouldReceive('delete')->once()
-            ->andReturn($ROWS_AFFECTED);
+            ->andReturn($rowsAffected);
         /** === Call and asserts  === */
-        $resp = $this->obj->deleteEntityByPk($ENTITY, $PK);
+        $resp = $this->obj->deleteEntityByPk($ent, $pkey);
+        $this->assertEquals($rowsAffected, $resp);
     }
 
     public function test_getEntities()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $query = $this->_conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
@@ -153,24 +158,24 @@ class Generic_UnitTest
             ->shouldReceive('fetchAll')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->getEntities($ENTITY, null, 'where', 'order', 'limit', 'offset');
+        $resp = $this->obj->getEntities($entity, null, 'where', 'order', 'limit', 'offset');
         $this->assertEquals('result', $resp);
     }
 
     public function test_getEntityByPk()
     {
         /** === Test Data === */
-        $PK = [
+        $pkey = [
             'field' => 'value'
         ];
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $query = $conn->select();
         $mQuery = $this->_mockDbSelect();
         $this->mConn
@@ -186,23 +191,26 @@ class Generic_UnitTest
             ->shouldReceive('fetchRow')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->getEntityByPk($ENTITY, $PK);
+        $resp = $this->obj->getEntityByPk($entity, $pkey);
         $this->assertEquals('result', $resp);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
     public function test_replaceEntity()
     {
         /** === Test Data === */
-        $BIND = ['key' => 'value'];
-        $ID = 321;
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $bind = ['key' => 'value'];
+        $id = 321;
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $this->_conn->query($query, $bind);
         $this->mConn
             ->shouldReceive('query')->once()
@@ -210,50 +218,119 @@ class Generic_UnitTest
         // $result = $this->_conn->lastInsertId($tbl);
         $this->mConn
             ->shouldReceive('lastInsertId')->once()
-            ->andReturn($ID);
+            ->andReturn($id);
         /** === Call and asserts  === */
-        $id = $this->obj->replaceEntity($ENTITY, $BIND);
-        $this->assertEquals($ID, $id);
+        $id = $this->obj->replaceEntity($entity, $bind);
+        $this->assertEquals($id, $id);
     }
 
     public function test_updateEntity()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->updateEntity($ENTITY, []);
+        $resp = $this->obj->updateEntity($entity, []);
         $this->assertEquals('result', $resp);
     }
 
     public function test_updateEntity_dataObject()
     {
         /** === Test Data === */
-        $ENTITY = 'entity';
-        $TABLE = 'table';
+        $entity = 'entity';
+        $table = 'table';
         /** === Setup Mocks === */
         // $tbl = $this->_resource->getTableName($entity);
         $this->mResource
             ->shouldReceive('getTableName')->once()
-            ->with($ENTITY)
-            ->andReturn($TABLE);
+            ->with($entity)
+            ->andReturn($table);
         // $result = $this->_conn->update($tbl, $bind, $where);
         $this->mConn
             ->shouldReceive('update')->once()
             ->andReturn('result');
         /** === Call and asserts  === */
-        $resp = $this->obj->updateEntity($ENTITY, new DataObject([]));
+        $resp = $this->obj->updateEntity($entity, new DataObject([]));
         $this->assertEquals('result', $resp);
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
+    public function test_updateEntityById()
+    {
+        /** === Test Data === */
+        $entity = 'entity';
+        $bind = [];
+        $key = 'key';
+        $value = 'value';
+        $id = [$key => $value];
+        /** === Setup Mocks === */
+        // $tbl = $this->_resource->getTableName($entity);
+        $mTable = 'table';
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($entity)
+            ->andReturn($mTable);
+        // $where .= " AND $field=" . $this->_conn->quote($value);
+        $this->mConn
+            ->shouldReceive('quote')->once()
+            ->with($value)
+            ->andReturn($value);
+        // $result = $this->_conn->update($tbl, $data, $where);
+        $mResult = 'result';
+        $this->mConn
+            ->shouldReceive('update')->once()
+            ->with($mTable, $bind, "1 AND $key=$value")
+            ->andReturn($mResult);
+        /** === Call and asserts  === */
+        $resp = $this->obj->updateEntityById($entity, $bind, $id);
+        $this->assertEquals($mResult, $resp);
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
+    public function test_updateEntityById_isDataObject()
+    {
+        /** === Test Data === */
+        $entity = 'entity';
+        $objData = [];
+        $bind = new DataObject($objData);
+        $key = 'key';
+        $value = 'value';
+        $id = [$key => $value];
+        /** === Setup Mocks === */
+        // $tbl = $this->_resource->getTableName($entity);
+        $mTable = 'table';
+        $this->mResource
+            ->shouldReceive('getTableName')->once()
+            ->with($entity)
+            ->andReturn($mTable);
+        // $where .= " AND $field=" . $this->_conn->quote($value);
+        $this->mConn
+            ->shouldReceive('quote')->once()
+            ->with($value)
+            ->andReturn($value);
+        // $result = $this->_conn->update($tbl, $data, $where);
+        $mResult = 'result';
+        $this->mConn
+            ->shouldReceive('update')->once()
+            ->with($mTable, $objData, "1 AND $key=$value")
+            ->andReturn($mResult);
+        /** === Call and asserts  === */
+        $resp = $this->obj->updateEntityById($entity, $bind, $id);
+        $this->assertEquals($mResult, $resp);
     }
 
 }
