@@ -33,13 +33,15 @@ class MethodsMap
      * @param \Closure $proceed
      * @param $interfaceName
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function aroundGetMethodsMap(
         \Magento\Framework\Reflection\MethodsMap $subject,
         \Closure $proceed,
         $interfaceName
     ) {
-        $orig = $proceed($interfaceName);
+        // $orig = $proceed($interfaceName); TODO: remove if not used
         $result = $this->_mapMethods->getMap($interfaceName);
         return $result;
     }

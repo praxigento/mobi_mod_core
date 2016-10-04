@@ -6,9 +6,14 @@ namespace Praxigento\Core\Plugin\Framework\Reflection;
 
 include_once(__DIR__ . '/../../../phpunit_bootstrap.php');
 
-class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+/**
+ * @SuppressWarnings(PHPMD.CamelCaseClassName)
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
+ */
+class TypeProcessor_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
-    /** @var  \Magento\Framework\Reflection\TypeProcessor */
+    /** @var  \Mockery\MockInterface */
     private $mSubject;
     /** @var  TypeProcessor */
     private $obj;
@@ -28,53 +33,53 @@ class TypeProcessor_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_TranslateTypeName_isNotPraxigentoNamespace()
     {
         /** === Test Data === */
-        $CLASS = '\Vendor\Core\Data\Object\Some\Element';
+        $class = '\Vendor\Core\Data\Object\Some\Element';
         /** === Setup Mocks === */
-        $mProceed = function ($classIn) {
+        $mProceed = function () {
             throw new \InvalidArgumentException();
         };
         /** === Call and asserts  === */
         $this->obj->aroundTranslateTypeName(
             $this->mSubject,
             $mProceed,
-            $CLASS
+            $class
         );
     }
 
     public function test_TranslateTypeName_isPraxigentoNamespace()
     {
         /** === Test Data === */
-        $CLASS = '\Praxigento\Core\Data\Object\Some\Element';
-        $RESULT = 'PraxigentoCoreDataObjectSomeElement';
+        $class = '\Praxigento\Core\Data\Object\Some\Element';
+        $result = 'PraxigentoCoreDataObjectSomeElement';
         /** === Setup Mocks === */
-        $mProceed = function ($classIn) {
+        $mProceed = function () {
             throw new \InvalidArgumentException();
         };
         /** === Call and asserts  === */
         $res = $this->obj->aroundTranslateTypeName(
             $this->mSubject,
             $mProceed,
-            $CLASS
+            $class
         );
-        $this->assertEquals($RESULT, $res);
+        $this->assertEquals($result, $res);
     }
 
     public function test_TranslateTypeName_proceed()
     {
         /** === Test Data === */
-        $CLASS = 'classname to translate';
-        $RESULT = 'transaltion result';
+        $class = 'classname to translate';
+        $result = 'transaltion result';
         /** === Setup Mocks === */
-        $mProceed = function ($classIn) use ($CLASS, $RESULT) {
-            $this->assertEquals($CLASS, $classIn);
-            return $RESULT;
+        $mProceed = function ($classIn) use ($class, $result) {
+            $this->assertEquals($class, $classIn);
+            return $result;
         };
         /** === Call and asserts  === */
         $res = $this->obj->aroundTranslateTypeName(
             $this->mSubject,
             $mProceed,
-            $CLASS
+            $class
         );
-        $this->assertEquals($RESULT, $res);
+        $this->assertEquals($result, $res);
     }
 }
