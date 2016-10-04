@@ -5,13 +5,15 @@
 
 namespace Praxigento\Core\Service\Base;
 
-use Flancer32\Lib\DataObject;
-use Praxigento\Core\Service\IResponse;
-
-class Response extends DataObject implements IResponse
+/**
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
+ */
+class Response
+    extends \Flancer32\Lib\DataObject
+    implements \Praxigento\Core\Service\IResponse
 {
-
-    private $_errorCode = IResponse::ERR_UNDEFINED;
+    /** @var string */
+    private $_errorCode = \Praxigento\Core\Service\IResponse::ERR_UNDEFINED;
     /** @var  string */
     private $_errorMessage;
 
@@ -31,44 +33,22 @@ class Response extends DataObject implements IResponse
         return $this->_errorMessage;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function isSucceed()
     {
         $result = ($this->_errorCode == self::ERR_NO_ERROR);
         return $result;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function markSucceed()
     {
-        $this->_errorCode = IResponse::ERR_NO_ERROR;
+        $this->_errorCode = \Praxigento\Core\Service\IResponse::ERR_NO_ERROR;
     }
 
-    /**
-     * Mark response as succeed.
-     * @deprecated use markSucceed() instead.
-     */
-    public function setAsSucceed()
-    {
-        $this->markSucceed();
-
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function setErrorCode($code)
     {
         $this->_errorCode = $code;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function setErrorMessage($message)
     {
         $this->_errorMessage = $message;
