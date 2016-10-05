@@ -26,6 +26,24 @@ class Type
     }
 
     /**
+     * Get count of the required parameters.
+     *
+     * @param $paramsDef "\Type $arg1, $arg2, $arg3=null"
+     * @return int
+     */
+    public function _getRequiredParamsCount($paramsDef)
+    {
+        $result = 0;
+        if ($paramsDef) {
+            $result = 1;
+            $commas = substr_count($paramsDef, ',');
+            $equals = substr_count($paramsDef, '=');
+            $result += ($commas - $equals);
+        }
+        return $result;
+    }
+
+    /**
      * Determines if the method is suitable to be used by the processor.
      * (see \Magento\Framework\Reflection\MethodsMap::isSuitableMethod)
      *
@@ -70,24 +88,6 @@ class Type
     }
 
     /**
-     * Get count of the required parameters.
-     *
-     * @param $paramsDef "\Type $arg1, $arg2, $arg3=null"
-     * @return int
-     */
-    public function _getRequiredParamsCount($paramsDef)
-    {
-        $result = 0;
-        if ($paramsDef) {
-            $result = 1;
-            $commas = substr_count($paramsDef, ',');
-            $equals = substr_count($paramsDef, '=');
-            $result += ($commas - $equals);
-        }
-        return $result;
-    }
-
-    /**
      * Analyze class level documentation line and extract method data.
      *
      * @param string $line
@@ -100,13 +100,17 @@ class Type
             /* parse and transform template's data */
             $isRequired = true;
             $returnType = $matches[1];
-            if (substr($returnType, -0, strlen('|null')) == '|null') {
-                $returnType = str_replace('|null', '', $returnType);
+            /* replace '|null' in the end of the return type and mark as not required */
+            $key = '|null';
+            $length = strlen($key);
+            if (substr($returnType, -$length, $length) == $key) {
+                $returnType = str_replace($key, '', $returnType);
                 $isRequired = false;
             }
             $methodName = lcfirst($matches[2]);
             $paramsCount = $this->_getRequiredParamsCount($matches[3]);
             $desc = $matches[4]??'';
+            $desc = trim($desc);
             /* compose result  */
             /** @var \Praxigento\Core\Reflection\Data\Method $result */
             $result = $this->_manObj->create(\Praxigento\Core\Reflection\Data\Method::class);
@@ -130,10 +134,12 @@ class Type
         foreach ($methods as $method) {
             // Include all the methods of classes inheriting from AbstractExtensibleObject.
             // Ignore all the methods of AbstractExtensibleModel's parent classes
-            $class = $method->class;
+            /** @var \Zend\Code\Reflection\ClassReflection $class */
+            $class = $method->getDeclaringClass();
+            $className = $class->getName();
             if (
-                ($class === self::CLASS_MAGE_BASE) ||
-                ($class === self::CLASS_PRXGT_BASE)
+                ($className === self::CLASS_MAGE_BASE) ||
+                ($className === self::CLASS_PRXGT_BASE)
             ) {
                 // ReflectionClass::getMethods() sorts the methods by class
                 // (lowest in inheritance tree first)
@@ -155,7 +161,7 @@ class Type
     }
 
     /**
-     * @param $docBlock
+     * @param \Zend\Code\Reflection\DocBlockReflection|false $docBlock
      * @return \Praxigento\Core\Reflection\Data\Method
      */
     public function _processMethodDocBlock($docBlock)
@@ -194,6 +200,7 @@ class Type
             \Zend\Code\Reflection\ClassReflection::class,
             ['argument' => $typeNorm]
         );
+        /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
         $docBlock = $reflection->getDocBlock();
         $annotatedMethods = $this->_processClassDocBlock($docBlock);
         /* process normal methods (not annotated) */
@@ -201,6 +208,7 @@ class Type
         $generalMethods = $this->_processClassMethods($publicMethods);
         $merged = array_merge($generalMethods, $annotatedMethods);
         /* convert results to array form according Magento requirements to be saved in the cache */
+        /** @var \Praxigento\Core\Reflection\Data\Method $item */
         foreach ($merged as $item) {
             $methodName = $item->getName();
             $entry = [
