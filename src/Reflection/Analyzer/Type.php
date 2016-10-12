@@ -70,10 +70,10 @@ class Type
      * @param \Zend\Code\Reflection\DocBlockReflection $block Documentation block.
      * @return \Praxigento\Core\Reflection\Data\Method[]
      */
-    public function _processClassDocBlock(\Zend\Code\Reflection\DocBlockReflection $block)
+    public function _processClassDocBlock($block)
     {
         $result = [];
-        if ($block) {
+        if ($block instanceof \Zend\Code\Reflection\DocBlockReflection) {
             $docBlockLines = $block->getContents();
             $docBlockLines = explode("\n", $docBlockLines);
             foreach ($docBlockLines as $line) {

@@ -4,6 +4,11 @@
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
+    <type name="Magento\Framework\Json\DecoderInterface">
+        <!-- Cut form key from REST request and add as JSON attribute (MOBI-473). -->
+        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Json\Decoder" sortOrder="100" disabled="false"/>
+    </type>
+
     <type name="Magento\Framework\Reflection\MethodsMap">
         <!-- Replace Magento mapper to get full methods map (including annotated) used in DO2JSON conversion. -->
         <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\MethodsMap" sortOrder="100" disabled="false"/>
