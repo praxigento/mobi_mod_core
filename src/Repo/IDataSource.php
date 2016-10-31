@@ -39,6 +39,8 @@ interface IDataSource
      *
      * @param int|string|array $id
      * @return DataObject|array|bool Found instance data or 'false'
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function getById($id);
 
