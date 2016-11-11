@@ -33,6 +33,9 @@ class Response
         return $this->_errorMessage;
     }
 
+    /**
+     * @return bool
+     */
     public function isSucceed()
     {
         $result = ($this->_errorCode == self::ERR_NO_ERROR);
