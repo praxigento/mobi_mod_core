@@ -15,7 +15,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     private $mConfigDeployment;
     /** @var  \Mockery\MockInterface */
     private $mFactoryConn;
-    /** @var  Factory */
+    /** @var  Fabrique */
     private $obj;
 
     protected function setUp()
@@ -25,7 +25,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $this->mManObj = $this->_mock(\Magento\Framework\ObjectManagerInterface::class);
         $this->mConfigDeployment = $this->_mock(\Magento\Framework\App\DeploymentConfig::class);
         $this->mFactoryConn = $this->_mock(\Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactory::class);
-        $this->obj = new Factory(
+        $this->obj = new Fabrique(
             $this->mManObj,
             $this->mConfigDeployment,
             $this->mFactoryConn
@@ -34,7 +34,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 
     public function test_constructor()
     {
-        $this->assertInstanceOf(\Praxigento\Core\Transaction\Database\IFactory::class, $this->obj);
+        $this->assertInstanceOf(\Praxigento\Core\Transaction\Database\IFabrique::class, $this->obj);
     }
 
     public function test_create_new()

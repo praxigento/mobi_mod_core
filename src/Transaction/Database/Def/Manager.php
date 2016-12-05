@@ -11,13 +11,13 @@ namespace Praxigento\Core\Transaction\Database\Def;
 class Manager
     implements \Praxigento\Core\Transaction\Database\IManager
 {
-    /** @var  \Praxigento\Core\Transaction\Database\IFactory */
+    /** @var  \Praxigento\Core\Transaction\Database\IFabrique */
     private $_factoryTrans;
     /** @var array Registry to store transaction by connection & transaction names ([conn][trans]=>$item). */
     private $_registry = [];
 
     public function __construct(
-        \Praxigento\Core\Transaction\Database\IFactory $factoryTrans
+        \Praxigento\Core\Transaction\Database\IFabrique $factoryTrans
     ) {
         $this->_factoryTrans = $factoryTrans;
         /* init default connection for default transaction */

@@ -20,7 +20,7 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         /** create mocks */
-        $this->mFactoryTrans = $this->_mock(\Praxigento\Core\Transaction\Database\IFactory::class);
+        $this->mFactoryTrans = $this->_mock(\Praxigento\Core\Transaction\Database\IFabrique::class);
         $this->mTransItem = $this->_mock(\Praxigento\Core\Transaction\Database\IItem::class);
         /** setup mocks for constructor */
         // $trans = $this->_factoryTrans->create(self::DEF_TRANSACTION, self::DEF_CONNECTION);

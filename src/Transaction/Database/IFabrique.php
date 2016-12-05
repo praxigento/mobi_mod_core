@@ -8,7 +8,7 @@ namespace Praxigento\Core\Transaction\Database;
 /**
  * Transaction items factory used by Database Transaction Manager.
  */
-interface IFactory
+interface IFabrique
 {
     /**
      * @param string $transactionName
