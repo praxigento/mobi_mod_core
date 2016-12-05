@@ -8,17 +8,17 @@ namespace Praxigento\Core\Transaction\Business\Def;
 /**
  * Default implementation for Transaction items factory used by Business Transaction Manager.
  */
-class Factory
-    implements \Praxigento\Core\Transaction\Business\IFactory
+class Fabrique
+    implements \Praxigento\Core\Transaction\Business\IFabrique
 {
 
     /** @var \Magento\Framework\ObjectManagerInterface */
-    private $_manObj;
+    private $manObj;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $maObj
     ) {
-        $this->_manObj = $maObj;
+        $this->manObj = $maObj;
     }
 
     /**
@@ -27,7 +27,7 @@ class Factory
      */
     public function create($name)
     {
-        $result = $this->_manObj->create(\Praxigento\Core\Transaction\Business\Def\Item::class);
+        $result = $this->manObj->create(\Praxigento\Core\Transaction\Business\Def\Item::class);
         $result->setName($name);
         return $result;
     }

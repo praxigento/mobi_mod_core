@@ -18,7 +18,7 @@ class Manager_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         /** create mocks */
-        $this->mFactoryTrans = $this->_mock(\Praxigento\Core\Transaction\Business\IFactory::class);
+        $this->mFactoryTrans = $this->_mock(\Praxigento\Core\Transaction\Business\IFabrique::class);
         $this->obj = new Manager(
             $this->mFactoryTrans
         );

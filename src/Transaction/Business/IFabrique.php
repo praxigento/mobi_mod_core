@@ -7,8 +7,10 @@ namespace Praxigento\Core\Transaction\Business;
 
 /**
  * Transaction items factory used by Business Transaction Manager.
+ *
+ * MOBI-502: cannot use IFactory name for the interface, it conflicts with Magento naming conventions.
  */
-interface IFactory
+interface IFabrique
 {
     /**
      * @param string $name

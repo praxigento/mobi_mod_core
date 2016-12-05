@@ -11,7 +11,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
 
     /** @var  \Mockery\MockInterface */
     private $mManObj;
-    /** @var  Factory */
+    /** @var  Fabrique */
     private $obj;
 
     protected function setUp()
@@ -19,7 +19,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         parent::setUp();
         /** create mocks */
         $this->mManObj = $this->_mock(\Magento\Framework\ObjectManagerInterface::class);
-        $this->obj = new Factory(
+        $this->obj = new Fabrique(
             $this->mManObj
         );
     }
@@ -27,7 +27,7 @@ class Factory_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_constructor()
     {
         /** === Call and asserts  === */
-        $this->assertInstanceOf(Factory::class, $this->obj);
+        $this->assertInstanceOf(Fabrique::class, $this->obj);
     }
 
     public function test_create()

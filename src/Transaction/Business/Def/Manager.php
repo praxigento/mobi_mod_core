@@ -13,38 +13,38 @@ class Manager
      * Starting level for the first transaction.
      */
     const ZERO_LEVEL = 0;
-    /** @var \Praxigento\Core\Transaction\Business\IFactory */
-    private $_factoryTrans;
+    /** @var \Praxigento\Core\Transaction\Business\IFabrique */
+    private $factoryTrans;
     /**
      * @var array [$transactionName][$level] => \Praxigento\Core\Transaction\Business\IItem
      */
-    private $_registry = [];
+    private $registry = [];
 
     public function __construct(
-        \Praxigento\Core\Transaction\Business\IFactory $factoryTrans
+        \Praxigento\Core\Transaction\Business\IFabrique $factoryTrans
     ) {
-        $this->_factoryTrans = $factoryTrans;
+        $this->factoryTrans = $factoryTrans;
     }
 
     /** @inheritdoc */
     public function begin($transactionName)
     {
-        $result = $this->_factoryTrans->create($transactionName);
-        if (!isset($this->_registry[$transactionName])) {
+        $result = $this->factoryTrans->create($transactionName);
+        if (!isset($this->registry[$transactionName])) {
             $level = self::ZERO_LEVEL;
         } else {
-            $level = count($this->_registry[$transactionName]);
+            $level = count($this->registry[$transactionName]);
         }
         $result->setLevel($level);
-        $this->_registry[$transactionName][$level] = $result;
+        $this->registry[$transactionName][$level] = $result;
         return $result;
     }
 
     /** @inheritdoc */
     public function commit($transactionName, $transactionLevel)
     {
-        if (isset($this->_registry[$transactionName])) {
-            $regData = $this->_registry[$transactionName];
+        if (isset($this->registry[$transactionName])) {
+            $regData = $this->registry[$transactionName];
             $count = count($regData);
             if ($count > ($transactionLevel + 1)) {
                 /* rollback all nested levels and current level */
@@ -66,8 +66,8 @@ class Manager
     /** @inheritdoc */
     public function end($transactionName)
     {
-        if (isset($this->_registry[$transactionName])) {
-            $regData = $this->_registry[$transactionName];
+        if (isset($this->registry[$transactionName])) {
+            $regData = $this->registry[$transactionName];
             $count = count($regData);
             if ($count > 0) {
                 /* rollback all nested levels and current level */
@@ -85,8 +85,8 @@ class Manager
     /** @inheritdoc */
     public function rollback($transactionName, $transactionLevel)
     {
-        if (isset($this->_registry[$transactionName])) {
-            $regData = $this->_registry[$transactionName];
+        if (isset($this->registry[$transactionName])) {
+            $regData = $this->registry[$transactionName];
             $count = count($regData);
             /* rollback all nested levels and current level */
             for ($i = $count - 1; $i >= $transactionLevel; $i--) {
