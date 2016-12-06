@@ -11,25 +11,41 @@ use Praxigento\Core\Tool\IFormat;
 
 class Date implements IDate
 {
+    /** @var \Magento\Framework\ObjectManagerInterface */
+    protected $manObj;
     /** @var  IFormat */
-    protected $_toolFormat;
+    protected $toolFormat;
     /**
      * Add delta to get Mage time from UTC time or subtract delta to get UTC time from Mage time.
      *
      * @var int Delta in seconds for Magento timezone according to UTC
      */
-    protected $_tzDelta = 0;
+    protected $tzDelta;
 
     /**
      * @param IFormat $toolFormat
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
      */
     public function __construct(
-        IFormat $toolFormat,
-        \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
+        \Magento\Framework\ObjectManagerInterface $manObj,
+        IFormat $toolFormat
     ) {
-        $this->_toolFormat = $toolFormat;
-        $this->_tzDelta = $dateTime->getGmtOffset();
+        $this->manObj = $manObj;
+        $this->toolFormat = $toolFormat;
+    }
+
+
+    /**
+     * MOBI-504: don't retrieve session depended objects from Object Manager
+     *
+     * @return \Magento\Framework\Stdlib\DateTime\DateTime
+     */
+    private function _getTzDelta()
+    {
+        if (is_null($this->tzDelta)) {
+            $this->tzDelta = $this->manObj->get(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+        }
+        return $this->tzDelta;
     }
 
     /**
@@ -39,7 +55,7 @@ class Date implements IDate
     public function getMageNow()
     {
         $dtUtc = $this->getUtcNow();
-        $result = $dtUtc->setTimestamp($dtUtc->getTimestamp() + $this->_tzDelta);
+        $result = $dtUtc->setTimestamp($dtUtc->getTimestamp() + $this->_getTzDelta());
         return $result;
     }
 
@@ -50,7 +66,7 @@ class Date implements IDate
     public function getMageNowForDb()
     {
         $dt = $this->getMageNow();
-        $result = $this->_toolFormat->dateTimeForDb($dt);
+        $result = $this->toolFormat->dateTimeForDb($dt);
         return $result;
     }
 
@@ -72,7 +88,7 @@ class Date implements IDate
     public function getUtcNowForDb()
     {
         $dt = $this->getUtcNow();
-        $result = $this->_toolFormat->dateTimeForDb($dt);
+        $result = $this->toolFormat->dateTimeForDb($dt);
         return $result;
     }
 }
