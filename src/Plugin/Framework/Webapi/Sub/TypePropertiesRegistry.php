@@ -139,7 +139,9 @@ class TypePropertiesRegistry
                     ['argument' => $typeNorm]
                 );
                 $docBlock = $reflection->getDocBlock();
-                $this->_processDocBlock($typeNorm, $docBlock);
+                if ($docBlock) {
+                    $this->_processDocBlock($typeNorm, $docBlock);
+                }
                 /* process normal methods (not annotated) */
                 $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
                 $this->_processMethods($typeNorm, $methods);
