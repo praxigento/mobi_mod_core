@@ -196,10 +196,7 @@ class Type
         $result = [];
         $typeNorm = $this->_toolsType->normalizeType($type);
         /** @var \Zend\Code\Reflection\ClassReflection $reflection */
-        $reflection = $this->_manObj->create(
-            \Zend\Code\Reflection\ClassReflection::class,
-            ['argument' => $typeNorm]
-        );
+        $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
         /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
         $docBlock = $reflection->getDocBlock();
         $annotatedMethods = $this->_processClassDocBlock($docBlock);
