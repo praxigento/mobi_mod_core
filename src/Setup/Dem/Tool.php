@@ -27,7 +27,7 @@ class Tool
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Psr\Log\LoggerInterface $logger,
+        \Praxigento\Core\Fw\Logger\App $logger,
         \Praxigento\Core\Setup\Dem\Parser $parser
     ) {
         $this->_resource = $resource;
