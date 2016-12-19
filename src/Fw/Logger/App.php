@@ -27,7 +27,7 @@ class App
         if (is_null($logger)) {
             /* */
             $obm = \Magento\Framework\App\ObjectManager::getInstance();
-            $this->logger = new  \Praxigento\Logging\Logger($obm, self::DEF_CONFG_FILE, self::LOGGER_NAME);
+            $this->logger = new  \Praxigento\Logging\Logger($obm, static::DEF_CONFG_FILE, static::LOGGER_NAME);
         } else {
             /* use pre-configured Praxigento logger from constructor */
             $this->logger = $logger;
