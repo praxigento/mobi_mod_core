@@ -131,8 +131,8 @@ abstract class BaseIntegrationTest
             }
             $response = $this->_callDownlineCustomer->add($request);
             if ($response->isSucceed()) {
-                $path = $response->getData(Customer::ATTR_PATH);
-                $depth = $response->getData(Customer::ATTR_DEPTH);
+                $path = $response->get(Customer::ATTR_PATH);
+                $depth = $response->get(Customer::ATTR_DEPTH);
                 $this->_logger->debug("New customer #$customerMageId is added to path '$path' on depth $depth at '$dtToday'.");
             } else {
                 $this->_logger->error("Cannot add new customer #$customerMageId to downline tree.");

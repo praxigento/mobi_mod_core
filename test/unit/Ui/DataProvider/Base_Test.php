@@ -126,7 +126,7 @@ class Base_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $mConn->shouldReceive('fetchAll')->once()
             ->andReturn($DATA);
         /** === Call and asserts  === */
-        $res = $this->obj->getData();
+        $res = $this->obj->get();
         $expected = [
             Base::JSON_ATTR_TOTAL_RECORDS => $TOTAL,
             Base::JSON_ATTR_ITEMS => $DATA

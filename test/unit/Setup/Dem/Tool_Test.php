@@ -156,7 +156,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         /** === Call and asserts  === */
         $res = $this->obj->readDemPackage($pathToFile, $pathToNode);
-        $this->assertEquals('DEM', $res->getData('data'));
+        $this->assertEquals('DEM', $res->get('data'));
     }
 
     /**
@@ -170,7 +170,7 @@ class Tool_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Setup Mocks === */
         /** === Call and asserts  === */
         $res = $this->obj->readDemPackage($pathToFile, $pathToNode);
-        $this->assertEquals('DEM', $res->getData('data'));
+        $this->assertEquals('DEM', $res->get('data'));
     }
 
 }

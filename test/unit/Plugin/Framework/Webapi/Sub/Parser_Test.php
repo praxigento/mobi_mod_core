@@ -146,7 +146,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Call and asserts  === */
         $res = $this->obj->parseArrayData($TYPE, $DATA);
         $this->assertTrue($res instanceof $TYPE_NORM);
-        $this->assertEquals($ERR_CODE, $res->getData($PROP_CODE));
+        $this->assertEquals($ERR_CODE, $res->get($PROP_CODE));
     }
 
     public function test_parseArrayData_isDataObject_notArray_propIsArray()
@@ -204,7 +204,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Call and asserts  === */
         $res = $this->obj->parseArrayData($TYPE, $DATA);
         $this->assertTrue($res instanceof $TYPE_NORM);
-        $this->assertTrue(is_array($res->getData($PROP_CODE)));
+        $this->assertTrue(is_array($res->get($PROP_CODE)));
     }
 
     public function test_parseArrayData_notDataObject()

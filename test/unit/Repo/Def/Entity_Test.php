@@ -143,7 +143,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($DATA);
         /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
-        $this->assertEquals($DATA, $res->getData());
+        $this->assertEquals($DATA, $res->get());
     }
 
     public function test_getById_notArray()
@@ -159,7 +159,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($DATA);
         /** === Call and asserts  === */
         $res = $this->obj->getById($ID);
-        $this->assertEquals($DATA, $res->getData());
+        $this->assertEquals($DATA, $res->get());
     }
 
     public function test_getQueryToSelect()
@@ -213,7 +213,7 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         // $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
         $this->mRepoGeneric
             ->shouldReceive('replaceEntity')->once()
-            ->with($this->ENTITY_NAME, $DATA->getData())
+            ->with($this->ENTITY_NAME, $DATA->get())
             ->andReturn($UPDATED);
         /** === Call and asserts  === */
         $res = $this->obj->replace($DATA);

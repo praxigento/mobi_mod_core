@@ -20,7 +20,7 @@ abstract class Base extends EntityBase
      */
     public function getCode()
     {
-        $result = parent::getData(self::ATTR_CODE);
+        $result = parent::get(self::ATTR_CODE);
         return $result;
     }
 
@@ -29,7 +29,7 @@ abstract class Base extends EntityBase
      */
     public function getId()
     {
-        $result = parent::getData(self::ATTR_ID);
+        $result = parent::get(self::ATTR_ID);
         return $result;
     }
 
@@ -38,7 +38,7 @@ abstract class Base extends EntityBase
      */
     public function getNote()
     {
-        $result = parent::getData(self::ATTR_NOTE);
+        $result = parent::get(self::ATTR_NOTE);
         return $result;
     }
 
@@ -52,7 +52,7 @@ abstract class Base extends EntityBase
      */
     public function setCode($data)
     {
-        parent::setData(self::ATTR_CODE, $data);
+        parent::set(self::ATTR_CODE, $data);
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class Base extends EntityBase
      */
     public function setId($data)
     {
-        parent::setData(self::ATTR_ID, $data);
+        parent::set(self::ATTR_ID, $data);
     }
 
     /**
@@ -68,6 +68,6 @@ abstract class Base extends EntityBase
      */
     public function setNote($data)
     {
-        parent::setData(self::ATTR_NOTE, $data);
+        parent::set(self::ATTR_NOTE, $data);
     }
 }

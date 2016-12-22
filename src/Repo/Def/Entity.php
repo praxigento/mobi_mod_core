@@ -50,7 +50,7 @@ class Entity
         /** @var DataObject $result */
         $result = new $this->_entityClassName();
         if ($data) {
-            $result->setData($data);
+            $result->set($data);
         }
         return $result;
     }
@@ -144,7 +144,9 @@ class Entity
     public function replace($data)
     {
         if ($data instanceof DataObject) {
-            $data = $data->getData();
+            $data = (array)$data->get();
+        } elseif ($data instanceof \stdClass) {
+            $data = (array)$data;
         }
         $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
         return $result;

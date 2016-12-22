@@ -18,7 +18,9 @@ class  Generic
         $result = null;
         $tbl = $this->_resource->getTableName($entity);
         if ($bind instanceof DataObject) {
-            $data = $bind->getData();
+            $data = (array)$bind->get();
+        } elseif ($bind instanceof \stdClass) {
+            $data = (array)$bind;
         } else {
             $data = $bind;
         }
@@ -109,7 +111,7 @@ class  Generic
     {
         $tbl = $this->_resource->getTableName($entity);
         if ($bind instanceof DataObject) {
-            $data = $bind->getData();
+            $data = $bind->get();
         } else {
             $data = $bind;
         }
@@ -126,7 +128,7 @@ class  Generic
     {
         $tbl = $this->_resource->getTableName($entity);
         if ($bind instanceof DataObject) {
-            $data = $bind->getData();
+            $data = $bind->get();
         } else {
             $data = $bind;
         }

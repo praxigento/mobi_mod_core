@@ -10,5 +10,4 @@ namespace Praxigento\Core\Service;
 
 interface IRequest
 {
-    public function getData();
 }
