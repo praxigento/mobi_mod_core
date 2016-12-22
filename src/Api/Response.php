@@ -11,6 +11,26 @@ abstract class Response
     extends \Flancer32\Lib\DataObject
 {
     /**
+     * Name for inner 'data' attribute cause getData & setData are abstract methods.
+     * Use "parent::get(self::ATTR_DATA)" & "parent::set(self::ATTR_DATA, $data)" in child classes.
+     */
+    const ATTR_DATA = 'data';
+
+    /**#@+
+     * Common result codes.
+     */
+    const CODE_SUCCESS = 'SUCCESS';
+    const CODE_UNDEF = 'UNDEFINED';
+
+    /**#@- */
+
+    public function __construct()
+    {
+        $data = new \Praxigento\Core\Api\Response\Result();
+        $this->setResult($data);
+    }
+
+    /**
      * @return mixed|null
      */
     public abstract function getData();
