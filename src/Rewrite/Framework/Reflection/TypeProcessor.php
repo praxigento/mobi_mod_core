@@ -12,7 +12,6 @@ namespace Praxigento\Core\Rewrite\Framework\Reflection;
 class TypeProcessor
     extends \Magento\Framework\Reflection\TypeProcessor
 {
-    const SKIP_DATA = 'getData';
     const SKIP_DATA_UNSET = 'unsetData';
     const SKIP_ITERATOR = 'getIterator';
 
@@ -24,7 +23,6 @@ class TypeProcessor
         /* skip basic methods of the DataObjects */
         $name = $methodReflection->getName();
         if (
-            $name != self::SKIP_DATA &&
             $name != self::SKIP_ITERATOR &&
             $name != self::SKIP_DATA_UNSET
         ) {

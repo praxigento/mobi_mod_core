@@ -12,17 +12,14 @@ class Type
     const CLASS_MAGE_BASE = \Magento\Framework\Reflection\MethodsMap::BASE_MODEL_CLASS;
     const CLASS_PRXGT_BASE = 'Flancer32\Lib\DataObject';
     const PATTERN_METHOD = "/\@method\s+(.+)\s+(.+)\((.*)\)(.*)/";
-    /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $_manObj;
+
     /** @var \Praxigento\Core\Reflection\Tool\Type */
-    protected $_toolsType;
+    protected $toolsType;
 
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Reflection\Tool\Type $toolsType
     ) {
-        $this->_manObj = $manObj;
-        $this->_toolsType = $toolsType;
+        $this->toolsType = $toolsType;
     }
 
     /**
@@ -112,8 +109,7 @@ class Type
             $desc = $matches[4]??'';
             $desc = trim($desc);
             /* compose result  */
-            /** @var \Praxigento\Core\Reflection\Data\Method $result */
-            $result = $this->_manObj->create(\Praxigento\Core\Reflection\Data\Method::class);
+            $result = new \Praxigento\Core\Reflection\Data\Method();
             $result->setName($methodName);
             $result->setIsRequired($isRequired);
             $result->setType($returnType);
@@ -166,8 +162,7 @@ class Type
      */
     public function _processMethodDocBlock($docBlock)
     {
-        /** @var \Praxigento\Core\Reflection\Data\Method $result */
-        $result = $this->_manObj->create(\Praxigento\Core\Reflection\Data\Method::class);
+        $result = new \Praxigento\Core\Reflection\Data\Method();
         if ($docBlock) {
             $returnAnnotations = $docBlock->getTags('return');
             if (!empty($returnAnnotations)) {
@@ -194,7 +189,7 @@ class Type
     public function getMethods($type)
     {
         $result = [];
-        $typeNorm = $this->_toolsType->normalizeType($type);
+        $typeNorm = $this->toolsType->normalizeType($type);
         /** @var \Zend\Code\Reflection\ClassReflection $reflection */
         $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
         /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
