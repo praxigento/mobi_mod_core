@@ -11,6 +11,11 @@ abstract class Response
     extends \Flancer32\Lib\DataObject
 {
     /**
+     * @return mixed|null
+     */
+    public abstract function getData();
+
+    /**
      * @return \Praxigento\Core\Api\Response\Result
      */
     public function getResult()
@@ -18,6 +23,11 @@ abstract class Response
         $result = parent::getResult();
         return $result;
     }
+
+    /**
+     * @param mixed $data
+     */
+    public abstract function setData($data);
 
     /**
      * @param \Praxigento\Core\Api\Response\Result $data

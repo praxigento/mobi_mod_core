@@ -73,15 +73,15 @@ class Parser
                             /* property is the array of types */
                             $propertyType = $this->_toolType->getTypeAsArrayOfTypes($propertyType);
                             $complex = $this->parseArrayDataRecursive($propertyType, $value);
-                            $result->setData($propName, $complex);
+                            $result->set($propName, $complex);
                         } else {
                             if ($this->_toolType->isSimple($propertyType)) {
                                 /* property is the simple type */
-                                $result->setData($propName, $value);
+                                $result->set($propName, $value);
                             } else {
                                 /* property is the complex type, we need to convert recursively */
                                 $complex = $this->parseArrayDataRecursive($propertyType, $value);
-                                $result->setData($propName, $complex);
+                                $result->set($propName, $complex);
                             }
                         }
                     }
