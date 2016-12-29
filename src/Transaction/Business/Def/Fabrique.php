@@ -27,7 +27,8 @@ class Fabrique
      */
     public function create($name)
     {
-        $result = $this->manObj->create(\Praxigento\Core\Transaction\Business\Def\Item::class);
+        $logger = $this->manObj->get(\Praxigento\Core\Fw\Logger\App::class);
+        $result = new \Praxigento\Core\Transaction\Business\Def\Item($logger);
         $result->setName($name);
         return $result;
     }
