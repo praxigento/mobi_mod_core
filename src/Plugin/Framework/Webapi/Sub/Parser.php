@@ -50,7 +50,7 @@ class Parser
     {
         $isArray = $this->_toolType->isArray($type);
         $typeNorm = $this->_toolType->normalizeType($type);
-        if (is_subclass_of($typeNorm, \Flancer32\Lib\DataObject::class)) {
+        if (is_subclass_of($typeNorm, \Flancer32\Lib\Data::class)) {
             /* Process data objects separately. Register annotated class and parse parameters types. */
             if ($isArray) {
                 /* process $data as array of $types */
@@ -61,7 +61,7 @@ class Parser
             } else {
                 /* process $data as data object of $type */
                 $typeData = $this->_typePropsRegistry->register($typeNorm);
-                $result = $this->_manObj->create($typeNorm);
+                $result = new $typeNorm(); // all data objects are w/o constructor params (Object Manager in production mode!!!!)
                 foreach ($data as $key => $value) {
                     $propName = $this->_toolType->formatPropertyName($key);
                     if (isset($typeData[$propName])) {
