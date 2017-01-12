@@ -16,7 +16,7 @@ class  Generic
     public function addEntity($entity, $bind)
     {
         $result = null;
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         if ($bind instanceof DataObject) {
             $data = (array)$bind->get();
         } elseif ($bind instanceof \stdClass) {
@@ -24,17 +24,17 @@ class  Generic
         } else {
             $data = $bind;
         }
-        $rowsAdded = $this->_conn->insert($tbl, $data);
+        $rowsAdded = $this->conn->insert($tbl, $data);
         if ($rowsAdded) {
-            $result = $this->_conn->lastInsertId($tbl);
+            $result = $this->conn->lastInsertId($tbl);
         }
         return $result;
     }
 
     public function deleteEntity($entity, $where)
     {
-        $tbl = $this->_resource->getTableName($entity);
-        $result = $this->_conn->delete($tbl, $where);
+        $tbl = $this->resource->getTableName($entity);
+        $result = $this->conn->delete($tbl, $where);
         return $result;
     }
 
@@ -45,19 +45,19 @@ class  Generic
      */
     public function deleteEntityByPk($entity, $pk)
     {
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         $where = [];
         foreach ($pk as $field => $value) {
             $where["$field=?"] = $value;
         }
-        $result = $this->_conn->delete($tbl, $where);
+        $result = $this->conn->delete($tbl, $where);
         return $result;
     }
 
     public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
     {
-        $tbl = $this->_resource->getTableName($entity);
-        $query = $this->_conn->select();
+        $tbl = $this->resource->getTableName($entity);
+        $query = $this->conn->select();
         if (is_null($cols)) {
             $cols = '*';
         }
@@ -71,7 +71,7 @@ class  Generic
         if ($limit) {
             $query->limit($limit, $offset);
         }
-        $result = $this->_conn->fetchAll($query);
+        $result = $this->conn->fetchAll($query);
         return $result;
     }
 
@@ -83,39 +83,39 @@ class  Generic
     public function getEntityByPk($entity, $pk, $cols = null)
     {
         // TODO: rename PK to ID
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         /* columns to select */
         $cols = ($cols) ? $cols : '*';
-        $query = $this->_conn->select();
+        $query = $this->conn->select();
         $query->from($tbl, $cols);
         foreach (array_keys($pk) as $field) {
             $query->where("$field=:$field");
         }
-        $result = $this->_conn->fetchRow($query, $pk);
+        $result = $this->conn->fetchRow($query, $pk);
         return $result;
     }
 
     public function replaceEntity($entity, $bind)
     {
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         $keys = array_keys($bind);
         $columns = implode(',', $keys);
         $values = ":" . implode(',:', $keys);
         $query = "REPLACE $tbl ($columns) VALUES ($values)";
-        $this->_conn->query($query, $bind);
-        $result = $this->_conn->lastInsertId($tbl);
+        $this->conn->query($query, $bind);
+        $result = $this->conn->lastInsertId($tbl);
         return $result;
     }
 
     public function updateEntity($entity, $bind, $where = null)
     {
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         if ($bind instanceof DataObject) {
             $data = $bind->get();
         } else {
             $data = $bind;
         }
-        $result = $this->_conn->update($tbl, $data, $where);
+        $result = $this->conn->update($tbl, $data, $where);
         return $result;
     }
 
@@ -126,7 +126,7 @@ class  Generic
      */
     public function updateEntityById($entity, $bind, $id)
     {
-        $tbl = $this->_resource->getTableName($entity);
+        $tbl = $this->resource->getTableName($entity);
         if ($bind instanceof DataObject) {
             $data = $bind->get();
         } else {
@@ -134,9 +134,9 @@ class  Generic
         }
         $where = '1';
         foreach ($id as $field => $value) {
-            $where .= " AND $field=" . $this->_conn->quote($value);
+            $where .= " AND $field=" . $this->conn->quote($value);
         }
-        $result = $this->_conn->update($tbl, $data, $where);
+        $result = $this->conn->update($tbl, $data, $where);
         return $result;
     }
 }

@@ -126,8 +126,8 @@ class Entity
     /** @inheritdoc */
     public function getQueryToSelect()
     {
-        $result = $this->_conn->select();
-        $tbl = $this->_resource->getTableName($this->_entityName);
+        $result = $this->conn->select();
+        $tbl = $this->resource->getTableName($this->_entityName);
         $result->from($tbl);
         return $result;
     }
@@ -135,8 +135,8 @@ class Entity
     /** @inheritdoc */
     public function getQueryToSelectCount()
     {
-        $result = $this->_conn->select();
-        $tbl = $this->_resource->getTableName($this->_entityName);
+        $result = $this->conn->select();
+        $tbl = $this->resource->getTableName($this->_entityName);
         $result->from($tbl, "COUNT({$this->_idFieldName})");
         return $result;
     }
@@ -166,12 +166,12 @@ class Entity
             /* probably this is complex PK */
             $where = '';
             foreach ($id as $key => $value) {
-                $val = is_int($value) ? $value : $this->_conn->quote($value);
+                $val = is_int($value) ? $value : $this->conn->quote($value);
                 $where .= "($key=$val) AND ";
             }
             $where .= '1'; // WHERE ... AND 1;
         } else {
-            $val = is_int($id) ? $id : $this->_conn->quote($id);
+            $val = is_int($id) ? $id : $this->conn->quote($id);
             $where = $this->_idFieldName . '=' . $val;
         }
         $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);

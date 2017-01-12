@@ -11,15 +11,15 @@ abstract class Db
     implements \Praxigento\Core\Repo\IDb
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
-    protected $_conn;
+    protected $conn;
     /** @var \Magento\Framework\App\ResourceConnection */
-    protected $_resource;
+    protected $resource;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource
     ) {
-        $this->_resource = $resource;
-        $this->_conn = $resource->getConnection();
+        $this->resource = $resource;
+        $this->conn = $resource->getConnection();
     }
 
     public function getConnection($name = null)
@@ -27,12 +27,12 @@ abstract class Db
         if (is_null($name)) {
             $name = \Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION;
         }
-        $result = $this->_resource->getConnection($name);
+        $result = $this->resource->getConnection($name);
         return $result;
     }
 
     public function getResource()
     {
-        return $this->_resource;
+        return $this->resource;
     }
 }

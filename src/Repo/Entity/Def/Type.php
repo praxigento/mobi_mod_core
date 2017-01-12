@@ -17,7 +17,7 @@ abstract class Type
     public function getIdByCode($code)
     {
         $result = null;
-        $where = EntityTypeBase::ATTR_CODE . '=' . $this->_conn->quote($code);
+        $where = EntityTypeBase::ATTR_CODE . '=' . $this->conn->quote($code);
         $data = $this->_repoGeneric->getEntities($this->_entityName, null, $where);
         if ($data) {
             $first = reset($data);
