@@ -35,6 +35,7 @@ class Config
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
     const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
+    const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
     const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_CUSTOMER_GROUP = 'customer_group';
@@ -60,6 +61,7 @@ class Config
     const E_CATINV_STOCK_STATUS_A_PROD_ID = ModelStockStatus::KEY_PRODUCT_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_ID = ModelStockStatus::KEY_STOCK_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = ModelStockStatus::KEY_STOCK_STATUS;
+    const E_CAT_PROD_IDX_A_CUST_GROUP_ID = 'customer_group_id';
     const E_COMMON_A_ENTITY_ID = 'entity_id';
     const E_CONFIG_A_PATH = 'path';
     const E_CONFIG_A_SCOPE = 'scope';
