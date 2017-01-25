@@ -102,9 +102,11 @@ class Period implements IPeriod, ICached
     private function _getTzDelta()
     {
         if (is_null($this->tzDelta)) {
-            $this->tzDelta = $this->manObj->get(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+            /** @var \Magento\Framework\Stdlib\DateTime\DateTime $dt */
+            $dt = $this->manObj->get(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+            $this->tzDelta = $dt->getGmtOffset();
         }
-        return $this->_getTzDelta();
+        return $this->tzDelta;
     }
 
     public function cacheReset()
@@ -123,6 +125,7 @@ class Period implements IPeriod, ICached
         $result = null;
         $dt = $this->toolConvert->toDateTime($date);
         if ($withTimezone) {
+
             $dt->setTimestamp($dt->getTimestamp() - $this->_getTzDelta());
         }
         switch ($periodType) {
