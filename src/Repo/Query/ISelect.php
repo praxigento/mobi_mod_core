@@ -5,6 +5,8 @@
 namespace Praxigento\Core\Repo\Query;
 
 /**
+ * TODO: use it or remove it!
+ *
  * Marker-interface to collect methods of the \Magento\Framework\DB\Select that are used in the own repos.
  */
 interface ISelect
