@@ -125,7 +125,6 @@ class Period implements IPeriod, ICached
         $result = null;
         $dt = $this->toolConvert->toDateTime($date);
         if ($withTimezone) {
-
             $dt->setTimestamp($dt->getTimestamp() - $this->_getTzDelta());
         }
         switch ($periodType) {

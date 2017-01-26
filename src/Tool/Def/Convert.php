@@ -43,6 +43,8 @@ class Convert
             $result = $dt;
         } elseif ($data instanceof \DateTime) {
             $result = $data;
+        } elseif (is_null($data)) {
+            $result = new \DateTime();
         } else {
             $result = \DateTime::createFromFormat(Cfg::FORMAT_DATETIME, trim($data));
         }
