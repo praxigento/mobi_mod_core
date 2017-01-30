@@ -20,7 +20,7 @@ interface IEntity
     /**
      * Get array with names of the primary key attributes.
      *
-     * @return array
+     * @return string[]
      */
     public function getPrimaryKeyAttrs();
 }

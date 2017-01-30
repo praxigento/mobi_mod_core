@@ -11,7 +11,9 @@ abstract class Base
     extends \Flancer32\Lib\DataObject
     implements \Praxigento\Core\Data\IEntity
 {
-    /** @inheritdoc */
+    /**
+     * @return string
+     */
     public function getEntityName()
     {
         return static::ENTITY_NAME; // "static::" will use child attribute value
