@@ -73,7 +73,9 @@ class Config
     const E_CUSTOMER_A_EMAIL = 'email';
     const E_CUSTOMER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_CUSTOMER_A_FIRSTNAME = 'firstname';
+    const E_CUSTOMER_A_GROUP_ID = 'group_id';
     const E_CUSTOMER_A_LASTNAME = 'lastname';
+    const E_CUSTOMER_A_PASS_HASH = 'password_hash';
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';
     const E_PRODUCT_A_ATTR_SET_ID = 'attribute_set_id';
     const E_PRODUCT_A_CRETED_AT = 'created_at';
