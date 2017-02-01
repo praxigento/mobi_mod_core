@@ -31,7 +31,7 @@ class  Generic
         return $result;
     }
 
-    public function deleteEntity($entity, $where)
+    public function deleteEntity($entity, $where = null)
     {
         $tbl = $this->resource->getTableName($entity);
         $result = $this->conn->delete($tbl, $where);

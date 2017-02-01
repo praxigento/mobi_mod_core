@@ -68,7 +68,7 @@ abstract class BaseIntegrationTest
      * @var array [ $index  => $entityId, ... ]
      */
     protected $_mapCustomerMageIdByIndex = [];
-    /** @var \Mage_Core_Model_Resource|\Magento\Framework\App\ResourceConnection */
+    /** @var \Magento\Framework\App\ResourceConnection */
     protected $_resource;
     /** @var  IPeriod */
     protected $_toolPeriod;

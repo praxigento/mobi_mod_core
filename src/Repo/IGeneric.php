@@ -28,7 +28,7 @@ interface IGeneric
      * @param mixed $where condition to select entities for delete.
      * @return int number of deleted rows
      */
-    public function deleteEntity($entity, $where);
+    public function deleteEntity($entity, $where = null);
 
     /**
      * Delete one simple entity using primary key.
