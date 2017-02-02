@@ -15,6 +15,8 @@ class Config
     const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Default stock ID for empty Magento instance. */
     const DEF_STOCK_ID = 1;
+    /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
+    const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
     /** Default 'admin' website ID for empty Magento instance */
     const DEF_WEBSITE_ID_ADMIN = 0;
     /** Default 'base' website ID for empty Magento instance */
