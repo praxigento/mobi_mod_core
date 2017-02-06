@@ -20,6 +20,7 @@ abstract class Response
      * Common result codes.
      */
     const CODE_SUCCESS = 'SUCCESS';
+    const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     const CODE_UNDEF = 'UNDEFINED';
 
     /**#@- */
