@@ -55,7 +55,10 @@ class Date implements IDate
     public function getMageNow()
     {
         $dtUtc = $this->getUtcNow();
-        $result = $dtUtc->setTimestamp($dtUtc->getTimestamp() + $this->_getTzDelta());
+        $delta = $this->_getTzDelta();
+        $tsUtc = $dtUtc->getTimestamp();
+        $tsDelta = $delta->getGmtOffset();
+        $result = $dtUtc->setTimestamp($tsUtc + $tsDelta);
         return $result;
     }
 
