@@ -77,6 +77,7 @@ class Config
     const E_CUSTADDR_A_FAX = 'fax';
     const E_CUSTADDR_A_FIRSTNAME = 'firstname';
     const E_CUSTADDR_A_LASTNAME = 'lastname';
+    const E_CUSTADDR_A_PARENT_ID = 'parent_id';
     const E_CUSTADDR_A_POSTCODE = 'postcode';
     const E_CUSTADDR_A_STREET = 'street';
     const E_CUSTADDR_A_TELEPHONE = 'telephone';
