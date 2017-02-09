@@ -13,10 +13,10 @@ use Magento\Sales\Api\Data\OrderItemInterface as ModelOrderItem;
 class Config
 {
     const DEFAULT_WRITE_RESOURCE = 'core_write';
-    /** Default stock ID for empty Magento instance. */
-    const DEF_STOCK_ID = 1;
     /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
     const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
+    /** Default stock ID for empty Magento instance. */
+    const DEF_STOCK_ID = 1;
     /** Default 'admin' website ID for empty Magento instance */
     const DEF_WEBSITE_ID_ADMIN = 0;
     /** Default 'base' website ID for empty Magento instance */
@@ -72,9 +72,12 @@ class Config
     const E_CUSTGROUP_A_CODE = 'customer_group_code';
     const E_CUSTGROUP_A_ID = 'customer_group_id';
     const E_CUSTGROUP_A_TAX_CLASS_ID = 'tax_class_id';
+    const E_CUSTOMER_A_CREATED_AT = 'created_at';
+    const E_CUSTOMER_A_DOB = 'dob';
     const E_CUSTOMER_A_EMAIL = 'email';
     const E_CUSTOMER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_CUSTOMER_A_FIRSTNAME = 'firstname';
+    const E_CUSTOMER_A_GENDER = 'gender';
     const E_CUSTOMER_A_GROUP_ID = 'group_id';
     const E_CUSTOMER_A_LASTNAME = 'lastname';
     const E_CUSTOMER_A_PASS_HASH = 'password_hash';
