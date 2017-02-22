@@ -5,7 +5,7 @@
 namespace Praxigento\Core\Repo\Agg;
 
 /**
- * Base class for factories to create SQL quieries for aggregates.
+ * Base class for factories to create SQL queries for aggregates.
  *
  * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
