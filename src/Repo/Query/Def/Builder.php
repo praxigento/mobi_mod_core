@@ -36,7 +36,7 @@ abstract class Builder
     }
 
     /**
-     * Will throw an error if is not overriden.
+     * Will throw an error if is not overridden.
      *
      * @inheritdoc
      */
@@ -47,7 +47,7 @@ abstract class Builder
     }
 
     /**
-     * Will throw an error if is not overriden.
+     * Will throw an error if is not overridden.
      *
      * @inheritdoc
      */
