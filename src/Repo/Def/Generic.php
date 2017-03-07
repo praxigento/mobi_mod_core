@@ -111,9 +111,9 @@ class  Generic
     {
         $tbl = $this->resource->getTableName($entity);
         if ($bind instanceof DataObject) {
-            $data = $bind->get();
+            $data = (array)$bind->get();
         } else {
-            $data = $bind;
+            $data = (array)$bind;
         }
         $result = $this->conn->update($tbl, $data, $where);
         return $result;
