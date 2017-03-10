@@ -1,71 +1,103 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- *** -->
+    <!-- API -->
+    <!-- *** -->
+    <preference for="\Praxigento\Core\Api\IAuthenticator"
+            type="\Praxigento\Core\Api\Authenticator"/>
 
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
     <type name="Magento\Framework\Json\DecoderInterface">
         <!-- Cut form key from REST request and add as JSON attribute (MOBI-473). -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Json\Decoder" sortOrder="100" disabled="false"/>
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Json\Decoder"
+                sortOrder="100" disabled="false"/>
     </type>
 
     <type name="Magento\Framework\Reflection\MethodsMap">
         <!-- Replace Magento mapper to get full methods map (including annotated) used in DO2JSON conversion. -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\MethodsMap" sortOrder="100" disabled="false"/>
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Reflection\MethodsMap"
+                sortOrder="100" disabled="false"/>
     </type>
 
     <type name="Magento\Framework\Reflection\TypeProcessor">
         <!-- Add "\Praxigento\*" namespace to available namespaces for web service schema generation -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor" sortOrder="100" disabled="false"/>
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor"
+                sortOrder="100" disabled="false"/>
     </type>
 
     <type name="Magento\Framework\Webapi\ServiceInputProcessor">
         <!-- Process annotated methods in API data objects -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor" sortOrder="100" disabled="false"/>
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor"
+                sortOrder="100" disabled="false"/>
     </type>
 
     <type name="Magento\Framework\Webapi\ServiceOutputProcessor">
         <!-- Process annotated methods in API data objects -->
-        <plugin name="praxigento_core_plugin" type="Praxigento\Core\Plugin\Framework\Webapi\ServiceOutputProcessor" sortOrder="100" disabled="false"/>
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Webapi\ServiceOutputProcessor"
+                sortOrder="100" disabled="false"/>
     </type>
 
 
     <!-- ***** -->
     <!-- Repos -->
     <!-- ***** -->
-    <preference for="Praxigento\Core\Repo\Query\ISelect" type="Praxigento\Core\Repo\Query\Def\Select"/>
-    <preference for="Praxigento\Core\Repo\IGeneric" type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter" type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
+    <preference for="Praxigento\Core\Repo\Query\ISelect"
+            type="Praxigento\Core\Repo\Query\Def\Select"/>
+    <preference for="Praxigento\Core\Repo\IGeneric"
+            type="Praxigento\Core\Repo\Def\Generic"/>
+    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter"
+            type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
 
 
     <!-- ******** -->
     <!-- REWRITES -->
     <!-- ******** -->
-    <preference for="Magento\Framework\Reflection\TypeProcessor" type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
+    <preference for="Magento\Framework\Reflection\TypeProcessor"
+            type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
 
 
     <!-- *********** -->
     <!-- Transaction -->
     <!-- *********** -->
-    <preference for="Praxigento\Core\Transaction\Business\IFabrique" type="Praxigento\Core\Transaction\Business\Def\Fabrique"/>
-    <preference for="Praxigento\Core\Transaction\Business\IItem" type="Praxigento\Core\Transaction\Business\Def\Item"/>
-    <preference for="Praxigento\Core\Transaction\Business\IManager" type="Praxigento\Core\Transaction\Business\Def\Manager"/>
-    <preference for="Praxigento\Core\Transaction\Database\IFabrique" type="Praxigento\Core\Transaction\Database\Def\Fabrique"/>
-    <preference for="Praxigento\Core\Transaction\Database\IItem" type="Praxigento\Core\Transaction\Database\Def\Item"/>
-    <preference for="Praxigento\Core\Transaction\Database\IManager" type="Praxigento\Core\Transaction\Database\Def\Manager"/>
+    <preference for="Praxigento\Core\Transaction\Business\IFabrique"
+            type="Praxigento\Core\Transaction\Business\Def\Fabrique"/>
+    <preference for="Praxigento\Core\Transaction\Business\IItem"
+            type="Praxigento\Core\Transaction\Business\Def\Item"/>
+    <preference for="Praxigento\Core\Transaction\Business\IManager"
+            type="Praxigento\Core\Transaction\Business\Def\Manager"/>
+    <preference for="Praxigento\Core\Transaction\Database\IFabrique"
+            type="Praxigento\Core\Transaction\Database\Def\Fabrique"/>
+    <preference for="Praxigento\Core\Transaction\Database\IItem"
+            type="Praxigento\Core\Transaction\Database\Def\Item"/>
+    <preference for="Praxigento\Core\Transaction\Database\IManager"
+            type="Praxigento\Core\Transaction\Database\Def\Manager"/>
 
     <!-- ***** -->
     <!-- Tools -->
     <!-- ***** -->
-    <preference for="Praxigento\Core\Tool\IConvert" type="Praxigento\Core\Tool\Def\Convert"/>
-    <preference for="Praxigento\Core\Tool\IDate" type="Praxigento\Core\Tool\Def\Date"/>
-    <preference for="Praxigento\Core\Tool\IFormat" type="Praxigento\Core\Tool\Def\Format"/>
-    <preference for="Praxigento\Core\Tool\IPeriod" type="Praxigento\Core\Tool\Def\Period"/>
+    <preference for="Praxigento\Core\Tool\IConvert"
+            type="Praxigento\Core\Tool\Def\Convert"/>
+    <preference for="Praxigento\Core\Tool\IDate"
+            type="Praxigento\Core\Tool\Def\Date"/>
+    <preference for="Praxigento\Core\Tool\IFormat"
+            type="Praxigento\Core\Tool\Def\Format"/>
+    <preference for="Praxigento\Core\Tool\IPeriod"
+            type="Praxigento\Core\Tool\Def\Period"/>
 
     <!-- ***** -->
     <!-- Other -->
     <!-- ***** -->
     <!-- Replace Magento logger by Praxigento Logger (see application di.xml for more) -->
-    <preference for="Psr\Log\LoggerInterface" type="Praxigento\Logging\Logger"/>
+    <preference for="Psr\Log\LoggerInterface"
+            type="Praxigento\Logging\Logger"/>
 
 </config>
