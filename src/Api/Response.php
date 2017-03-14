@@ -8,7 +8,7 @@ namespace Praxigento\Core\Api;
  * Base for API responses.
  */
 abstract class Response
-    extends \Flancer32\Lib\DataObject
+    extends \Flancer32\Lib\Data
 {
     /**
      * Name for inner 'data' attribute cause getData & setData are abstract methods.
@@ -22,7 +22,6 @@ abstract class Response
     const CODE_SUCCESS = 'SUCCESS';
     const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     const CODE_UNDEF = 'UNDEFINED';
-
     /**#@- */
 
     public function __construct()

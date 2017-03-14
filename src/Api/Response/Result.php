@@ -5,10 +5,10 @@
 namespace Praxigento\Core\Api\Response;
 
 /**
- * Response result data. If "SUCCESS" then $text is ommitted.
+ * Response result data. If "SUCCESS" then $text is omitted.
  */
 class Result
-    extends \Flancer32\Lib\DataObject
+    extends \Flancer32\Lib\Data
 {
     /**
      * @return string
