@@ -42,8 +42,7 @@ abstract class Builder
      */
     public function getCountQuery(\Praxigento\Core\Repo\Query\IBuilder $qbuild = null)
     {
-        $result = $qbuild->getCountQuery();
-        return $result;
+        throw new \Exception('Implement if you need this query.');
     }
 
     /**
@@ -53,7 +52,6 @@ abstract class Builder
      */
     public function getSelectQuery(\Praxigento\Core\Repo\Query\IBuilder $qbuild = null)
     {
-        $result = $qbuild->getSelectQuery();
-        return $result;
+        throw new \Exception('Implement if you need this query.');
     }
 }
