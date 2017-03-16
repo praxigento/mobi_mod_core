@@ -32,6 +32,11 @@ class TypeProcessor
                 $moduleName = $matches[2];
                 $typeNameParts = explode('\\', $matches[3]);
                 $result = ucfirst($moduleNamespace . $moduleName . implode('', $typeNameParts));
+            } elseif (preg_match('/\\\\?(Flancer32)\\\\([A-Za-z0-9]*)\\\\(.*)/', $class, $matches)) {
+                $moduleNamespace = 'Flancer32';
+                $moduleName = $matches[2];
+                $typeNameParts = explode('\\', $matches[3]);
+                $result = ucfirst($moduleNamespace . $moduleName . implode('', $typeNameParts));
             } else {
                 throw $e;
             }
