@@ -10,9 +10,28 @@ namespace Praxigento\Core\Api\Request\Part\Conditions\Filter;
 class Group
     extends \Flancer32\Lib\Data
 {
+    /**#@+
+     * Operations to apply to group entries.
+     */
+    const OP_AND = 'AND';
+    const OP_NOT = 'NOT';
+    const OP_OR = 'OR';
+    /**#@-  */
 
     /**
-     * Operand to apply to the group entries.
+     * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
+     * or entries (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
+     *
+     * @return \Flancer32\Lib\Data[]
+     */
+    public function getEntries()
+    {
+        $result = parent::getEntries();
+        return $result;
+    }
+
+    /**
+     * Operation to apply to the group entries.
      *
      * @return string
      */
@@ -23,14 +42,23 @@ class Group
     }
 
     /**
-     * Group entries (filters or other groups).
+     * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
+     * or entries (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
      *
-     * @return array
+     * @param \Flancer32\Lib\Data[] $data
      */
-    public function getEntries()
+    public function setEntries($data)
     {
-        $result = parent::getEntries();
-        return $result;
+        parent::setEntries($data);
     }
 
+    /**
+     * Operation to apply to the group entries.
+     *
+     * @param string $data
+     */
+    public function setWith($data)
+    {
+        parent::setWith($data);
+    }
 }

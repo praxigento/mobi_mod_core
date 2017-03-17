@@ -35,4 +35,23 @@ class Entry
         return $result;
     }
 
+    /**
+     * Name of the attribute in result set.
+     *
+     * @param string $data
+     */
+    public function setAttr($data)
+    {
+        parent::setAttr($data);
+    }
+
+    /**
+     * Ordering direction ('asc', 'desc').
+     *
+     * @param string $data
+     */
+    public function setDir($data)
+    {
+        parent::setDir($data);
+    }
 }

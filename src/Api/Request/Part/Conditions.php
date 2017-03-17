@@ -11,17 +11,8 @@ class Conditions
     extends \Flancer32\Lib\Data
 {
     /**
-     * Set of ordering conditions.
+     * Filtering conditions. Condition can be
      *
-     * @return \Praxigento\Core\Api\Request\Part\Conditions\Order\Entry[]
-     */
-    public function getOrder()
-    {
-        $result = parent::getOrder();
-        return $result;
-    }
-
-    /**
      * @return \Flancer32\Lib\Data[]
      */
     public function getFilters()
@@ -50,5 +41,56 @@ class Conditions
     {
         $result = parent::getOffset();
         return $result;
+    }
+
+    /**
+     * Set of ordering conditions.
+     *
+     * @return \Praxigento\Core\Api\Request\Part\Conditions\Order\Entry[]
+     */
+    public function getOrder()
+    {
+        $result = parent::getOrder();
+        return $result;
+    }
+
+    /**
+     * Filtering conditions.
+     *
+     * @param \Flancer32\Lib\Data[] $data
+     */
+    public function setFilters($data)
+    {
+        parent::setFilters($data);
+    }
+
+    /**
+     * Number of entries in result set to return.
+     *
+     * @param int $data
+     */
+    public function setLimit($data)
+    {
+        parent::setLimit($data);
+    }
+
+    /**
+     * Offset in selected data to skip in result set.
+     *
+     * @param int $data
+     */
+    public function setOffset($data)
+    {
+        parent::setOffset($data);
+    }
+
+    /**
+     * Set of ordering conditions.
+     *
+     * @param \Praxigento\Core\Api\Request\Part\Conditions\Order\Entry[] $data
+     */
+    public function setOrder($data)
+    {
+        parent::setOrder($data);
     }
 }
