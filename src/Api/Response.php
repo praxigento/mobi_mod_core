@@ -7,7 +7,7 @@ namespace Praxigento\Core\Api;
 /**
  * Base for API responses.
  */
-abstract class Response
+class Response
     extends \Flancer32\Lib\Data
 {
     /**
@@ -15,12 +15,11 @@ abstract class Response
      * Use "parent::get(self::ATTR_DATA)" & "parent::set(self::ATTR_DATA, $data)" in child classes.
      */
     const ATTR_DATA = 'data';
-
+    const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     /**#@+
      * Common result codes.
      */
     const CODE_SUCCESS = 'SUCCESS';
-    const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     const CODE_UNDEF = 'UNDEFINED';
     /**#@- */
 
@@ -31,9 +30,15 @@ abstract class Response
     }
 
     /**
-     * @return mixed|null
+     * Override to get appropriate JSON structure in response.
+     *
+     * @return \Flancer32\Lib\Data|null
      */
-    public abstract function getData();
+    public function getData()
+    {
+        $result = parent::getData();
+        return $result;
+    }
 
     /**
      * @return \Praxigento\Core\Api\Response\Result
@@ -45,9 +50,14 @@ abstract class Response
     }
 
     /**
-     * @param mixed $data
+     * Override to get appropriate JSON structure in response.
+     *
+     * @param \Flancer32\Lib\Data $data
      */
-    public abstract function setData($data);
+    public function setData($data)
+    {
+        parent::setData($data);
+    }
 
     /**
      * @param \Praxigento\Core\Api\Response\Result $data
