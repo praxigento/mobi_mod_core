@@ -32,7 +32,6 @@ abstract class WithQuery
         $this->performQuery($ctx);
 
         /* get query results from context and add to API response */
-        $class = static::RESPONSE_CLASS;
         /** @var \Praxigento\Core\Api\Response $result */
         $result = new \Praxigento\Core\Api\Response();
         $rs = $ctx->get(self::CTX_RESULT);
