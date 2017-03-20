@@ -27,7 +27,7 @@ abstract class WithQuery
 
         /* parse request, prepare query and fetch data */
         $this->prepareQueryParameters($ctx);
-        $this->getSelectQuery($ctx);
+        $this->createQuerySelect($ctx);
         $this->populateQuery($ctx);
         $this->performQuery($ctx);
 
@@ -44,7 +44,7 @@ abstract class WithQuery
      *
      * @param \Flancer32\Lib\Data $ctx
      */
-    protected abstract function getSelectQuery(\Flancer32\Lib\Data $ctx);
+    protected abstract function createQuerySelect(\Flancer32\Lib\Data $ctx);
 
     /**
      * Get query from context, execute it and place results back into context.
