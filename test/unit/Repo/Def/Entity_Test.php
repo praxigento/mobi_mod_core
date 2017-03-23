@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
-use Flancer32\Lib\DataObject;
+use Flancer32\Lib\Data as DataObject;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 

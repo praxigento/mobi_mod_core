@@ -6,7 +6,7 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
-use Flancer32\Lib\DataObject;
+use Flancer32\Lib\Data as DataObject;
 
 class Entity
     extends \Praxigento\Core\Repo\Def\Crud

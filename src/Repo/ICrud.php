@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Repo;
 
-use Flancer32\Lib\DataObject;
+use Flancer32\Lib\Data as DataObject;
 
 /**
  * Base interface for CRUD repositories (general Create-Read-Update-Delete operations).

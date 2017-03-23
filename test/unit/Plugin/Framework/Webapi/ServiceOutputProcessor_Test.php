@@ -49,7 +49,7 @@ class ServiceOutputProcessor_UnitTest
         $typeSimple = 'simple type';
         $typeComplex = 'complex type';
         $typeComplexArr = 'complex type[]';
-        $data = new \Flancer32\Lib\DataObject([
+        $data = new \Flancer32\Lib\Data([
             $propSimple => $valueSimple,
             $propComplex => $valueComplex
         ]);

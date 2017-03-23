@@ -7,7 +7,7 @@
 
 namespace Praxigento\Core\Setup\Dem;
 
-use Flancer32\Lib\DataObject;
+use Flancer32\Lib\Data as DataObject;
 use Praxigento\Core\Config;
 use Praxigento\Core\Setup\Dem\Cfg as DemCfg;
 

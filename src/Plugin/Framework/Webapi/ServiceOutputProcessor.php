@@ -39,7 +39,7 @@ class ServiceOutputProcessor
         $data,
         $type
     ) {
-        if ($data instanceof \Flancer32\Lib\DataObject) {
+        if ($data instanceof \Flancer32\Lib\Data) {
             $result = [];
             $typeData = $this->_typePropertiesRegistry->register($type);
             /**

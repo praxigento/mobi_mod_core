@@ -9,7 +9,7 @@ namespace Praxigento\Core\Service\Base;
  * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Response
-    extends \Flancer32\Lib\DataObject
+    extends \Flancer32\Lib\Data
     implements \Praxigento\Core\Service\IResponse
 {
     /** @var string */

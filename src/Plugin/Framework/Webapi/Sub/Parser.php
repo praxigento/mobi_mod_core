@@ -4,11 +4,11 @@
  */
 namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
 
-use Flancer32\Lib\DataObject;
+use Flancer32\Lib\Data as DataObject;
 
 /**
  * Parse associative array and convert it into the DataObject according to given type.
- * Given type must be child of the \Flancer32\Lib\DataObject class or simple type (string, int, ...).
+ * Given type must be child of the \Flancer32\Lib\Data class or simple type (string, int, ...).
  */
 class Parser
 {
