@@ -15,6 +15,7 @@ interface IResponse
      */
     const ERR_NO_ERROR = 'no_error';
     const ERR_UNDEFINED = 'undefined';
+    const ERR_VALIDATION = 'validation_err';
     /**#@- */
 
     /**
