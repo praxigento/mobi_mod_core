@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Console\Command;
+namespace Praxigento\Core\Cli\Cmd;
 
 /**
  * Base class to create console commands.
