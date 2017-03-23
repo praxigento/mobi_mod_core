@@ -15,12 +15,14 @@ class Response
      * Use "parent::get(self::ATTR_DATA)" & "parent::set(self::ATTR_DATA, $data)" in child classes.
      */
     const ATTR_DATA = 'data';
-    const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     /**#@+
      * Common result codes.
      */
+    const CODE_FAILED = 'FAILED';
+    const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     const CODE_SUCCESS = 'SUCCESS';
     const CODE_UNDEF = 'UNDEFINED';
+
     /**#@- */
 
     public function __construct()
