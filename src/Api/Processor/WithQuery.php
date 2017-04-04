@@ -2,6 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api\Processor;
 
 abstract class WithQuery
@@ -20,6 +21,16 @@ abstract class WithQuery
     ) {
         $this->qbld = $qbld;
     }
+
+    /**
+     * Check right of the current customer to perform requested operation.
+     * This method should throws "\Magento\Framework\Exception\AuthorizationException" if customer is not authorized
+     * to perform operation.
+     *
+     * @param \Flancer32\Lib\Data $ctx
+     * @throws \Magento\Framework\Exception\AuthorizationException
+     */
+    protected abstract function authorize(\Flancer32\Lib\Data $ctx);
 
     /**
      * Create query to select data and place it to context.
@@ -81,8 +92,9 @@ abstract class WithQuery
         $ctx->set(self::CTX_VARS, new \Flancer32\Lib\Data());
         $ctx->set(self::CTX_RESULT, null);
 
-        /* parse request, prepare query and fetch data */
+        /* parse request, authorize customer, prepare query and fetch data */
         $this->prepareQueryParameters($ctx);
+        $this->authorize($ctx);
         $this->createQuerySelect($ctx);
         $this->populateQuery($ctx);
         $this->performQuery($ctx);

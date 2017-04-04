@@ -2,6 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api;
 
 /**
@@ -10,13 +11,18 @@ namespace Praxigento\Core\Api;
 interface IAuthenticator
 {
     /**
+     * @return \Flancer32\Lib\Data
+     */
+    public function getCurrentUserData();
+
+    /**
+     * @return int
+     */
+    public function getCurrentUserId();
+
+    /**
      *
      * @return boolean
      */
     public function isAuthenticated();
-
-    /**
-     * @return \Flancer32\Lib\Data
-     */
-    public function getCurrentUserData();
 }

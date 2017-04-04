@@ -2,7 +2,10 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api;
+
+use \Praxigento\Core\Config as Cfg;
 
 /**
  * Default implementation for REST API authenticator.
@@ -37,4 +40,10 @@ class Authenticator
         return $result;
     }
 
+    public function getCurrentUserId()
+    {
+        $data = $this->getCurrentUserData();
+        $result = $data->get(Cfg::E_CUSTOMER_A_ENTITY_ID);
+        return $result;
+    }
 }
