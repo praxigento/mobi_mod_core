@@ -6,5 +6,22 @@
         <tab id="praxigento_mobi" translate="label" sortOrder="099">
             <label>MOBI</label>
         </tab>
+        <section id="praxigento_api" translate="label"
+                sortOrder="1024" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>API</label>
+            <tab>praxigento_mobi</tab>
+            <resource>Praxigento_Core::api</resource>
+            <group id="authentication" translate="label" type="text"
+                    sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Authentication</label>
+                <field id="enabled_dev_mode" translate="label comment tooltip" type="select"
+                        sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable DevMode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Switch on/off development mode for MOBI API Authentication.</comment>
+                    <tooltip>Enable Development Mode to use IDs from requests rather then IDs from MOBI authenticator.</tooltip>
+                </field>
+            </group>
+        </section>
     </system>
 </config>
