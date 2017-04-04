@@ -26,10 +26,9 @@ interface IAuthenticator
     public function getCurrentCustomerId($offer = null);
 
     /**
-     * Return 'true' if user is logged in.
+     * Return 'true' if MOBI API Developer Mode is enabled.
      *
      * @return boolean
-     * @deprecated this method is never used. use it or remove it.
      */
-    public function isAuthenticated();
+    public function isEnabledDevMode();
 }

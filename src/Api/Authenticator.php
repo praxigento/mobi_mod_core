@@ -5,7 +5,7 @@
 
 namespace Praxigento\Core\Api;
 
-use \Praxigento\Core\Config as Cfg;
+use Praxigento\Core\Config as Cfg;
 
 /**
  * Default implementation for REST API authenticator.
@@ -13,12 +13,12 @@ use \Praxigento\Core\Config as Cfg;
 class Authenticator
     implements \Praxigento\Core\Api\IAuthenticator
 {
+    /** @var  \Flancer32\Lib\Data */
+    protected $cacheCurrentCustomer;
     /** @var \Praxigento\Core\Helper\Config */
     protected $hlpCfg;
     /** @var \Magento\Customer\Model\Session */
     protected $sessCustomer;
-    /** @var  \Flancer32\Lib\Data */
-    protected $cacheCurrentCustomer;
 
     public function __construct(
         \Magento\Customer\Model\Session $sessCustomer,
@@ -57,9 +57,9 @@ class Authenticator
         return $result;
     }
 
-    public function isAuthenticated()
+    public function isEnabledDevMode()
     {
-        $result = $this->sessCustomer->isLoggedIn();
+        $result = $this->hlpCfg->getApiAuthenticationEnabledDevMode();
         return $result;
     }
 }
