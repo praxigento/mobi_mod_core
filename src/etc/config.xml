@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <praxigento_api>
+            <authentication>
+                <enabled_dev_mode>1</enabled_dev_mode>
+            </authentication>
+        </praxigento_api>
+    </default>
+</config>
