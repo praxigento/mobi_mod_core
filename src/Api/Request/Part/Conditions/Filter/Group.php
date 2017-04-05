@@ -2,10 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api\Request\Part\Conditions\Filter;
 
 /**
- * Filters group. Group contains simple filters or other filters groups and operand to apply ('or', 'and').
+ * Filtering group. Group contains simple clauses or other groups and operand to apply ('or', 'and').
  */
 class Group
     extends \Flancer32\Lib\Data
@@ -20,7 +21,7 @@ class Group
 
     /**
      * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
-     * or entries (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
+     * or clauses (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Clause) to filter result set.
      *
      * @return \Flancer32\Lib\Data[]
      */
@@ -43,7 +44,7 @@ class Group
 
     /**
      * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
-     * or entries (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
+     * or clauses (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
      *
      * @param \Flancer32\Lib\Data[] $data
      */

@@ -2,6 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api\Request\Part;
 
 /**
@@ -11,13 +12,13 @@ class Conditions
     extends \Flancer32\Lib\Data
 {
     /**
-     * Filtering conditions. Condition can be
+     * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).
      *
-     * @return \Flancer32\Lib\Data[]
+     * @return \Praxigento\Core\Api\Request\Part\Conditions\Filter
      */
-    public function getFilters()
+    public function getFilter()
     {
-        $result = parent::getFilters();
+        $result = parent::getFilter();
         return $result;
     }
 
@@ -55,13 +56,13 @@ class Conditions
     }
 
     /**
-     * Filtering conditions.
+     * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).
      *
-     * @param \Flancer32\Lib\Data[] $data
+     * @param \Praxigento\Core\Api\Request\Part\Conditions\Filter $data
      */
-    public function setFilters($data)
+    public function setFilter($data)
     {
-        parent::setFilters($data);
+        parent::setFilter($data);
     }
 
     /**

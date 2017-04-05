@@ -2,17 +2,18 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Api\Request\Part\Conditions\Filter;
 
 /**
- * Filtering entry (standalone filter).
+ * Filtering clause (standalone filter).
  */
-class Entry
+class Clause
     extends \Flancer32\Lib\Data
 {
 
     /**
-     * Set of attributes/values to be used in the filter expression.
+     * Set of attributes/values to be used in the filtering expression.
      *
      * @return string[]|null
      */
@@ -23,7 +24,7 @@ class Entry
     }
 
     /**
-     * Name of the attribute in result set.
+     * Name of the attribute in the result set to be filtered.
      *
      * @return string
      */
@@ -34,7 +35,7 @@ class Entry
     }
 
     /**
-     * Function/operation to use in the filter expression.
+     * Function/operation to use in the filtering expression.
      *
      * @return string
      */
@@ -45,7 +46,7 @@ class Entry
     }
 
     /**
-     * Single value to be used in the filter expression.
+     * Single value to be used in the filtering expression.
      *
      * @return string|null
      */
@@ -56,7 +57,7 @@ class Entry
     }
 
     /**
-     * Set of attributes/values to be used in the filter expression.
+     * Set of attributes/values to be used in the filtering expression.
      *
      * @param string[] $data
      */
@@ -66,7 +67,7 @@ class Entry
     }
 
     /**
-     * Name of the attribute in result set.
+     * Name of the attribute in the result set to be filtered.
      *
      * @param string $data
      */
@@ -76,7 +77,7 @@ class Entry
     }
 
     /**
-     * Function/operation to use in the filter expression.
+     * Function/operation to use in the filtering expression.
      *
      * @param string $data
      */
@@ -86,7 +87,7 @@ class Entry
     }
 
     /**
-     * Single value to be used in the filter expression.
+     * Single value to be used in the filtering expression.
      *
      * @param string $data
      */

@@ -24,6 +24,16 @@ class Conditions
             /* we need to get reverse map: $valueAlias => [$tblAlias, $column] */
             $map = $this->mapReverse($columns);
 
+            /* process filters */
+            $filters = $cond->getFilter();
+            if ($filters) {
+                if ($filters->getClause()) {
+                    /* there is single filtering clause in the filter */
+                } elseif ($filters->getGroup()) {
+                    /* there is single group of the filtering clauses in the filter */
+                }
+            }
+
             /* process limit & offset */
             $limit = (int)$cond->getLimit();
             $offset = (int)$cond->getOffset();
@@ -33,21 +43,24 @@ class Conditions
                 $query->limit($limit);
             }
 
+
             /* process order */
             $order = $cond->getOrder();
-            foreach ($order as $one) {
-                $alias = $one->getAttr();
-                $dir = $one->getDir();
-                if (strtoupper($dir) == \Zend_Db_Select::SQL_DESC) {
-                    $dir = \Zend_Db_Select::SQL_DESC;
-                } else {
-                    $dir = \Zend_Db_Select::SQL_ASC;
-                }
-                if (isset($map[$alias])) {
-                    $pair = $map[$alias];
-                    $tblAlias = $pair[0];
-                    $col = $pair[1];
-                    $query->order("$tblAlias.$col $dir");
+            if (is_array($order)) {
+                foreach ($order as $one) {
+                    $alias = $one->getAttr();
+                    $dir = $one->getDir();
+                    if (strtoupper($dir) == \Zend_Db_Select::SQL_DESC) {
+                        $dir = \Zend_Db_Select::SQL_DESC;
+                    } else {
+                        $dir = \Zend_Db_Select::SQL_ASC;
+                    }
+                    if (isset($map[$alias])) {
+                        $pair = $map[$alias];
+                        $tblAlias = $pair[0];
+                        $col = $pair[1];
+                        $query->order("$tblAlias.$col $dir");
+                    }
                 }
             }
         }
