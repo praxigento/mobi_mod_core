@@ -13,13 +13,22 @@ abstract class WithQuery
     const CTX_RESULT = 'result'; // data to place to response
     const CTX_VARS = 'vars'; // working variables
 
+    const VAR_CONDITIONS = 'conditions'; // query conditions (filter, order, paging)
+    /** @var  \Magento\Framework\ObjectManagerInterface */
+    protected $manObj;
     /** @var  \Praxigento\Core\Repo\Query\IBuilder */
     protected $qbld;
+    /** @var  \Praxigento\Core\Api\Processor\WithQuery\Conditions */
+    protected $subCond;
 
     public function __construct(
+        \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\Query\IBuilder $qbld
     ) {
+        $this->manObj = $manObj;
         $this->qbld = $qbld;
+        /* use Object Manager to create this class internal subs. Don't expand constructor */
+        $this->subCond = $this->manObj->get(\Praxigento\Core\Api\Processor\WithQuery\Conditions::class);
     }
 
     /**
@@ -27,7 +36,7 @@ abstract class WithQuery
      * This method should throws "\Magento\Framework\Exception\AuthorizationException" if customer is not authorized
      * to perform operation.
      *
-     * @param \Flancer32\Lib\Data $ctx
+     * @param \Flancer32\Lib\Data $ctx execution context
      * @throws \Magento\Framework\Exception\AuthorizationException
      */
     protected abstract function authorize(\Flancer32\Lib\Data $ctx);
@@ -35,7 +44,7 @@ abstract class WithQuery
     /**
      * Create query to select data and place it to context.
      *
-     * @param \Flancer32\Lib\Data $ctx
+     * @param \Flancer32\Lib\Data $ctx execution context
      */
     protected function createQuerySelect(\Flancer32\Lib\Data $ctx)
     {
@@ -46,7 +55,7 @@ abstract class WithQuery
     /**
      * Get query from context, execute it and place results back into context.
      *
-     * @param \Flancer32\Lib\Data $ctx
+     * @param \Flancer32\Lib\Data $ctx execution context
      */
     protected function performQuery(\Flancer32\Lib\Data $ctx)
     {
@@ -64,14 +73,50 @@ abstract class WithQuery
     /**
      * Populate query and bound parameters according to request data (from $bind).
      *
-     * @param \Flancer32\Lib\Data $ctx
+     * @param \Flancer32\Lib\Data $ctx execution context
      */
     protected abstract function populateQuery(\Flancer32\Lib\Data $ctx);
 
     /**
-     * Analyze request data, collect expected parameters and place its to execution context.
+     * @param \Flancer32\Lib\Data $ctx execution context
+     */
+    protected function populateQueryConditions(\Flancer32\Lib\Data $ctx)
+    {
+        /* get working vars from context */
+        /** @var \Flancer32\Lib\Data $vars */
+        $vars = $ctx->get(self::CTX_VARS);
+        /** @var \Magento\Framework\DB\Select $query */
+        $query = $ctx->get(self::CTX_QUERY);
+        /** @var \Flancer32\Lib\Data $cond */
+        $cond = $vars->get(self::VAR_CONDITIONS);
+
+        /* perform action */
+        $ctxCond = new \Praxigento\Core\Api\Processor\WithQuery\Conditions\Context();
+        $ctxCond->setQuery($query);
+        $ctxCond->setConditions($cond);
+        $this->subCond->exec($ctxCond);
+    }
+
+    /**
+     * Get query conditions from request and place it into the VARS section of the execution context.
+     * @param \Flancer32\Lib\Data $ctx execution context
+     */
+    protected function prepareQueryConditions(\Flancer32\Lib\Data $ctx)
+    {
+        /* get working vars from context */
+        $vars = $ctx->get(self::CTX_VARS);
+        /** @var \Praxigento\BonusHybrid\Api\Stats\Plain\Request $req */
+        $req = $ctx->get(self::CTX_REQ);
+
+        /* perform action */
+        $conditions = $req->getConditions();
+        $vars->set(self::VAR_CONDITIONS, $conditions);
+    }
+
+    /**
+     * Analyze API request data, collect expected parameters and place its into execution context.
      *
-     * @param \Flancer32\Lib\Data $ctx
+     * @param \Flancer32\Lib\Data $ctx execution context
      */
     protected abstract function prepareQueryParameters(\Flancer32\Lib\Data $ctx);
 
@@ -94,9 +139,11 @@ abstract class WithQuery
 
         /* parse request, authorize customer, prepare query and fetch data */
         $this->prepareQueryParameters($ctx);
+        $this->prepareQueryConditions($ctx);
         $this->authorize($ctx);
         $this->createQuerySelect($ctx);
         $this->populateQuery($ctx);
+        $this->populateQueryConditions($ctx);
         $this->performQuery($ctx);
 
         /* get query results from context and add to API response */
