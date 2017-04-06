@@ -30,7 +30,7 @@ class Context
         return $result;
     }
 
-    public function setConditions(\Praxigento\Core\Api\Request\Part\Conditions $data)
+    public function setConditions(\Praxigento\Core\Api\Request\Part\Conditions $data = null)
     {
         parent::setConditions($data);
     }
