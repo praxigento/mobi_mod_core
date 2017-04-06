@@ -11,6 +11,14 @@ namespace Praxigento\Core\Api\Processor\WithQuery;
  */
 class Conditions
 {
+    /** @var \Praxigento\Core\Api\Processor\WithQuery\Conditions\Filter\Parser */
+    protected $subFilterParser;
+
+    public function __construct(
+        \Praxigento\Core\Api\Processor\WithQuery\Conditions\Filter\Parser $subFilterParser
+    ) {
+        $this->subFilterParser = $subFilterParser;
+    }
 
     public function exec(\Praxigento\Core\Api\Processor\WithQuery\Conditions\Context $ctx)
     {
@@ -25,13 +33,10 @@ class Conditions
             $map = $this->mapReverse($columns);
 
             /* process filters */
-            $filters = $cond->getFilter();
-            if ($filters) {
-                if ($filters->getClause()) {
-                    /* there is single filtering clause in the filter */
-                } elseif ($filters->getGroup()) {
-                    /* there is single group of the filtering clauses in the filter */
-                }
+            $filter = $cond->getFilter();
+            if ($filter) {
+                $sql = $this->subFilterParser->parse($filter, $map);
+                if ($sql) $query->where($sql);
             }
 
             /* process limit & offset */
@@ -42,7 +47,6 @@ class Conditions
             } elseif ($limit) {
                 $query->limit($limit);
             }
-
 
             /* process order */
             $order = $cond->getOrder();
@@ -56,9 +60,11 @@ class Conditions
                         $dir = \Zend_Db_Select::SQL_ASC;
                     }
                     if (isset($map[$alias])) {
-                        $pair = $map[$alias];
-                        $tblAlias = $pair[0];
-                        $col = $pair[1];
+                        /** @var \Praxigento\Core\Api\Processor\WithQuery\Alias $data */
+                        $data = $map[$alias];
+                        $tblAlias = $data->getTable();
+                        $col = $data->getField();
+                        /* don't add quotes to names (`name`), Zend will do it. */
                         $query->order("$tblAlias.$col $dir");
                     }
                 }
@@ -80,7 +86,11 @@ class Conditions
             $tableAlias = $one[0];
             $column = $one[1];
             $valueAlias = $one[2];
-            $result[$valueAlias] = [$tableAlias, $column];
+            $data = new \Praxigento\Core\Api\Processor\WithQuery\Alias();
+            $data->setAlias($valueAlias);
+            $data->setTable($tableAlias);
+            $data->setField($column);
+            $result[$valueAlias] = $data;
         }
         return $result;
     }
