@@ -23,7 +23,7 @@ abstract class WithQuery
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Query\IBuilder $qbld
+        \Praxigento\Core\Repo\Query\IBuilder $qbld = null
     ) {
         $this->manObj = $manObj;
         $this->qbld = $qbld;
