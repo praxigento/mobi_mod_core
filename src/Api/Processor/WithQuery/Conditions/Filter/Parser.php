@@ -37,7 +37,12 @@ class Parser
         $data = $aliases[$alias];
         $table = $data->getTable();
         $field = $data->getField();
-        $result = "`$table`.`$field`";
+        if ($field instanceof \Praxigento\Core\Repo\Query\Expression) {
+            /* this is an expression, don't use table alias and backquotes */
+            $result = $field;
+        } else {
+            $result = "`$table`.`$field`";
+        }
         return $result;
     }
 
