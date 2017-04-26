@@ -8,6 +8,7 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Tool;
 
 interface IPeriod
@@ -31,7 +32,7 @@ interface IPeriod
      *
      * @return null|string 20150601 | 201506 | 2015
      */
-    public function getPeriodCurrent($date, $periodType = self::TYPE_DAY, $withTimezone = true);
+    public function getPeriodCurrent($date = null, $periodType = self::TYPE_DAY, $withTimezone = true);
 
     /**
      * Return the datestamp for the first date of the month or year period.

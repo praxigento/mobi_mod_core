@@ -4,6 +4,7 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core\Tool\Def;
 
 
@@ -38,6 +39,7 @@ class Period implements IPeriod, ICached
         $this->manObj = $manObj;
         $this->toolConvert = $toolConvert;
     }
+
     /**
      * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 01:59:59") and cache it.
      *
@@ -120,7 +122,7 @@ class Period implements IPeriod, ICached
      *
      * @return null|string 20150601 | 201506 | 2015
      */
-    public function getPeriodCurrent($date, $periodType = self::TYPE_DAY, $withTimezone = true)
+    public function getPeriodCurrent($date = null, $periodType = self::TYPE_DAY, $withTimezone = true)
     {
         $result = null;
         $dt = $this->toolConvert->toDateTime($date);
