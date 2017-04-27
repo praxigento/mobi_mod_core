@@ -54,10 +54,10 @@ class Period implements IPeriod, ICached
             case self::TYPE_DAY:
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime('midnight', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
                 $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_WEEK:
@@ -67,28 +67,28 @@ class Period implements IPeriod, ICached
                 /* this should be the last day of the week */
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime("previous $prev midnight", $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
                 $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_MONTH:
                 $dt = date_create_from_format('Ym', $periodValue);
                 $ts = strtotime('first day of midnight', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
                 $ts = strtotime('first day of next month midnight -1 second', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_YEAR:
                 $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('first day of January', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
                 $ts = strtotime('first day of January next year midnight -1 second', $dt->getTimestamp());
-                $ts -= $this->_getTzDelta();
+                $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
         }
@@ -96,24 +96,45 @@ class Period implements IPeriod, ICached
         self::$cachePeriodBounds[$periodValue][$periodType]['to'] = $to;
     }
 
-    /**
-     * MOBI-504: don't retrieve session depended objects from Object Manager
-     *
-     * @return \Magento\Framework\Stdlib\DateTime\DateTime
-     */
-    private function _getTzDelta()
-    {
-        if (is_null($this->tzDelta)) {
-            /** @var \Magento\Framework\Stdlib\DateTime\DateTime $dt */
-            $dt = $this->manObj->get(\Magento\Framework\Stdlib\DateTime\DateTime::class);
-            $this->tzDelta = $dt->getGmtOffset();
-        }
-        return $this->tzDelta;
-    }
-
     public function cacheReset()
     {
         self::$cachePeriodBounds = [];
+    }
+
+    public function getPeriodCurrent($date = null, $changeTz = 0, $periodType = self::TYPE_DAY)
+    {
+        $result = null;
+        /* convert $date into datetime and change timezone on demand */
+        $dt = $this->toolConvert->toDateTime($date);
+        if ($changeTz > 0) {
+            $dt->setTimestamp($dt->getTimestamp() + $this->getTzDelta());
+        } elseif ($changeTz < 0) {
+            $dt->setTimestamp($dt->getTimestamp() - $this->getTzDelta());
+        }
+
+        /* calculate expected period for given datetime */
+        switch ($periodType) {
+            case self::TYPE_DAY:
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_WEEK:
+                $weekDay = date('w', $dt->getTimestamp());
+                if ($weekDay != 0) {
+                    /* week period ends on ...  */
+                    $end = $this->getWeekLastDay();
+                    $ts = strtotime("next $end", $dt->getTimestamp());
+                    $dt = $this->toolConvert->toDateTime($ts);
+                }
+                $result = date_format($dt, 'Ymd');
+                break;
+            case self::TYPE_MONTH:
+                $result = date_format($dt, 'Ym');
+                break;
+            case self::TYPE_YEAR:
+                $result = date_format($dt, 'Y');
+                break;
+        }
+        return $result;
     }
 
     /**
@@ -122,12 +143,12 @@ class Period implements IPeriod, ICached
      *
      * @return null|string 20150601 | 201506 | 2015
      */
-    public function getPeriodCurrent($date = null, $periodType = self::TYPE_DAY, $withTimezone = true)
+    public function getPeriodCurrentOld($date = null, $periodType = self::TYPE_DAY, $withTimezone = true)
     {
         $result = null;
         $dt = $this->toolConvert->toDateTime($date);
         if ($withTimezone) {
-            $dt->setTimestamp($dt->getTimestamp() - $this->_getTzDelta());
+            $dt->setTimestamp($dt->getTimestamp() - $this->getTzDelta());
         }
         switch ($periodType) {
             case self::TYPE_DAY:
@@ -319,6 +340,21 @@ class Period implements IPeriod, ICached
         }
         $result = self::$cachePeriodBounds[$periodValue][$periodType]['to'];
         return $result;
+    }
+
+    /**
+     * MOBI-504: don't retrieve session depended objects from Object Manager
+     *
+     * @return \Magento\Framework\Stdlib\DateTime\DateTime
+     */
+    private function getTzDelta()
+    {
+        if (is_null($this->tzDelta)) {
+            /** @var \Magento\Framework\Stdlib\DateTime\DateTime $dt */
+            $dt = $this->manObj->get(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+            $this->tzDelta = $dt->getGmtOffset();
+        }
+        return $this->tzDelta;
     }
 
     /**

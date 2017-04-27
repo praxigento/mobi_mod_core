@@ -57,12 +57,12 @@ class Period_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Test Data === */
         $DATE = '2015-01-05 18:00:00';
         /** === Call and asserts  === */
-        $this->assertEquals('20150105', $this->obj->getPeriodCurrent($DATE, Period::TYPE_DAY, false));
-        $this->assertEquals('20150106', $this->obj->getPeriodCurrent($DATE, Period::TYPE_DAY));
-        $this->assertEquals('20150111', $this->obj->getPeriodCurrent($DATE, Period::TYPE_WEEK));
-        $this->assertEquals('20150111', $this->obj->getPeriodCurrent('2015-01-11 14:32:32', Period::TYPE_WEEK));
-        $this->assertEquals('201501', $this->obj->getPeriodCurrent($DATE, Period::TYPE_MONTH));
-        $this->assertEquals('2015', $this->obj->getPeriodCurrent($DATE, Period::TYPE_YEAR));
+        $this->assertEquals('20150105', $this->obj->getPeriodCurrentOld($DATE, Period::TYPE_DAY, false));
+        $this->assertEquals('20150106', $this->obj->getPeriodCurrentOld($DATE, Period::TYPE_DAY));
+        $this->assertEquals('20150111', $this->obj->getPeriodCurrentOld($DATE, Period::TYPE_WEEK));
+        $this->assertEquals('20150111', $this->obj->getPeriodCurrentOld('2015-01-11 14:32:32', Period::TYPE_WEEK));
+        $this->assertEquals('201501', $this->obj->getPeriodCurrentOld($DATE, Period::TYPE_MONTH));
+        $this->assertEquals('2015', $this->obj->getPeriodCurrentOld($DATE, Period::TYPE_YEAR));
     }
 
     public function test_getPeriodFirstDate()

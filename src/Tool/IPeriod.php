@@ -27,12 +27,29 @@ interface IPeriod
     const WEEK_WEDNESDAY = 'wednesday';
 
     /**
+     *  Get current period for datetime (with timezone fixation MOBI-704).
+     *
+     * $changeTz: account delta between "Magento" time and GMT.
+     *  - "= 0" - don't change timezone for $date;
+     *  - "< 0" - decrease $date on tzDelta (GMT offset);
+     *  - "> 0" - increase $date on tzDelta (GMT offset);
+     * (see \Praxigento\Core\Tool\Def\Period::$tzDelta)
+     *
+     * @param \DateTime|int|string|null $date datetime to process (see \Praxigento\Core\Tool\Def\Convert::toDateTime)
+     * @param int $changeTz
+     * @param string $periodType
+     * @return null|string 20150601 | 201506 | 2015
+     */
+    public function getPeriodCurrent($date = null, $changeTz = 0, $periodType = self::TYPE_DAY);
+
+    /**
      * @param $date string "2015-11-11 22:21:37"
      * @param $periodType string see self::TYPE_...
      *
      * @return null|string 20150601 | 201506 | 2015
+     * @deprecated use getPeriodCurrent()
      */
-    public function getPeriodCurrent($date = null, $periodType = self::TYPE_DAY, $withTimezone = true);
+    public function getPeriodCurrentOld($date = null, $periodType = self::TYPE_DAY, $withTimezone = true);
 
     /**
      * Return the datestamp for the first date of the month or year period.
