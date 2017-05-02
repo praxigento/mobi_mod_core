@@ -94,6 +94,7 @@ class Config
     const E_CUSTOMER_A_GENDER = 'gender';
     const E_CUSTOMER_A_GROUP_ID = 'group_id';
     const E_CUSTOMER_A_LASTNAME = 'lastname';
+    const E_CUSTOMER_A_MIDDLENAME = 'middlename';
     const E_CUSTOMER_A_PASS_HASH = 'password_hash';
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';
     const E_PRODUCT_A_ATTR_SET_ID = 'attribute_set_id';
