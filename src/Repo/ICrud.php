@@ -25,7 +25,7 @@ interface ICrud
      * @param $where
      * @return int The number of affected rows.
      */
-    public function delete($where);
+    public function delete($where = null);
 
     /**
      * @param int|string|array $id

@@ -74,7 +74,7 @@ class Entity
     }
 
     /** @inheritdoc */
-    public function delete($where)
+    public function delete($where = null)
     {
         $result = $this->_repoGeneric->deleteEntity($this->_entityName, $where);
         return $result;

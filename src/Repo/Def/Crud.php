@@ -17,7 +17,7 @@ abstract class Crud
         throw new \Exception('Method is not implemented yet.');
     }
 
-    public function delete($where)
+    public function delete($where = null)
     {
         /* override this method in the children classes */
         throw new \Exception('Method is not implemented yet.');
