@@ -31,8 +31,7 @@ abstract class Builder
 
     public function getResource()
     {
-        $result = $this->getResource();
-        return $result;
+        return $this->resource;
     }
 
     /**
