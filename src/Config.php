@@ -105,6 +105,7 @@ class Config
     const E_PRODUCT_A_SKU = 'sku';
     const E_PRODUCT_A_TYPE_ID = 'type_id';
     const E_PRODUCT_A_UPDATED_AT = 'updated_at';
+    const E_SALE_ORDER_A_APPLIED_RULE_IDS = 'applied_rule_ids';
     const E_SALE_ORDER_A_BASE_GRAND_TOTAL = 'base_grand_total';
     const E_SALE_ORDER_A_CREATED_AT = 'created_at';
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
