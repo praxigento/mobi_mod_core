@@ -12,6 +12,9 @@ use Magento\Sales\Api\Data\OrderItemInterface as ModelOrderItem;
 
 class Config
 {
+    /** Default alias for main tables in Magento 2 (used in SQL JOINS) */
+    const AS_MAIN_TABLE = 'main_table';
+
     const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
     const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
