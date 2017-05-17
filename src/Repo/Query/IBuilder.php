@@ -6,6 +6,8 @@ namespace Praxigento\Core\Repo\Query;
 
 /**
  * Interface for DB selection query builders. Queries can be based on other queries.
+ *
+ * @deprecated use \Praxigento\Core\Repo\Query\IBuilder2 instead.
  */
 interface  IBuilder
     extends \Praxigento\Core\Repo\IDb
