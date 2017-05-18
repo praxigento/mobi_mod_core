@@ -38,6 +38,6 @@ class ChildToTest extends Call
 {
     public function logMemoryUsage()
     {
-        $this->_logMemoryUsage();
+        $this->logMemoryUsage();
     }
 }
