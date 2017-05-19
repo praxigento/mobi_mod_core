@@ -16,6 +16,6 @@ interface  IBuilder2
      * @param \Magento\Framework\DB\Select $source
      * @return \Magento\Framework\DB\Select
      */
-    public function build($source = null);
+    public function build(\Magento\Framework\DB\Select $source = null);
 
 }
