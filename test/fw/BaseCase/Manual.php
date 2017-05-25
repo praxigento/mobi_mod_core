@@ -12,15 +12,15 @@ abstract class Manual
     extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     /** @var  \Magento\Framework\ObjectManagerInterface */
-    protected $_manObj;
+    protected $manObj;
     /** @var  \Praxigento\Core\Transaction\Database\IManager */
-    protected $_manTrans;
+    protected $manTrans;
 
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->_manObj = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->_manTrans = $this->_manObj->get(\Praxigento\Core\Transaction\Database\IManager::class);
+        $this->manObj = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->manTrans = $this->manObj->get(\Praxigento\Core\Transaction\Database\IManager::class);
     }
 }

@@ -11,10 +11,9 @@ namespace Praxigento\Core\Repo\Query;
 interface  IBuilder2
 {
     /**
-     * Build query optionally based on other query.
+     * Build query optionally based on other query. Builder modifies $source query.
      *
      * @param \Magento\Framework\DB\Select $source
-     * @return \Magento\Framework\DB\Select
      */
     public function build(\Magento\Framework\DB\Select $source = null);
 
