@@ -14,6 +14,9 @@ abstract class WithQuery
     const CTX_VARS = 'vars'; // working variables
 
     const VAR_CONDITIONS = 'conditions'; // query conditions (filter, order, paging)
+
+    /** @var \Praxigento\Core\Helper\Config */
+    protected $hlpCfg;
     /** @var  \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
     /** @var  \Praxigento\Core\Repo\Query\IBuilder */
@@ -23,10 +26,12 @@ abstract class WithQuery
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Query\IBuilder $qbld = null
+        \Praxigento\Core\Repo\Query\IBuilder $qbld = null,
+        \Praxigento\Core\Helper\Config $hlpCfg
     ) {
         $this->manObj = $manObj;
         $this->qbld = $qbld;
+        $this->hlpCfg = $hlpCfg;
         /* use Object Manager to create this class internal subs. Don't expand constructor */
         $this->subCond = $this->manObj->get(\Praxigento\Core\Api\Processor\WithQuery\Conditions::class);
     }
