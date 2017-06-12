@@ -5,9 +5,9 @@
 namespace Praxigento\Core\Fw\Logger;
 
 /**
- * Deocrator for application logger. Use this logger to log application level messages.
+ * Decorator for application logger. Use this logger to log application level messages.
  *
- * This logger is used the following default configuration parameters:
+ * This logger is used with the following default configuration parameters:
  *  - Monolog Cascade YAML config: 'var/log/logging.yaml'
  *  - YAML config logger name:     'app'
  */
