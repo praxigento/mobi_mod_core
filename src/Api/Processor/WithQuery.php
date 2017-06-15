@@ -49,6 +49,8 @@ abstract class WithQuery
     /**
      * Create query to select data and place it to context.
      *
+     * This method should be overridden in the children classes if query is depended from the request params.
+     *
      * @param \Flancer32\Lib\Data $ctx execution context
      */
     protected function createQuerySelect(\Flancer32\Lib\Data $ctx)
