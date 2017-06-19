@@ -8,7 +8,7 @@ namespace Praxigento\Core\Repo\Query\Def;
  * Base class for query builders.
  */
 abstract class Builder
-    implements \Praxigento\Core\Repo\Query\IBuilder
+    implements \Praxigento\Core\Repo\Query\IBuilder, \Praxigento\Core\Repo\Query\IBuilder2
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $conn; // default connection
@@ -23,15 +23,15 @@ abstract class Builder
         $this->conn = $resource->getConnection();
     }
 
+    public function build(\Magento\Framework\DB\Select $source = null)
+    {
+        throw new \Exception('Implement it if you need this method.');
+    }
+
     public function getConnection($name = null)
     {
         $result = $this->resource->getConnection($name);
         return $result;
-    }
-
-    public function getResource()
-    {
-        return $this->resource;
     }
 
     /**
@@ -42,6 +42,11 @@ abstract class Builder
     public function getCountQuery(\Praxigento\Core\Repo\Query\IBuilder $qbuild = null)
     {
         throw new \Exception('Implement if you need this query.');
+    }
+
+    public function getResource()
+    {
+        return $this->resource;
     }
 
     /**
