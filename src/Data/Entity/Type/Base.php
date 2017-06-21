@@ -7,9 +7,8 @@
 
 namespace Praxigento\Core\Data\Entity\Type;
 
-use Praxigento\Core\Data\Entity\Base as EntityBase;
-
-abstract class Base extends EntityBase
+abstract class Base
+    extends \Praxigento\Core\Data\Entity\Base
 {
     const ATTR_CODE = 'code';
     const ATTR_ID = 'id';
