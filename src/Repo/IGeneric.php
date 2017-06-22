@@ -36,6 +36,8 @@ interface IGeneric
      * @param string $entity Entity name (not table name).
      * @param array $pk [COL_NAME=>$value, ...]
      * @return int number of deleted rows
+     *
+     * TODO: rename PK to Id
      */
     public function deleteEntityByPk($entity, $pk);
 
@@ -67,6 +69,8 @@ interface IGeneric
      * @param array|null $cols The columns to select from the table or null to select all columns.
      *
      * @return bool|array 'false' or selected data ([...])
+     *
+     * TODO: rename PK to Id
      */
     public function getEntityByPk($entity, $pk, $cols = null);
 
