@@ -17,6 +17,8 @@ interface  IBuilder
      *
      * @param \Praxigento\Core\Repo\Query\IBuilder $qbuild
      * @return \Magento\Framework\DB\Select
+     *
+     * @deprecated use \Praxigento\Core\Repo\Query\IBuilder2::build
      */
     public function getCountQuery(\Praxigento\Core\Repo\Query\IBuilder $qbuild = null);
 
@@ -25,6 +27,8 @@ interface  IBuilder
      *
      * @param \Praxigento\Core\Repo\Query\IBuilder $qbuild
      * @return \Magento\Framework\DB\Select
+     *
+     * @deprecated use \Praxigento\Core\Repo\Query\IBuilder2::build
      */
     public function getSelectQuery(\Praxigento\Core\Repo\Query\IBuilder $qbuild = null);
 
