@@ -40,21 +40,6 @@ abstract class Base
         /* UI related config (Symfony) */
         $this->setName($this->cmdName);
         $this->setDescription($this->cmdDesc);
-        /* Magento related config (Object Manager) */
-        /** @var \Magento\Framework\App\State $appState */
-        $appState = $this->manObj->get(\Magento\Framework\App\State::class);
-        try {
-            /* area code should be set only once */
-            $appState->getAreaCode();
-        } catch (\Magento\Framework\Exception\LocalizedException $e) {
-            /* exception will be thrown if no area code is set */
-            $areaCode = \Magento\Framework\App\Area::AREA_FRONTEND;
-            $appState->setAreaCode($areaCode);
-            /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
-            $configLoader = $this->manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
-            $config = $configLoader->load($areaCode);
-            $this->manObj->configure($config);
-        }
     }
 
 }
