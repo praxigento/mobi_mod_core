@@ -12,18 +12,6 @@ abstract class BaseWithArea
     extends \Praxigento\Core\Cli\Cmd\Base
 {
 
-    public function __construct(
-        \Magento\Framework\ObjectManagerInterface $manObj,
-        $cmdName,
-        $cmdDesc
-    ) {
-        $this->manObj = $manObj;
-        $this->cmdName = $cmdName;
-        $this->cmdDesc = $cmdDesc;
-        /* props initialization should be above parent constructor cause $this->configure() will be called inside */
-        parent::__construct();
-    }
-
     /**
      * Sets area code to start a adminhtml session and configure Object Manager.
      */
