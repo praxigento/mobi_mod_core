@@ -4,6 +4,7 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
+
 namespace Praxigento\Core;
 
 use Magento\CatalogInventory\Model\Stock as ModelStock;
@@ -114,9 +115,14 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
+    const E_SALE_ORDER_ITEM_A_BASE_PRICE = ModelOrderItem::BASE_PRICE;
+    const E_SALE_ORDER_ITEM_A_BASE_ROW_TOTAL_INCL_TAX = ModelOrderItem::BASE_ROW_TOTAL_INCL_TAX;
     const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
     const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
     const E_SALE_ORDER_ITEM_A_PRODUCT_ID = ModelOrderItem::PRODUCT_ID;
+    const E_SALE_ORDER_ITEM_A_QTY_ORDERED = ModelOrderItem::QTY_ORDERED;
+    const E_SALE_ORDER_ITEM_A_SKU = ModelOrderItem::SKU;
+    const E_SALE_ORDER_ITEM_A_TAX_PERCENT = ModelOrderItem::TAX_PERCENT;
     const E_TAX_CALC_A_CUST_TAX_CLASS_ID = 'customer_tax_class_id';
     const E_TAX_CALC_A_ID = 'tax_calculation_id';
     const E_TAX_CALC_A_PROD_TAX_CLASS_ID = 'product_tax_class_id';

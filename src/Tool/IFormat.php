@@ -28,13 +28,13 @@ interface IFormat
     public function roundBonus($val, $precision = 2);
 
     /**
-     * Format $val as float number with $precision. Used in external API requests to send numbers outside.
+     * Format $val as number with $precision. Used in external API requests to send numbers outside.
      *
      * @param $val
      * @param int $precision
      * @param string $decimal
      * @param string $group
-     * @return float
+     * @return string
      */
     public function toNumber($val, $precision = 2, $decimal = '.', $group = '');
 }
