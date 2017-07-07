@@ -26,7 +26,7 @@ class Format
 
     public function toNumber($val, $precision = 2, $decimal = '.', $group = '')
     {
-        $result = number_format($val, $precision, $decimal, $group);
+        $result = (float)number_format($val, $precision, $decimal, $group);
         return $result;
     }
 }

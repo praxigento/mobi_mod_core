@@ -34,7 +34,7 @@ interface IFormat
      * @param int $precision
      * @param string $decimal
      * @param string $group
-     * @return string
+     * @return float
      */
     public function toNumber($val, $precision = 2, $decimal = '.', $group = '');
 }
