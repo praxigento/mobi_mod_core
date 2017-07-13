@@ -93,7 +93,18 @@ class Entity
         return $result;
     }
 
-    /** @inheritdoc */
+    /**
+     * Generic method to get data from repository.
+     *
+     * @param null $where
+     * @param null $order
+     * @param null $limit
+     * @param null $offset
+     * @param null $columns
+     * @param null $group
+     * @param null $having
+     * @return \Praxigento\Core\Data\Entity\Base[] or empty array if no data found.
+     */
     public function get(
         $where = null,
         $order = null,
@@ -103,7 +114,11 @@ class Entity
         $group = null,
         $having = null
     ) {
-        $result = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
+        $result = [];
+        $entities = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
+        foreach ($entities as $entity) {
+            $result[] = new $this->_entityClassName($entity);
+        }
         return $result;
     }
 

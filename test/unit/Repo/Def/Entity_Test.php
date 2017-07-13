@@ -15,9 +15,9 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     /** @var  \Mockery\MockInterface */
     private $mConn;
     /** @var  \Mockery\MockInterface */
-    private $mResource;
-    /** @var  \Mockery\MockInterface */
     private $mRepoGeneric;
+    /** @var  \Mockery\MockInterface */
+    private $mResource;
     /** @var  Entity */
     private $obj;
 
@@ -127,7 +127,10 @@ class Entity_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
             ->andReturn($DATA);
         /** === Call and asserts  === */
         $res = $this->obj->get($WHERE, $ORDER, $LIMIT, $OFFSET);
-        $this->assertEquals($DATA, $res);
+        $expectedDATA = [];
+        $expectedDATA[] = new \Praxigento\Core\Repo\Def\TestEntity($DATA[0]);
+        $expectedDATA[] = new \Praxigento\Core\Repo\Def\TestEntity($DATA[1]);
+        $this->assertEquals($expectedDATA, $res);
     }
 
     public function test_getById_array()
