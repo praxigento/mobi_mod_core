@@ -12,10 +12,16 @@ abstract class Base
     implements \Praxigento\Core\Data\IEntity
 {
     /**
+     * Name of the entity (table name w/o prefix). Should be overridden in child classes.
+     */
+    const ENTITY_NAME = '';
+
+    /**
      * @return string
      */
-    public function getEntityName()
+    public static function getEntityName()
     {
-        return static::ENTITY_NAME; // "static::" will use child attribute value
+        /* "static::" will use child attribute value (don't use 'self::') */
+        return static::ENTITY_NAME;
     }
 }

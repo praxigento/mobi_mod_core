@@ -6,25 +6,31 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
-use Flancer32\Lib\Data as DataObject;
-
 class Entity
     extends \Praxigento\Core\Repo\Def\Crud
     implements \Praxigento\Core\Repo\IEntity
 {
-    /** @var  string Class name for the related entity. */
-    protected $_entityClassName;
-    /** @var  string Entity name (table name w/o prefix) */
-    protected $_entityName;
-    /** @var  string Name of the first attribute from primary key */
-    protected $_idFieldName;
-    /** @var  \Praxigento\Core\Data\IEntity entity instance */
-    protected $_refEntity;
-    /** @var \Praxigento\Core\Repo\IGeneric */
-    protected $_repoGeneric;
+    /** @var  string Class name for the related entity ('\Praxigento\Pv\Data\Entity\Product'). */
+    protected $entityClassName;
+    /**
+     * Name of the first attribute from primary key ('customer_ref').
+     *
+     * To use "$this->[get|update|delete]ById(32)" in case of PK consists from one attribute only.
+     *
+     * @var  string
+     */
+    protected $entityId;
+    /** @var  string Entity name (table name w/o prefix: 'prxgt_pv_prod') */
+    protected $entityName;
+    /** @var  string[] primary key attributes (ordered: ['first_attr', 'second_attr']) */
+    protected $entityPk;
+    /** @var \Praxigento\Core\Repo\IGeneric generic repository to perform DB operation */
+    protected $repoGeneric;
 
     /**
-     * Entity constructor.
+     * Analyze $entityClassName (@see \Praxigento\Core\Data\Entity\Base children) and save
+     *
+     *
      * @param \Magento\Framework\App\ResourceConnection $resource
      * @param \Praxigento\Core\Repo\IGeneric $repoGeneric
      * @param string $entityClassName
@@ -35,61 +41,50 @@ class Entity
         $entityClassName
     ) {
         parent::__construct($resource);
-        $this->_repoGeneric = $repoGeneric;
-        $this->_entityClassName = $entityClassName;
-        /* init entity that is related for the repo */
-        $this->_initRefEntity();
+        $this->repoGeneric = $repoGeneric;
+        $this->entityClassName = $entityClassName;
+        /* analyze entity class to get entity name & PK attributes */
+        $this->entityName = $entityClassName::getEntityName();
+        $this->entityPk = $entityClassName::getPrimaryKeyAttrs();
+        /* ... and first attr of the PK (80% of the entities have one attribute only in PK) */
+        $this->entityId = reset($this->entityPk);
+    }
+
+    public function create($data)
+    {
+        $result = $this->repoGeneric->addEntity($this->entityName, $data);
+        return $result;
     }
 
     /**
+     * Create entity instance for given $data (convert row DB data to the Entity data object).
+     *
      * @param array $data
-     * @return DataObject
+     * @return \Praxigento\Core\Data\Entity\Base
      */
-    protected function _createEntityInstance($data = null)
+    protected function createEntity($data = null)
     {
-        /** @var DataObject $result */
-        $result = new $this->_entityClassName();
-        if ($data) {
-            $result->set($data);
-        }
+        /** @var \Praxigento\Core\Data\Entity\Base $result */
+        $result = new $this->entityClassName($data);
         return $result;
     }
 
-    protected function _initRefEntity()
-    {
-        if (is_null($this->_refEntity)) {
-            $this->_refEntity = new $this->_entityClassName();
-            $this->_entityName = $this->_refEntity->getEntityName();
-            $ids = $this->_refEntity->getPrimaryKeyAttrs();
-            /* get first field (and alone for one-field primary keys)*/
-            $this->_idFieldName = reset($ids);
-        }
-    }
-
-    /** @inheritdoc */
-    public function create($data)
-    {
-        $result = $this->_repoGeneric->addEntity($this->_entityName, $data);
-        return $result;
-    }
-
-    /** @inheritdoc */
     public function delete($where = null)
     {
-        $result = $this->_repoGeneric->deleteEntity($this->_entityName, $where);
+        $result = $this->repoGeneric->deleteEntity($this->entityName, $where);
         return $result;
     }
 
-    /** @inheritdoc */
     public function deleteById($id)
     {
         if (is_array($id)) {
-            /* probably this is complex PK */
+            /* probably this is a complex PK (['key1'=>8, 'key2'=>16]) */
             $pk = $id;
         } else {
-            $pk = [$this->_idFieldName => $id];
+            /* probably this is a single-attr PK */
+            $pk = [$this->entityId => $id];
         }
-        $result = $this->_repoGeneric->deleteEntityByPk($this->_entityName, $pk);
+        $result = $this->repoGeneric->deleteEntityByPk($this->entityName, $pk);
         return $result;
     }
 
@@ -115,70 +110,66 @@ class Entity
         $having = null
     ) {
         $result = [];
-        $entities = $this->_repoGeneric->getEntities($this->_entityName, null, $where, $order, $limit, $offset);
-        foreach ($entities as $entity) {
-            $result[] = new $this->_entityClassName($entity);
+        $rows = $this->repoGeneric->getEntities($this->entityName, null, $where, $order, $limit, $offset);
+        foreach ($rows as $data) {
+            $result[] = $this->createEntity($data);
         }
         return $result;
     }
 
-    /** @inheritdoc */
     public function getById($id)
     {
         if (is_array($id)) {
-            /* probably this is complex PK */
+            /* probably this is a complex PK (['key1'=>8, 'key2'=>16]) */
             $pk = $id;
         } else {
-            $pk = [$this->_idFieldName => $id];
+            /* probably this is a single-attr PK */
+            $pk = [$this->entityId => $id];
         }
-        $result = $this->_repoGeneric->getEntityByPk($this->_entityName, $pk);
+        $result = $this->repoGeneric->getEntityByPk($this->entityName, $pk);
         if ($result) {
-            $result = $this->_createEntityInstance($result);
+            $result = $this->createEntity($result);
         }
         return $result;
     }
 
-    /** @inheritdoc */
     public function getQueryToSelect()
     {
         $result = $this->conn->select();
-        $tbl = $this->resource->getTableName($this->_entityName);
+        $tbl = $this->resource->getTableName($this->entityName);
         $result->from($tbl);
         return $result;
     }
 
-    /** @inheritdoc */
     public function getQueryToSelectCount()
     {
         $result = $this->conn->select();
-        $tbl = $this->resource->getTableName($this->_entityName);
-        $result->from($tbl, "COUNT({$this->_idFieldName})");
+        $tbl = $this->resource->getTableName($this->entityName);
+        $result->from($tbl, "COUNT({$this->entityId})");
         return $result;
     }
 
     public function replace($data)
     {
-        if ($data instanceof DataObject) {
+        if ($data instanceof \Flancer32\Lib\Data) {
             $data = (array)$data->get();
         } elseif ($data instanceof \stdClass) {
             $data = (array)$data;
         }
-        $result = $this->_repoGeneric->replaceEntity($this->_entityName, $data);
+        $result = $this->repoGeneric->replaceEntity($this->entityName, $data);
         return $result;
     }
 
-    /** @inheritdoc */
     public function update($data, $where)
     {
-        $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
+        $result = $this->repoGeneric->updateEntity($this->entityName, $data, $where);
         return $result;
     }
 
-    /** @inheritdoc */
     public function updateById($id, $data)
     {
         if (is_array($id)) {
-            /* probably this is complex PK */
+            /* probably this is a complex PK (['key1'=>8, 'key2'=>16]) */
             $where = '';
             foreach ($id as $key => $value) {
                 $val = is_int($value) ? $value : $this->conn->quote($value);
@@ -186,10 +177,11 @@ class Entity
             }
             $where .= '1'; // WHERE ... AND 1;
         } else {
+            /* probably this is a single-attr PK */
             $val = is_int($id) ? $id : $this->conn->quote($id);
-            $where = $this->_idFieldName . '=' . $val;
+            $where = $this->entityId . '=' . $val;
         }
-        $result = $this->_repoGeneric->updateEntity($this->_entityName, $data, $where);
+        $result = $this->repoGeneric->updateEntity($this->entityName, $data, $where);
         return $result;
     }
 }

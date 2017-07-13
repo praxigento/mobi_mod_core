@@ -18,7 +18,7 @@ abstract class Type
     {
         $result = null;
         $where = EntityTypeBase::ATTR_CODE . '=' . $this->conn->quote($code);
-        $data = $this->_repoGeneric->getEntities($this->_entityName, null, $where);
+        $data = $this->repoGeneric->getEntities($this->entityName, null, $where);
         if ($data) {
             $first = reset($data);
             $result = (int)$first[EntityTypeBase::ATTR_ID];

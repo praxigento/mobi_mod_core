@@ -48,6 +48,8 @@ interface IDataSource
      * Compose SELECT query for the simple entity or aggregate.
      *
      * @return \Magento\Framework\DB\Select
+     *
+     * @deprecated \Praxigento\Core\Repo\Query\Builder should be used instead
      */
     public function getQueryToSelect();
 
@@ -55,6 +57,8 @@ interface IDataSource
      * Compose COUNT SELECT query for the simple entity or aggregate.
      *
      * @return \Magento\Framework\DB\Select
+     *
+     * @deprecated \Praxigento\Core\Repo\Query\Builder should be used instead
      */
     public function getQueryToSelectCount();
 
