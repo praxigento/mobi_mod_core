@@ -306,7 +306,7 @@ class TestEntity extends \Praxigento\Core\Data\Entity\Base
     const ATTR_ID = 'pkey';
     const ENTITY_NAME = 'test entity';
 
-    public function getPrimaryKeyAttrs()
+    public static function getPrimaryKeyAttrs()
     {
         return [static::ATTR_ID];
     }

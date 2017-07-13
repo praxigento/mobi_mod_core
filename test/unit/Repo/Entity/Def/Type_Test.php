@@ -26,7 +26,7 @@ class TestTypeEntity
     const ATTR_ID = 'pkey';
     const ENTITY_NAME = 'test entity';
 
-    public function getPrimaryKeyAttrs()
+    public static function getPrimaryKeyAttrs()
     {
         return [static::ATTR_ID];
     }
