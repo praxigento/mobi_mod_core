@@ -11,16 +11,16 @@ namespace Praxigento\Core\Data;
 interface IEntity
 {
     /**
-     * Get name of the entity in DEM.
+     * Get name of the entity (table name w/o prefix).
      *
      * @return string
      */
-    public function getEntityName();
+    public static function getEntityName();
 
     /**
      * Get array with names of the primary key attributes.
      *
      * @return string[]
      */
-    public function getPrimaryKeyAttrs();
+    public static function getPrimaryKeyAttrs();
 }
