@@ -49,6 +49,7 @@ class Config
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
+    const ENTITY_MAGE_SALES_ORDER_TAX = 'sales_order_tax';
     const ENTITY_MAGE_SALES_ORDER_TAX_ITEM = 'sales_order_tax_item';
     const ENTITY_MAGE_TAX_CALC = 'tax_calculation';
     const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
@@ -124,6 +125,17 @@ class Config
     const E_SALE_ORDER_ITEM_A_QTY_ORDERED = ModelOrderItem::QTY_ORDERED;
     const E_SALE_ORDER_ITEM_A_SKU = ModelOrderItem::SKU;
     const E_SALE_ORDER_ITEM_A_TAX_PERCENT = ModelOrderItem::TAX_PERCENT;
+    const E_SALE_ORDER_TAX_A_AMOUNT = 'amount';
+    const E_SALE_ORDER_TAX_A_BASE_AMOUNT = 'base_amount';
+    const E_SALE_ORDER_TAX_A_BASE_REAL_AMOUNT = 'base_real_amount';
+    const E_SALE_ORDER_TAX_A_CODE = 'code';
+    const E_SALE_ORDER_TAX_A_ORDER_ID = 'order_id';
+    const E_SALE_ORDER_TAX_A_PERCENT = 'percent';
+    const E_SALE_ORDER_TAX_A_POSITION = 'position';
+    const E_SALE_ORDER_TAX_A_PRIORITY = 'priority';
+    const E_SALE_ORDER_TAX_A_PROCESS = 'process';
+    const E_SALE_ORDER_TAX_A_TAX_ID = 'tax_id';
+    const E_SALE_ORDER_TAX_A_TITLE = 'title';
     const E_SALE_ORDER_TAX_ITEM_A_AMOUNT = 'amount';
     const E_SALE_ORDER_TAX_ITEM_A_ASSOCIATED_ITEM_ID = 'associated_item_id';
     const E_SALE_ORDER_TAX_ITEM_A_BASE_AMOUNT = 'base_amount';
