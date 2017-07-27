@@ -11,9 +11,11 @@ use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
  */
 abstract class Type
     extends \Praxigento\Core\Repo\Def\Entity
-    implements \Praxigento\Core\Repo\Entity\IType
 {
-    /** @inheritdoc */
+    /**
+     * @param string $code
+     * @return int|null
+     */
     public function getIdByCode($code)
     {
         $result = null;
