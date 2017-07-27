@@ -2,7 +2,8 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Entity\Def;
+
+namespace Praxigento\Core\Repo\Entity;
 
 use Praxigento\Core\Data\Entity\Type\Base as EntityTypeBase;
 
