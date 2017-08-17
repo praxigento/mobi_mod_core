@@ -5,24 +5,26 @@
 
 namespace Praxigento\Core\Service\Base;
 
-/**
- * @SuppressWarnings(PHPMD.CamelCasePropertyName)
- */
 class Response
     extends \Flancer32\Lib\Data
     implements \Praxigento\Core\Service\IResponse
 {
     /** @var string */
-    private $_errorCode = \Praxigento\Core\Service\IResponse::ERR_UNDEFINED;
+    private $errorCode = \Praxigento\Core\Service\IResponse::ERR_UNDEFINED;
     /** @var  string */
-    private $_errorMessage;
+    private $errorMessage;
 
     /**
      * @return string (required for Magento API transformations)
      */
     public function getErrorCode()
     {
-        return $this->_errorCode;
+        return $this->errorCode;
+    }
+
+    public function setErrorCode($code)
+    {
+        $this->errorCode = $code;
     }
 
     /**
@@ -30,7 +32,12 @@ class Response
      */
     public function getErrorMessage()
     {
-        return $this->_errorMessage;
+        return $this->errorMessage;
+    }
+
+    public function setErrorMessage($message)
+    {
+        $this->errorMessage = $message;
     }
 
     /**
@@ -38,22 +45,12 @@ class Response
      */
     public function isSucceed()
     {
-        $result = ($this->_errorCode == self::ERR_NO_ERROR);
+        $result = ($this->errorCode == self::ERR_NO_ERROR);
         return $result;
     }
 
     public function markSucceed()
     {
-        $this->_errorCode = \Praxigento\Core\Service\IResponse::ERR_NO_ERROR;
-    }
-
-    public function setErrorCode($code)
-    {
-        $this->_errorCode = $code;
-    }
-
-    public function setErrorMessage($message)
-    {
-        $this->_errorMessage = $message;
+        $this->errorCode = \Praxigento\Core\Service\IResponse::ERR_NO_ERROR;
     }
 }

@@ -7,10 +7,9 @@
 
 namespace Praxigento\Core\Service\Base;
 
-use Flancer32\Lib\Data as DataObject;
-use Praxigento\Core\Service\IRequest;
-
-abstract class Request extends DataObject implements IRequest
+abstract class Request
+    extends \Flancer32\Lib\Data
+    implements \Praxigento\Core\Service\IRequest
 {
 
 }
