@@ -110,7 +110,7 @@ class Entity
         $having = null
     ) {
         $result = [];
-        $rows = $this->repoGeneric->getEntities($this->entityName, null, $where, $order, $limit, $offset);
+        $rows = $this->repoGeneric->getEntities($this->entityName, $columns, $where, $order, $limit, $offset);
         foreach ($rows as $data) {
             $result[] = $this->createEntity($data);
         }
