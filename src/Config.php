@@ -148,11 +148,26 @@ class Config
     const E_SALE_ORDER_TAX_ITEM_A_TAX_PERCENT = 'tax_percent';
     const E_TAX_CALC_A_CUST_TAX_CLASS_ID = 'customer_tax_class_id';
     const E_TAX_CALC_A_ID = 'tax_calculation_id';
+    const E_TAX_CALC_A_PRODUCT_TAX_CLASS_ID = 'product_tax_class_id';
     const E_TAX_CALC_A_PROD_TAX_CLASS_ID = 'product_tax_class_id';
     const E_TAX_CALC_A_RATE_ID = 'tax_calculation_rate_id';
     const E_TAX_CALC_A_RULE_ID = 'tax_calculation_rule_id';
+    const E_TAX_CALC_A_TAX_CALCULATION_RATE_ID = 'tax_calculation_rate_id';
+    const E_TAX_CALC_A_TAX_CALCULATION_RULE_ID = 'tax_calculation_rule_id';
+    const E_TAX_CALC_RATE_A_CODE = 'code';
+    const E_TAX_CALC_RATE_A_COUNTRY_ID = 'tax_country_id';
     const E_TAX_CALC_RATE_A_ID = 'tax_calculation_rate_id';
+    const E_TAX_CALC_RATE_A_POSTCODE = 'tax_postcode';
+    const E_TAX_CALC_RATE_A_RATE = 'rate';
+    const E_TAX_CALC_RATE_A_REGION_ID = 'tax_region_id';
+    const E_TAX_CALC_RATE_A_ZIP_FROM = 'zip_from';
+    const E_TAX_CALC_RATE_A_ZIP_IS_RANGE = 'zip_is_range';
+    const E_TAX_CALC_RATE_A_ZIP_TO = 'zip_to';
+    const E_TAX_CALC_RULE_A_CALC_SUBTOTAL = 'calculate_subtotal';
+    const E_TAX_CALC_RULE_A_CODE = 'code';
     const E_TAX_CALC_RULE_A_ID = 'tax_calculation_rule_id';
+    const E_TAX_CALC_RULE_A_POSITION = 'position';
+    const E_TAX_CALC_RULE_A_PRIORITY = 'priority';
     /**
      * other
      */
