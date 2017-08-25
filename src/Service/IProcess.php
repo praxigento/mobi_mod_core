@@ -12,6 +12,15 @@ namespace Praxigento\Core\Service;
  */
 interface IProcess
 {
+
+
+    /**
+     * Context path to success processing flag.
+     *
+     * if($ctx->get(CTX_OUT_SUCCESS)) => "process is complete successfully"
+     */
+    const CTX_OUT_SUCCESS = 'out.success';
+
     /**
      * Execute some operation in the given context ($ctx). Input & output data are placed in the context.
      *
