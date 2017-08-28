@@ -6,43 +6,30 @@ namespace Praxigento\Core\Tool\Def;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
-class Period_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
+class Period_UnitTest
+    extends \Praxigento\Core\Test\BaseCase\Mockery
 {
     const OFFSET = -25200; // -7 * 3600 (UTC-7)
     /** @var  \Mockery\MockInterface */
     private $mConvert;
-    /** @var  \Mockery\MockInterface */
-    private $mDt;
     /** @var  Period */
     private $obj;
-
-    /**
-     * @return Period
-     */
-    private function _getObj()
-    {
-        $mDateTime = $this->_mockFor('Magento\Framework\Stdlib\DateTime\DateTime', ['getGmtOffset']);
-        $mDateTime
-            ->expects($this->any())
-            ->method('getGmtOffset')
-            ->will($this->returnValue(-7 * 3600));
-        /** @var  $result Period */
-        $result = new Period(new Convert(), $mDateTime);
-        $result->setWeekFirstDay(Period::WEEK_MONDAY);
-        return $result;
-    }
 
     protected function setUp()
     {
         parent::setUp();
+        $manObj = $this->_mockObjectManager();
         $this->mConvert = new Convert();
-        $this->mDt = $this->_mock(\Magento\Framework\Stdlib\DateTime\DateTime::class);
-        $this->mDt
+        $mDt = $this->_mock(\Magento\Framework\Stdlib\DateTime\DateTime::class);
+        $mDt
             ->shouldReceive('getGmtOffset')
             ->andReturn(self::OFFSET);
+        $manObj
+            ->shouldReceive('get')
+            ->andReturn($mDt);
         $this->obj = new Period(
-            $this->mConvert,
-            $this->mDt
+            $manObj,
+            $this->mConvert
         );
         $this->obj->setWeekFirstDay(Period::WEEK_MONDAY);
     }
