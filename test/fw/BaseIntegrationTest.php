@@ -12,7 +12,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use Praxigento\Core\Config as Cfg;
 use Praxigento\Core\Tool\IPeriod;
-use Praxigento\Downline\Data\Entity\Customer;
+use Praxigento\Downline\Repo\Entity\Data\Customer;
 use Praxigento\Downline\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
