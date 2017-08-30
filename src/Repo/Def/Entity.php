@@ -10,7 +10,7 @@ class Entity
     extends \Praxigento\Core\Repo\Def\Crud
     implements \Praxigento\Core\Repo\IEntity
 {
-    /** @var  string Class name for the related entity ('\Praxigento\Pv\Data\Entity\Product'). */
+    /** @var  string Class name for the related entity ('\Praxigento\Pv\Repo\Entity\Data\Product'). */
     protected $entityClassName;
     /**
      * Name of the first attribute from primary key ('customer_ref').
