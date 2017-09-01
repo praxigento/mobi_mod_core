@@ -13,7 +13,7 @@ use Praxigento\Core\Config as Cfg;
 class Authenticator
     implements \Praxigento\Core\Api\IAuthenticator
 {
-    /** @var  \Flancer32\Lib\Data */
+    /** @var  \Praxigento\Core\Data */
     protected $cacheCurrentCustomer;
     /** @var \Praxigento\Core\Helper\Config */
     protected $hlpCfg;
@@ -42,9 +42,9 @@ class Authenticator
             $customer = $this->sessCustomer->getCustomer();
             if ($customer) {
                 $data = $customer->getData();
-                $this->cacheCurrentCustomer = new \Flancer32\Lib\Data($data);
+                $this->cacheCurrentCustomer = new \Praxigento\Core\Data($data);
             } else {
-                $this->cacheCurrentCustomer = new \Flancer32\Lib\Data();
+                $this->cacheCurrentCustomer = new \Praxigento\Core\Data();
             }
         }
         return $this->cacheCurrentCustomer;

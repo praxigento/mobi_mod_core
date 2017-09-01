@@ -21,7 +21,7 @@ namespace Praxigento\Core\Reflection\Data;
  * @method void setParamsDefinition(string $data)
  */
 class Method
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
 
 }

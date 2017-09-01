@@ -9,7 +9,7 @@ namespace Praxigento\Core\Api\Request\Part\Conditions\Filter;
  * Filtering clause (standalone filter).
  */
 class Clause
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
 
     /**

@@ -17,7 +17,7 @@ namespace Praxigento\Core\Api\Processor\WithQuery;
  *
  */
 class Alias
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
 
 }

@@ -9,7 +9,7 @@ namespace Praxigento\Core\Api\Request\Part\Conditions\Filter;
  * Filtering group. Group contains simple clauses or other groups and operand to apply ('or', 'and').
  */
 class Group
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     /**#@+
      * Operations to apply to group entries.
@@ -23,7 +23,7 @@ class Group
      * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
      * or clauses (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Clause) to filter result set.
      *
-     * @return \Flancer32\Lib\Data[]
+     * @return \Praxigento\Core\Data[]
      */
     public function getEntries()
     {
@@ -46,7 +46,7 @@ class Group
      * Set of groups (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Group)
      * or clauses (\Praxigento\Core\Api\Request\Part\Conditions\Filter\Entry) to filter result set.
      *
-     * @param \Flancer32\Lib\Data[] $data
+     * @param \Praxigento\Core\Data[] $data
      */
     public function setEntries($data)
     {

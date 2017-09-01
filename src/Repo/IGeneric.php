@@ -4,7 +4,7 @@
  */
 namespace Praxigento\Core\Repo;
 
-use Flancer32\Lib\Data as DataObject;
+use Praxigento\Core\Data as DataObject;
 
 /**
  * Interface for generic repository to do universal operations (CRUD) with simple entities (not aggregates).

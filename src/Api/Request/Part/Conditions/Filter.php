@@ -9,7 +9,7 @@ namespace Praxigento\Core\Api\Request\Part\Conditions;
  * Top level filter (union of the filtering clauses and/or groups of clauses).
  */
 class Filter
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
 
     /**

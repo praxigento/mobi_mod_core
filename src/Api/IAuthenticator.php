@@ -12,7 +12,7 @@ interface IAuthenticator
 {
     /**
      * @param int|null $offer proposal ID got from request (see MOBI API DevMode).
-     * @return \Flancer32\Lib\Data
+     * @return \Praxigento\Core\Data
      */
     public function getCurrentCustomerData($offer = null);
 

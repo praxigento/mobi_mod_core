@@ -27,7 +27,7 @@ class Create
         $this->factoryUser = $factoryUser;
     }
 
-    public function exec(\Flancer32\Lib\Data $ctx)
+    public function exec(\Praxigento\Core\Data $ctx)
     {
         /* get input options from context */
         $username = $ctx->get(self::OPT_USER_NAME);

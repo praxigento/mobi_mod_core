@@ -8,7 +8,7 @@ namespace Praxigento\Core\Api\Request\Part\Conditions\Order;
  * Ordering (sorting) entry.
  */
 class Entry
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     const DIR_ASC = 'asc';
     const DIR_DESC = 'desc';

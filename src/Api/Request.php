@@ -12,7 +12,7 @@ namespace Praxigento\Core\Api;
  *
  */
 class Request
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     /**
      * Flag to return request in response.

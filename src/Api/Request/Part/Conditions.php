@@ -9,7 +9,7 @@ namespace Praxigento\Core\Api\Request\Part;
  * Part of the request to get grid-like data (contains order, filter, pagination).
  */
 class Conditions
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     /**
      * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).

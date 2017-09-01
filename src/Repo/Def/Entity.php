@@ -151,7 +151,7 @@ class Entity
 
     public function replace($data)
     {
-        if ($data instanceof \Flancer32\Lib\Data) {
+        if ($data instanceof \Praxigento\Core\Data) {
             $data = (array)$data->get();
         } elseif ($data instanceof \stdClass) {
             $data = (array)$data;

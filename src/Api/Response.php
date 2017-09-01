@@ -8,7 +8,7 @@ namespace Praxigento\Core\Api;
  * Base for API responses.
  */
 class Response
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     /**
      * Name for inner 'data' attribute cause getData & setData are abstract methods.
@@ -34,7 +34,7 @@ class Response
     /**
      * Override to get appropriate JSON structure in response.
      *
-     * @return \Flancer32\Lib\Data|null
+     * @return \Praxigento\Core\Data|null
      */
     public function getData()
     {
@@ -54,7 +54,7 @@ class Response
     /**
      * Override to get appropriate JSON structure in response.
      *
-     * @param \Flancer32\Lib\Data $data
+     * @param \Praxigento\Core\Data $data
      */
     public function setData($data)
     {

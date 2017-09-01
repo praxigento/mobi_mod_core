@@ -38,7 +38,7 @@ class ServiceInputProcessor
         $type
     ) {
         $result = null;
-        if (is_subclass_of($type, \Flancer32\Lib\Data::class)) {
+        if (is_subclass_of($type, \Praxigento\Core\Data::class)) {
             if (
                 $this->_typeProcessor->isTypeSimple($type) ||
                 $this->_typeProcessor->isTypeAny($type)

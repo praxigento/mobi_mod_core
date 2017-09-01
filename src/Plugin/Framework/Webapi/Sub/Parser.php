@@ -4,11 +4,11 @@
  */
 namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
 
-use Flancer32\Lib\Data as DataObject;
+use Praxigento\Core\Data as DataObject;
 
 /**
  * Parse associative array and convert it into the DataObject according to given type.
- * Given type must be child of the \Flancer32\Lib\Data class or simple type (string, int, ...).
+ * Given type must be child of the \Praxigento\Core\Data class or simple type (string, int, ...).
  */
 class Parser
 {
@@ -30,18 +30,6 @@ class Parser
     }
 
     /**
-     * This method is a wrapper to be used in the unit tests.
-     *
-     * @param $type
-     * @param $data
-     * @return DataObject|mixed
-     */
-    public function parseArrayDataRecursive($type, $data)
-    {
-        return $this->parseArrayData($type, $data);
-    }
-
-    /**
      * @param string $type
      * @param array $data
      * @return DataObject|mixed
@@ -50,7 +38,7 @@ class Parser
     {
         $isArray = $this->_toolType->isArray($type);
         $typeNorm = $this->_toolType->normalizeType($type);
-        if (is_subclass_of($typeNorm, \Flancer32\Lib\Data::class)) {
+        if (is_subclass_of($typeNorm, \Praxigento\Core\Data::class)) {
             /* Process data objects separately. Register annotated class and parse parameters types. */
             if ($isArray) {
                 /* process $data as array of $types */
@@ -91,6 +79,18 @@ class Parser
             $result = $data;
         }
         return $result;
+    }
+
+    /**
+     * This method is a wrapper to be used in the unit tests.
+     *
+     * @param $type
+     * @param $data
+     * @return DataObject|mixed
+     */
+    public function parseArrayDataRecursive($type, $data)
+    {
+        return $this->parseArrayData($type, $data);
     }
 
 }

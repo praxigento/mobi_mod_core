@@ -8,7 +8,7 @@
 namespace Praxigento\Core\Service\Base;
 
 abstract class Request
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
     implements \Praxigento\Core\Service\IRequest
 {
 

@@ -10,7 +10,7 @@ namespace Praxigento\Core\Reflection\Analyzer;
 class Type
 {
     const CLASS_MAGE_BASE = \Magento\Framework\Reflection\MethodsMap::BASE_MODEL_CLASS;
-    const CLASS_PRXGT_BASE = \Flancer32\Lib\Data::class;
+    const CLASS_PRXGT_BASE = \Praxigento\Core\Data::class;
     const PATTERN_METHOD = "/\@method\s+(.+)\s+(.+)\((.*)\)(.*)/";
 
     /** @var \Praxigento\Core\Reflection\Tool\Type */

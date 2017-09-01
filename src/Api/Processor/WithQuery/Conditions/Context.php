@@ -10,7 +10,7 @@ namespace Praxigento\Core\Api\Processor\WithQuery\Conditions;
  * Execution context for ..\Conditions class.
  */
 class Context
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
     /**
      * @return \Praxigento\Core\Api\Request\Part\Conditions|null

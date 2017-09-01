@@ -6,7 +6,7 @@
  */
 namespace Praxigento\Core\Repo\Def;
 
-use Flancer32\Lib\Data as DataObject;
+use Praxigento\Core\Data as DataObject;
 
 class  Generic
     extends \Praxigento\Core\Repo\Def\Db

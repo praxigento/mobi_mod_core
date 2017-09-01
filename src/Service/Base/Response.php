@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Service\Base;
 
 class Response
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
     implements \Praxigento\Core\Service\IResponse
 {
     /** @var string */

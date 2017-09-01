@@ -41,19 +41,19 @@ abstract class WithQuery
      * This method should throws "\Magento\Framework\Exception\AuthorizationException" if customer is not authorized
      * to perform operation.
      *
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      * @throws \Magento\Framework\Exception\AuthorizationException
      */
-    protected abstract function authorize(\Flancer32\Lib\Data $ctx);
+    protected abstract function authorize(\Praxigento\Core\Data $ctx);
 
     /**
      * Create query to select data and place it to context.
      *
      * This method should be overridden in the children classes if query is depended from the request params.
      *
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function createQuerySelect(\Flancer32\Lib\Data $ctx)
+    protected function createQuerySelect(\Praxigento\Core\Data $ctx)
     {
         $query = $this->qbld->getSelectQuery();
         $ctx->set(self::CTX_QUERY, $query);
@@ -62,9 +62,9 @@ abstract class WithQuery
     /**
      * Get query from context, execute it and place results back into context.
      *
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function performQuery(\Flancer32\Lib\Data $ctx)
+    protected function performQuery(\Praxigento\Core\Data $ctx)
     {
         /* get working vars from context */
         $bind = $ctx->get(self::CTX_BIND);
@@ -80,21 +80,21 @@ abstract class WithQuery
     /**
      * Populate query and bound parameters according to request data (from $bind).
      *
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected abstract function populateQuery(\Flancer32\Lib\Data $ctx);
+    protected abstract function populateQuery(\Praxigento\Core\Data $ctx);
 
     /**
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function populateQueryConditions(\Flancer32\Lib\Data $ctx)
+    protected function populateQueryConditions(\Praxigento\Core\Data $ctx)
     {
         /* get working vars from context */
-        /** @var \Flancer32\Lib\Data $vars */
+        /** @var \Praxigento\Core\Data $vars */
         $vars = $ctx->get(self::CTX_VARS);
         /** @var \Magento\Framework\DB\Select $query */
         $query = $ctx->get(self::CTX_QUERY);
-        /** @var \Flancer32\Lib\Data $cond */
+        /** @var \Praxigento\Core\Data $cond */
         $cond = $vars->get(self::VAR_CONDITIONS);
 
         /* perform action */
@@ -106,9 +106,9 @@ abstract class WithQuery
 
     /**
      * Get query conditions from request and place it into the VARS section of the execution context.
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function prepareQueryConditions(\Flancer32\Lib\Data $ctx)
+    protected function prepareQueryConditions(\Praxigento\Core\Data $ctx)
     {
         /* get working vars from context */
         $vars = $ctx->get(self::CTX_VARS);
@@ -123,9 +123,9 @@ abstract class WithQuery
     /**
      * Analyze API request data, collect expected parameters and place its into execution context.
      *
-     * @param \Flancer32\Lib\Data $ctx execution context
+     * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected abstract function prepareQueryParameters(\Flancer32\Lib\Data $ctx);
+    protected abstract function prepareQueryParameters(\Praxigento\Core\Data $ctx);
 
     /**
      * Internal method to be used in 'exec' decorator. This decorator allows Magento 2 to perform
@@ -137,11 +137,11 @@ abstract class WithQuery
     protected function process(\Praxigento\Core\Api\Request $data)
     {
         /* create context for request processing */
-        $ctx = new \Flancer32\Lib\Data();
+        $ctx = new \Praxigento\Core\Data();
         $ctx->set(self::CTX_REQ, $data);
         $ctx->set(self::CTX_QUERY, null);
-        $ctx->set(self::CTX_BIND, new \Flancer32\Lib\Data());
-        $ctx->set(self::CTX_VARS, new \Flancer32\Lib\Data());
+        $ctx->set(self::CTX_BIND, new \Praxigento\Core\Data());
+        $ctx->set(self::CTX_VARS, new \Praxigento\Core\Data());
         $ctx->set(self::CTX_RESULT, null);
 
         /* parse request, authorize customer, prepare query and fetch data */

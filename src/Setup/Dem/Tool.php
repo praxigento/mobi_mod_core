@@ -7,20 +7,20 @@
 
 namespace Praxigento\Core\Setup\Dem;
 
-use Flancer32\Lib\Data as DataObject;
 use Praxigento\Core\Config;
+use Praxigento\Core\Data as DataObject;
 use Praxigento\Core\Setup\Dem\Cfg as DemCfg;
 
 class Tool
 {
     /** Path separator between packages. */
     const PS = Config::DEM_PS;
+    /** @var \Psr\Log\LoggerInterface */
+    private $_logger;
     /** @var \Praxigento\Core\Setup\Dem\Parser */
     private $_parser;
     /** @var \Magento\Framework\App\ResourceConnection */
     private $_resource;
-    /** @var \Psr\Log\LoggerInterface */
-    private $_logger;
 
     /**
      * Tool constructor.

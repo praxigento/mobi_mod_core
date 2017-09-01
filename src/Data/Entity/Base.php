@@ -8,7 +8,7 @@
 namespace Praxigento\Core\Data\Entity;
 
 abstract class Base
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
     implements \Praxigento\Core\Data\IEntity
 {
     /**

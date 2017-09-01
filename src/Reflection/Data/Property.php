@@ -18,7 +18,7 @@ namespace Praxigento\Core\Reflection\Data;
  * @method void setIsArray(boolean $data)
  */
 class Property
-    extends \Flancer32\Lib\Data
+    extends \Praxigento\Core\Data
 {
 
 }
