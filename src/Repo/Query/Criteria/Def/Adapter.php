@@ -24,11 +24,13 @@ class Adapter
     {
         $result = [];
         $orders = $criteria->getSortOrders();
-        foreach ($orders as $item) {
-            $field = $item->getField();
-            $direction = $item->getDirection();
-            if ($field) {
-                $result[] = "$field $direction";
+        if (is_array($orders)) {
+            foreach ($orders as $item) {
+                $field = $item->getField();
+                $direction = $item->getDirection();
+                if ($field) {
+                    $result[] = "$field $direction";
+                }
             }
         }
         if (!count($result) > 0) {

@@ -12,11 +12,18 @@ class Mapper
     implements \Praxigento\Core\Repo\Query\Criteria\IMapper
 {
     /** @var array */
-    protected $_map = [];
+    protected $map = [];
+
+    public function __construct($map = null)
+    {
+        if (is_array($map)) {
+            $this->map = $map;
+        }
+    }
 
     public function get($key)
     {
-        $result = $this->_map[$key]??$key;
+        $result = $this->map[$key] ?? $key;
         return $result;
     }
 }
