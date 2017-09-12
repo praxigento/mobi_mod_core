@@ -8,6 +8,7 @@ namespace Praxigento\Core\Ui\DataProvider;
  * Base data provider for own grids.
  *
  * @SuppressWarnings(PHPMD.CamelCasePropertyName)
+ * @deprecated use \Praxigento\Core\Ui\DataProvider\Grid\Base
  */
 class Base
     extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider

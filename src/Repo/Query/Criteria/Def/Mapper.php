@@ -21,6 +21,11 @@ class Mapper
         }
     }
 
+    public function add($key, $value)
+    {
+        $this->map[$key] = $value;
+    }
+
     public function get($key)
     {
         $result = $this->map[$key] ?? $key;
