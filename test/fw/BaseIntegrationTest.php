@@ -95,8 +95,6 @@ abstract class BaseIntegrationTest
     {
         /** @var  $obj \Praxigento\Core\ICached */
         // old services
-        $obj = $this->_manObj->get(\Praxigento\Accounting\Repo\IModule::class);
-        $obj->cacheReset();
         $obj = $this->_manObj->get(\Praxigento\Accounting\Service\IAccount::class);
         $obj->cacheReset();
         $obj = $this->_manObj->get(\Praxigento\Pv\Service\ISale::class);
