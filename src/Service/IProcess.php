@@ -25,6 +25,7 @@ interface IProcess
      * Execute some operation in the given context ($ctx). Input & output data are placed in the context.
      *
      * @param \Praxigento\Core\Data $ctx
+     * @return \Praxigento\Core\Data|null
      */
     public function exec(\Praxigento\Core\Data $ctx);
 }
