@@ -8,7 +8,7 @@ namespace Praxigento\Core\Test\BaseCase;
 use Mockery as m;
 
 abstract class Mockery
-    extends \PHPUnit_Framework_TestCase
+    extends \PHPUnit\Framework\TestCase
 {
 
     /**
