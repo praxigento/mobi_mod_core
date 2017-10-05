@@ -6,6 +6,8 @@ namespace Praxigento\Core\Repo\Query\Def;
 
 /**
  * Base class for query builders.
+ *
+ * @deprecated use \Praxigento\Core\Repo\Query\Builder
  */
 abstract class Builder
     implements \Praxigento\Core\Repo\Query\IBuilder, \Praxigento\Core\Repo\Query\IBuilder2
