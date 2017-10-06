@@ -29,8 +29,9 @@ class Parser
     }
 
     /**
-     * @param string $alias
-     * @param \Praxigento\Core\Api\Processor\WithQuery\Alias[] $aliases
+     * @param $alias
+     * @param $aliases
+     * @return \Praxigento\Core\Repo\Query\Expression|string
      */
     protected function mapAlias($alias, $aliases)
     {
