@@ -40,6 +40,11 @@ class Period implements IPeriod, ICached
         $this->toolConvert = $toolConvert;
     }
 
+    public function cacheReset()
+    {
+        self::$cachePeriodBounds = [];
+    }
+
     /**
      * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 02:00:00") and cache it.
      * Use "<=" for dateFrom and "<" for dateTo in comparison.
@@ -47,7 +52,7 @@ class Period implements IPeriod, ICached
      * @param $periodValue 20150601 | 201506 | 2015
      * @param $periodType DAY | WEEK | MONTH | YEAR
      */
-    private function _calcPeriodBounds($periodValue, $periodType = self::TYPE_DAY)
+    private function calcPeriodBounds($periodValue, $periodType = self::TYPE_DAY)
     {
         $from = null;
         $to = null;
@@ -66,6 +71,7 @@ class Period implements IPeriod, ICached
                 $end = $this->getWeekLastDay();
                 $prev = $this->getWeekDayNext($end);
                 /* this should be the last day of the week */
+                $periodValue = substr($periodValue, 0, 8);
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime("previous $prev midnight", $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -75,6 +81,7 @@ class Period implements IPeriod, ICached
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_MONTH:
+                $periodValue = substr($periodValue, 0, 6);
                 $dt = date_create_from_format('Ym', $periodValue);
                 $ts = strtotime('first day of midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -84,6 +91,7 @@ class Period implements IPeriod, ICached
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_YEAR:
+                $periodValue = substr($periodValue, 0, 4);
                 $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('first day of January', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -95,11 +103,6 @@ class Period implements IPeriod, ICached
         }
         self::$cachePeriodBounds[$periodValue][$periodType]['from'] = $from;
         self::$cachePeriodBounds[$periodValue][$periodType]['to'] = $to;
-    }
-
-    public function cacheReset()
-    {
-        self::$cachePeriodBounds = [];
     }
 
     public function getPeriodCurrent($date = null, $changeTz = 0, $periodType = self::TYPE_DAY)
@@ -230,6 +233,7 @@ class Period implements IPeriod, ICached
     public function getPeriodNext($periodValue, $periodType = self::TYPE_DAY)
     {
         $result = null;
+        $periodValue = $this->normalizePeriod($periodValue, $periodType);
         switch ($periodType) {
             case self::TYPE_DAY:
                 $dt = date_create_from_format('Ymd', $periodValue);
@@ -246,15 +250,13 @@ class Period implements IPeriod, ICached
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_MONTH:
-                $truncated = substr($periodValue, 0, 6);
-                $dt = date_create_from_format('Ymd', $truncated . '01');
+                $dt = date_create_from_format('Ymd', $periodValue . '01');
                 $ts = strtotime('next month', $dt->getTimestamp());
                 $dt = $this->toolConvert->toDateTime($ts);
                 $result = date_format($dt, 'Ym');
                 break;
             case self::TYPE_YEAR:
-                $truncated = substr($periodValue, 0, 4);
-                $dt = date_create_from_format('Y', $truncated);
+                $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('next year', $dt->getTimestamp());
                 $dt = $this->toolConvert->toDateTime($ts);
                 $result = date_format($dt, 'Y');
@@ -266,6 +268,7 @@ class Period implements IPeriod, ICached
     public function getPeriodPrev($periodValue, $periodType = self::TYPE_DAY)
     {
         $result = null;
+        $periodValue = $this->normalizePeriod($periodValue, $periodType);
         switch ($periodType) {
             case self::TYPE_DAY:
                 $dt = date_create_from_format('Ymd', $periodValue);
@@ -307,11 +310,12 @@ class Period implements IPeriod, ICached
      */
     public function getTimestampFrom($periodValue, $periodType = self::TYPE_DAY)
     {
+        $periodValue = $this->normalizePeriod($periodValue, $periodType);
         if (
             !isset(self::$cachePeriodBounds[$periodValue]) &&
             !isset(self::$cachePeriodBounds[$periodValue][$periodType])
         ) {
-            $this->_calcPeriodBounds($periodValue, $periodType);
+            $this->calcPeriodBounds($periodValue, $periodType);
         }
         $result = self::$cachePeriodBounds[$periodValue][$periodType]['from'];
         return $result;
@@ -319,6 +323,7 @@ class Period implements IPeriod, ICached
 
     public function getTimestampNextFrom($periodValue, $periodType = self::TYPE_DAY)
     {
+        $periodValue = $this->normalizePeriod($periodValue, $periodType);
         $periodNext = $this->getPeriodNext($periodValue, $periodType);
         $result = $this->getTimestampFrom($periodNext, $periodType);
         return $result;
@@ -333,11 +338,12 @@ class Period implements IPeriod, ICached
 
     public function getTimestampTo($periodValue, $periodType = self::TYPE_DAY)
     {
+        $periodValue = $this->normalizePeriod($periodValue, $periodType);
         if (
             !isset(self::$cachePeriodBounds[$periodValue]) &&
             !isset(self::$cachePeriodBounds[$periodValue][$periodType])
         ) {
-            $this->_calcPeriodBounds($periodValue, $periodType);
+            $this->calcPeriodBounds($periodValue, $periodType);
         }
         $result = self::$cachePeriodBounds[$periodValue][$periodType]['to'];
         return $result;
@@ -433,11 +439,31 @@ class Period implements IPeriod, ICached
     }
 
     /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekFirstDay($weekDay)
+    {
+        $this->weekFirstDay = $weekDay;
+        $this->weekLastDay = $this->getWeekDayPrev($weekDay);
+        self::cacheReset();
+    }
+
+    /**
      * @return string
      */
     public function getWeekLastDay()
     {
         return $this->weekLastDay;
+    }
+
+    /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekLastDay($weekDay)
+    {
+        $this->weekLastDay = $weekDay;
+        $this->weekFirstDay = $this->getWeekDayNext($weekDay);
+        self::cacheReset();
     }
 
     /**
@@ -480,22 +506,21 @@ class Period implements IPeriod, ICached
     }
 
     /**
-     * @param string $weekDay see self::WEEK_
+     * @param string $periodValue 'YYYY', 'YYYYMM', 'YYYYMMDD'
+     * @param string $periodType
+     * @return bool|string
      */
-    public function setWeekFirstDay($weekDay)
+    private function normalizePeriod($periodValue, $periodType = self::TYPE_DAY)
     {
-        $this->weekFirstDay = $weekDay;
-        $this->weekLastDay = $this->getWeekDayPrev($weekDay);
-        self::cacheReset();
-    }
-
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekLastDay($weekDay)
-    {
-        $this->weekLastDay = $weekDay;
-        $this->weekFirstDay = $this->getWeekDayNext($weekDay);
-        self::cacheReset();
+        $result = substr($periodValue, 0, 8);
+        switch ($periodType) {
+            case self::TYPE_MONTH:
+                $result = substr($periodValue, 0, 6);
+                break;
+            case self::TYPE_YEAR:
+                $result = substr($periodValue, 0, 4);
+                break;
+        }
+        return $result;
     }
 }
