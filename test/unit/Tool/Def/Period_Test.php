@@ -37,6 +37,7 @@ class Period_UnitTest
     public function test_cacheReset()
     {
         $this->obj->cacheReset();
+        $this->assertTrue(true, 'Prevent "This test did not perform any assertions" error.');
     }
 
     public function test_getPeriodCurrent()
@@ -87,17 +88,17 @@ class Period_UnitTest
     {
         /* tests for zone "America/Los_Angeles" as set up in test/templates.json */
         $this->assertEquals('2015-08-12 07:00:00', $this->obj->getTimestampFrom('20150812', Period::TYPE_DAY));
-        $this->assertEquals('2015-08-13 06:59:59', $this->obj->getTimestampTo('20150812', Period::TYPE_DAY));
+        $this->assertEquals('2015-08-13 07:00:00', $this->obj->getTimestampTo('20150812', Period::TYPE_DAY));
         $this->assertEquals('2015-08-10 07:00:00', $this->obj->getTimestampFrom('20150816', Period::TYPE_WEEK));
-        $this->assertEquals('2015-08-17 06:59:59', $this->obj->getTimestampTo('20150816', Period::TYPE_WEEK));
+        $this->assertEquals('2015-08-17 07:00:00', $this->obj->getTimestampTo('20150816', Period::TYPE_WEEK));
         $this->assertEquals('2015-08-01 07:00:00', $this->obj->getTimestampFrom('201508', Period::TYPE_MONTH));
-        $this->assertEquals('2015-09-01 06:59:59', $this->obj->getTimestampTo('201508', Period::TYPE_MONTH));
+        $this->assertEquals('2015-09-01 07:00:00', $this->obj->getTimestampTo('201508', Period::TYPE_MONTH));
         /* switch from and to sequence to cover getTimestampTo() branches */
-        $this->assertEquals('2016-01-01 06:59:59', $this->obj->getTimestampTo('2015', Period::TYPE_YEAR));
+        $this->assertEquals('2016-01-01 07:00:00', $this->obj->getTimestampTo('2015', Period::TYPE_YEAR));
         $this->assertEquals('2015-01-01 07:00:00', $this->obj->getTimestampFrom('2015', Period::TYPE_YEAR));
         /* tests nextFrom & prevTo */
         $this->assertEquals('2014-12-29 07:00:00', $this->obj->getTimestampNextFrom('20141228', Period::TYPE_WEEK));
-        $this->assertEquals('2015-01-05 06:59:59', $this->obj->getTimestampPrevTo('20150105', Period::TYPE_WEEK));
+        $this->assertEquals('2015-01-05 07:00:00', $this->obj->getTimestampPrevTo('20150105', Period::TYPE_WEEK));
     }
 
     public function test_getWeekDayNext()

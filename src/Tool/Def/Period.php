@@ -18,7 +18,7 @@ class Period implements IPeriod, ICached
     /** @var array Common cache for periods bounds: [period][type][from|to] = ... */
     private static $cachePeriodBounds = [];
     /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $manObj;
+    private $manObj;
     /** @var IConvert */
     private $toolConvert;
     /** @var int Delta in seconds for Magento timezone according to UTC */
@@ -41,7 +41,8 @@ class Period implements IPeriod, ICached
     }
 
     /**
-     * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 01:59:59") and cache it.
+     * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 02:00:00") and cache it.
+     * Use "<=" for dateFrom and "<" for dateTo in comparison.
      *
      * @param $periodValue 20150601 | 201506 | 2015
      * @param $periodType DAY | WEEK | MONTH | YEAR
@@ -56,7 +57,7 @@ class Period implements IPeriod, ICached
                 $ts = strtotime('midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
-                $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
+                $ts = strtotime('tomorrow midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
@@ -69,7 +70,7 @@ class Period implements IPeriod, ICached
                 $ts = strtotime("previous $prev midnight", $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
-                $ts = strtotime('tomorrow midnight -1 second', $dt->getTimestamp());
+                $ts = strtotime('tomorrow midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
@@ -78,7 +79,7 @@ class Period implements IPeriod, ICached
                 $ts = strtotime('first day of midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
-                $ts = strtotime('first day of next month midnight -1 second', $dt->getTimestamp());
+                $ts = strtotime('first day of next month midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
@@ -87,7 +88,7 @@ class Period implements IPeriod, ICached
                 $ts = strtotime('first day of January', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
-                $ts = strtotime('first day of January next year midnight -1 second', $dt->getTimestamp());
+                $ts = strtotime('first day of January next year midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
