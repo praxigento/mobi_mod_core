@@ -349,6 +349,13 @@ class Period implements IPeriod, ICached
         return $result;
     }
 
+    public function getTimestampUpTo($periodValue, $periodType = self::TYPE_DAY)
+    {
+        $tsTo = $this->getTimestampTo($periodValue, $periodType);
+        $result = date(Cfg::FORMAT_DATETIME, (strtotime($tsTo) - 1));
+        return $result;
+    }
+
     /**
      * MOBI-504: don't retrieve session depended objects from Object Manager
      *

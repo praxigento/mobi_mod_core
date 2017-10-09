@@ -90,6 +90,14 @@ interface IPeriod
     public function getTimestampTo($periodValue, $periodType = self::TYPE_DAY);
 
     /**
+     * Get "1 second before next period begin" timestamp
+     * @param $periodValue
+     * @param string $periodType
+     * @return string
+     */
+    public function getTimestampUpTo($periodValue, $periodType = self::TYPE_DAY);
+
+    /**
      * @param $weekDay - string see self::WEEK_
      *
      * @return string see self::WEEK_
