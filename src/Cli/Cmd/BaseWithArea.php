@@ -7,6 +7,8 @@ namespace Praxigento\Core\Cli\Cmd;
 
 /**
  * Base class to create console commands.
+ *
+ * @deprecated use \Praxigento\Core\Cli\Cmd\Base & checkAreaCode() on execute()
  */
 abstract class BaseWithArea
     extends \Praxigento\Core\Cli\Cmd\Base
