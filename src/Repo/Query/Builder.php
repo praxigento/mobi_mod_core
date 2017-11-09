@@ -9,7 +9,7 @@ namespace Praxigento\Core\Repo\Query;
  * Base class for query builders (new format).
  */
 abstract class Builder
-    implements \Praxigento\Core\Repo\Query\IBuilder2
+    implements \Praxigento\Core\Repo\Query\IBuilder
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $conn; // default connection

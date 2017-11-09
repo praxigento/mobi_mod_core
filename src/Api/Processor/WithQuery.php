@@ -19,14 +19,14 @@ abstract class WithQuery
     protected $hlpCfg;
     /** @var  \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
-    /** @var  \Praxigento\Core\Repo\Query\IBuilder2 */
+    /** @var  \Praxigento\Core\Repo\Query\IBuilder */
     protected $qbld;
     /** @var  \Praxigento\Core\Api\Processor\WithQuery\Conditions */
     protected $subCond;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        \Praxigento\Core\Repo\Query\IBuilder2 $qbld = null,
+        \Praxigento\Core\Repo\Query\IBuilder $qbld = null,
         \Praxigento\Core\Helper\Config $hlpCfg
     ) {
         $this->manObj = $manObj;
@@ -55,7 +55,7 @@ abstract class WithQuery
      */
     protected function createQuerySelect(\Praxigento\Core\Data $ctx)
     {
-        if ($this->qbld instanceof \Praxigento\Core\Repo\Query\IBuilder2) {
+        if ($this->qbld instanceof \Praxigento\Core\Repo\Query\IBuilder) {
             $query = $this->qbld->build();
         } else {
             $query = $this->qbld->getSelectQuery();

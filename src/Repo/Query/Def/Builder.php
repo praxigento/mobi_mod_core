@@ -11,7 +11,7 @@ namespace Praxigento\Core\Repo\Query\Def;
  * @deprecated use \Praxigento\Core\Repo\Query\Builder
  */
 abstract class Builder
-    implements \Praxigento\Core\Repo\Query\IBuilder2
+    implements \Praxigento\Core\Repo\Query\IBuilder
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $conn; // default connection

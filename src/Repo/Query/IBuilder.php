@@ -8,7 +8,7 @@ namespace Praxigento\Core\Repo\Query;
 /**
  * Interface for DB query builders. Queries can be based on other queries.
  */
-interface  IBuilder2
+interface  IBuilder
 {
     /**
      * Build query optionally based on other query. Builder modifies $source query.
