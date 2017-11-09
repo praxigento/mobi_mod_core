@@ -12,23 +12,22 @@ namespace Praxigento\Core\Ui\DataProvider\Grid;
 class Base
     extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
-    const UICD_UPDATE_URL = 'mui/index/render';
-    const UIC_CONFIG = 'config';
-    const UIC_UPDATE_URL = 'update_url';
     /**#@+
      *  See method \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput
      */
     const JSON_ATTR_ITEMS = 'items';
     const JSON_ATTR_TOTAL_RECORDS = 'totalRecords';
     /**#@-  */
-
-    /** @var  \Praxigento\Core\Ui\DataProvider\Grid\Query\IBuilder */
+    const UICD_UPDATE_URL = 'mui/index/render';
+    const UIC_CONFIG = 'config';
+    const UIC_UPDATE_URL = 'update_url';
+     /** @var  \Praxigento\Core\Ui\DataProvider\Grid\Query\IBuilder */
     private $gridQueryBuilder;
 
     public function __construct(
         $name,
-        $primaryFieldName,
-        $requestFieldName,
+        $primaryFieldName = 'primaryFieldName',
+        $requestFieldName = 'requestFieldName',
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\App\RequestInterface $request,
         \Praxigento\Core\Ui\DataProvider\Grid\Query\IBuilder $gridQueryBuilder,
