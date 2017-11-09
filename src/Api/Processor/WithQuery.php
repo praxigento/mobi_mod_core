@@ -28,7 +28,8 @@ abstract class WithQuery
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Repo\Query\IBuilder $qbld = null,
         \Praxigento\Core\Helper\Config $hlpCfg
-    ) {
+    )
+    {
         $this->manObj = $manObj;
         $this->qbld = $qbld;
         $this->hlpCfg = $hlpCfg;
@@ -116,7 +117,7 @@ abstract class WithQuery
     {
         /* get working vars from context */
         $vars = $ctx->get(self::CTX_VARS);
-        /** @var \Praxigento\BonusHybrid\Api\Stats\Plain\Request $req */
+        /** @var \Praxigento\Core\Api\Request\WithCond $req */
         $req = $ctx->get(self::CTX_REQ);
 
         /* perform action */
