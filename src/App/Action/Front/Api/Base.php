@@ -3,12 +3,12 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Action\Front;
+namespace Praxigento\Core\App\Action\Front\Api;
 
 use Magento\Framework\Controller\ResultFactory as AResultFactory;
 
 /**
- * Base for frontend actions (controllers).
+ * Base for frontend CTRL API actions.
  */
 abstract class Base
     extends \Magento\Framework\App\Action\Action
@@ -96,5 +96,5 @@ abstract class Base
         return $result;
     }
 
-    abstract protected function process($data);
+    abstract protected function process($request);
 }
