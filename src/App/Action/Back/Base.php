@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Controller\Adminhtml;
+namespace Praxigento\Core\App\Action\Back;
 
 /**
  * Base class for adminhtml controllers.
