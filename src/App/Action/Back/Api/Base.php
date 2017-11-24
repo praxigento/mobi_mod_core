@@ -5,14 +5,14 @@
 
 namespace Praxigento\Core\App\Action\Back\Api;
 
+use Magento\Framework\Controller\ResultFactory as AResultFactory;
+
 /**
  * Base for backend CTRL API actions.
  */
 abstract class Base
     extends \Magento\Backend\App\Action
 {
-    /** @var \Praxigento\Core\Api\IAuthenticator */
-    protected $authenticator;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
     /** @var \Psr\Log\LoggerInterface */
@@ -24,15 +24,13 @@ abstract class Base
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Webapi\ServiceInputProcessor $inputProcessor,
         \Magento\Framework\Webapi\ServiceOutputProcessor $outputProcessor,
-        \Praxigento\Core\Fw\Logger\App $logger,
-        \Praxigento\Core\Api\IAuthenticator $authenticator
+        \Praxigento\Core\Fw\Logger\App $logger
     )
     {
         parent::__construct($context);
         $this->inputProcessor = $inputProcessor;
         $this->outputProcessor = $outputProcessor;
         $this->logger = $logger;
-        $this->authenticator = $authenticator;
     }
 
     public function execute()
