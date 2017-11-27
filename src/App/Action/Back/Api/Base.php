@@ -66,6 +66,10 @@ abstract class Base
         $result = null;
         try {
             $rawBody = file_get_contents('php://input');
+            if (strpos($rawBody, '&form_key=')) {
+                $parts = explode('&form_key=', $rawBody);
+                $rawBody = reset($parts);
+            }
             $obj = json_decode($rawBody);
             if ($obj) {
                 $type = $this->getInDataType();
