@@ -27,6 +27,7 @@ abstract class Base
         \Praxigento\Core\Fw\Logger\App $logger
     )
     {
+        /* TODO: should we use an Object Manager to get base attributes (bad practice, worse testing but simpler constructor) ? */
         parent::__construct($context);
         $this->inputProcessor = $inputProcessor;
         $this->outputProcessor = $outputProcessor;
