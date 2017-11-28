@@ -9,6 +9,8 @@ use Magento\Framework\Controller\ResultFactory as AResultFactory;
 
 /**
  * Base for backend CTRL API actions.
+ *
+ * TODO: should we use Traits for methods common with Front API Base?
  */
 abstract class Base
     extends \Magento\Backend\App\Action
