@@ -5,11 +5,13 @@
 
 namespace Praxigento\Core\Api\Service\Customer;
 
-use Praxigento\Core\Api\Service\Customer\Get\Request as ARequest;
-use Praxigento\Core\Api\Service\Customer\Get\Response as AResponse;
+use Praxigento\Core\Api\Service\Customer\Search\Request as ARequest;
+use Praxigento\Core\Api\Service\Customer\Search\Response as AResponse;
 
 /**
  * Search customers by some criteria (name, email, etc.).
+ *
+ * This service has no default implementation - there is one implementation in 'Downline' module.
  */
 interface Search
 {
