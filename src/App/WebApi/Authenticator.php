@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Api;
+namespace Praxigento\Core\App\WebApi;
 
 use Praxigento\Core\Config as Cfg;
 
