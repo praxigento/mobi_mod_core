@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Api\Request;
+namespace Praxigento\Core\App\WebApi\Request;
 
 /**
  * Base for API requests with conditions (ordering, filtering, limitations).
@@ -12,12 +12,12 @@ namespace Praxigento\Core\Api\Request;
  *
  */
 class WithCond
-    extends \Praxigento\Core\Api\Request
+    extends \Praxigento\Core\App\WebApi\Request
 {
     /**
      * Conditions (ordering, filtering, limitations).
      *
-     * @return \Praxigento\Core\Api\Request\Part\Conditions|null
+     * @return \Praxigento\Core\App\WebApi\Request\Part\Conditions|null
      */
     public function getConditions()
     {
@@ -28,7 +28,7 @@ class WithCond
     /**
      * Conditions (ordering, filtering, limitations).
      *
-     * @param \Praxigento\Core\Api\Request\Part\Conditions $data
+     * @param \Praxigento\Core\App\WebApi\Request\Part\Conditions $data
      */
     public function setConditions($data)
     {

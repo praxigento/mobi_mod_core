@@ -13,7 +13,7 @@ use Magento\Framework\Controller\ResultFactory as AResultFactory;
 abstract class Base
     extends \Magento\Framework\App\Action\Action
 {
-    /** @var \Praxigento\Core\Api\IAuthenticator */
+    /** @var \Praxigento\Core\App\WebApi\IAuthenticator */
     protected $authenticator;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
@@ -27,7 +27,7 @@ abstract class Base
         \Magento\Framework\Webapi\ServiceInputProcessor $inputProcessor,
         \Magento\Framework\Webapi\ServiceOutputProcessor $outputProcessor,
         \Praxigento\Core\Fw\Logger\App $logger,
-        \Praxigento\Core\Api\IAuthenticator $authenticator
+        \Praxigento\Core\App\WebApi\IAuthenticator $authenticator
     )
     {
         parent::__construct($context);

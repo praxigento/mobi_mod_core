@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Api;
+namespace Praxigento\Core\App\WebApi;
 
 /**
  * This interface is used by REST API handlers that should process requests in restricted mode (user based).

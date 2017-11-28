@@ -11,7 +11,7 @@ use Praxigento\Core\Config as Cfg;
  * Default implementation for REST API authenticator.
  */
 class Authenticator
-    implements \Praxigento\Core\Api\IAuthenticator
+    implements \Praxigento\Core\App\WebApi\IAuthenticator
 {
     /** @var  \Praxigento\Core\Data */
     protected $cacheCurrentCustomer;

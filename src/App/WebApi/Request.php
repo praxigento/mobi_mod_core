@@ -2,7 +2,8 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Api;
+
+namespace Praxigento\Core\App\WebApi;
 
 /**
  * Base API request.

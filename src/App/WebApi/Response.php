@@ -2,10 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Api;
+
+namespace Praxigento\Core\App\WebApi;
 
 /**
- * Base for API responses.
+ * Base for Web API responses.
  */
 class Response
     extends \Praxigento\Core\Data
@@ -27,7 +28,7 @@ class Response
 
     public function __construct()
     {
-        $data = new \Praxigento\Core\Api\Response\Result();
+        $data = new \Praxigento\Core\App\WebApi\Response\Result();
         $this->setResult($data);
     }
 
@@ -43,7 +44,7 @@ class Response
     }
 
     /**
-     * @return \Praxigento\Core\Api\Response\Result
+     * @return \Praxigento\Core\App\WebApi\Response\Result
      */
     public function getResult()
     {
@@ -62,9 +63,9 @@ class Response
     }
 
     /**
-     * @param \Praxigento\Core\Api\Response\Result $data
+     * @param \Praxigento\Core\App\WebApi\Response\Result $data
      */
-    public function setResult(\Praxigento\Core\Api\Response\Result $data)
+    public function setResult(\Praxigento\Core\App\WebApi\Response\Result $data)
     {
         parent::setResult($data);
     }
