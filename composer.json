@@ -12,7 +12,7 @@
   ],
   "require": {
     "flancer32/php_data_object": "^0.2",
-    "praxigento/mage2_ext_logging": "^0.1.0"
+    "praxigento/mage2_ext_logging": "^0.1"
   },
   "autoload": {
     "files": [
