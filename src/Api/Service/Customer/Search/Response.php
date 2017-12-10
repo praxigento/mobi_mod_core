@@ -6,24 +6,6 @@
 namespace Praxigento\Core\Api\Service\Customer\Search;
 
 class Response
-    extends \Praxigento\Core\Data
+    extends \Praxigento\Core\Api\Data\Customer\Search\Response
 {
-    const ATTR_DATA = 'data';
-
-    /**
-     * @return \Praxigento\Core\Api\Service\Customer\Search\Response\Data
-     */
-    public function getData()
-    {
-        $result = parent::get(self::ATTR_DATA);
-        return $result;
-    }
-
-    /**
-     * @param \Praxigento\Core\Api\Service\Customer\Search\Response\Data $data
-     */
-    public function setData($data)
-    {
-        parent::set(self::ATTR_DATA, $data);
-    }
 }

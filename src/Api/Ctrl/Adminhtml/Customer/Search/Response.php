@@ -6,9 +6,22 @@
 namespace Praxigento\Core\Api\Ctrl\Adminhtml\Customer\Search;
 
 /**
- * Controller's shell extends underline service response directly.
+ * Response to search customers from adminhtml.
  */
 class Response
-    extends \Praxigento\Core\Api\Service\Customer\Search\Response
-{
+    extends \Praxigento\Core\App\Api\Ctrl\Response {
+
+    /**
+     * @return Response\Data
+     */
+    public function getData() {
+        return parent::getData();
+    }
+
+    /**
+     * @param Response\Data $data
+     */
+    public function setData($data) {
+        parent::setData($data);
+    }
 }
