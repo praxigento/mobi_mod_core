@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\WebApi\Processor\WithQuery;
+namespace Praxigento\Core\App\Web\Processor\WithQuery;
 
 /**
  * Alias structure to represent result set attribute ("SELECT `table`.`field` AS `alias`, ...")

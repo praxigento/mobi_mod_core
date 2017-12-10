@@ -4,7 +4,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\WebApi\Processor\WithQuery\Conditions;
+namespace Praxigento\Core\App\Web\Processor\WithQuery\Conditions;
 
 /**
  * Execution context for ..\Conditions class.
@@ -13,7 +13,7 @@ class Context
     extends \Praxigento\Core\Data
 {
     /**
-     * @return \Praxigento\Core\App\WebApi\Request\Part\Conditions|null
+     * @return \Praxigento\Core\App\Web\Request\Part\Conditions|null
      */
     public function getConditions()
     {
@@ -30,7 +30,7 @@ class Context
         return $result;
     }
 
-    public function setConditions(\Praxigento\Core\App\WebApi\Request\Part\Conditions $data = null)
+    public function setConditions(\Praxigento\Core\App\Web\Request\Part\Conditions $data = null)
     {
         parent::setConditions($data);
     }

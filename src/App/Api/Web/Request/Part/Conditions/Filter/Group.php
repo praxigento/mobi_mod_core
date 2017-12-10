@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter;
+namespace Praxigento\Core\App\Web\Request\Part\Conditions\Filter;
 
 /**
  * Filtering group. Group contains simple clauses or other groups and operand to apply ('or', 'and').
@@ -20,8 +20,8 @@ class Group
     /**#@-  */
 
     /**
-     * Set of groups (\Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter\Group)
-     * or clauses (\Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter\Clause) to filter result set.
+     * Set of groups (\Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Group)
+     * or clauses (\Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Clause) to filter result set.
      *
      * @return \Praxigento\Core\Data[]
      */
@@ -43,8 +43,8 @@ class Group
     }
 
     /**
-     * Set of groups (\Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter\Group)
-     * or clauses (\Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter\Entry) to filter result set.
+     * Set of groups (\Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Group)
+     * or clauses (\Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Entry) to filter result set.
      *
      * @param \Praxigento\Core\Data[] $data
      */

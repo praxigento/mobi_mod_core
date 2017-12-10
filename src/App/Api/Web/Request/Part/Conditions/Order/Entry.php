@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\WebApi\Request\Part\Conditions\Order;
+namespace Praxigento\Core\App\Web\Request\Part\Conditions\Order;
 
 /**
  * Ordering (sorting) entry.

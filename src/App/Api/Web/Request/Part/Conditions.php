@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\WebApi\Request\Part;
+namespace Praxigento\Core\App\Web\Request\Part;
 
 /**
  * Part of the request to get grid-like data (contains order, filter, pagination).
@@ -14,7 +14,7 @@ class Conditions
     /**
      * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).
      *
-     * @return \Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter
+     * @return \Praxigento\Core\App\Web\Request\Part\Conditions\Filter
      */
     public function getFilter()
     {
@@ -47,7 +47,7 @@ class Conditions
     /**
      * Set of ordering conditions.
      *
-     * @return \Praxigento\Core\App\WebApi\Request\Part\Conditions\Order\Entry[]
+     * @return \Praxigento\Core\App\Web\Request\Part\Conditions\Order\Entry[]
      */
     public function getOrder()
     {
@@ -58,7 +58,7 @@ class Conditions
     /**
      * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).
      *
-     * @param \Praxigento\Core\App\WebApi\Request\Part\Conditions\Filter $data
+     * @param \Praxigento\Core\App\Web\Request\Part\Conditions\Filter $data
      */
     public function setFilter($data)
     {
@@ -88,7 +88,7 @@ class Conditions
     /**
      * Set of ordering conditions.
      *
-     * @param \Praxigento\Core\App\WebApi\Request\Part\Conditions\Order\Entry[] $data
+     * @param \Praxigento\Core\App\Web\Request\Part\Conditions\Order\Entry[] $data
      */
     public function setOrder($data)
     {

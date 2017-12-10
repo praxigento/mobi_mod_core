@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\WebApi;
+namespace Praxigento\Core\App\Web;
 
 use Praxigento\Core\Config as Cfg;
 
@@ -11,7 +11,7 @@ use Praxigento\Core\Config as Cfg;
  * Default implementation for REST API authenticator.
  */
 class Authenticator
-    implements \Praxigento\Core\App\WebApi\IAuthenticator
+    implements \Praxigento\Core\App\Web\IAuthenticator
 {
     /** @var  \Praxigento\Core\Data */
     protected $cacheCurrentCustomer;
