@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Web\Response;
+namespace Praxigento\Core\App\Api\Web\Response;
 
 /**
  * Response result data. If "SUCCESS" then $text is omitted.

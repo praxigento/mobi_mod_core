@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web\Processor;
+namespace Praxigento\Core\App\Api\Web\Processor;
 
 abstract class WithQuery
 {
@@ -21,7 +21,7 @@ abstract class WithQuery
     protected $manObj;
     /** @var  \Praxigento\Core\App\Repo\Query\IBuilder */
     protected $qbld;
-    /** @var  \Praxigento\Core\App\Web\Processor\WithQuery\Conditions */
+    /** @var  \Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions */
     protected $subCond;
 
     public function __construct(
@@ -34,7 +34,7 @@ abstract class WithQuery
         $this->qbld = $qbld;
         $this->hlpCfg = $hlpCfg;
         /* use Object Manager to create this class internal subs. Don't expand constructor */
-        $this->subCond = $this->manObj->get(\Praxigento\Core\App\Web\Processor\WithQuery\Conditions::class);
+        $this->subCond = $this->manObj->get(\Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions::class);
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class WithQuery
         $cond = $vars->get(self::VAR_CONDITIONS);
 
         /* perform action */
-        $ctxCond = new \Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Context();
+        $ctxCond = new \Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions\Context();
         $ctxCond->setQuery($query);
         $ctxCond->setConditions($cond);
         $this->subCond->exec($ctxCond);
@@ -117,7 +117,7 @@ abstract class WithQuery
     {
         /* get working vars from context */
         $vars = $ctx->get(self::CTX_VARS);
-        /** @var \Praxigento\Core\App\Web\Request\WithCond $req */
+        /** @var \Praxigento\Core\App\Api\Web\Request\WithCond $req */
         $req = $ctx->get(self::CTX_REQ);
 
         /* perform action */
@@ -136,10 +136,10 @@ abstract class WithQuery
      * Internal method to be used in 'exec' decorator. This decorator allows Magento 2 to perform
      * JSON2OBJ transformation of the input data by request's class.
      *
-     * @param \Praxigento\Core\App\Web\Request $data
-     * @return \Praxigento\Core\App\Web\Response
+     * @param \Praxigento\Core\App\Api\Web\Request $data
+     * @return \Praxigento\Core\App\Api\Web\Response
      */
-    protected function process(\Praxigento\Core\App\Web\Request $data)
+    protected function process(\Praxigento\Core\App\Api\Web\Request $data)
     {
         /* create context for request processing */
         $ctx = new \Praxigento\Core\Data();
@@ -159,8 +159,8 @@ abstract class WithQuery
         $this->performQuery($ctx);
 
         /* get query results from context and add to API response */
-        /** @var \Praxigento\Core\App\Web\Response $result */
-        $result = new \Praxigento\Core\App\Web\Response();
+        /** @var \Praxigento\Core\App\Api\Web\Response $result */
+        $result = new \Praxigento\Core\App\Api\Web\Response();
         $rs = $ctx->get(self::CTX_RESULT);
         $result->setData($rs);
         return $result;

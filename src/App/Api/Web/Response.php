@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web;
+namespace Praxigento\Core\App\Api\Web;
 
 /**
  * Base for Web API responses.
@@ -28,7 +28,7 @@ class Response
 
     public function __construct()
     {
-        $data = new \Praxigento\Core\App\Web\Response\Result();
+        $data = new \Praxigento\Core\App\Api\Web\Response\Result();
         $this->setResult($data);
     }
 
@@ -44,7 +44,7 @@ class Response
     }
 
     /**
-     * @return \Praxigento\Core\App\Web\Response\Result
+     * @return \Praxigento\Core\App\Api\Web\Response\Result
      */
     public function getResult()
     {
@@ -63,9 +63,9 @@ class Response
     }
 
     /**
-     * @param \Praxigento\Core\App\Web\Response\Result $data
+     * @param \Praxigento\Core\App\Api\Web\Response\Result $data
      */
-    public function setResult(\Praxigento\Core\App\Web\Response\Result $data)
+    public function setResult(\Praxigento\Core\App\Api\Web\Response\Result $data)
     {
         parent::setResult($data);
     }

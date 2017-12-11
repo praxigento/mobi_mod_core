@@ -5,8 +5,8 @@
     <!-- *** -->
     <!-- API -->
     <!-- *** -->
-    <preference for="\Praxigento\Core\App\Web\IAuthenticator"
-            type="\Praxigento\Core\App\Web\Authenticator"/>
+    <preference for="\Praxigento\Core\App\Api\Web\IAuthenticator"
+            type="\Praxigento\Core\App\Api\Web\Authenticator"/>
 
     <!-- ******* -->
     <!-- Plugins -->

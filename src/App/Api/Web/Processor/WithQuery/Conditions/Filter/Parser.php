@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Filter;
+namespace Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions\Filter;
 
 
 /**
@@ -50,8 +50,8 @@ class Parser
     /**
      * Parse tree-like filter structure and return string for SQL 'WHERE' clause.
      *
-     * @param \Praxigento\Core\App\Web\Request\Part\Conditions\Filter $filter
-     * @param \Praxigento\Core\App\Web\Processor\WithQuery\Alias[] $aliases map of the aliases to [table, field]
+     * @param \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter $filter
+     * @param \Praxigento\Core\App\Api\Web\Processor\WithQuery\Alias[] $aliases map of the aliases to [table, field]
      * @return string
      */
     public function parse($filter, $aliases)
@@ -59,9 +59,9 @@ class Parser
         $result = '';
         /* Filter can be a single 'clause' or single 'group' */
         $clause = $filter->getClause();
-        if (is_array($clause)) $clause = new \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Clause($clause);
+        if (is_array($clause)) $clause = new \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Clause($clause);
         $group = $filter->getGroup();
-        if (is_array($group)) $group = new \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Group($group);
+        if (is_array($group)) $group = new \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Group($group);
         if ($clause) {
             /* there is single filtering clause in the filter */
             $attr = $clause->getAttr(); // required
@@ -82,10 +82,10 @@ class Parser
             $entries = $group->getEntries();
             /* collect group parts as SQL */
             $parts = [];
-            /** @var \Praxigento\Core\App\Web\Request\Part\Conditions\Filter $entry */
+            /** @var \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter $entry */
             foreach ($entries as $entry) {
                 /* place data into 'filter' container */
-                if (is_array($entry)) $entry = new \Praxigento\Core\App\Web\Request\Part\Conditions\Filter($entry);
+                if (is_array($entry)) $entry = new \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter($entry);
                 $sql = $this->parse($entry, $aliases);
                 $parts[] = $sql;
             }

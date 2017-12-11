@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web\Request\Part\Conditions\Filter;
+namespace Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter;
 
 /**
  * Filtering clause (standalone filter).

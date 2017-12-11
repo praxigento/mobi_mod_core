@@ -4,23 +4,23 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web\Processor\WithQuery;
+namespace Praxigento\Core\App\Api\Web\Processor\WithQuery;
 
 /**
  * Process conditions from API request and add parts to SQL query.
  */
 class Conditions
 {
-    /** @var \Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Filter\Parser */
+    /** @var \Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions\Filter\Parser */
     protected $subFilterParser;
 
     public function __construct(
-        \Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Filter\Parser $subFilterParser
+        \Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions\Filter\Parser $subFilterParser
     ) {
         $this->subFilterParser = $subFilterParser;
     }
 
-    public function exec(\Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Context $ctx)
+    public function exec(\Praxigento\Core\App\Api\Web\Processor\WithQuery\Conditions\Context $ctx)
     {
         /* get working vars from context */
         $query = $ctx->getQuery();
@@ -28,7 +28,7 @@ class Conditions
 
         /* perform action */
         $columns = $query->getPart(\Zend_Db_Select::COLUMNS); // get map [$tblAlias, $column, $valueAlias]
-        if ($cond && $cond instanceof \Praxigento\Core\App\Web\Request\Part\Conditions) {
+        if ($cond && $cond instanceof \Praxigento\Core\App\Api\Web\Request\Part\Conditions) {
             /* we need to get reverse map: $valueAlias => [$tblAlias, $column] */
             $map = $this->mapReverse($columns);
 
@@ -60,7 +60,7 @@ class Conditions
                         $dir = \Zend_Db_Select::SQL_ASC;
                     }
                     if (isset($map[$alias])) {
-                        /** @var \Praxigento\Core\App\Web\Processor\WithQuery\Alias $data */
+                        /** @var \Praxigento\Core\App\Api\Web\Processor\WithQuery\Alias $data */
                         $data = $map[$alias];
                         $tblAlias = $data->getTable();
                         $col = $data->getField();
@@ -86,7 +86,7 @@ class Conditions
             $tableAlias = $one[0];
             $column = $one[1];
             $valueAlias = $one[2];
-            $data = new \Praxigento\Core\App\Web\Processor\WithQuery\Alias();
+            $data = new \Praxigento\Core\App\Api\Web\Processor\WithQuery\Alias();
             $data->setAlias($valueAlias);
             $data->setTable($tableAlias);
             $data->setField($column);

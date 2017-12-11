@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Web\Request\Part\Conditions;
+namespace Praxigento\Core\App\Api\Web\Request\Part\Conditions;
 
 /**
  * Top level filter (union of the filtering clauses and/or groups of clauses).
@@ -15,7 +15,7 @@ class Filter
     /**
      * Single filtering clause.
      *
-     * @return \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Clause|null
+     * @return \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Clause|null
      */
     public function getClause()
     {
@@ -26,7 +26,7 @@ class Filter
     /**
      * Single group of the filtering clauses.
      *
-     * @return \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Group
+     * @return \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Group
      */
     public function getGroup()
     {
@@ -37,7 +37,7 @@ class Filter
     /**
      * Single filtering clause.
      *
-     * @param \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Clause $data
+     * @param \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Clause $data
      */
     public function setClause($data)
     {
@@ -47,7 +47,7 @@ class Filter
     /**
      * Single group of the filtering clauses.
      *
-     * @param \Praxigento\Core\App\Web\Request\Part\Conditions\Filter\Group $data
+     * @param \Praxigento\Core\App\Api\Web\Request\Part\Conditions\Filter\Group $data
      */
     public function setGroup($data)
     {
