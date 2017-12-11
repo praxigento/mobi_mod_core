@@ -12,7 +12,7 @@ class Response
     const ITEMS = 'items';
 
     /**
-     * @return Response\Item[]
+     * @return \Praxigento\Core\Api\Data\Customer\Search\Response\Item[]
      */
     public function getItems() {
         $result = parent::get(self::ITEMS);
@@ -20,7 +20,7 @@ class Response
     }
 
     /**
-     * @param Response\Item[] $data
+     * @param \Praxigento\Core\Api\Data\Customer\Search\Response\Item[] $data
      */
     public function setItems($data) {
         parent::set(self::ITEMS, $data);
