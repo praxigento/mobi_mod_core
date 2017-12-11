@@ -16,24 +16,77 @@ class Request
     extends \Praxigento\Core\Data
 {
     /**
-     * Flag to return request in response.
-     *
-     * @return bool|null
+     * Name for inner attribute that contains request's useful data (w/o service attributes of the request).
      */
-    public function getRequestReturn()
-    {
-        $result = parent::getRequestReturn();
+    const DATA = 'data';
+    /**
+     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
+     */
+    const DEV_ADMIN_ID = 'devAdminId';
+    /**
+     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
+     */
+    const DEV_CUST_ID = 'devCustId';
+
+    /**
+     * Data structure for the Web API request.
+     *
+     * Override to get appropriate JSON structure for concrete request.
+     *
+     * @return \Praxigento\Core\Data
+     */
+    public function getData() {
+        $result = parent::get(self::DATA);
         return $result;
     }
 
     /**
-     * Flag to return request in response.
+     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
      *
-     * @param bool $data
+     * @return int|null
      */
-    public function setRequestReturn($data)
-    {
-        parent::setRequestReturn($data);
+    public function getDevAdminId() {
+        $result = parent::get(self::DEV_ADMIN_ID);
+        return $result;
+    }
+
+    /**
+     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
+     *
+     * @return int|null
+     */
+    public function getDevCustId() {
+        $result = parent::get(self::DEV_CUST_ID);
+        return $result;
+    }
+
+    /**
+     * Data structure for the Web API request.
+     *
+     * Override to get appropriate JSON structure for concrete request.
+     *
+     * @param \Praxigento\Core\Data $data
+     */
+    public function setData($data) {
+        parent::set(self::DATA, $data);
+    }
+
+    /**
+     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
+     *
+     * @param int $data
+     */
+    public function setDevAdminId($data) {
+        parent::set(self::DEV_ADMIN_ID, $data);
+    }
+
+    /**
+     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
+     *
+     * @param int $data
+     */
+    public function setDevCustId($data) {
+        parent::set(self::DEV_CUST_ID, $data);
     }
 
 }

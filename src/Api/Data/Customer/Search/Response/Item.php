@@ -6,12 +6,11 @@
 namespace Praxigento\Core\Api\Data\Customer\Search\Response;
 
 /**
- * Response set item with found customers data.
+ * Result set item with found customers data.
  */
 class Item
     extends \Praxigento\Core\Data
 {
-
     const EMAIL = 'email';
     const ID = 'id';
     const NAME_FIRST = 'name_first';

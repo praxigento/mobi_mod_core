@@ -3,10 +3,10 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
     <!-- *** -->
-    <!-- API -->
+    <!-- App -->
     <!-- *** -->
     <preference for="\Praxigento\Core\App\Api\Web\IAuthenticator"
-            type="\Praxigento\Core\App\Api\Web\Authenticator"/>
+                type="\Praxigento\Core\App\Api\Web\Authenticator"/>
 
     <!-- ******* -->
     <!-- Plugins -->
@@ -51,53 +51,59 @@
     <!-- Repos -->
     <!-- ***** -->
     <preference for="Praxigento\Core\App\Repo\Query\ISelect"
-            type="Praxigento\Core\App\Repo\Query\Def\Select"/>
+                type="Praxigento\Core\App\Repo\Query\Def\Select"/>
     <preference for="Praxigento\Core\App\Repo\IGeneric"
-            type="Praxigento\Core\App\Repo\Def\Generic"/>
+                type="Praxigento\Core\App\Repo\Def\Generic"/>
     <preference for="Praxigento\Core\App\Repo\Query\Criteria\IAdapter"
-            type="Praxigento\Core\App\Repo\Query\Criteria\Def\Adapter"/>
+                type="Praxigento\Core\App\Repo\Query\Criteria\Def\Adapter"/>
 
 
     <!-- ******** -->
     <!-- REWRITES -->
     <!-- ******** -->
     <preference for="Magento\Framework\Reflection\TypeProcessor"
-            type="Praxigento\Core\App\Reflection\TypeProcessor"/>
+                type="Praxigento\Core\App\Reflection\TypeProcessor"/>
 
 
     <!-- *********** -->
     <!-- Transaction -->
     <!-- *********** -->
     <preference for="Praxigento\Core\App\Transaction\Business\IFabrique"
-            type="Praxigento\Core\App\Transaction\Business\Def\Fabrique"/>
+                type="Praxigento\Core\App\Transaction\Business\Def\Fabrique"/>
     <preference for="Praxigento\Core\App\Transaction\Business\IItem"
-            type="Praxigento\Core\App\Transaction\Business\Def\Item"/>
+                type="Praxigento\Core\App\Transaction\Business\Def\Item"/>
     <preference for="Praxigento\Core\App\Transaction\Business\IManager"
-            type="Praxigento\Core\App\Transaction\Business\Def\Manager"/>
+                type="Praxigento\Core\App\Transaction\Business\Def\Manager"/>
     <preference for="Praxigento\Core\App\Transaction\Database\IFabrique"
-            type="Praxigento\Core\App\Transaction\Database\Def\Fabrique"/>
+                type="Praxigento\Core\App\Transaction\Database\Def\Fabrique"/>
     <preference for="Praxigento\Core\App\Transaction\Database\IItem"
-            type="Praxigento\Core\App\Transaction\Database\Def\Item"/>
+                type="Praxigento\Core\App\Transaction\Database\Def\Item"/>
     <preference for="Praxigento\Core\App\Transaction\Database\IManager"
-            type="Praxigento\Core\App\Transaction\Database\Def\Manager"/>
+                type="Praxigento\Core\App\Transaction\Database\Def\Manager"/>
 
     <!-- ***** -->
     <!-- Tools -->
     <!-- ***** -->
     <preference for="Praxigento\Core\Tool\IConvert"
-            type="Praxigento\Core\Tool\Def\Convert"/>
+                type="Praxigento\Core\Tool\Def\Convert"/>
     <preference for="Praxigento\Core\Tool\IDate"
-            type="Praxigento\Core\Tool\Def\Date"/>
+                type="Praxigento\Core\Tool\Def\Date"/>
     <preference for="Praxigento\Core\Tool\IFormat"
-            type="Praxigento\Core\Tool\Def\Format"/>
+                type="Praxigento\Core\Tool\Def\Format"/>
     <preference for="Praxigento\Core\Tool\IPeriod"
-            type="Praxigento\Core\Tool\Def\Period"/>
+                type="Praxigento\Core\Tool\Def\Period"/>
+
+    <!-- ******* -->
+    <!-- Web API -->
+    <!-- ******* -->
+    <preference for="\Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface"
+                type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
 
     <!-- ***** -->
     <!-- Other -->
     <!-- ***** -->
     <!-- Replace Magento logger by Praxigento Logger (see application di.xml for more) -->
     <preference for="Psr\Log\LoggerInterface"
-            type="Praxigento\Logging\Logger"/>
+                type="Praxigento\Logging\Logger"/>
 
 </config>
