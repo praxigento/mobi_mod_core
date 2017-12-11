@@ -8,7 +8,7 @@ use Mockery as m;
 
 /**
  * Base class to create units to test services
- * based on \Praxigento\Core\Service\Base\Call.
+ * based on \Praxigento\Core\App\Service\Base\Call.
  */
 abstract class Call
     extends \Praxigento\Core\Test\BaseCase\Mockery

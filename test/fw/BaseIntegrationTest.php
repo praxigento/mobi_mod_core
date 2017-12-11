@@ -93,7 +93,7 @@ abstract class BaseIntegrationTest
      */
     protected function _cacheReset()
     {
-        /** @var  $obj \Praxigento\Core\ICached */
+        /** @var  $obj \Praxigento\Core\App\ICached */
         // old services
         $obj = $this->_manObj->get(\Praxigento\Accounting\Service\IAccount::class);
         $obj->cacheReset();

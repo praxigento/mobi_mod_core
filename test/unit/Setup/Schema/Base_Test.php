@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Setup\Schema;
+namespace Praxigento\Core\App\Setup\Schema;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 

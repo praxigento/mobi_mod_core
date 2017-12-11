@@ -81,7 +81,7 @@ abstract class Mockery
      */
     protected function _mockRepoGeneric()
     {
-        $result = $this->_mock(\Praxigento\Core\Repo\IGeneric::class);
+        $result = $this->_mock(\Praxigento\Core\App\Repo\IGeneric::class);
         return $result;
     }
 
@@ -110,7 +110,7 @@ abstract class Mockery
      */
     protected function _mockTransactionDefinition()
     {
-        $result = $this->_mock(\Praxigento\Core\Transaction\Database\IDefinition::class);
+        $result = $this->_mock(\Praxigento\Core\App\Transaction\Database\IDefinition::class);
         return $result;
     }
 
@@ -125,7 +125,7 @@ abstract class Mockery
      */
     protected function _mockTransactionManager()
     {
-        $result = $this->_mock(\Praxigento\Core\Transaction\Database\IManager::class);
+        $result = $this->_mock(\Praxigento\Core\App\Transaction\Database\IManager::class);
         return $result;
     }
 

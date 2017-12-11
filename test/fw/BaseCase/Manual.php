@@ -13,7 +13,7 @@ abstract class Manual
 {
     /** @var  \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
-    /** @var  \Praxigento\Core\Transaction\Database\IManager */
+    /** @var  \Praxigento\Core\App\Transaction\Database\IManager */
     protected $manTrans;
 
 
@@ -21,6 +21,6 @@ abstract class Manual
     {
         parent::__construct($name, $data, $dataName);
         $this->manObj = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->manTrans = $this->manObj->get(\Praxigento\Core\Transaction\Database\IManager::class);
+        $this->manTrans = $this->manObj->get(\Praxigento\Core\App\Transaction\Database\IManager::class);
     }
 }

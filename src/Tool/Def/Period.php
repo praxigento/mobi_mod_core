@@ -9,7 +9,7 @@ namespace Praxigento\Core\Tool\Def;
 
 
 use Praxigento\Core\Config as Cfg;
-use Praxigento\Core\ICached;
+use Praxigento\Core\App\ICached;
 use Praxigento\Core\Tool\IConvert;
 use Praxigento\Core\Tool\IPeriod;
 

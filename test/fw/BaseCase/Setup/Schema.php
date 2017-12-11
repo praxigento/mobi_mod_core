@@ -8,7 +8,7 @@ use Mockery as m;
 
 /**
  * Base class to create units to test schema install classes
- * based on \Praxigento\Core\Setup\Schema\Base.
+ * based on \Praxigento\Core\App\Setup\Schema\Base.
  */
 abstract class Schema
     extends \Praxigento\Core\Test\BaseCase\Mockery
@@ -32,7 +32,7 @@ abstract class Schema
         $this->mContext = m::mock(\Magento\Framework\Setup\ModuleContextInterface::class);
         $this->mResource = m::mock(\Magento\Framework\App\ResourceConnection::class);
         $this->mSetup = m::mock(\Magento\Framework\Setup\SchemaSetupInterface::class);
-        $this->mToolDem = m::mock(\Praxigento\Core\Setup\Dem\Tool::class);
+        $this->mToolDem = m::mock(\Praxigento\Core\App\Setup\Dem\Tool::class);
         /** setup mocks for constructor */
         $this->mResource
             ->shouldReceive('getConnection')->once()

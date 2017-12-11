@@ -50,36 +50,36 @@
     <!-- ***** -->
     <!-- Repos -->
     <!-- ***** -->
-    <preference for="Praxigento\Core\Repo\Query\ISelect"
-            type="Praxigento\Core\Repo\Query\Def\Select"/>
-    <preference for="Praxigento\Core\Repo\IGeneric"
-            type="Praxigento\Core\Repo\Def\Generic"/>
-    <preference for="Praxigento\Core\Repo\Query\Criteria\IAdapter"
-            type="Praxigento\Core\Repo\Query\Criteria\Def\Adapter"/>
+    <preference for="Praxigento\Core\App\Repo\Query\ISelect"
+            type="Praxigento\Core\App\Repo\Query\Def\Select"/>
+    <preference for="Praxigento\Core\App\Repo\IGeneric"
+            type="Praxigento\Core\App\Repo\Def\Generic"/>
+    <preference for="Praxigento\Core\App\Repo\Query\Criteria\IAdapter"
+            type="Praxigento\Core\App\Repo\Query\Criteria\Def\Adapter"/>
 
 
     <!-- ******** -->
     <!-- REWRITES -->
     <!-- ******** -->
     <preference for="Magento\Framework\Reflection\TypeProcessor"
-            type="Praxigento\Core\Rewrite\Framework\Reflection\TypeProcessor"/>
+            type="Praxigento\Core\App\Reflection\TypeProcessor"/>
 
 
     <!-- *********** -->
     <!-- Transaction -->
     <!-- *********** -->
-    <preference for="Praxigento\Core\Transaction\Business\IFabrique"
-            type="Praxigento\Core\Transaction\Business\Def\Fabrique"/>
-    <preference for="Praxigento\Core\Transaction\Business\IItem"
-            type="Praxigento\Core\Transaction\Business\Def\Item"/>
-    <preference for="Praxigento\Core\Transaction\Business\IManager"
-            type="Praxigento\Core\Transaction\Business\Def\Manager"/>
-    <preference for="Praxigento\Core\Transaction\Database\IFabrique"
-            type="Praxigento\Core\Transaction\Database\Def\Fabrique"/>
-    <preference for="Praxigento\Core\Transaction\Database\IItem"
-            type="Praxigento\Core\Transaction\Database\Def\Item"/>
-    <preference for="Praxigento\Core\Transaction\Database\IManager"
-            type="Praxigento\Core\Transaction\Database\Def\Manager"/>
+    <preference for="Praxigento\Core\App\Transaction\Business\IFabrique"
+            type="Praxigento\Core\App\Transaction\Business\Def\Fabrique"/>
+    <preference for="Praxigento\Core\App\Transaction\Business\IItem"
+            type="Praxigento\Core\App\Transaction\Business\Def\Item"/>
+    <preference for="Praxigento\Core\App\Transaction\Business\IManager"
+            type="Praxigento\Core\App\Transaction\Business\Def\Manager"/>
+    <preference for="Praxigento\Core\App\Transaction\Database\IFabrique"
+            type="Praxigento\Core\App\Transaction\Database\Def\Fabrique"/>
+    <preference for="Praxigento\Core\App\Transaction\Database\IItem"
+            type="Praxigento\Core\App\Transaction\Database\Def\Item"/>
+    <preference for="Praxigento\Core\App\Transaction\Database\IManager"
+            type="Praxigento\Core\App\Transaction\Database\Def\Manager"/>
 
     <!-- ***** -->
     <!-- Tools -->

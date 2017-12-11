@@ -8,7 +8,7 @@ namespace Praxigento\Core\Test\BaseCase\Ui;
 
 /**
  * Base class to create units to test UI Data Providers
- * based on \Praxigento\Core\Ui\DataProvider\Base.
+ * based on \Praxigento\Core\App\Ui\DataProvider\Base.
  */
 abstract class DataProvider
     extends \Praxigento\Core\Test\BaseCase\Mockery
@@ -30,7 +30,7 @@ abstract class DataProvider
     {
         parent::setUp();
         /** create mocks */
-        $this->mCritAdapter = $this->_mock(\Praxigento\Core\Repo\Query\Criteria\IAdapter::class);
+        $this->mCritAdapter = $this->_mock(\Praxigento\Core\App\Repo\Query\Criteria\IAdapter::class);
         $this->mFilterBuilder = $this->_mock(\Magento\Framework\Api\FilterBuilder::class);
         $this->mReporting = $this->_mock(\Magento\Framework\View\Element\UiComponent\DataProvider\Reporting::class);
         $this->mRequest = $this->_mock(\Magento\Framework\App\RequestInterface::class);

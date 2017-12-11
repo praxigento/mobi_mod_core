@@ -31,14 +31,14 @@ class Parser
     /**
      * @param $alias
      * @param $aliases
-     * @return \Praxigento\Core\Repo\Query\Expression|string
+     * @return \Praxigento\Core\App\Repo\Query\Expression|string
      */
     protected function mapAlias($alias, $aliases)
     {
         $data = $aliases[$alias];
         $table = $data->getTable();
         $field = $data->getField();
-        if ($field instanceof \Praxigento\Core\Repo\Query\Expression) {
+        if ($field instanceof \Praxigento\Core\App\Repo\Query\Expression) {
             /* this is an expression, don't use table alias and backquotes */
             $result = $field;
         } else {

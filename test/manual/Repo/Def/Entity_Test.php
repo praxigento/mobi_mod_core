@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Repo\Def;
+namespace Praxigento\Core\App\Repo\Def;
 
 use Magento\Framework\App\ObjectManager;
 use Praxigento\Accounting\Repo\Entity\Data\Account as DataEntity;
@@ -13,7 +13,7 @@ include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
 
-    /** @var  \Praxigento\Core\Repo\Def\Entity */
+    /** @var  \Praxigento\Core\App\Repo\Def\Entity */
     private $_obj;
     private $_obj2;
 
@@ -21,7 +21,7 @@ class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         $resource = ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class);
-        $repoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\Repo\IGeneric::class);
+        $repoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\App\Repo\IGeneric::class);
         $this->_obj = new Entity($resource, $repoGeneric, DataEntity::class);
         $this->_obj2 = new Entity($resource, $repoGeneric, DataEntityOther::class);
     }

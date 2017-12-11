@@ -8,7 +8,7 @@ use Mockery as m;
 
 /**
  * Base class to create units to test agregate repositories
- * based on \Praxigento\Core\Repo\Def\Agg.
+ * based on \Praxigento\Core\App\Repo\Def\Agg.
  */
 abstract class Aggregate
     extends \Praxigento\Core\Test\BaseCase\Repo

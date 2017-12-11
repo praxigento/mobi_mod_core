@@ -9,14 +9,14 @@ class ServiceOutputProcessor
 {
     /** @var \Praxigento\Core\Tool\IConvert */
     protected $_toolConvert;
-    /** @var \Praxigento\Core\Reflection\Tool\Type */
+    /** @var \Praxigento\Core\App\Reflection\Tool\Type */
     protected $_toolType;
     /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
     protected $_typePropertiesRegistry;
 
     public function __construct(
         \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropertiesRegistry,
-        \Praxigento\Core\Reflection\Tool\Type $toolType,
+        \Praxigento\Core\App\Reflection\Tool\Type $toolType,
         \Praxigento\Core\Tool\IConvert $toolConvert
     ) {
         $this->_typePropertiesRegistry = $typePropertiesRegistry;
@@ -44,7 +44,7 @@ class ServiceOutputProcessor
             $typeData = $this->_typePropertiesRegistry->register($type);
             /**
              * @var string $propertyName
-             * @var \Praxigento\Core\Reflection\Data\Property $propertyData
+             * @var \Praxigento\Core\App\Reflection\Data\Property $propertyData
              */
             foreach ($typeData as $propertyName => $propertyData) {
                 $attrName = $this->_toolConvert->camelCaseToSnakeCase($propertyName);

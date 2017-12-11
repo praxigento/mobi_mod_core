@@ -2,9 +2,9 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Setup\Dem;
+namespace Praxigento\Core\App\Setup\Dem;
 
-use Praxigento\Core\Setup\Dem\Cfg as Dem;
+use Praxigento\Core\App\Setup\Dem\Cfg as Dem;
 
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');

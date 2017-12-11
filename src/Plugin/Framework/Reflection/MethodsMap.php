@@ -15,13 +15,13 @@ class MethodsMap
     /**
      * Praxigento mapper to parse types consider annotated methods.
      *
-     * @var \Praxigento\Core\Reflection\Map\Methods
+     * @var \Praxigento\Core\App\Reflection\Map\Methods
      */
     protected $_mapMethods;
 
 
     public function __construct(
-        \Praxigento\Core\Reflection\Map\Methods $mapMethods
+        \Praxigento\Core\App\Reflection\Map\Methods $mapMethods
     ) {
         $this->_mapMethods = $mapMethods;
     }

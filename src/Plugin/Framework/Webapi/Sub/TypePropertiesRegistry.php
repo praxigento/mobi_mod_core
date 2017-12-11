@@ -20,13 +20,13 @@ class TypePropertiesRegistry
     protected $_registry = [];
     /** @var \Magento\Framework\Reflection\TypeProcessor */
     protected $_typeProcessor;
-    /** @var \Praxigento\Core\Reflection\Tool\Type */
+    /** @var \Praxigento\Core\App\Reflection\Tool\Type */
     protected $_toolsType;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Magento\Framework\Reflection\TypeProcessor $typeProcessor,
-        \Praxigento\Core\Reflection\Tool\Type $toolsType
+        \Praxigento\Core\App\Reflection\Tool\Type $toolsType
     ) {
         $this->_manObj = $manObj;
         $this->_typeProcessor = $typeProcessor;
@@ -61,7 +61,7 @@ class TypePropertiesRegistry
     /**
      * Analyze documentation line and extract property data according to getter's pattern.
      * @param string $line
-     * @return \Praxigento\Core\Reflection\Data\Property|null
+     * @return \Praxigento\Core\App\Reflection\Data\Property|null
      */
     public function _processDocLine($line)
     {
@@ -76,7 +76,7 @@ class TypePropertiesRegistry
             }
             $propIsArray = $this->_toolsType->isArray($propType);
             $propType = $this->_toolsType->normalizeType($propType);
-            $result = new \Praxigento\Core\Reflection\Data\Property();
+            $result = new \Praxigento\Core\App\Reflection\Data\Property();
             $result->setName($propName);
             $result->setIsRequired($propRequired);
             $result->setIsArray($propIsArray);
@@ -106,7 +106,7 @@ class TypePropertiesRegistry
                 $propIsRequired = $typeData['isRequired'];
                 $propIsArray = $this->_toolsType->isArray($propType);
                 $propType = $this->_toolsType->normalizeType($propType);
-                $propData = new \Praxigento\Core\Reflection\Data\Property();
+                $propData = new \Praxigento\Core\App\Reflection\Data\Property();
                 $propData->setName($propName);
                 $propData->setIsRequired($propIsRequired);
                 $propData->setIsArray($propIsArray);
@@ -122,7 +122,7 @@ class TypePropertiesRegistry
      * Analyze $type and save type properties into the registry.
      *
      * @param string $type
-     * @return \Praxigento\Core\Reflection\Data\Property[] array with type properties or empty array for simple types.
+     * @return \Praxigento\Core\App\Reflection\Data\Property[] array with type properties or empty array for simple types.
      */
     public function register($type)
     {

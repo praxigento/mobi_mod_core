@@ -26,7 +26,7 @@ abstract class Base
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Webapi\ServiceInputProcessor $inputProcessor,
         \Magento\Framework\Webapi\ServiceOutputProcessor $outputProcessor,
-        \Praxigento\Core\Fw\Logger\App $logger
+        \Praxigento\Core\App\Logger\App $logger
     )
     {
         /* TODO: should we use an Object Manager to get base attributes (bad practice, worse testing but simpler constructor) ? */

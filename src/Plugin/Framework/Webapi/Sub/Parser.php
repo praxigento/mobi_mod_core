@@ -14,7 +14,7 @@ class Parser
 {
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
-    /** @var \Praxigento\Core\Reflection\Tool\Type */
+    /** @var \Praxigento\Core\App\Reflection\Tool\Type */
     protected $_toolType;
     /** @var \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry */
     protected $_typePropsRegistry;
@@ -22,7 +22,7 @@ class Parser
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\Plugin\Framework\Webapi\Sub\TypePropertiesRegistry $typePropsRegistry,
-        \Praxigento\Core\Reflection\Tool\Type $toolType
+        \Praxigento\Core\App\Reflection\Tool\Type $toolType
     ) {
         $this->_manObj = $manObj;
         $this->_typePropsRegistry = $typePropsRegistry;
@@ -53,7 +53,7 @@ class Parser
                 foreach ($data as $key => $value) {
                     $propName = $this->_toolType->formatPropertyName($key);
                     if (isset($typeData[$propName])) {
-                        /** @var \\Praxigento\Core\Reflection\Data\Property $propertyData */
+                        /** @var \\Praxigento\Core\App\Reflection\Data\Property $propertyData */
                         $propertyData = $typeData[$propName];
                         $propertyType = $propertyData->getType();
                         $propertyIsArray = $propertyData->getIsArray();
