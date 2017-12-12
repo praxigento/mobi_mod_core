@@ -20,13 +20,9 @@ class Request
      */
     const DATA = 'data';
     /**
-     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
+     * Development mode data (acts only if app is in DEV MODE).
      */
-    const DEV_ADMIN_ID = 'devAdminId';
-    /**
-     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
-     */
-    const DEV_CUST_ID = 'devCustId';
+    const DEV = 'dev';
 
     /**
      * Data structure for the Web API request.
@@ -41,22 +37,12 @@ class Request
     }
 
     /**
-     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
+     * Development mode data (acts only if app is in DEV MODE).
      *
-     * @return int|null
+     * @return \Praxigento\Core\App\Api\Web\Request\Dev|null
      */
-    public function getDevAdminId() {
-        $result = parent::get(self::DEV_ADMIN_ID);
-        return $result;
-    }
-
-    /**
-     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
-     *
-     * @return int|null
-     */
-    public function getDevCustId() {
-        $result = parent::get(self::DEV_CUST_ID);
+    public function getDev() {
+        $result = parent::get(self::DEV);
         return $result;
     }
 
@@ -72,21 +58,12 @@ class Request
     }
 
     /**
-     * ID of the 'currently logged in' admin user (acts only if app is in DEV MODE).
+     * Development mode data (acts only if app is in DEV MODE).
      *
-     * @param int $data
+     * @param \Praxigento\Core\App\Api\Web\Request\Dev $data
      */
-    public function setDevAdminId($data) {
-        parent::set(self::DEV_ADMIN_ID, $data);
-    }
-
-    /**
-     * ID of the 'currently logged in' customer user (acts only if app is in DEV MODE).
-     *
-     * @param int $data
-     */
-    public function setDevCustId($data) {
-        parent::set(self::DEV_CUST_ID, $data);
+    public function setDev($data) {
+        parent::set(self::DEV, $data);
     }
 
 }

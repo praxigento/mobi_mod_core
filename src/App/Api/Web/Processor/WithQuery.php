@@ -28,8 +28,7 @@ abstract class WithQuery
         \Magento\Framework\ObjectManagerInterface $manObj,
         \Praxigento\Core\App\Repo\Query\IBuilder $qbld = null,
         \Praxigento\Core\Helper\Config $hlpCfg
-    )
-    {
+    ) {
         $this->manObj = $manObj;
         $this->qbld = $qbld;
         $this->hlpCfg = $hlpCfg;
@@ -54,8 +53,7 @@ abstract class WithQuery
      *
      * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function createQuerySelect(\Praxigento\Core\Data $ctx)
-    {
+    protected function createQuerySelect(\Praxigento\Core\Data $ctx) {
         if ($this->qbld instanceof \Praxigento\Core\App\Repo\Query\IBuilder) {
             $query = $this->qbld->build();
         } else {
@@ -69,8 +67,7 @@ abstract class WithQuery
      *
      * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function performQuery(\Praxigento\Core\Data $ctx)
-    {
+    protected function performQuery(\Praxigento\Core\Data $ctx) {
         /* get working vars from context */
         $bind = $ctx->get(self::CTX_BIND);
         /** @var \Magento\Framework\DB\Select $query */
@@ -92,8 +89,7 @@ abstract class WithQuery
     /**
      * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function populateQueryConditions(\Praxigento\Core\Data $ctx)
-    {
+    protected function populateQueryConditions(\Praxigento\Core\Data $ctx) {
         /* get working vars from context */
         /** @var \Praxigento\Core\Data $vars */
         $vars = $ctx->get(self::CTX_VARS);
@@ -113,11 +109,10 @@ abstract class WithQuery
      * Get query conditions from request and place it into the VARS section of the execution context.
      * @param \Praxigento\Core\Data $ctx execution context
      */
-    protected function prepareQueryConditions(\Praxigento\Core\Data $ctx)
-    {
+    protected function prepareQueryConditions(\Praxigento\Core\Data $ctx) {
         /* get working vars from context */
         $vars = $ctx->get(self::CTX_VARS);
-        /** @var \Praxigento\Core\App\Api\Web\Request\WithCond $req */
+        /** @var \Praxigento\Core\App\Api\Web\RequestCond $req */
         $req = $ctx->get(self::CTX_REQ);
 
         /* perform action */
@@ -139,8 +134,7 @@ abstract class WithQuery
      * @param \Praxigento\Core\App\Api\Web\Request $data
      * @return \Praxigento\Core\App\Api\Web\Response
      */
-    protected function process(\Praxigento\Core\App\Api\Web\Request $data)
-    {
+    protected function process(\Praxigento\Core\App\Api\Web\Request $data) {
         /* create context for request processing */
         $ctx = new \Praxigento\Core\Data();
         $ctx->set(self::CTX_REQ, $data);

@@ -2,7 +2,8 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Api\Web\Request;
+
+namespace Praxigento\Core\App\Api\Web;
 
 /**
  * Base for API requests with conditions (ordering, filtering, limitations).
@@ -11,13 +12,13 @@ namespace Praxigento\Core\App\Api\Web\Request;
  * (Define setters explicitly to use with Magento JSON2PHP conversion tool)
  *
  */
-class WithCond
+class RequestCond
     extends \Praxigento\Core\App\Api\Web\Request
 {
     /**
      * Conditions (ordering, filtering, limitations).
      *
-     * @return \Praxigento\Core\App\Api\Web\Request\Part\Conditions|null
+     * @return \Praxigento\Core\App\Api\Web\Request\Conditions|null
      */
     public function getConditions()
     {
@@ -28,7 +29,7 @@ class WithCond
     /**
      * Conditions (ordering, filtering, limitations).
      *
-     * @param \Praxigento\Core\App\Api\Web\Request\Part\Conditions $data
+     * @param \Praxigento\Core\App\Api\Web\Request\Conditions $data
      */
     public function setConditions($data)
     {
