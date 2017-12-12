@@ -26,10 +26,17 @@ class Response
 
     /**#@- */
 
-    public function __construct()
+    public function __construct($data = null)
     {
-        $data = new \Praxigento\Core\App\Api\Web\Response\Result();
-        $this->setResult($data);
+        if ($data instanceof \Praxigento\Core\Data) {
+            /* init object with given $data */
+            $arg = $data->get();
+            parent::__construct($arg);
+        } else {
+            /* init empty response object*/
+            $rs = new \Praxigento\Core\App\Api\Web\Response\Result();
+            $this->setResult($rs);
+        }
     }
 
     /**
