@@ -28,7 +28,7 @@ class Conditions
 
         /* perform action */
         $columns = $query->getPart(\Zend_Db_Select::COLUMNS); // get map [$tblAlias, $column, $valueAlias]
-        if ($cond && $cond instanceof \Praxigento\Core\App\Api\Web\Request\Part\Conditions) {
+        if ($cond && $cond instanceof \Praxigento\Core\App\Api\Web\Request\Conditions) {
             /* we need to get reverse map: $valueAlias => [$tblAlias, $column] */
             $map = $this->mapReverse($columns);
 

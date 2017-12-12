@@ -13,7 +13,7 @@ class Context
     extends \Praxigento\Core\Data
 {
     /**
-     * @return \Praxigento\Core\App\Api\Web\Request\Part\Conditions|null
+     * @return \Praxigento\Core\App\Api\Web\Request\Conditions|null
      */
     public function getConditions()
     {
@@ -30,7 +30,7 @@ class Context
         return $result;
     }
 
-    public function setConditions(\Praxigento\Core\App\Api\Web\Request\Part\Conditions $data = null)
+    public function setConditions(\Praxigento\Core\App\Api\Web\Request\Conditions $data = null)
     {
         parent::setConditions($data);
     }
