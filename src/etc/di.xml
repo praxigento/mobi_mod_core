@@ -2,11 +2,28 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- ************ -->
+    <!-- API Services -->
+    <!-- ************ -->
+    <preference for="\Praxigento\Core\Api\Service\Customer\Get\ById"
+                type="\Praxigento\Core\Service\Customer\Get\ById"/>
+
+
+    <!-- ******* -->
+    <!-- API Web -->
+    <!-- ******* -->
+    <preference for="\Praxigento\Core\Api\Web\Customer\Get\ByIdInterface"
+                type="\Praxigento\Core\Web\Customer\Get\ById"/>
+    <preference for="\Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface"
+                type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
+
+
     <!-- *** -->
     <!-- App -->
     <!-- *** -->
     <preference for="\Praxigento\Core\App\Api\Web\IAuthenticator"
                 type="\Praxigento\Core\App\Api\Web\Authenticator"/>
+
 
     <!-- ******* -->
     <!-- Plugins -->
@@ -99,11 +116,5 @@
                 type="Praxigento\Core\Tool\Def\Format"/>
     <preference for="Praxigento\Core\Tool\IPeriod"
                 type="Praxigento\Core\Tool\Def\Period"/>
-
-    <!-- ******* -->
-    <!-- Web API -->
-    <!-- ******* -->
-    <preference for="\Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface"
-                type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
 
 </config>

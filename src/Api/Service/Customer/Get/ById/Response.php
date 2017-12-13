@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Api\Service\Customer\Get;
+namespace Praxigento\Core\Api\Service\Customer\Get\ById;
 
 class Response
     extends \Praxigento\Core\Data
