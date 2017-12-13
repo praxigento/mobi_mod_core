@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <route url="/V1/prxgt/customer/search/by_key" method="POST">
-        <!-- ByKey customers by some criteria (name, email, etc.). -->
+        <!-- Search customers by some criteria (name, email, etc.). -->
         <service class="Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface" method="exec"/>
         <resources>
             <resource ref="anonymous"/>
