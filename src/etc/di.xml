@@ -106,11 +106,4 @@
     <preference for="\Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface"
                 type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
 
-    <!-- ***** -->
-    <!-- Other -->
-    <!-- ***** -->
-    <!-- Replace Magento logger by Praxigento Logger (see application di.xml for more) -->
-    <preference for="Psr\Log\LoggerInterface"
-                type="Praxigento\Logging\Logger"/>
-
 </config>
