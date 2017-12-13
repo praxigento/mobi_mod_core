@@ -29,7 +29,7 @@ class Item
     private $_name;
 
     public function __construct(
-        \Praxigento\Core\App\Logger\App $logger
+        \Psr\Log\LoggerInterface $logger
     ) {
         $this->_logger = $logger;
     }

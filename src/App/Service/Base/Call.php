@@ -31,7 +31,7 @@ abstract class Call
     protected $manObj;
 
     public function __construct(
-        \Praxigento\Core\App\Logger\App $logger,
+        \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\ObjectManagerInterface $manObj
     ) {
         $this->logger = $logger;
