@@ -30,7 +30,7 @@ class ById
         $requesterId = $request->getRequesterId();
 
         /** perform processing */
-
+        /* TODO: add search by email for frontend requests (when customerId is not set) */
         if (
             $ignoreRequester ||
             ($customerId == $requesterId)
