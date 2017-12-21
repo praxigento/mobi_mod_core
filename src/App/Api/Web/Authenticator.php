@@ -5,6 +5,9 @@
 
 namespace Praxigento\Core\App\Api\Web;
 
+use \Praxigento\Core\App\Api\Web\Request as ARequest;
+use \Praxigento\Core\App\Api\Web\Request\Dev as ADev;
+
 /**
  * Default implementation for REST API authenticator.
  */
@@ -32,8 +35,12 @@ class Authenticator
         $this->hlpCfg = $hlpCfg;
     }
 
-    public function getCurrentAdminId($offeredId = null) {
+    public function getCurrentAdminId(ARequest $request = null) {
         if (is_null($this->cacheAdminId)) {
+            $offeredId = null;
+            if ($request) {
+                $offeredId = $request->get('/' . ARequest::DEV . '/' . ADev::ADMIN_ID);
+            }
             if (
                 $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
                 !is_null($offeredId)
@@ -51,8 +58,12 @@ class Authenticator
         return $this->cacheAdminId;
     }
 
-    public function getCurrentCustomerId($offeredId = null) {
-            if (is_null($this->cacheCustomerId)) {
+    public function getCurrentCustomerId(ARequest $request = null) {
+        if (is_null($this->cacheCustomerId)) {
+            $offeredId = null;
+            if ($request) {
+                $offeredId = $request->get('/' . ARequest::DEV . '/' . ADev::CUST_ID);
+            }
             if (
                 $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
                 !is_null($offeredId)

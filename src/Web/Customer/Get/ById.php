@@ -30,13 +30,10 @@ class ById
         $data = $request->getData();
         $custId = $data->getCustomerId();
         $email = $data->getEmail();
-        $dev = $request->getDev();
-        $devAdminId = $dev->getAdminId();
-        $devCustId = $dev->getCustId();
 
         /* get currently logged in users */
-        $currentAdminId = $this->authenticator->getCurrentAdminId($devAdminId);
-        $currentCustId = $this->authenticator->getCurrentCustomerId($devCustId);
+        $currentAdminId = $this->authenticator->getCurrentAdminId($request);
+        $currentCustId = $this->authenticator->getCurrentCustomerId($request);
 
         /* analyze logged in users */
         if ($currentCustId) {
