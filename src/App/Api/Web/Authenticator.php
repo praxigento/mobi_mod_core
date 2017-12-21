@@ -5,61 +5,68 @@
 
 namespace Praxigento\Core\App\Api\Web;
 
-use Praxigento\Core\Config as Cfg;
-
 /**
  * Default implementation for REST API authenticator.
  */
 class Authenticator
     implements \Praxigento\Core\App\Api\Web\IAuthenticator
 {
-    /** @var  \Praxigento\Core\Data */
-    protected $cacheCurrentCustomer;
+    /** @var int */
+    private $cacheAdminId;
+    /** @var int */
+    private $cacheCustomerId;
     /** @var \Praxigento\Core\Helper\Config */
-    protected $hlpCfg;
+    private $hlpCfg;
+    /** @var \Magento\Backend\Model\Auth\Session */
+    private $sessAdmin;
     /** @var \Magento\Customer\Model\Session */
-    protected $sessCustomer;
+    private $sessCustomer;
 
     public function __construct(
+        \Magento\Backend\Model\Auth\Session $sessAdmin,
         \Magento\Customer\Model\Session $sessCustomer,
         \Praxigento\Core\Helper\Config $hlpCfg
     ) {
+        $this->sessAdmin = $sessAdmin;
         $this->sessCustomer = $sessCustomer;
         $this->hlpCfg = $hlpCfg;
     }
 
-    public function getCurrentCustomerData($offer = null)
-    {
-        if (is_null($this->cacheCurrentCustomer)) {
-            /* use offered Customer ID if MOBI API DevMode is enabled */
+    public function getCurrentAdminId($offeredId = null) {
+        if (is_null($this->cacheAdminId)) {
             if (
                 $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
-                !is_null($offer)
+                !is_null($offeredId)
             ) {
-                $this->sessCustomer->setCustomerId($offer);
-            }
-            /* load customer data */
-            $customer = $this->sessCustomer->getCustomer();
-            if ($customer) {
-                $data = $customer->getData();
-                $this->cacheCurrentCustomer = new \Praxigento\Core\Data($data);
+                /* use offered user ID if MOBI API DevMode is enabled */
+                $this->cacheCustomerId = (int)$offeredId;
             } else {
-                $this->cacheCurrentCustomer = new \Praxigento\Core\Data();
+                /* get currently logged in admin data */
+                $user = $this->sessAdmin->getUser();
+                if ($user) {
+                    $this->cacheAdminId = $user->getId();
+                }
             }
         }
-        return $this->cacheCurrentCustomer;
+        return $this->cacheAdminId;
     }
 
-    public function getCurrentCustomerId($offer = null)
-    {
-        $data = $this->getCurrentCustomerData($offer);
-        $result = $data->get(Cfg::E_CUSTOMER_A_ENTITY_ID);
-        return $result;
-    }
-
-    public function isEnabledDevMode()
-    {
-        $result = $this->hlpCfg->getApiAuthenticationEnabledDevMode();
-        return $result;
+    public function getCurrentCustomerId($offeredId = null) {
+        if (is_null($this->cacheCustomerId)) {
+            if (
+                $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
+                !is_null($offeredId)
+            ) {
+                /* use offered Customer ID if MOBI API DevMode is enabled */
+                $this->cacheCustomerId = (int)$offeredId;
+            } else {
+                /* get currently logged in customer data */
+                $customer = $this->sessCustomer->getCustomer();
+                if ($customer) {
+                    $this->cacheCustomerId = $customer->getId();
+                }
+            }
+        }
+        return $this->cacheCustomerId;
     }
 }
