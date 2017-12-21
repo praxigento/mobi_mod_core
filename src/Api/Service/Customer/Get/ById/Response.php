@@ -14,37 +14,33 @@ class Response
     const NAME_LAST = 'name_last';
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         $result = parent::get(self::EMAIL);
         return $result;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId()
-    {
+    public function getId() {
         $result = parent::get(self::ID);
         return $result;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNameFirst()
-    {
+    public function getNameFirst() {
         $result = parent::get(self::NAME_FIRST);
         return $result;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNameLast()
-    {
+    public function getNameLast() {
         $result = parent::get(self::NAME_LAST);
         return $result;
     }
@@ -52,32 +48,28 @@ class Response
     /**
      * @param string $data
      */
-    public function setEmail($data)
-    {
+    public function setEmail($data) {
         parent::set(self::EMAIL, $data);
     }
 
     /**
      * @param int $data
      */
-    public function setId($data)
-    {
+    public function setId($data) {
         parent::set(self::ID, $data);
     }
 
     /**
      * @param string $data
      */
-    public function setNameFirst($data)
-    {
+    public function setNameFirst($data) {
         parent::set(self::NAME_FIRST, $data);
     }
 
     /**
      * @param string $data
      */
-    public function setNameLast($data)
-    {
+    public function setNameLast($data) {
         parent::set(self::NAME_LAST, $data);
     }
 

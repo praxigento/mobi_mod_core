@@ -39,7 +39,7 @@ class Authenticator
                 !is_null($offeredId)
             ) {
                 /* use offered user ID if MOBI API DevMode is enabled */
-                $this->cacheCustomerId = (int)$offeredId;
+                $this->cacheAdminId = (int)$offeredId;
             } else {
                 /* get currently logged in admin data */
                 $user = $this->sessAdmin->getUser();
@@ -52,7 +52,7 @@ class Authenticator
     }
 
     public function getCurrentCustomerId($offeredId = null) {
-        if (is_null($this->cacheCustomerId)) {
+            if (is_null($this->cacheCustomerId)) {
             if (
                 $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
                 !is_null($offeredId)
