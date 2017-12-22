@@ -5,8 +5,9 @@
 
 namespace Praxigento\Core\App\Api\Web;
 
-use \Praxigento\Core\App\Api\Web\Request as ARequest;
-use \Praxigento\Core\App\Api\Web\Request\Dev as ADev;
+use Magento\Backend\Model\Session\AdminConfig as AnAdminConfig;
+use Praxigento\Core\App\Api\Web\Request as ARequest;
+use Praxigento\Core\App\Api\Web\Request\Dev as ADev;
 
 /**
  * Default implementation for REST API authenticator.
@@ -20,23 +21,20 @@ class Authenticator
     private $cacheCustomerId;
     /** @var \Praxigento\Core\Helper\Config */
     private $hlpCfg;
-    /** @var \Magento\Backend\Model\Auth\Session */
-    private $sessAdmin;
     /** @var \Magento\Customer\Model\Session */
     private $sessCustomer;
 
     public function __construct(
-        \Magento\Backend\Model\Auth\Session $sessAdmin,
         \Magento\Customer\Model\Session $sessCustomer,
         \Praxigento\Core\Helper\Config $hlpCfg
     ) {
-        $this->sessAdmin = $sessAdmin;
         $this->sessCustomer = $sessCustomer;
         $this->hlpCfg = $hlpCfg;
     }
 
     public function getCurrentAdminId(ARequest $request = null) {
         if (is_null($this->cacheAdminId)) {
+            $this->cacheAdminId = false; // to prevent execution reiteration for not logged in admins
             $offeredId = null;
             if ($request) {
                 $offeredId = $request->get('/' . ARequest::DEV . '/' . ADev::ADMIN_ID);
@@ -49,9 +47,14 @@ class Authenticator
                 $this->cacheAdminId = (int)$offeredId;
             } else {
                 /* get currently logged in admin data */
-                $user = $this->sessAdmin->getUser();
-                if ($user) {
-                    $this->cacheAdminId = $user->getId();
+                if (
+                    (isset($_SESSION[AnAdminConfig::SESSION_NAME_ADMIN])) &&
+                    (isset($_SESSION[AnAdminConfig::SESSION_NAME_ADMIN]['user']))
+                ) {
+                    $user = $_SESSION[AnAdminConfig::SESSION_NAME_ADMIN]['user'];
+                    if ($user instanceof \Magento\User\Model\User) {
+                        $this->cacheAdminId = $user->getId();
+                    }
                 }
             }
         }
