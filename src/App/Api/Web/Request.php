@@ -23,6 +23,11 @@ class Request
      * Development mode data (acts only if app is in DEV MODE).
      */
     const DEV = 'dev';
+    /**
+     * 'true' - request is sent from admin app and should be authorized according to current admin.
+     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
+     */
+    const IS_ADMIN = 'isAdmin';
 
     /**
      * Data structure for the Web API request.
@@ -47,6 +52,17 @@ class Request
     }
 
     /**
+     * 'true' - request is sent from admin app and should be authorized according to current admin.
+     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
+     *
+     * @return bool|null
+     */
+    public function getIsAdmin() {
+        $result = parent::get(self::IS_ADMIN);
+        return $result;
+    }
+
+    /**
      * Data structure for the Web API request.
      *
      * Override to get appropriate JSON structure for concrete request.
@@ -64,6 +80,16 @@ class Request
      */
     public function setDev($data) {
         parent::set(self::DEV, $data);
+    }
+
+    /**
+     * 'true' - request is sent from admin app and should be authorized according to current admin.
+     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
+     *
+     * @param bool $data
+     */
+    public function setIsAdmin($data) {
+        parent::set(self::IS_ADMIN, $data);
     }
 
 }
