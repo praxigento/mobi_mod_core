@@ -8,9 +8,7 @@ namespace Praxigento\Core\App\Action\Back\Api;
 use Magento\Framework\Controller\ResultFactory as AResultFactory;
 
 /**
- * Base for backend CTRL API actions.
- *
- * TODO: should we use Traits for methods common with Front API Base?
+ * Base for backend CTRL API actions (Web API alternative for adminhtml).
  */
 abstract class Base
     extends \Magento\Backend\App\Action
@@ -18,22 +16,19 @@ abstract class Base
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
     /** @var \Psr\Log\LoggerInterface */
-    protected $logger;
+    private $logger;
     /** @var \Magento\Framework\Webapi\ServiceOutputProcessor */
     private $outputProcessor;
 
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Webapi\ServiceInputProcessor $inputProcessor,
-        \Magento\Framework\Webapi\ServiceOutputProcessor $outputProcessor,
-        \Psr\Log\LoggerInterface $logger
-    )
-    {
-        /* TODO: should we use an Object Manager to get base attributes (bad practice, worse testing but simpler constructor) ? */
+        \Magento\Backend\App\Action\Context $context
+    ) {
         parent::__construct($context);
-        $this->inputProcessor = $inputProcessor;
-        $this->outputProcessor = $outputProcessor;
-        $this->logger = $logger;
+        /* init own properties using Object Manager from Context */
+        $obm = $context->getObjectManager();
+        $this->inputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceInputProcessor::class);
+        $this->outputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceOutputProcessor::class);
+        $this->logger = $obm->get(\Psr\Log\LoggerInterface::class);
     }
 
     public function execute()
@@ -100,5 +95,11 @@ abstract class Base
         return $result;
     }
 
+    /**
+     * Main class to validate permissions and to call internal service to perform operation.
+     *
+     * @param $request
+     * @return mixed
+     */
     abstract protected function process($request);
 }
