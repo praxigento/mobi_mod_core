@@ -17,6 +17,7 @@ class Dev
 {
     /**
      * ID of the 'currently logged in' admin user.
+     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
     const ADMIN_ID = 'adminId';
     /**
@@ -28,8 +29,10 @@ class Dev
      * ID of the 'currently logged in' admin user.
      *
      * @return int|null
+     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
-    public function getAdminId() {
+    public function getAdminId()
+    {
         $result = parent::get(self::ADMIN_ID);
         return $result;
     }
@@ -39,7 +42,8 @@ class Dev
      *
      * @return int|null
      */
-    public function getCustId() {
+    public function getCustId()
+    {
         $result = parent::get(self::CUST_ID);
         return $result;
     }
@@ -48,8 +52,10 @@ class Dev
      * ID of the 'currently logged in' admin user.
      *
      * @param int $data
+     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
-    public function setAdminId($data) {
+    public function setAdminId($data)
+    {
         parent::set(self::ADMIN_ID, $data);
     }
 
@@ -58,7 +64,8 @@ class Dev
      *
      * @param int $data
      */
-    public function setCustId($data) {
+    public function setCustId($data)
+    {
         parent::set(self::CUST_ID, $data);
     }
 

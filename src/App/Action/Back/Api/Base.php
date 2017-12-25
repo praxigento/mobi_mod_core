@@ -13,6 +13,8 @@ use Magento\Framework\Controller\ResultFactory as AResultFactory;
 abstract class Base
     extends \Magento\Backend\App\Action
 {
+    /** @var \Praxigento\Core\App\Api\Web\IAuthenticator */
+    private $authenticator;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
     /** @var \Psr\Log\LoggerInterface */
@@ -26,17 +28,39 @@ abstract class Base
         parent::__construct($context);
         /* init own properties using Object Manager from Context */
         $obm = $context->getObjectManager();
+        $this->authenticator = $obm->get(\Praxigento\Core\App\Api\Web\Authenticator\Back::class);
         $this->inputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceInputProcessor::class);
         $this->outputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceOutputProcessor::class);
         $this->logger = $obm->get(\Psr\Log\LoggerInterface::class);
     }
 
+    /**
+     * Administrative requests are allowed for authorized users only (logged in at least).
+     * @param $request
+     * @throws \Magento\Framework\Exception\AuthorizationException
+     */
+    private function authorize($request)
+    {
+        $currentUserId = $this->authenticator->getCurrentUserId($request);
+        if (!$currentUserId) {
+            $phrase = new \Magento\Framework\Phrase('User is not authorized to perform this operation.');
+            /** @noinspection PhpUnhandledExceptionInspection */
+            throw new \Magento\Framework\Exception\AuthorizationException($phrase);
+        }
+    }
+
     public function execute()
     {
         $body = $this->parseInput();
+        $this->authorize($body);
         $result = $this->process($body);
         $resultPage = $this->prepareResultPage($result);
         return $resultPage;
+    }
+
+    protected function getAuthenticator(): \Praxigento\Core\App\Api\Web\IAuthenticator
+    {
+        return $this->authenticator;
     }
 
     /**
