@@ -12,10 +12,10 @@ class Request
     const CUSTOMER_ID = 'customerId';
     /** Email to search by */
     const EMAIL = 'email';
-    /** ID of the customer that sends request */
-    const REQUESTER_ID = 'requesterId';
     /** 'true' if this is admin's request - return info about any customer */
     const IGNORE_REQUESTER = 'ignoreRequester';
+    /** ID of the customer that sends request */
+    const REQUESTER_ID = 'requesterId';
 
     /**
      * @return int|null
@@ -27,25 +27,30 @@ class Request
     }
 
     /**
-     * @return bool|null
-     */
-    public function getIgnoreRequester() {
-        $result = parent::get(self::IGNORE_REQUESTER);
-        return $result;
-    }
-
-    /**
      * @return string|null
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         $result = parent::get(self::EMAIL);
         return $result;
     }
 
     /**
-     * @return int|null
+     * @return bool|null
+     * @deprecated
      */
-    public function getRequesterId() {
+    public function getIgnoreRequester()
+    {
+        $result = parent::get(self::IGNORE_REQUESTER);
+        return $result;
+    }
+
+    /**
+     * @return int|null
+     * @deprecated
+     */
+    public function getRequesterId()
+    {
         $result = parent::get(self::REQUESTER_ID);
         return $result;
     }
@@ -61,21 +66,26 @@ class Request
     /**
      * @param string $data
      */
-    public function setEmail($data) {
+    public function setEmail($data)
+    {
         parent::set(self::EMAIL, $data);
     }
 
     /**
-     * @param int $data
+     * @param bool $data
+     * @deprecated
      */
-    public function setRequesterId($data) {
-        parent::set(self::REQUESTER_ID, $data);
+    public function setIgnoreRequester($data)
+    {
+        parent::set(self::IGNORE_REQUESTER, $data);
     }
 
     /**
-     * @param bool $data
+     * @param int $data
+     * @deprecated
      */
-    public function setIgnoreRequester($data) {
-        parent::set(self::IGNORE_REQUESTER, $data);
+    public function setRequesterId($data)
+    {
+        parent::set(self::REQUESTER_ID, $data);
     }
 }

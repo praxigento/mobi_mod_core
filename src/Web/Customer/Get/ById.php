@@ -17,41 +17,32 @@ class ById
     private $servCustGet;
 
     public function __construct(
-        \Praxigento\Core\App\Api\Web\IAuthenticator $authenticator,
+        \Praxigento\Core\App\Api\Web\Authenticator\Front $authenticator,
         \Praxigento\Core\Api\Service\Customer\Get\ById $servCustGet
     ) {
         $this->authenticator = $authenticator;
         $this->servCustGet = $servCustGet;
     }
 
-    public function exec($request) {
+    public function exec($request)
+    {
         assert($request instanceof ARequest);
         /** define local working data */
-        $data = $request->getData();
-        $custId = $data->getCustomerId();
-        $email = $data->getEmail();
 
-        /* get currently logged in users */
-        $currentAdminId = $this->authenticator->getCurrentAdminId($request);
+        /**
+         * Customer can access his own data by ID only in core service.
+         */
+        /* pre-authorization */
         $currentCustId = $this->authenticator->getCurrentUserId($request);
-
-        /* analyze logged in users */
-        if ($currentCustId) {
-            /* this is customer session */
-            $custId = $currentCustId;
-            $requesterId = $currentCustId;
-            $email = null;
-            $isAdminRequest = false;
-        } elseif ($currentAdminId) {
-            $isAdminRequest = true;
+        if (!$currentCustId) {
+            $phrase = new \Magento\Framework\Phrase('User is not authorized to perform this operation.');
+            /** @noinspection PhpUnhandledExceptionInspection */
+            throw new \Magento\Framework\Exception\AuthorizationException($phrase);
         }
 
         /** perform processing */
         $req = new \Praxigento\Core\Api\Service\Customer\Get\ById\Request();
-        $req->setCustomerId($custId);
-        $req->setEmail($email);
-        $req->setIgnoreRequester($isAdminRequest);
-        $req->setRequesterId($requesterId);
+        $req->setCustomerId($currentCustId);
         $resp = $this->servCustGet->exec($req);
 
         /** compose result */
