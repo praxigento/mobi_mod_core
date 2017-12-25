@@ -55,7 +55,7 @@ class Request
      * 'true' - request is sent from admin app and should be authorized according to current admin.
      *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
      *
-     * @return bool|null
+     * @return string|null
      */
     public function getIsAdmin() {
         $result = parent::get(self::IS_ADMIN);
@@ -86,7 +86,7 @@ class Request
      * 'true' - request is sent from admin app and should be authorized according to current admin.
      *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
      *
-     * @param bool $data
+     * @param string $data
      */
     public function setIsAdmin($data) {
         parent::set(self::IS_ADMIN, $data);
