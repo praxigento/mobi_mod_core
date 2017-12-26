@@ -12,10 +12,6 @@ class Request
     const CUSTOMER_ID = 'customerId';
     /** Email to search by */
     const EMAIL = 'email';
-    /** 'true' if this is admin's request - return info about any customer */
-    const IGNORE_REQUESTER = 'ignoreRequester';
-    /** ID of the customer that sends request */
-    const REQUESTER_ID = 'requesterId';
 
     /**
      * @return int|null
@@ -36,26 +32,6 @@ class Request
     }
 
     /**
-     * @return bool|null
-     * @deprecated
-     */
-    public function getIgnoreRequester()
-    {
-        $result = parent::get(self::IGNORE_REQUESTER);
-        return $result;
-    }
-
-    /**
-     * @return int|null
-     * @deprecated
-     */
-    public function getRequesterId()
-    {
-        $result = parent::get(self::REQUESTER_ID);
-        return $result;
-    }
-
-    /**
      * @param int $data
      */
     public function setCustomerId($data)
@@ -71,21 +47,4 @@ class Request
         parent::set(self::EMAIL, $data);
     }
 
-    /**
-     * @param bool $data
-     * @deprecated
-     */
-    public function setIgnoreRequester($data)
-    {
-        parent::set(self::IGNORE_REQUESTER, $data);
-    }
-
-    /**
-     * @param int $data
-     * @deprecated
-     */
-    public function setRequesterId($data)
-    {
-        parent::set(self::REQUESTER_ID, $data);
-    }
 }

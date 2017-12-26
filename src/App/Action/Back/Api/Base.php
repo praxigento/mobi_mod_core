@@ -38,6 +38,9 @@ abstract class Base
      * Administrative requests are allowed for authorized users only (logged in at least).
      * @param $request
      * @throws \Magento\Framework\Exception\AuthorizationException
+     *
+     * TODO: this method is probably useless, because Magento performs own authentication (this code is not
+     * running w/o actual admin session).
      */
     private function authorize($request)
     {

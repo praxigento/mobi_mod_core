@@ -21,37 +21,30 @@ class ById
     }
 
 
-    public function exec($request) {
+    public function exec($request)
+    {
         assert($request instanceof ARequest);
         /** define local working data */
         $customerId = $request->getCustomerId();
         $email = $request->getEmail();
-        $ignoreRequester = $request->getIgnoreRequester();
-        $requesterId = $request->getRequesterId();
 
         /** perform processing */
-        /* TODO: add search by email for frontend requests (when customerId is not set) */
-        if (
-            $ignoreRequester ||
-            ($customerId == $requesterId)
-        ) {
-            /* process if this is admin request or customer requests info for itself */
-            if ($customerId) {
-                /* customer ID has a higher priority */
-                $result = $this->searchById($customerId);
-            } elseif ($email) {
-                /* ... then search by email */
-                $result = $this->searchByEmail($email);
-            } else {
-                $result = new AResponse(); // empty result
-            }
+        if ($customerId) {
+            /* customer ID has a higher priority */
+            $result = $this->searchById($customerId);
+        } elseif ($email) {
+            /* ... then search by email */
+            $result = $this->searchByEmail($email);
+        } else {
+            $result = new AResponse(); // empty result
         }
 
         /** compose result */
         return $result;
     }
 
-    private function searchByEmail($email) {
+    private function searchByEmail($email)
+    {
         $conn = $this->repoGeneric->getConnection();
         $cols = null; // all columns
         $quoted = $conn->quote($email);
@@ -72,7 +65,8 @@ class ById
         return $result;
     }
 
-    private function searchById($id) {
+    private function searchById($id)
+    {
         $pk = [Cfg::E_CUSTOMER_A_ENTITY_ID => (int)$id];
         $entry = $this->repoGeneric->getEntityByPk(Cfg::ENTITY_MAGE_CUSTOMER, $pk);
         $result = new AResponse();
