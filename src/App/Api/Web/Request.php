@@ -23,11 +23,6 @@ class Request
      * Development mode data (acts only if app is in DEV MODE).
      */
     const DEV = 'dev';
-    /**
-     * 'true' - request is sent from admin app and should be authorized according to current admin.
-     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
-     */
-    const IS_ADMIN = 'isAdmin';
 
     /**
      * Data structure for the Web API request.
@@ -36,7 +31,8 @@ class Request
      *
      * @return \Praxigento\Core\Data
      */
-    public function getData() {
+    public function getData()
+    {
         $result = parent::get(self::DATA);
         return $result;
     }
@@ -46,19 +42,9 @@ class Request
      *
      * @return \Praxigento\Core\App\Api\Web\Request\Dev|null
      */
-    public function getDev() {
+    public function getDev()
+    {
         $result = parent::get(self::DEV);
-        return $result;
-    }
-
-    /**
-     * 'true' - request is sent from admin app and should be authorized according to current admin.
-     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
-     *
-     * @return string|null
-     */
-    public function getIsAdmin() {
-        $result = parent::get(self::IS_ADMIN);
         return $result;
     }
 
@@ -69,7 +55,8 @@ class Request
      *
      * @param \Praxigento\Core\Data $data
      */
-    public function setData($data) {
+    public function setData($data)
+    {
         parent::set(self::DATA, $data);
     }
 
@@ -78,18 +65,9 @@ class Request
      *
      * @param \Praxigento\Core\App\Api\Web\Request\Dev $data
      */
-    public function setDev($data) {
+    public function setDev($data)
+    {
         parent::set(self::DEV, $data);
-    }
-
-    /**
-     * 'true' - request is sent from admin app and should be authorized according to current admin.
-     *  skipped (or !true) - request is sent from frontend (authorize according to current customer).
-     *
-     * @param string $data
-     */
-    public function setIsAdmin($data) {
-        parent::set(self::IS_ADMIN, $data);
     }
 
 }

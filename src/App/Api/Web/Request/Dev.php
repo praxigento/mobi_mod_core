@@ -17,7 +17,6 @@ class Dev
 {
     /**
      * ID of the 'currently logged in' admin user.
-     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
     const ADMIN_ID = 'adminId';
     /**
@@ -29,7 +28,6 @@ class Dev
      * ID of the 'currently logged in' admin user.
      *
      * @return int|null
-     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
     public function getAdminId()
     {
@@ -52,7 +50,6 @@ class Dev
      * ID of the 'currently logged in' admin user.
      *
      * @param int $data
-     * @deprecated https://jira.prxgt.com/browse/MOBI-1042?focusedCommentId=111107&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-111107
      */
     public function setAdminId($data)
     {
