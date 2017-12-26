@@ -51,13 +51,6 @@ class Back
                 if ($user instanceof \Magento\User\Model\User) {
                     $this->cacheId = $user->getId();
                 }
-
-//                if (
-//                    (isset($_SESSION[AnAdminConfig::SESSION_NAME_ADMIN])) &&
-//                    (isset($_SESSION[AnAdminConfig::SESSION_NAME_ADMIN]['user']))
-//                ) {
-//                    $user = $_SESSION[AnAdminConfig::SESSION_NAME_ADMIN]['user'];
-//                }
             }
         }
         return $this->cacheId;
