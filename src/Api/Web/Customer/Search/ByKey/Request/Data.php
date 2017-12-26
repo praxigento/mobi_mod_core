@@ -20,7 +20,8 @@ class Data
     /**
      * @return int
      */
-    public function getLimit() {
+    public function getLimit()
+    {
         $result = parent::get(self::LIMIT);
         return $result;
     }
@@ -28,7 +29,8 @@ class Data
     /**
      * @return string
      */
-    public function getSearchKey() {
+    public function getSearchKey()
+    {
         $result = parent::get(self::SEARCH_KEY);
         return $result;
     }
@@ -36,14 +38,16 @@ class Data
     /**
      * @param int $data
      */
-    public function setLimit($data) {
+    public function setLimit($data)
+    {
         parent::set(self::LIMIT, $data);
     }
 
     /**
      * @param string $data
      */
-    public function setSearchKey($data) {
+    public function setSearchKey($data)
+    {
         parent::set(self::SEARCH_KEY, $data);
     }
 }

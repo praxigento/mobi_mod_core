@@ -9,7 +9,7 @@ class Response
     extends \Praxigento\Core\App\Api\Web\Response
 {
     /**
-     * @return \Praxigento\Core\Api\Web\Customer\Search\ByKey\Response\Data
+     * @return \Praxigento\Core\Api\Service\Customer\Search\Response
      *
      * Magento 2 WebAPI requires full names in documentation (aliases are not allowed).
      */
@@ -19,7 +19,7 @@ class Response
     }
 
     /**
-     * @param \Praxigento\Core\Api\Web\Customer\Search\ByKey\Response\Data $data
+     * @param \Praxigento\Core\Api\Service\Customer\Search\Response $data
      *
      * Magento 2 WebAPI requires full names in documentation (aliases are not allowed).
      */

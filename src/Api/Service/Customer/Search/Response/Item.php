@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Api\Service\Customer\Search\Response\Data;
+namespace Praxigento\Core\Api\Service\Customer\Search\Response;
 
 class Item
     extends \Praxigento\Core\Data
