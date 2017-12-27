@@ -18,12 +18,6 @@
                 type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
 
 
-    <!-- *** -->
-    <!-- App -->
-    <!-- *** -->
-    <preference for="\Praxigento\Core\App\Api\Web\IAuthenticator"
-                type="\Praxigento\Core\App\Api\Web\Authenticator"/>
-
 
     <!-- ******* -->
     <!-- Plugins -->
