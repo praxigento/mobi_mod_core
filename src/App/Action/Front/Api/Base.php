@@ -27,7 +27,7 @@ abstract class Base
         \Magento\Framework\Webapi\ServiceInputProcessor $inputProcessor,
         \Magento\Framework\Webapi\ServiceOutputProcessor $outputProcessor,
         \Psr\Log\LoggerInterface $logger,
-        \Praxigento\Core\App\Api\Web\IAuthenticator $authenticator
+        \Praxigento\Core\App\Api\Web\Authenticator\Front $authenticator
     )
     {
         parent::__construct($context);
