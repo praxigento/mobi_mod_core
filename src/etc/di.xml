@@ -19,6 +19,19 @@
 
 
 
+    <!-- ********************** -->
+    <!-- Console (CLI Commands) -->
+    <!-- ********************** -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="prxgt_core_modules_installed" xsi:type="object">\Praxigento\Core\Cli\Cmd\Modules\Installed</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
