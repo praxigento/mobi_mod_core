@@ -33,22 +33,24 @@ class Front
     {
         /* $cacheId can be equal to 'null' if no customer is anonymous */
         if ($this->cacheId === false) {
-            $offeredId = null;
-            if ($request) {
-                $path = ARequest::PS . ARequest::DEV . ARequest::PS . ADev::CUST_ID;
-                $offeredId = $request->get($path);
+            /* get currently logged in customer data */
+            $customer = $this->session->getCustomer();
+            if ($customer) {
+                $this->cacheId = $customer->getId();
             }
-            if (
-                $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
-                !is_null($offeredId)
-            ) {
-                /* use offered Customer ID if MOBI API DevMode is enabled */
-                $this->cacheId = (int)$offeredId;
-            } else {
-                /* get currently logged in customer data */
-                $customer = $this->session->getCustomer();
-                if ($customer) {
-                    $this->cacheId = $customer->getId();
+            /* get ID from request if session is not established */
+            if (!$this->cacheId) {
+                $offeredId = null;
+                if ($request) {
+                    $path = ARequest::PS . ARequest::DEV . ARequest::PS . ADev::CUST_ID;
+                    $offeredId = $request->get($path);
+                }
+                if (
+                    $this->hlpCfg->getApiAuthenticationEnabledDevMode() &&
+                    !is_null($offeredId)
+                ) {
+                    /* use offered Customer ID if MOBI API DevMode is enabled */
+                    $this->cacheId = (int)$offeredId;
                 }
             }
         }
