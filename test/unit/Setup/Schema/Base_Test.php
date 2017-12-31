@@ -44,9 +44,9 @@ class Base_UnitTest
 
 class ChildToTest extends Base
 {
-    protected function _setup()
+    protected function setup()
     {
-        $this->_toolDem->readDemPackage('pathToFile', 'pathToNode');
+        $this->toolDem->readDemPackage('pathToFile', 'pathToNode');
     }
 
 }
