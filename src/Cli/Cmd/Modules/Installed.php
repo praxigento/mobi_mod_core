@@ -11,8 +11,8 @@ namespace Praxigento\Core\Cli\Cmd\Modules;
 class Installed
     extends \Praxigento\Core\App\Cli\Cmd\Base
 {
-    const OPT_SKIP_MAGE_MODS_NAME = 'skip-mage-mods';
-    const OPT_SKIP_MAGE_MODS_SHORTCUT = 'm';
+    const OPT_DISPLAY_MAGE_MODS_NAME = 'display-mage-mods';
+    const OPT_DISPLAY_MAGE_MODS_SHORTCUT = 'm';
 
     /** @var \Magento\Framework\Module\ModuleList */
     private $moduleList;
@@ -33,11 +33,11 @@ class Installed
     {
         parent::configure();
         $this->addOption(
-            self::OPT_SKIP_MAGE_MODS_NAME,
-            self::OPT_SKIP_MAGE_MODS_SHORTCUT,
+            self::OPT_DISPLAY_MAGE_MODS_NAME,
+            self::OPT_DISPLAY_MAGE_MODS_SHORTCUT,
             \Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL,
-            'Skip Magento modules in listing.',
-            true
+            'Display Magento modules in listing (skipped by default).',
+            false
         );
     }
 
@@ -45,8 +45,9 @@ class Installed
         \Symfony\Component\Console\Input\InputInterface $input,
         \Symfony\Component\Console\Output\OutputInterface $output
     ) {
-        $skipMageMods = $input->getOption(self::OPT_SKIP_MAGE_MODS_NAME);
-        if ($skipMageMods) {
+        $displayMageMods = $input->getOption(self::OPT_DISPLAY_MAGE_MODS_NAME);
+        $displayMageMods = ($displayMageMods !== false);
+        if ($displayMageMods === false) {
             $msg = "List installed Magento modules (skip Magento modules)";
         } else {
             $msg = "List installed Magento modules.";
@@ -59,8 +60,8 @@ class Installed
             $name = $one['name'];
             $version = $one['setup_version'];
             if (
-                (!$skipMageMods) ||
-                ($skipMageMods && !$this->isMageModule($name))
+                ($displayMageMods) ||
+                (!$displayMageMods && !$this->isMageModule($name))
             ) {
                 $total++;
                 $output->writeln("<info>$name:$version<info>");
