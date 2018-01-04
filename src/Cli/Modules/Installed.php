@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Cli\Cmd\Modules;
+namespace Praxigento\Core\Cli\Modules;
 
 /**
  * List installed Magento modules.
