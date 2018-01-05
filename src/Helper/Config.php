@@ -9,10 +9,11 @@ namespace Praxigento\Core\Helper;
  * Helper to get configuration parameters related to the module.
  */
 class Config
+    implements \Praxigento\Core\Api\Helper\Config
 {
 
     /** @var \Magento\Framework\App\Config\ScopeConfigInterface */
-    protected $scopeConfig;
+    private $scopeConfig;
 
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig

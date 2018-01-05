@@ -2,6 +2,12 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- ********** -->
+    <!-- API Helper -->
+    <!-- ********** -->
+    <preference for="\Praxigento\Core\Api\Helper\Config"
+                type="\Praxigento\Core\Helper\Config"/>
+
     <!-- ************ -->
     <!-- API Services -->
     <!-- ************ -->
@@ -18,7 +24,6 @@
                 type="\Praxigento\Core\Web\Customer\Search\ByKey"/>
 
 
-
     <!-- ********************** -->
     <!-- Console (CLI Commands) -->
     <!-- ********************** -->
@@ -29,7 +34,6 @@
             </argument>
         </arguments>
     </type>
-
 
 
     <!-- ******* -->
