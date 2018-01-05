@@ -31,7 +31,7 @@ class Front
 
     public function getCurrentUserId(ARequest $request = null)
     {
-        /* $cacheId can be equal to 'null' if no customer is anonymous */
+        /* $cacheId can be equal to 'null' if customer is anonymous */
         if ($this->cacheId === false) {
             /* get currently logged in customer data */
             $customer = $this->session->getCustomer();
