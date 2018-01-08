@@ -5,39 +5,27 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Tool\Def;
+namespace Praxigento\Core\Helper;
 
 
 use Praxigento\Core\Config as Cfg;
-use Praxigento\Core\App\ICached;
-use Praxigento\Core\Tool\IConvert;
-use Praxigento\Core\Tool\IPeriod;
 
-class Period implements IPeriod, ICached
+class Period
+    implements \Praxigento\Core\Api\Helper\Period, \Praxigento\Core\App\ICached
 {
     /** @var array Common cache for periods bounds: [period][type][from|to] = ... */
     private static $cachePeriodBounds = [];
     /** @var \Magento\Framework\ObjectManagerInterface */
     private $manObj;
-    /** @var IConvert */
-    private $toolConvert;
     /** @var int Delta in seconds for Magento timezone according to UTC */
     private $tzDelta;
     private $weekFirstDay = self::WEEK_SATURDAY;
     private $weekLastDay = self::WEEK_FRIDAY;
 
-    /**
-     * Period constructor.
-     *
-     * @param Convert $toolConvert
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
-     */
     public function __construct(
-        \Magento\Framework\ObjectManagerInterface $manObj,
-        IConvert $toolConvert
+        \Magento\Framework\ObjectManagerInterface $manObj
     ) {
         $this->manObj = $manObj;
-        $this->toolConvert = $toolConvert;
     }
 
     public function cacheReset()
@@ -109,7 +97,7 @@ class Period implements IPeriod, ICached
     {
         $result = null;
         /* convert $date into datetime and change timezone on demand */
-        $dt = $this->toolConvert->toDateTime($date);
+        $dt = $this->toDateTime($date);
         if ($changeTz > 0) {
             $dt->setTimestamp($dt->getTimestamp() + $this->getTzDelta());
         } elseif ($changeTz < 0) {
@@ -127,7 +115,7 @@ class Period implements IPeriod, ICached
                     /* week period ends on ...  */
                     $end = $this->getWeekLastDay();
                     $ts = strtotime("next $end", $dt->getTimestamp());
-                    $dt = $this->toolConvert->toDateTime($ts);
+                    $dt = $this->toDateTime($ts);
                 }
                 $result = date_format($dt, 'Ymd');
                 break;
@@ -150,7 +138,7 @@ class Period implements IPeriod, ICached
     public function getPeriodCurrentOld($date = null, $periodType = self::TYPE_DAY, $withTimezone = true)
     {
         $result = null;
-        $dt = $this->toolConvert->toDateTime($date);
+        $dt = $this->toDateTime($date);
         if ($withTimezone) {
             $dt->setTimestamp($dt->getTimestamp() - $this->getTzDelta());
         }
@@ -164,7 +152,7 @@ class Period implements IPeriod, ICached
                     /* week period ends on ...  */
                     $end = $this->getWeekLastDay();
                     $ts = strtotime("next $end", $dt->getTimestamp());
-                    $dt = $this->toolConvert->toDateTime($ts);
+                    $dt = $this->toDateTime($ts);
                 }
                 $result = date_format($dt, 'Ymd');
                 break;
@@ -191,13 +179,13 @@ class Period implements IPeriod, ICached
         if ($this->isPeriodYear($periodValue)) {
             $dt = date_create_from_format('Y', $periodValue);
             $ts = strtotime('first day of January', $dt->getTimestamp());
-            $dt = $this->toolConvert->toDateTime($ts);
+            $dt = $this->toDateTime($ts);
             $result = date_format($dt, 'Ymd');
         } else {
             if ($this->isPeriodMonth($periodValue)) {
                 $dt = date_create_from_format('Ymd', $periodValue . '01');
                 $ts = strtotime('first day of', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
             }
         }
@@ -217,13 +205,13 @@ class Period implements IPeriod, ICached
         if ($this->isPeriodYear($periodValue)) {
             $dt = date_create_from_format('Y', $periodValue);
             $ts = strtotime('last day of December', $dt->getTimestamp());
-            $dt = $this->toolConvert->toDateTime($ts);
+            $dt = $this->toDateTime($ts);
             $result = date_format($dt, 'Ymd');
         } else {
             if ($this->isPeriodMonth($periodValue)) {
                 $dt = date_create_from_format('Ymd', $periodValue . '01');
                 $ts = strtotime('last day of', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
             }
         }
@@ -238,7 +226,7 @@ class Period implements IPeriod, ICached
             case self::TYPE_DAY:
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime('next day', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_WEEK:
@@ -246,19 +234,19 @@ class Period implements IPeriod, ICached
                 $end = $this->getWeekLastDay();
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime("next $end", $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_MONTH:
                 $dt = date_create_from_format('Ymd', $periodValue . '01');
                 $ts = strtotime('next month', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ym');
                 break;
             case self::TYPE_YEAR:
                 $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('next year', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Y');
                 break;
         }
@@ -273,7 +261,7 @@ class Period implements IPeriod, ICached
             case self::TYPE_DAY:
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime('previous day', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_WEEK:
@@ -281,19 +269,19 @@ class Period implements IPeriod, ICached
                 $end = $this->getWeekLastDay();
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime("previous $end", $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_MONTH:
                 $dt = date_create_from_format('Ym', $periodValue);
                 $ts = strtotime('previous month', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ym');
                 break;
             case self::TYPE_YEAR:
                 $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('previous year', $dt->getTimestamp());
-                $dt = $this->toolConvert->toDateTime($ts);
+                $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Y');
                 break;
         }
@@ -446,31 +434,11 @@ class Period implements IPeriod, ICached
     }
 
     /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekFirstDay($weekDay)
-    {
-        $this->weekFirstDay = $weekDay;
-        $this->weekLastDay = $this->getWeekDayPrev($weekDay);
-        self::cacheReset();
-    }
-
-    /**
      * @return string
      */
     public function getWeekLastDay()
     {
         return $this->weekLastDay;
-    }
-
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekLastDay($weekDay)
-    {
-        $this->weekLastDay = $weekDay;
-        $this->weekFirstDay = $this->getWeekDayNext($weekDay);
-        self::cacheReset();
     }
 
     /**
@@ -527,6 +495,43 @@ class Period implements IPeriod, ICached
             case self::TYPE_YEAR:
                 $result = substr($periodValue, 0, 4);
                 break;
+        }
+        return $result;
+    }
+
+    /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekFirstDay($weekDay)
+    {
+        $this->weekFirstDay = $weekDay;
+        $this->weekLastDay = $this->getWeekDayPrev($weekDay);
+        self::cacheReset();
+    }
+
+    /**
+     * @param string $weekDay see self::WEEK_
+     */
+    public function setWeekLastDay($weekDay)
+    {
+        $this->weekLastDay = $weekDay;
+        $this->weekFirstDay = $this->getWeekDayNext($weekDay);
+        self::cacheReset();
+    }
+
+    private function toDateTime($data)
+    {
+        if (is_int($data)) {
+            /* create DateTie from unix time */
+            $dt = new \DateTime();
+            $dt->setTimestamp($data);
+            $result = $dt;
+        } elseif ($data instanceof \DateTime) {
+            $result = $data;
+        } elseif (is_null($data)) {
+            $result = new \DateTime();
+        } else {
+            $result = \DateTime::createFromFormat(Cfg::FORMAT_DATETIME, trim($data));
         }
         return $result;
     }

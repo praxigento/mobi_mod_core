@@ -10,8 +10,8 @@ namespace Praxigento\Core\Test;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
+use Praxigento\Core\Api\Helper\Period as HPeriod;
 use Praxigento\Core\Config as Cfg;
-use Praxigento\Core\Tool\IPeriod;
 use Praxigento\Downline\Repo\Entity\Data\Customer;
 use Praxigento\Downline\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
@@ -70,8 +70,8 @@ abstract class BaseIntegrationTest
     protected $_mapCustomerMageIdByIndex = [];
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $_resource;
-    /** @var  IPeriod */
-    protected $_toolPeriod;
+    /** @var  HPeriod */
+    protected $hlpPeriod;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -80,7 +80,7 @@ abstract class BaseIntegrationTest
         $this->_logger = $this->_manObj->get(\Psr\Log\LoggerInterface::class);
         $this->_resource = $this->_manObj->get(\Magento\Framework\App\ResourceConnection::class);
         $this->_conn = $this->_resource->getConnection();
-        $this->_toolPeriod = $this->_manObj->get(IPeriod::class);
+        $this->hlpPeriod = $this->_manObj->get(HPeriod::class);
         /* base services */
         $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Service\ICustomer::class);
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
@@ -100,7 +100,7 @@ abstract class BaseIntegrationTest
         $obj = $this->_manObj->get(\Praxigento\Pv\Service\ITransfer::class);
         $obj->cacheReset();
         // fresh classes
-        $this->_manObj->get(\Praxigento\Core\Tool\Def\Period::class)->cacheReset();
+        $this->_manObj->get(\Praxigento\Core\Helper\Period::class)->cacheReset();
         $this->_manObj->get(\Praxigento\Odoo\Repo\Odoo\Connector\Api\Def\Login::class)->cacheReset();
     }
 
@@ -120,10 +120,10 @@ abstract class BaseIntegrationTest
             $request->setParentId($this->_mapCustomerMageIdByIndex[$parentRef]);
             $request->setReference($this->_mapCustomerMageIdByIndex[$customerRef]);
             $request->setCountryCode(self::DEFAULT_DOWNLINE_COUNTRY_CODE);
-            $request->setDate($this->_toolPeriod->getTimestampFrom($dtToday));
+            $request->setDate($this->hlpPeriod->getTimestampFrom($dtToday));
             /* Create customer per day or all customers in the same day. */
             if ($switchDateOnNewCustomer) {
-                $dtToday = $this->_toolPeriod->getPeriodNext($dtToday);
+                $dtToday = $this->hlpPeriod->getPeriodNext($dtToday);
             }
             $response = $this->_callDownlineCustomer->add($request);
             if ($response->isSucceed()) {

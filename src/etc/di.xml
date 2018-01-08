@@ -125,7 +125,7 @@
                 type="Praxigento\Core\Tool\Def\Date"/>
     <preference for="Praxigento\Core\Tool\IFormat"
                 type="Praxigento\Core\Tool\Def\Format"/>
-    <preference for="Praxigento\Core\Tool\IPeriod"
-                type="Praxigento\Core\Tool\Def\Period"/>
+    <preference for="Praxigento\Core\Api\Helper\Period"
+                type="Praxigento\Core\Helper\Period"/>
 
 </config>

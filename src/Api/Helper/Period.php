@@ -9,9 +9,9 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Tool;
+namespace Praxigento\Core\Api\Helper;
 
-interface IPeriod
+interface Period
 {
     const TYPE_DAY = 'DAY';
     const TYPE_MONTH = 'MONTH';
@@ -33,7 +33,7 @@ interface IPeriod
      *  - "= 0" - don't change timezone for $date;
      *  - "< 0" - decrease $date on tzDelta (GMT offset);
      *  - "> 0" - increase $date on tzDelta (GMT offset);
-     * (see \Praxigento\Core\Tool\Def\Period::$tzDelta)
+     * (see \Praxigento\Core\Helper\Period::$tzDelta)
      *
      * @param \DateTime|int|string|null $date datetime to process (see \Praxigento\Core\Tool\Def\Convert::toDateTime)
      * @param int $changeTz
