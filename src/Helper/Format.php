@@ -4,12 +4,13 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Tool\Def;
+
+namespace Praxigento\Core\Helper;
 
 use Praxigento\Core\Config as Cfg;
 
 class Format
-    implements \Praxigento\Core\Tool\IFormat
+    implements \Praxigento\Core\Api\Helper\Format
 {
     public function dateTimeForDb(\DateTime $dt)
     {

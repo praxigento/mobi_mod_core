@@ -4,9 +4,9 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Tool;
+namespace Praxigento\Core\Api\Helper;
 
-interface IFormat
+interface Format
 {
     /**
      * Return datetime value formatted to use in DB expressions (Y-m-d H:i:s).

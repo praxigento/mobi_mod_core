@@ -7,15 +7,13 @@
 
 namespace Praxigento\Core\Helper;
 
-use Praxigento\Core\Tool\IFormat;
-
 class Date
     implements \Praxigento\Core\Api\Helper\Date
 {
+    /** @var  \Praxigento\Core\Api\Helper\Format */
+    private $hlpFormat;
     /** @var \Magento\Framework\ObjectManagerInterface */
-    protected $manObj;
-    /** @var  IFormat */
-    protected $toolFormat;
+    private $manObj;
     /**
      * Add delta to get Mage time from UTC time or subtract delta to get UTC time from Mage time.
      *
@@ -25,10 +23,10 @@ class Date
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
-        IFormat $toolFormat
+        \Praxigento\Core\Api\Helper\Format $hlpFormat
     ) {
         $this->manObj = $manObj;
-        $this->toolFormat = $toolFormat;
+        $this->hlpFormat = $hlpFormat;
     }
 
 
@@ -66,7 +64,7 @@ class Date
     public function getMageNowForDb()
     {
         $dt = $this->getMageNow();
-        $result = $this->toolFormat->dateTimeForDb($dt);
+        $result = $this->hlpFormat->dateTimeForDb($dt);
         return $result;
     }
 
@@ -88,7 +86,7 @@ class Date
     public function getUtcNowForDb()
     {
         $dt = $this->getUtcNow();
-        $result = $this->toolFormat->dateTimeForDb($dt);
+        $result = $this->hlpFormat->dateTimeForDb($dt);
         return $result;
     }
 }
