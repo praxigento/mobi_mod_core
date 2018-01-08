@@ -4,12 +4,13 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Tool\Def;
 
-use Praxigento\Core\Tool\IDate;
+namespace Praxigento\Core\Helper;
+
 use Praxigento\Core\Tool\IFormat;
 
-class Date implements IDate
+class Date
+    implements \Praxigento\Core\Api\Helper\Date
 {
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
@@ -22,10 +23,6 @@ class Date implements IDate
      */
     protected $tzDelta;
 
-    /**
-     * @param IFormat $toolFormat
-     * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
-     */
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
         IFormat $toolFormat

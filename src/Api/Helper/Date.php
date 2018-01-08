@@ -4,10 +4,10 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\Tool;
+namespace Praxigento\Core\Api\Helper;
 
 
-interface IDate
+interface Date
 {
     /**
      * Return 'Magento' now (according to locale settings).

@@ -121,8 +121,8 @@
     <!-- ***** -->
     <preference for="Praxigento\Core\Tool\IConvert"
                 type="Praxigento\Core\Tool\Def\Convert"/>
-    <preference for="Praxigento\Core\Tool\IDate"
-                type="Praxigento\Core\Tool\Def\Date"/>
+    <preference for="Praxigento\Core\Api\Helper\Date"
+                type="Praxigento\Core\Helper\Date"/>
     <preference for="Praxigento\Core\Tool\IFormat"
                 type="Praxigento\Core\Tool\Def\Format"/>
     <preference for="Praxigento\Core\Api\Helper\Period"
