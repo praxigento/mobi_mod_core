@@ -19,6 +19,9 @@ class Period
     private $manObj;
     /** @var int Delta in seconds for Magento timezone according to UTC */
     private $tzDelta;
+    /**
+     * Week first and last day by default.
+     */
     private $weekFirstDay = self::WEEK_SATURDAY;
     private $weekLastDay = self::WEEK_FRIDAY;
 
@@ -37,8 +40,8 @@ class Period
      * Calculate period's from/to bounds (month 201508 = "2015-08-01 02:00:00 / 2015-09-01 02:00:00") and cache it.
      * Use "<=" for dateFrom and "<" for dateTo in comparison.
      *
-     * @param $periodValue 20150601 | 201506 | 2015
-     * @param $periodType DAY | WEEK | MONTH | YEAR
+     * @param string $periodValue [20150601 | 201506 | 2015]
+     * @param string $periodType [DAY | WEEK | MONTH | YEAR]
      */
     private function calcPeriodBounds($periodValue, $periodType = self::TYPE_DAY)
     {
@@ -105,43 +108,6 @@ class Period
         }
 
         /* calculate expected period for given datetime */
-        switch ($periodType) {
-            case self::TYPE_DAY:
-                $result = date_format($dt, 'Ymd');
-                break;
-            case self::TYPE_WEEK:
-                $weekDay = date('w', $dt->getTimestamp());
-                if ($weekDay != 0) {
-                    /* week period ends on ...  */
-                    $end = $this->getWeekLastDay();
-                    $ts = strtotime("next $end", $dt->getTimestamp());
-                    $dt = $this->toDateTime($ts);
-                }
-                $result = date_format($dt, 'Ymd');
-                break;
-            case self::TYPE_MONTH:
-                $result = date_format($dt, 'Ym');
-                break;
-            case self::TYPE_YEAR:
-                $result = date_format($dt, 'Y');
-                break;
-        }
-        return $result;
-    }
-
-    /**
-     * @param $date string "2015-11-11 22:21:37"
-     * @param $periodType string see self::TYPE_...
-     *
-     * @return null|string 20150601 | 201506 | 2015
-     */
-    public function getPeriodCurrentOld($date = null, $periodType = self::TYPE_DAY, $withTimezone = true)
-    {
-        $result = null;
-        $dt = $this->toDateTime($date);
-        if ($withTimezone) {
-            $dt->setTimestamp($dt->getTimestamp() - $this->getTzDelta());
-        }
         switch ($periodType) {
             case self::TYPE_DAY:
                 $result = date_format($dt, 'Ymd');
@@ -347,7 +313,7 @@ class Period
     /**
      * MOBI-504: don't retrieve session depended objects from Object Manager
      *
-     * @return \Magento\Framework\Stdlib\DateTime\DateTime
+     * @return int
      */
     private function getTzDelta()
     {

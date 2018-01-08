@@ -43,15 +43,6 @@ interface Period
     public function getPeriodCurrent($date = null, $changeTz = 0, $periodType = self::TYPE_DAY);
 
     /**
-     * @param $date string "2015-11-11 22:21:37"
-     * @param $periodType string see self::TYPE_...
-     *
-     * @return null|string 20150601 | 201506 | 2015
-     * @deprecated use getPeriodCurrent()
-     */
-    public function getPeriodCurrentOld($date = null, $periodType = self::TYPE_DAY, $withTimezone = true);
-
-    /**
      * Return the datestamp for the first date of the month or year period.
      *
      * @param $periodValue 'YYYY' or 'YYYYMM'
@@ -76,8 +67,8 @@ interface Period
     /**
      * Calculate FROM bound as timestamp for the period.
      *
-     * @param $periodValue 20150601 | 201506 | 2015
-     * @param $periodType DAY | WEEK | MONTH | YEAR
+     * @param string $periodValue [20150601 | 201506 | 2015]
+     * @param string $periodType [DAY | WEEK | MONTH | YEAR]
      *
      * @return string 2015-08-12 12:23:34
      */
