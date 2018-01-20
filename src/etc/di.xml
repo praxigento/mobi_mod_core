@@ -7,6 +7,13 @@
     <!-- ********** -->
     <preference for="\Praxigento\Core\Api\Helper\Config"
                 type="\Praxigento\Core\Helper\Config"/>
+    <preference for="Praxigento\Core\Api\Helper\Date"
+                type="Praxigento\Core\Helper\Date"/>
+    <preference for="Praxigento\Core\Api\Helper\Format"
+                type="Praxigento\Core\Helper\Format"/>
+    <preference for="Praxigento\Core\Api\Helper\Period"
+                type="Praxigento\Core\Helper\Period"/>
+
 
     <!-- ************ -->
     <!-- API Services -->
@@ -115,17 +122,5 @@
                 type="Praxigento\Core\App\Transaction\Database\Def\Item"/>
     <preference for="Praxigento\Core\App\Transaction\Database\IManager"
                 type="Praxigento\Core\App\Transaction\Database\Def\Manager"/>
-
-    <!-- ***** -->
-    <!-- Tools -->
-    <!-- ***** -->
-    <preference for="Praxigento\Core\Tool\IConvert"
-                type="Praxigento\Core\Tool\Def\Convert"/>
-    <preference for="Praxigento\Core\Api\Helper\Date"
-                type="Praxigento\Core\Helper\Date"/>
-    <preference for="Praxigento\Core\Api\Helper\Format"
-                type="Praxigento\Core\Helper\Format"/>
-    <preference for="Praxigento\Core\Api\Helper\Period"
-                type="Praxigento\Core\Helper\Period"/>
 
 </config>
