@@ -54,7 +54,7 @@ abstract class Base
     }
 
     /**
-     * Sets area code to start a adminhtml session and configure Object Manager.
+     * Sets area code to start an adminhtml session and configure Object Manager.
      */
     protected function configure()
     {
