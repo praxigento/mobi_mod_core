@@ -12,9 +12,9 @@ abstract class Base
     extends \Symfony\Component\Console\Command\Command
 {
 
-    /** string @var sample: "Create sample downline tree in application." */
+    /** @var string sample: "Create sample downline tree in application." */
     protected $cmdDesc;
-    /** string @var sample: "prxgt:app:init-customers" */
+    /** @var string sample: "prxgt:app:init-customers" */
     protected $cmdName;
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
