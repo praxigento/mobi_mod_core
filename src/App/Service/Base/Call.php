@@ -40,19 +40,4 @@ abstract class Call
         $this->_manObj = $manObj;
     }
 
-    /**
-     * @deprecated use logMemoryUsage()
-     */
-    protected function _logMemoryUsage()
-    {
-        $this->logMemoryUsage();
-    }
-
-    protected function logMemoryUsage()
-    {
-        $memPeak = number_format(memory_get_peak_usage(), 0, '.', ',');
-        $memCurrent = number_format(memory_get_usage(), 0, '.', ',');
-        $this->logger->debug("Current memory usage: $memCurrent bytes (peak: $memPeak bytes). Service: "
-            . get_class($this) . '.');
-    }
 }
