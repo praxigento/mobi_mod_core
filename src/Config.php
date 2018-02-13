@@ -67,8 +67,10 @@ class Config
     const E_CATINV_STOCK_A_WEBSITE_ID = 'website_id';
     const E_CATINV_STOCK_ITEM_A_ITEM_ID = 'item_id';
     const E_CATINV_STOCK_ITEM_A_PROD_ID = 'product_id';
+    const E_CATINV_STOCK_ITEM_A_QTY = 'qty';
     const E_CATINV_STOCK_ITEM_A_STOCK_ID = 'stock_id';
     const E_CATINV_STOCK_STATUS_A_PROD_ID = ModelStockStatus::KEY_PRODUCT_ID;
+    const E_CATINV_STOCK_STATUS_A_QTY = ModelStockStatus::KEY_QTY;
     const E_CATINV_STOCK_STATUS_A_STOCK_ID = ModelStockStatus::KEY_STOCK_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = ModelStockStatus::KEY_STOCK_STATUS;
     const E_CAT_PROD_IDX_A_CUST_GROUP_ID = 'customer_group_id';
