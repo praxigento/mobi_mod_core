@@ -26,11 +26,11 @@ class Base
 
     public function __construct(
         $name,
-        $primaryFieldName = 'primaryFieldName',
-        $requestFieldName = 'requestFieldName',
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\App\RequestInterface $request,
         \Praxigento\Core\App\Ui\DataProvider\Grid\Query\IBuilder $gridQueryBuilder,
+        $primaryFieldName = 'primaryFieldName',
+        $requestFieldName = 'requestFieldName',
         array $meta = [],
         array $data = []
     )
