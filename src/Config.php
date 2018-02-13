@@ -49,6 +49,7 @@ class Config
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_SALES_INVOICE = 'sales_invoice';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
+    const ENTITY_MAGE_SALES_ORDER_GRID = 'sales_order_grid';
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
     const ENTITY_MAGE_SALES_ORDER_TAX = 'sales_order_tax';
     const ENTITY_MAGE_SALES_ORDER_TAX_ITEM = 'sales_order_tax_item';
@@ -122,6 +123,7 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
+    const E_SALE_ORDER_GRID_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_ITEM_A_BASE_PRICE = ModelOrderItem::BASE_PRICE;
     const E_SALE_ORDER_ITEM_A_BASE_ROW_TOTAL_INCL_TAX = ModelOrderItem::BASE_ROW_TOTAL_INCL_TAX;
     const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
