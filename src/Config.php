@@ -47,6 +47,8 @@ class Config
     const ENTITY_MAGE_CUSTOMER_ADDR = 'customer_address_entity';
     const ENTITY_MAGE_CUSTOMER_GROUP = 'customer_group';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
+    const ENTITY_MAGE_QUOTE = 'quote';
+    const ENTITY_MAGE_QUOTE_ITEM = 'quote_item';
     const ENTITY_MAGE_SALES_INVOICE = 'sales_invoice';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
     const ENTITY_MAGE_SALES_ORDER_GRID = 'sales_order_grid';
@@ -115,6 +117,8 @@ class Config
     const E_PRODUCT_A_SKU = 'sku';
     const E_PRODUCT_A_TYPE_ID = 'type_id';
     const E_PRODUCT_A_UPDATED_AT = 'updated_at';
+    const E_QUOTE_ITEM_A_ITEM_ID = 'item_id';
+    const E_QUOTE_ITEM_A_QUOTE_ID = 'quote_id';
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
     const E_SALE_ORDER_A_APPLIED_RULE_IDS = 'applied_rule_ids';
