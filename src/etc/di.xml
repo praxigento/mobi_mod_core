@@ -46,6 +46,13 @@
     <!-- ******* -->
     <!-- Plugins -->
     <!-- ******* -->
+    <type name="Magento\Framework\Api\DataObjectHelper">
+        <!-- MOBI-1148: disable error 500 (argument ... must be an instance of Magento\Quote\Api\Data\TotalsExtensionInterface). -->
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Api\DataObjectHelper"
+                sortOrder="100" disabled="false"/>
+    </type>
+
     <type name="Magento\Framework\Json\DecoderInterface">
         <!-- Cut form key from REST request and add as JSON attribute (MOBI-473). -->
         <plugin name="praxigento_core_plugin"
