@@ -11,12 +11,10 @@ namespace Praxigento\Core\App\Cli\Cmd;
 abstract class Base
     extends \Symfony\Component\Console\Command\Command
 {
-
-    /** @var string sample: "Create sample downline tree in application." */
-    protected $cmdDesc;
-    /** @var string sample: "prxgt:app:init-customers" */
-    protected $cmdName;
-    /** @var \Magento\Framework\ObjectManagerInterface */
+    /**
+     * @var \Magento\Framework\ObjectManagerInterface
+     * @deprecated I suppose it is better to use static methods to get Object Manager cause we don't use tests.
+     */
     protected $manObj;
 
     public function __construct(
@@ -25,10 +23,9 @@ abstract class Base
         $cmdDesc
     ) {
         $this->manObj = $manObj;
-        $this->cmdName = $cmdName;
-        $this->cmdDesc = $cmdDesc;
         /* props initialization should be above parent constructor cause $this->configure() will be called inside */
-        parent::__construct();
+        parent::__construct($cmdName);
+        $this->setDescription($cmdDesc);
     }
 
     /**
@@ -52,16 +49,4 @@ abstract class Base
             $this->manObj->configure($config);
         }
     }
-
-    /**
-     * Sets area code to start an adminhtml session and configure Object Manager.
-     */
-    protected function configure()
-    {
-        parent::configure();
-        /* UI related config (Symfony) */
-        $this->setName($this->cmdName);
-        $this->setDescription($this->cmdDesc);
-    }
-
 }
