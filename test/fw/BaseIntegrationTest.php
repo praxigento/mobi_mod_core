@@ -118,7 +118,7 @@ abstract class BaseIntegrationTest
             $request = new CustomerAddRequest();
             $request->setCustomerId($customerMageId);
             $request->setParentId($this->_mapCustomerMageIdByIndex[$parentRef]);
-            $request->setReference($this->_mapCustomerMageIdByIndex[$customerRef]);
+            $request->setMlmId($this->_mapCustomerMageIdByIndex[$customerRef]);
             $request->setCountryCode(self::DEFAULT_DOWNLINE_COUNTRY_CODE);
             $request->setDate($this->hlpPeriod->getTimestampFrom($dtToday));
             /* Create customer per day or all customers in the same day. */
