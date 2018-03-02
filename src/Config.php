@@ -76,7 +76,7 @@ class Config
     const E_CATINV_STOCK_STATUS_A_QTY = ModelStockStatus::KEY_QTY;
     const E_CATINV_STOCK_STATUS_A_STOCK_ID = ModelStockStatus::KEY_STOCK_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = ModelStockStatus::KEY_STOCK_STATUS;
-    const E_CAT_PROD_IDX_A_CUST_GROUP_ID = 'customer_group_id';
+    const E_CATPROD_IDX_PRICE_A_CUST_GROUP_ID = 'customer_group_id';
     const E_COMMON_A_ENTITY_ID = 'entity_id';
     const E_CONFIG_A_PATH = 'path';
     const E_CONFIG_A_SCOPE = 'scope';
