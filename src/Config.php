@@ -184,6 +184,7 @@ class Config
      */
     const FORMAT_DATETIME = 'Y-m-d H:i:s';
     const MODULE = 'Praxigento_Core';
+    const REG_REST_INPUT = 'prxgtRestInput';
     const SCOPE_CFG_DEFAULT = \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT;
     const SCOPE_CFG_STORES = \Magento\Config\Block\System\Config\Form::SCOPE_STORES;
     const SCOPE_CFG_WEBSITE = \Magento\Config\Block\System\Config\Form::SCOPE_WEBSITES;
