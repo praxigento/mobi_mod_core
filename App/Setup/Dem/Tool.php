@@ -7,9 +7,9 @@
 
 namespace Praxigento\Core\App\Setup\Dem;
 
+use Praxigento\Core\App\Setup\Dem\Cfg as DemCfg;
 use Praxigento\Core\Config;
 use Praxigento\Core\Data as DataObject;
-use Praxigento\Core\App\Setup\Dem\Cfg as DemCfg;
 
 class Tool
 {

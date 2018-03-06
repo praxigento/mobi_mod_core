@@ -23,11 +23,10 @@ class Base
     const UIC_CONFIG = 'config';
     const UIC_UPDATE_URL = 'update_url';
     /**#@- */
-
-    /** @var  \Praxigento\Core\App\Repo\Query\Criteria\IAdapter */
-    protected $_criteriaAdapter;
     /** @var  \Praxigento\Core\App\Repo\Query\Criteria\IMapper */
     protected $_api2sqlMapper;
+    /** @var  \Praxigento\Core\App\Repo\Query\Criteria\IAdapter */
+    protected $_criteriaAdapter;
     /**
      * Repository to select data for grid.
      *

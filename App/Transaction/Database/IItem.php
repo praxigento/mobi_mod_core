@@ -16,14 +16,14 @@ interface IItem
     public function getConnection();
 
     /**
-     * @return \Praxigento\Core\App\Transaction\Database\IDefinition
-     */
-    public function getDefinition();
-
-    /**
      * @return string
      */
     public function getConnectionName();
+
+    /**
+     * @return \Praxigento\Core\App\Transaction\Database\IDefinition
+     */
+    public function getDefinition();
 
     /**
      * @return int

@@ -18,20 +18,18 @@ abstract class Builder
      * @var  \Magento\Framework\DB\Adapter\AdapterInterface
      */
     protected $conn;
-
-    /**
-     * Map query aliases into "table"."column" pairs.
-     *
-     * @var  \Praxigento\Core\App\Repo\Query\Criteria\IMapper
-     */
-    protected $mapper;
-
     /**
      * Adopts SearchCriteria to SQL queries.
      *
      * @var \Praxigento\Core\App\Repo\Query\Criteria\IAdapter
      */
     protected $critAdapter;
+    /**
+     * Map query aliases into "table"."column" pairs.
+     *
+     * @var  \Praxigento\Core\App\Repo\Query\Criteria\IMapper
+     */
+    protected $mapper;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $resource;
 

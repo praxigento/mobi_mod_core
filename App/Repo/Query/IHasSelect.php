@@ -10,17 +10,17 @@ namespace Praxigento\Core\App\Repo\Query;
 interface  IHasSelect
 {
     /**
-     * Get SELECT COUNT query.
-     *
-     * @return \Praxigento\Core\App\Repo\Query\ISelect
-     */
-    public function getQueryToSelectCount();
-
-    /**
      * Get SELECT query.
      *
      * @return \Praxigento\Core\App\Repo\Query\ISelect
      */
     public function getQueryToSelect();
+
+    /**
+     * Get SELECT COUNT query.
+     *
+     * @return \Praxigento\Core\App\Repo\Query\ISelect
+     */
+    public function getQueryToSelectCount();
 
 }

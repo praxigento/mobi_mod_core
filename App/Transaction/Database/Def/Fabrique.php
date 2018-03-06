@@ -11,10 +11,10 @@ namespace Praxigento\Core\App\Transaction\Database\Def;
 class Fabrique
     implements \Praxigento\Core\App\Transaction\Database\IFabrique
 {
-    /** @var \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactoryInterface */
-    private $_factoryConn;
     /** @var \Magento\Framework\App\DeploymentConfig */
     private $_configDeployment;
+    /** @var \Magento\Framework\Model\ResourceModel\Type\Db\ConnectionFactoryInterface */
+    private $_factoryConn;
     /** @var \Magento\Framework\ObjectManagerInterface */
     private $_manObj;
 

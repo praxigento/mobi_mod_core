@@ -22,22 +22,12 @@ class Response
         return $this->errorCode;
     }
 
-    public function setErrorCode($code)
-    {
-        $this->errorCode = $code;
-    }
-
     /**
      * @return string (required for Magento API transformations)
      */
     public function getErrorMessage()
     {
         return $this->errorMessage;
-    }
-
-    public function setErrorMessage($message)
-    {
-        $this->errorMessage = $message;
     }
 
     /**
@@ -52,5 +42,15 @@ class Response
     public function markSucceed()
     {
         $this->errorCode = \Praxigento\Core\App\Service\IResponse::ERR_NO_ERROR;
+    }
+
+    public function setErrorCode($code)
+    {
+        $this->errorCode = $code;
+    }
+
+    public function setErrorMessage($message)
+    {
+        $this->errorMessage = $message;
     }
 }

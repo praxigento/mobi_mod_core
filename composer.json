@@ -15,10 +15,10 @@
   },
   "autoload": {
     "files": [
-      "src/registration.php"
+      "registration.php"
     ],
     "psr-4": {
-      "Praxigento\\Core\\": "src/",
+      "Praxigento\\Core\\": "",
       "Praxigento\\Core\\Test\\": "test/fw"
     }
   }

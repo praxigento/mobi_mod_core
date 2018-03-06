@@ -9,19 +9,18 @@ namespace Praxigento\Core\Plugin\Framework\Webapi\Sub;
  */
 class TypePropertiesRegistry
 {
-    const SKIP_DATA = 'data';
-    const SKIP_ITERATOR = 'iterator';
-
     /** Pattern to extract property data from getter. */
     const PATTERN_METHOD_GET = "/\@method\s+(.+)\s+get(.+)\(\)/";
+    const SKIP_DATA = 'data';
+    const SKIP_ITERATOR = 'iterator';
     /** @var \Magento\Framework\ObjectManagerInterface */
     protected $_manObj;
     /** @var array Registry for processed types. Type name w/o leading slash is the key ("Praxigento\Core\..."). */
     protected $_registry = [];
-    /** @var \Magento\Framework\Reflection\TypeProcessor */
-    protected $_typeProcessor;
     /** @var \Praxigento\Core\App\Reflection\Tool\Type */
     protected $_toolsType;
+    /** @var \Magento\Framework\Reflection\TypeProcessor */
+    protected $_typeProcessor;
 
     public function __construct(
         \Magento\Framework\ObjectManagerInterface $manObj,
