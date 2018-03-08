@@ -17,7 +17,7 @@ abstract class Base
     private $authenticator;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
-    /** @var \Psr\Log\LoggerInterface */
+    /** @var \Praxigento\Core\App\Api\Logger\Main */
     private $logger;
     /** @var \Magento\Framework\Webapi\ServiceOutputProcessor */
     private $outputProcessor;
