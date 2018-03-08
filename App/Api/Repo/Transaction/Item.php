@@ -3,12 +3,12 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Transaction\Database;
+namespace Praxigento\Core\App\Api\Repo\Transaction;
 
 /**
  * Database Transaction (Done Right, MOBI-337)
  */
-interface IItem
+interface Item
 {
     /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
@@ -21,7 +21,7 @@ interface IItem
     public function getConnectionName();
 
     /**
-     * @return \Praxigento\Core\App\Transaction\Database\IDefinition
+     * @return \Praxigento\Core\App\Api\Repo\Transaction\Definition
      */
     public function getDefinition();
 

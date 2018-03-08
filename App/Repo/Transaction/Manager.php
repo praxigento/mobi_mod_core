@@ -3,36 +3,35 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Transaction\Database\Def;
+namespace Praxigento\Core\App\Repo\Transaction;
 
 /**
  * Default implementation for Database Transaction Manager.
  */
 class Manager
-    implements \Praxigento\Core\App\Transaction\Database\IManager
+    implements \Praxigento\Core\App\Api\Repo\Transaction\Manager
 {
-    /** @var  \Praxigento\Core\App\Transaction\Database\IFabrique */
-    private $_factoryTrans;
+    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Factory */
+    private $factoryTrans;
     /** @var array Registry to store transaction by connection & transaction names ([conn][trans]=>$item). */
-    private $_registry = [];
+    private $registry = [];
 
     public function __construct(
-        \Praxigento\Core\App\Transaction\Database\IFabrique $factoryTrans
+        \Praxigento\Core\App\Api\Repo\Transaction\Factory $factoryTrans
     ) {
-        $this->_factoryTrans = $factoryTrans;
+        $this->factoryTrans = $factoryTrans;
         /* init default connection for default transaction */
-        $trans = $this->_factoryTrans->create(self::DEF_TRANSACTION, self::DEF_CONNECTION);
-        $this->_registry[self::DEF_CONNECTION][self::DEF_TRANSACTION] = $trans;
+        $trans = $this->factoryTrans->create(self::DEF_TRANSACTION, self::DEF_CONNECTION);
+        $this->registry[self::DEF_CONNECTION][self::DEF_TRANSACTION] = $trans;
     }
 
-    /** @inheritdoc */
     public function begin($transactionName = self::DEF_TRANSACTION, $connectionName = self::DEF_CONNECTION)
     {
-        if (isset($this->_registry[$connectionName][$transactionName])) {
-            $trans = $this->_registry[$connectionName][$transactionName];
+        if (isset($this->registry[$connectionName][$transactionName])) {
+            $trans = $this->registry[$connectionName][$transactionName];
         } else {
-            $trans = $this->_factoryTrans->create($transactionName, $connectionName);
-            $this->_registry[$connectionName][$transactionName] = $trans;
+            $trans = $this->factoryTrans->create($transactionName, $connectionName);
+            $this->registry[$connectionName][$transactionName] = $trans;
         }
         /** @var \Magento\Framework\DB\Adapter\AdapterInterface $conn */
         $conn = $trans->getConnection();
@@ -42,15 +41,14 @@ class Manager
         return $result;
     }
 
-    /** @inheritdoc */
-    public function commit(\Praxigento\Core\App\Transaction\Database\IDefinition $definition)
+    public function commit(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();
         $level = $definition->getLevel();
-        if (isset($this->_registry[$conn][$trans])) {
-            /** @var \Praxigento\Core\App\Transaction\Database\Def\Item $item */
-            $item = $this->_registry[$conn][$trans];
+        if (isset($this->registry[$conn][$trans])) {
+            /** @var \Praxigento\Core\App\Repo\Transaction\Item $item */
+            $item = $this->registry[$conn][$trans];
             $maxLevel = $item->getLevel();
             if ($maxLevel > $level) {
                 /* rollback all nested levels and current level */
@@ -66,19 +64,18 @@ class Manager
                 $item->levelDecrease();
             }
         } else {
-            throw new\Exception("There is no database transaction named as '$trans' for connection '$conn'.");
+            throw new \Exception("There is no database transaction named as '$trans' for connection '$conn'.");
         }
     }
 
-    /** @inheritdoc */
-    public function end(\Praxigento\Core\App\Transaction\Database\IDefinition $definition)
+    public function end(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();
         $level = $definition->getLevel();
-        if (isset($this->_registry[$conn][$trans])) {
-            /** @var \Praxigento\Core\App\Transaction\Database\Def\Item $item */
-            $item = $this->_registry[$conn][$trans];
+        if (isset($this->registry[$conn][$trans])) {
+            /** @var \Praxigento\Core\App\Repo\Transaction\Item $item */
+            $item = $this->registry[$conn][$trans];
             $maxLevel = $item->getLevel();
             if ($maxLevel >= $level) {
                 /* rollback all nested levels and current level */
@@ -89,19 +86,18 @@ class Manager
                 }
             }
         } else {
-            throw new\Exception("There is no database transaction named as '$trans' for connection '$conn'.");
+            throw new \Exception("There is no database transaction named as '$trans' for connection '$conn'.");
         }
     }
 
-    /** @inheritdoc */
-    public function getConnection(\Praxigento\Core\App\Transaction\Database\IDefinition $definition)
+    public function getConnection(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
     {
         $trans = $definition->getTransactionName();
         $conn = $definition->getConnectionName();
 
-        if (isset($this->_registry[$conn][$trans])) {
-            /** @var \Praxigento\Core\App\Transaction\Database\IItem $registered */
-            $registered = $this->_registry[$conn][$trans];
+        if (isset($this->registry[$conn][$trans])) {
+            /** @var \Praxigento\Core\App\Api\Repo\Transaction\Item $registered */
+            $registered = $this->registry[$conn][$trans];
             $result = $registered->getConnection();
         } else {
             $result = null;
@@ -109,15 +105,14 @@ class Manager
         return $result;
     }
 
-    /** @inheritdoc */
-    public function rollback(\Praxigento\Core\App\Transaction\Database\IDefinition $definition)
+    public function rollback(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();
         $level = $definition->getLevel();
-        if (isset($this->_registry[$conn][$trans])) {
-            /** @var \Praxigento\Core\App\Transaction\Database\Def\Item $item */
-            $item = $this->_registry[$conn][$trans];
+        if (isset($this->registry[$conn][$trans])) {
+            /** @var \Praxigento\Core\App\Repo\Transaction\Item $item */
+            $item = $this->registry[$conn][$trans];
             $maxLevel = $item->getLevel();
             /* rollback all nested levels and current level */
             for ($i = $maxLevel; $i >= $level; $i--) {
@@ -126,7 +121,7 @@ class Manager
                 $item->levelDecrease();
             }
         } else {
-            throw new\Exception("There is no database transaction named as '$trans' for connection '$conn'.");
+            throw new \Exception("There is no database transaction named as '$trans' for connection '$conn'.");
         }
     }
 }

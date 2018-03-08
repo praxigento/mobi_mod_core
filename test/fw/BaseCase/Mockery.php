@@ -110,7 +110,7 @@ abstract class Mockery
      */
     protected function _mockTransactionDefinition()
     {
-        $result = $this->_mock(\Praxigento\Core\App\Transaction\Database\IDefinition::class);
+        $result = $this->_mock(\Praxigento\Core\App\Api\Repo\Transaction\Definition::class);
         return $result;
     }
 
@@ -125,7 +125,7 @@ abstract class Mockery
      */
     protected function _mockTransactionManager()
     {
-        $result = $this->_mock(\Praxigento\Core\App\Transaction\Database\IManager::class);
+        $result = $this->_mock(\Praxigento\Core\App\Api\Repo\Transaction\Manager::class);
         return $result;
     }
 

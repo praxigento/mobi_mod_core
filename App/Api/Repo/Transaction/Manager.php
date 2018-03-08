@@ -3,12 +3,12 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Transaction\Database;
+namespace Praxigento\Core\App\Api\Repo\Transaction;
 
 /**
  * Database Transaction Manager (Done Right, MOBI-337)
  */
-interface IManager
+interface Manager
 {
     /**
      * Name for default connection.
@@ -28,37 +28,37 @@ interface IManager
      *
      * @param string $transactionName
      * @param string $connectionName
-     * @return \Praxigento\Core\App\Transaction\Database\IDefinition
+     * @return \Praxigento\Core\App\Api\Repo\Transaction\Definition
      */
     public function begin($transactionName = self::DEF_TRANSACTION, $connectionName = self::DEF_CONNECTION);
 
     /**
      * Commit transaction for given definition.
      *
-     * @param \Praxigento\Core\App\Transaction\Database\IDefinition $definition
+     * @param \Praxigento\Core\App\Api\Repo\Transaction\Definition $definition
      */
-    public function commit(\Praxigento\Core\App\Transaction\Database\IDefinition $definition);
+    public function commit(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition);
 
     /**
      * Close transaction (rollback all nested levels including current if any uncommitted transactions exist or do nothing).
      *
-     * @param \Praxigento\Core\App\Transaction\Database\IDefinition $definition
+     * @param \Praxigento\Core\App\Api\Repo\Transaction\Definition $definition
      */
-    public function end(\Praxigento\Core\App\Transaction\Database\IDefinition $definition);
+    public function end(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition);
 
     /**
      * Get connection for transaction definition.
      *
-     * @param \Praxigento\Core\App\Transaction\Database\IDefinition $definition
+     * @param \Praxigento\Core\App\Api\Repo\Transaction\Definition $definition
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
-    public function getConnection(\Praxigento\Core\App\Transaction\Database\IDefinition $definition);
+    public function getConnection(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition);
 
     /**
      * Rollback transaction for given definition.
      *
-     * @param \Praxigento\Core\App\Transaction\Database\IDefinition $definition
+     * @param \Praxigento\Core\App\Api\Repo\Transaction\Definition $definition
      */
-    public function rollback(\Praxigento\Core\App\Transaction\Database\IDefinition $definition);
+    public function rollback(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition);
 
 }

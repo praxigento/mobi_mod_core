@@ -1,1 +1,0 @@
-Business Transaction is not fully functioned. It is created with Database Transaction in the mind but was never used in the code.
