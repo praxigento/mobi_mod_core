@@ -113,8 +113,8 @@
     <!-- ********* -->
     <!-- App / Api -->
     <!-- ********* -->
-    <preference for="Praxigento\Core\App\Api\Repo\Transaction\Factory"
-                type="Praxigento\Core\App\Repo\Transaction\Factory"/>
+    <preference for="Praxigento\Core\App\Api\Repo\Transaction\Fabrica"
+                type="Praxigento\Core\App\Repo\Transaction\Fabrica"/>
     <preference for="Praxigento\Core\App\Api\Repo\Transaction\Item"
                 type="Praxigento\Core\App\Repo\Transaction\Item"/>
     <preference for="Praxigento\Core\App\Api\Repo\Transaction\Manager"

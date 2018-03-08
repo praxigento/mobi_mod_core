@@ -7,8 +7,10 @@ namespace Praxigento\Core\App\Api\Repo\Transaction;
 
 /**
  * Transaction items factory used by Database Transaction Manager.
+ *
+ * CAUTION: don't use 'Factory' name, it is reserved for Magento 2 auto-generated classes.
  */
-interface Factory
+interface Fabrica
 {
     /**
      * @param string $transactionName

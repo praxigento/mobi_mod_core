@@ -8,8 +8,8 @@ namespace Praxigento\Core\App\Repo\Transaction;
 /**
  * Default implementation for Transaction items factory used by Database Transaction Manager.
  */
-class Factory
-    implements \Praxigento\Core\App\Api\Repo\Transaction\Factory
+class Fabrica
+    implements \Praxigento\Core\App\Api\Repo\Transaction\Fabrica
 {
     /** @var \Magento\Framework\App\DeploymentConfig */
     private $configDeployment;
