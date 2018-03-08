@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Api\Web\Customer\Get\ById;
 
 class Request
-    extends \Praxigento\Core\App\Api\Web\Request
+    extends \Praxigento\Core\Api\App\Web\Request
 {
     /**
      * @return \Praxigento\Core\Api\Web\Customer\Get\ById\Request\Data

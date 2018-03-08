@@ -11,13 +11,13 @@ use Praxigento\Core\Api\Web\Customer\Get\ById\Response as AResponse;
 class ById
     implements \Praxigento\Core\Api\Web\Customer\Get\ByIdInterface
 {
-    /** @var \Praxigento\Core\App\Api\Web\IAuthenticator */
+    /** @var \Praxigento\Core\Api\App\Web\Authenticator */
     private $authenticator;
     /** @var \Praxigento\Core\Api\Service\Customer\Get\ById */
     private $servCustGet;
 
     public function __construct(
-        \Praxigento\Core\App\Api\Web\Authenticator\Front $authenticator,
+        \Praxigento\Core\Api\App\Web\Authenticator\Front $authenticator,
         \Praxigento\Core\Api\Service\Customer\Get\ById $servCustGet
     ) {
         $this->authenticator = $authenticator;

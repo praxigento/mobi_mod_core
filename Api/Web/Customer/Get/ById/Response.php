@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Api\Web\Customer\Get\ById;
 
 class Response
-    extends \Praxigento\Core\App\Api\Web\Response
+    extends \Praxigento\Core\Api\App\Web\Response
 {
     /**
      * @return \Praxigento\Core\Api\Service\Customer\Get\ById\Response

@@ -14,14 +14,14 @@ abstract class Manual
 {
     /** @var  \Magento\Framework\ObjectManagerInterface */
     protected $manObj;
-    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Manager */
+    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Manager */
     protected $manTrans;
 
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
         $this->manObj = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->manTrans = $this->manObj->get(\Praxigento\Core\App\Api\Repo\Transaction\Manager::class);
+        $this->manTrans = $this->manObj->get(\Praxigento\Core\Api\App\Repo\Transaction\Manager::class);
     }
 
     protected function setAreaCode()

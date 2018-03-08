@@ -13,11 +13,11 @@ use Magento\Framework\Controller\ResultFactory as AResultFactory;
 abstract class Base
     extends \Magento\Backend\App\Action
 {
-    /** @var \Praxigento\Core\App\Api\Web\IAuthenticator */
+    /** @var \Praxigento\Core\Api\App\Web\Authenticator */
     private $authenticator;
     /** @var \Magento\Framework\Webapi\ServiceInputProcessor */
     private $inputProcessor;
-    /** @var \Praxigento\Core\App\Api\Logger\Main */
+    /** @var \Praxigento\Core\Api\App\Logger\Main */
     private $logger;
     /** @var \Magento\Framework\Webapi\ServiceOutputProcessor */
     private $outputProcessor;
@@ -28,7 +28,7 @@ abstract class Base
         parent::__construct($context);
         /* init own properties using Object Manager from Context */
         $obm = $context->getObjectManager();
-        $this->authenticator = $obm->get(\Praxigento\Core\App\Api\Web\Authenticator\Back::class);
+        $this->authenticator = $obm->get(\Praxigento\Core\Api\App\Web\Authenticator\Back::class);
         $this->inputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceInputProcessor::class);
         $this->outputProcessor = $obm->get(\Magento\Framework\Webapi\ServiceOutputProcessor::class);
         $this->logger = $obm->get(\Psr\Log\LoggerInterface::class);
@@ -61,7 +61,7 @@ abstract class Base
         return $resultPage;
     }
 
-    protected function getAuthenticator(): \Praxigento\Core\App\Api\Web\IAuthenticator
+    protected function getAuthenticator(): \Praxigento\Core\Api\App\Web\Authenticator
     {
         return $this->authenticator;
     }

@@ -9,15 +9,15 @@ namespace Praxigento\Core\App\Repo\Transaction;
  * Default implementation for Database Transaction Manager.
  */
 class Manager
-    implements \Praxigento\Core\App\Api\Repo\Transaction\Manager
+    implements \Praxigento\Core\Api\App\Repo\Transaction\Manager
 {
-    /** @var  \Praxigento\Core\App\Api\Repo\Transaction\Fabrica */
+    /** @var  \Praxigento\Core\Api\App\Repo\Transaction\Fabrica */
     private $factoryTrans;
     /** @var array Registry to store transaction by connection & transaction names ([conn][trans]=>$item). */
     private $registry = [];
 
     public function __construct(
-        \Praxigento\Core\App\Api\Repo\Transaction\Fabrica $factoryTrans
+        \Praxigento\Core\Api\App\Repo\Transaction\Fabrica $factoryTrans
     ) {
         $this->factoryTrans = $factoryTrans;
         /* init default connection for default transaction */
@@ -41,7 +41,7 @@ class Manager
         return $result;
     }
 
-    public function commit(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
+    public function commit(\Praxigento\Core\Api\App\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();
@@ -68,7 +68,7 @@ class Manager
         }
     }
 
-    public function end(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
+    public function end(\Praxigento\Core\Api\App\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();
@@ -90,13 +90,13 @@ class Manager
         }
     }
 
-    public function getConnection(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
+    public function getConnection(\Praxigento\Core\Api\App\Repo\Transaction\Definition $definition)
     {
         $trans = $definition->getTransactionName();
         $conn = $definition->getConnectionName();
 
         if (isset($this->registry[$conn][$trans])) {
-            /** @var \Praxigento\Core\App\Api\Repo\Transaction\Item $registered */
+            /** @var \Praxigento\Core\Api\App\Repo\Transaction\Item $registered */
             $registered = $this->registry[$conn][$trans];
             $result = $registered->getConnection();
         } else {
@@ -105,7 +105,7 @@ class Manager
         return $result;
     }
 
-    public function rollback(\Praxigento\Core\App\Api\Repo\Transaction\Definition $definition)
+    public function rollback(\Praxigento\Core\Api\App\Repo\Transaction\Definition $definition)
     {
         $conn = $definition->getConnectionName();
         $trans = $definition->getTransactionName();

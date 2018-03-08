@@ -9,16 +9,16 @@ namespace Praxigento\Core\App\Repo\Transaction;
  * Default implementation for Database Transaction Item.
  */
 class Item
-    implements \Praxigento\Core\App\Api\Repo\Transaction\Item
+    implements \Praxigento\Core\Api\App\Repo\Transaction\Item
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     private $conn;
     /** @var  int */
-    private $level = \Praxigento\Core\App\Api\Repo\Transaction\Manager::ZERO_LEVEL;
+    private $level = \Praxigento\Core\Api\App\Repo\Transaction\Manager::ZERO_LEVEL;
     /** @var  string */
-    private $nameConn = \Praxigento\Core\App\Api\Repo\Transaction\Manager::DEF_CONNECTION;
+    private $nameConn = \Praxigento\Core\Api\App\Repo\Transaction\Manager::DEF_CONNECTION;
     /** @var  string */
-    private $nameTran = \Praxigento\Core\App\Api\Repo\Transaction\Manager::DEF_TRANSACTION;
+    private $nameTran = \Praxigento\Core\Api\App\Repo\Transaction\Manager::DEF_TRANSACTION;
     /** @var  \Magento\Framework\App\ResourceConnection */
     private $resource;
 

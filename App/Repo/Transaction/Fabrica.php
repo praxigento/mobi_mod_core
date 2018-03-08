@@ -9,7 +9,7 @@ namespace Praxigento\Core\App\Repo\Transaction;
  * Default implementation for Transaction items factory used by Database Transaction Manager.
  */
 class Fabrica
-    implements \Praxigento\Core\App\Api\Repo\Transaction\Fabrica
+    implements \Praxigento\Core\Api\App\Repo\Transaction\Fabrica
 {
     /** @var \Magento\Framework\App\DeploymentConfig */
     private $configDeployment;
@@ -35,8 +35,8 @@ class Fabrica
         $result->setTransactionName($transactionName);
         $result->setConnectionName($connectionName);
         if (
-            ($transactionName != \Praxigento\Core\App\Api\Repo\Transaction\Manager::DEF_TRANSACTION) ||
-            ($connectionName != \Praxigento\Core\App\Api\Repo\Transaction\Manager::DEF_CONNECTION)
+            ($transactionName != \Praxigento\Core\Api\App\Repo\Transaction\Manager::DEF_TRANSACTION) ||
+            ($connectionName != \Praxigento\Core\Api\App\Repo\Transaction\Manager::DEF_CONNECTION)
         ) {
             /* create new connection, don't use default connection/transaction */
             /* 'db/connection/default' */

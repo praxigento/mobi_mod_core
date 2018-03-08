@@ -9,7 +9,7 @@ namespace Praxigento\Core\App\Logger;
 
 class Main
     extends \Monolog\Logger
-    implements \Praxigento\Core\App\Api\Logger\Main
+    implements \Praxigento\Core\Api\App\Logger\Main
 {
     const FILENAME = 'mobi.main.log';
     const NAME = 'MOBI.MAIN';

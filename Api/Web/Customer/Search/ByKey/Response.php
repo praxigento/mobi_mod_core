@@ -6,7 +6,7 @@
 namespace Praxigento\Core\Api\Web\Customer\Search\ByKey;
 
 class Response
-    extends \Praxigento\Core\App\Api\Web\Response
+    extends \Praxigento\Core\Api\App\Web\Response
 {
     /**
      * @return \Praxigento\Core\Api\Service\Customer\Search\Response

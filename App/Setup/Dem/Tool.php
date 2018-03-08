@@ -15,7 +15,7 @@ class Tool
 {
     /** Path separator between packages. */
     const PS = Config::DEM_PS;
-    /** @var \Praxigento\Core\App\Api\Logger\Main */
+    /** @var \Praxigento\Core\Api\App\Logger\Main */
     private $_logger;
     /** @var \Praxigento\Core\App\Setup\Dem\Parser */
     private $_parser;
@@ -27,7 +27,7 @@ class Tool
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\App\Api\Logger\Main $logger,
+        \Praxigento\Core\Api\App\Logger\Main $logger,
         \Praxigento\Core\App\Setup\Dem\Parser $parser
     ) {
         $this->_resource = $resource;

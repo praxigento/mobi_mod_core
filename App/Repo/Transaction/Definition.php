@@ -7,7 +7,7 @@ namespace Praxigento\Core\App\Repo\Transaction;
 
 
 class Definition
-    implements \Praxigento\Core\App\Api\Repo\Transaction\Definition
+    implements \Praxigento\Core\Api\App\Repo\Transaction\Definition
 {
 
     /** @var  int */

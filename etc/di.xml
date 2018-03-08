@@ -2,6 +2,22 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+    <!-- ******* -->
+    <!-- API App -->
+    <!-- ******* -->
+    <preference for="Praxigento\Core\Api\App\Logger\Main"
+                type="Praxigento\Core\App\Logger\Main"/>
+    <preference for="Praxigento\Core\Api\App\Repo\Transaction\Fabrica"
+                type="Praxigento\Core\App\Repo\Transaction\Fabrica"/>
+    <preference for="Praxigento\Core\Api\App\Repo\Transaction\Item"
+                type="Praxigento\Core\App\Repo\Transaction\Item"/>
+    <preference for="Praxigento\Core\Api\App\Repo\Transaction\Manager"
+                type="Praxigento\Core\App\Repo\Transaction\Manager"/>
+    <preference for="Praxigento\Core\Api\App\Web\Authenticator\Back"
+                type="Praxigento\Core\App\Web\Authenticator\Back"/>
+    <preference for="Praxigento\Core\Api\App\Web\Authenticator\Front"
+                type="Praxigento\Core\App\Web\Authenticator\Front"/>
+
     <!-- ********** -->
     <!-- API Helper -->
     <!-- ********** -->
@@ -109,17 +125,5 @@
     <preference for="Magento\Framework\Reflection\TypeProcessor"
                 type="Praxigento\Core\App\Reflection\TypeProcessor"/>
 
-
-    <!-- ********* -->
-    <!-- App / Api -->
-    <!-- ********* -->
-    <preference for="Praxigento\Core\App\Api\Logger\Main"
-                type="Praxigento\Core\App\Logger\Main"/>
-    <preference for="Praxigento\Core\App\Api\Repo\Transaction\Fabrica"
-                type="Praxigento\Core\App\Repo\Transaction\Fabrica"/>
-    <preference for="Praxigento\Core\App\Api\Repo\Transaction\Item"
-                type="Praxigento\Core\App\Repo\Transaction\Item"/>
-    <preference for="Praxigento\Core\App\Api\Repo\Transaction\Manager"
-                type="Praxigento\Core\App\Repo\Transaction\Manager"/>
 
 </config>
