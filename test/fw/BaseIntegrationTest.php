@@ -94,11 +94,6 @@ abstract class BaseIntegrationTest
     protected function _cacheReset()
     {
         /** @var  $obj \Praxigento\Core\App\ICached */
-        // old services
-        $obj = $this->_manObj->get(\Praxigento\Pv\Service\ISale::class);
-        $obj->cacheReset();
-        $obj = $this->_manObj->get(\Praxigento\Pv\Service\ITransfer::class);
-        $obj->cacheReset();
         // fresh classes
         $this->_manObj->get(\Praxigento\Core\Helper\Period::class)->cacheReset();
         $this->_manObj->get(\Praxigento\Odoo\Repo\Odoo\Connector\Api\Def\Login::class)->cacheReset();
