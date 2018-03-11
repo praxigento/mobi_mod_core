@@ -17,6 +17,8 @@
                 type="Praxigento\Core\App\Web\Authenticator\Back"/>
     <preference for="Praxigento\Core\Api\App\Web\Authenticator\Front"
                 type="Praxigento\Core\App\Web\Authenticator\Front"/>
+    <preference for="Praxigento\Core\Api\App\Web\Authenticator\Rest"
+                type="Praxigento\Core\App\Web\Authenticator\Rest"/>
 
     <!-- ********** -->
     <!-- API Helper -->
