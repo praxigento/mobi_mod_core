@@ -10,6 +10,12 @@ namespace Praxigento\Core\Api\App\Web\Response;
 class Result
     extends \Praxigento\Core\Data
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setCode(\Praxigento\Core\Api\App\Web\Response::CODE_UNDEF);
+    }
+
     /**
      * @return string
      */
