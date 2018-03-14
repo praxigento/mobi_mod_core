@@ -13,7 +13,7 @@ class Result
     public function __construct()
     {
         parent::__construct();
-        $this->setCode(\Praxigento\Core\Api\App\Web\Response::CODE_UNDEF);
+        $this->setCode(\Praxigento\Core\Api\App\Web\Response::CODE_FAILED);
     }
 
     /**

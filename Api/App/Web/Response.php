@@ -22,7 +22,6 @@ class Response
     const CODE_FAILED = 'FAILED';
     const CODE_NOT_IMPLEMENTED = 'IS_NOT_IMPLEMENTED';
     const CODE_SUCCESS = 'SUCCESS';
-    const CODE_UNDEF = 'UNDEFINED';
 
     /**#@- */
 
