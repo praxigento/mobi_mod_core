@@ -465,26 +465,6 @@ class Period
         return $result;
     }
 
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekFirstDay($weekDay)
-    {
-        $this->weekFirstDay = $weekDay;
-        $this->weekLastDay = $this->getWeekDayPrev($weekDay);
-        self::cacheReset();
-    }
-
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekLastDay($weekDay)
-    {
-        $this->weekLastDay = $weekDay;
-        $this->weekFirstDay = $this->getWeekDayNext($weekDay);
-        self::cacheReset();
-    }
-
     private function toDateTime($data)
     {
         if (is_int($data)) {

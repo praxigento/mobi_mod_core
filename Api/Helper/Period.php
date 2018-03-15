@@ -139,13 +139,4 @@ interface Period
      */
     public function isPeriodYear($periodValue);
 
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekFirstDay($weekDay);
-
-    /**
-     * @param string $weekDay see self::WEEK_
-     */
-    public function setWeekLastDay($weekDay);
 }
