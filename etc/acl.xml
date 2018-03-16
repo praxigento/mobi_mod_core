@@ -9,6 +9,7 @@
                     <resource id="Praxigento_Core::front" title="Front UI" sortOrder="200"/>
                     <resource id="Praxigento_Core::api" title="API" sortOrder="300"/>
                     <resource id="Praxigento_Core::sales" title="Sales" sortOrder="400"/>
+                    <resource id="Praxigento_Core::system" title="System" sortOrder="9999"/>
                 </resource>
             </resource>
         </resources>
