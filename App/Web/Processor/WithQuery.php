@@ -5,6 +5,9 @@
 
 namespace Praxigento\Core\App\Web\Processor;
 
+/**
+ * This is a sample of the bad architecture - too high coupling, very complex refactoring.
+ */
 abstract class WithQuery
 {
     const CTX_BIND = 'bind'; // SQL query bindings
