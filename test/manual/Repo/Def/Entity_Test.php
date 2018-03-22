@@ -5,8 +5,8 @@
 namespace Praxigento\Core\App\Repo\Def;
 
 use Magento\Framework\App\ObjectManager;
-use Praxigento\Accounting\Repo\Entity\Data\Account as DataEntity;
-use Praxigento\Accounting\Repo\Entity\Data\Operation as DataEntityOther;
+use Praxigento\Accounting\Repo\Data\Account as DataEntity;
+use Praxigento\Accounting\Repo\Data\Operation as DataEntityOther;
 
 include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 
