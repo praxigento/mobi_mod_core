@@ -29,11 +29,11 @@ abstract class Base
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
     ) {
         $this->_resource = $resource;
         $this->_conn = $resource->getConnection();
-        $this->_repoGeneric = $repoGeneric;
+        $this->_repoGeneric = $daoGeneric;
     }
 
     /**

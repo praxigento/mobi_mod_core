@@ -21,7 +21,7 @@ abstract class Type
     {
         $result = null;
         $where = EntityTypeBase::A_CODE . '=' . $this->conn->quote($code);
-        $data = $this->repoGeneric->getEntities($this->entityName, null, $where);
+        $data = $this->daoGeneric->getEntities($this->entityName, null, $where);
         if ($data) {
             $first = reset($data);
             $result = (int)$first[EntityTypeBase::A_ID];

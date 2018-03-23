@@ -21,9 +21,9 @@ class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         $resource = ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class);
-        $repoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\App\Repo\IGeneric::class);
-        $this->_obj = new Entity($resource, $repoGeneric, DataEntity::class);
-        $this->_obj2 = new Entity($resource, $repoGeneric, DataEntityOther::class);
+        $daoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\App\Repo\IGeneric::class);
+        $this->_obj = new Entity($resource, $daoGeneric, DataEntity::class);
+        $this->_obj2 = new Entity($resource, $daoGeneric, DataEntityOther::class);
     }
 
     public function test_create()

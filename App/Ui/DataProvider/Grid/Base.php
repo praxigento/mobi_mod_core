@@ -49,14 +49,14 @@ class Base
             $data[static::UIC_CONFIG][static::UIC_UPDATE_URL] = $val;
         }
         /* these parameters are not used in overwritten Data Provider */
-        $reporting = $manObj->get(\Magento\Framework\Api\Search\ReportingInterface::class);
+        $daorting = $manObj->get(\Magento\Framework\Api\Search\ReportingInterface::class);
         $filterBuilder = $manObj->get(\Magento\Framework\Api\FilterBuilder::class);
         /* init parent */
         parent::__construct(
             $name,
             $primaryFieldName,
             $requestFieldName,
-            $reporting, // $reporting is not used in overwritten class
+            $daorting, // $daorting is not used in overwritten class
             $searchCriteriaBuilder,
             $request,
             $filterBuilder, // $filterBuilder is not used in overwritten class

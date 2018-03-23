@@ -43,8 +43,8 @@ class Base
         \Magento\Framework\UrlInterface $url,
         \Praxigento\Core\App\Repo\Query\Criteria\IAdapter $critAdapter,
         \Praxigento\Core\App\Repo\Query\Criteria\IMapper $api2sqlMapper = null,
-        \Praxigento\Core\App\Repo\ICrud $repo,
-        \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $reporting,
+        \Praxigento\Core\App\Repo\ICrud $dao,
+        \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $daorting,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCritBuilder,
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
@@ -61,7 +61,7 @@ class Base
             $name,
             'entity_id',
             'id',
-            $reporting,
+            $daorting,
             $searchCritBuilder,
             $request,
             $filterBuilder,
@@ -71,7 +71,7 @@ class Base
         /* post construction setup */
         $this->_criteriaAdapter = $critAdapter;
         $this->_api2sqlMapper = $api2sqlMapper;
-        $this->_repo = $repo;
+        $this->_repo = $dao;
     }
 
     public function getData()

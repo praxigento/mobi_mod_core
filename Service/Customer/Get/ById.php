@@ -12,12 +12,12 @@ use Praxigento\Core\Config as Cfg;
 class ById
     implements \Praxigento\Core\Api\Service\Customer\Get\ById
 {
-    private $repoGeneric;
+    private $daoGeneric;
 
     public function __construct(
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
     ) {
-        $this->repoGeneric = $repoGeneric;
+        $this->daoGeneric = $daoGeneric;
     }
 
 
@@ -45,11 +45,11 @@ class ById
 
     private function searchByEmail($email)
     {
-        $conn = $this->repoGeneric->getConnection();
+        $conn = $this->daoGeneric->getConnection();
         $cols = null; // all columns
         $quoted = $conn->quote($email);
         $where = Cfg::E_CUSTOMER_A_EMAIL . '=' . $quoted;
-        $entries = $this->repoGeneric->getEntities(Cfg::ENTITY_MAGE_CUSTOMER, $cols, $where);
+        $entries = $this->daoGeneric->getEntities(Cfg::ENTITY_MAGE_CUSTOMER, $cols, $where);
         $result = new AResponse();
         if (count($entries) == 1) {
             $entry = reset($entries);
@@ -68,7 +68,7 @@ class ById
     private function searchById($id)
     {
         $pk = [Cfg::E_CUSTOMER_A_ENTITY_ID => (int)$id];
-        $entry = $this->repoGeneric->getEntityByPk(Cfg::ENTITY_MAGE_CUSTOMER, $pk);
+        $entry = $this->daoGeneric->getEntityByPk(Cfg::ENTITY_MAGE_CUSTOMER, $pk);
         $result = new AResponse();
         if ($entry) {
             $email = $entry[Cfg::E_CUSTOMER_A_EMAIL];

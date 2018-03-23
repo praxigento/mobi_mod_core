@@ -25,23 +25,23 @@ class Entity
     /** @var  string[] primary key attributes (ordered: ['first_attr', 'second_attr']) */
     protected $entityPk;
     /** @var \Praxigento\Core\App\Repo\IGeneric generic repository to perform DB operation */
-    protected $repoGeneric;
+    protected $daoGeneric;
 
     /**
      * Analyze $entityClassName (@see \Praxigento\Core\App\Repo\Data\Entity\Base children) and save
      *
      *
      * @param \Magento\Framework\App\ResourceConnection $resource
-     * @param \Praxigento\Core\App\Repo\IGeneric $repoGeneric
+     * @param \Praxigento\Core\App\Repo\IGeneric $daoGeneric
      * @param string $entityClassName
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\App\Repo\IGeneric $repoGeneric,
+        \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
         $entityClassName
     ) {
         parent::__construct($resource);
-        $this->repoGeneric = $repoGeneric;
+        $this->daoGeneric = $daoGeneric;
         $this->entityClassName = $entityClassName;
         /* analyze entity class to get entity name & PK attributes */
         $this->entityName = $entityClassName::getEntityName();
@@ -52,7 +52,7 @@ class Entity
 
     public function create($data)
     {
-        $result = $this->repoGeneric->addEntity($this->entityName, $data);
+        $result = $this->daoGeneric->addEntity($this->entityName, $data);
         return $result;
     }
 
@@ -71,7 +71,7 @@ class Entity
 
     public function delete($where = null)
     {
-        $result = $this->repoGeneric->deleteEntity($this->entityName, $where);
+        $result = $this->daoGeneric->deleteEntity($this->entityName, $where);
         return $result;
     }
 
@@ -84,7 +84,7 @@ class Entity
             /* probably this is a single-attr PK */
             $pk = [$this->entityId => $id];
         }
-        $result = $this->repoGeneric->deleteEntityByPk($this->entityName, $pk);
+        $result = $this->daoGeneric->deleteEntityByPk($this->entityName, $pk);
         return $result;
     }
 
@@ -110,7 +110,7 @@ class Entity
         $having = null
     ) {
         $result = [];
-        $rows = $this->repoGeneric->getEntities($this->entityName, $columns, $where, $order, $limit, $offset);
+        $rows = $this->daoGeneric->getEntities($this->entityName, $columns, $where, $order, $limit, $offset);
         foreach ($rows as $data) {
             $result[] = $this->createEntity($data);
         }
@@ -126,7 +126,7 @@ class Entity
             /* probably this is a single-attr PK */
             $pk = [$this->entityId => $id];
         }
-        $result = $this->repoGeneric->getEntityByPk($this->entityName, $pk);
+        $result = $this->daoGeneric->getEntityByPk($this->entityName, $pk);
         if ($result) {
             $result = $this->createEntity($result);
         }
@@ -156,13 +156,13 @@ class Entity
         } elseif ($data instanceof \stdClass) {
             $data = (array)$data;
         }
-        $result = $this->repoGeneric->replaceEntity($this->entityName, $data);
+        $result = $this->daoGeneric->replaceEntity($this->entityName, $data);
         return $result;
     }
 
     public function update($data, $where)
     {
-        $result = $this->repoGeneric->updateEntity($this->entityName, $data, $where);
+        $result = $this->daoGeneric->updateEntity($this->entityName, $data, $where);
         return $result;
     }
 
@@ -181,7 +181,7 @@ class Entity
             $val = is_int($id) ? $id : $this->conn->quote($id);
             $where = $this->entityId . '=' . $val;
         }
-        $result = $this->repoGeneric->updateEntity($this->entityName, $data, $where);
+        $result = $this->daoGeneric->updateEntity($this->entityName, $data, $where);
         return $result;
     }
 }
