@@ -14,7 +14,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     const ALIAS = 'alias';
     const DEFAULT_VALUE = 'default value';
 
-    private function _getDemAttr($typeName = DemType::ATTR_TEXT, $typeOpts = [])
+    private function _getDemAttr($typeName = DemType::A_TEXT, $typeOpts = [])
     {
         $result = [
             Dem::ALIAS => self::ALIAS,
@@ -39,7 +39,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_binary()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_BINARY);
+        $demAttr = $this->_getDemAttr(DemType::A_BINARY);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -52,7 +52,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_boolean()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_BOOLEAN);
+        $demAttr = $this->_getDemAttr(DemType::A_BOOLEAN);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -65,7 +65,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_datetime()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_DATETIME);
+        $demAttr = $this->_getDemAttr(DemType::A_DATETIME);
         $demAttr[Dem::DEFAULT_] = DemType::DEF_CURRENT;
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
@@ -80,7 +80,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         /** === Test Data === */
         $opts = [Dem::UNSIGNED => true, Dem::AUTOINCREMENT => true];
-        $demAttr = $this->_getDemAttr(DemType::ATTR_INTEGER, $opts);
+        $demAttr = $this->_getDemAttr(DemType::A_INTEGER, $opts);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -93,7 +93,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_numeric()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_NUMERIC);
+        $demAttr = $this->_getDemAttr(DemType::A_NUMERIC);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -106,7 +106,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_option()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_OPTION);
+        $demAttr = $this->_getDemAttr(DemType::A_OPTION);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -119,7 +119,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrOptions_text()
     {
         /** === Test Data === */
-        $demAttr = $this->_getDemAttr(DemType::ATTR_TEXT);
+        $demAttr = $this->_getDemAttr(DemType::A_TEXT);
         $demIndexes = $this->_getDemIndexes();
         /** === Mocks === */
         /** === Test itself === */
@@ -132,7 +132,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_binary()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_BINARY => []];
+        $demAttrType = [DemType::A_BINARY => []];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -143,7 +143,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_boolean()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_BOOLEAN => []];
+        $demAttrType = [DemType::A_BOOLEAN => []];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -154,7 +154,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_datetime()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_DATETIME => []];
+        $demAttrType = [DemType::A_DATETIME => []];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -165,7 +165,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_integer()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_INTEGER => []];
+        $demAttrType = [DemType::A_INTEGER => []];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -177,7 +177,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         /** === Test Data === */
         $demAttrType = [
-            DemType::ATTR_NUMERIC => [
+            DemType::A_NUMERIC => [
                 Dem::PRECISION => 8,
                 Dem::SCALE => 2
             ]
@@ -194,7 +194,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_option()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_OPTION => []];
+        $demAttrType = [DemType::A_OPTION => []];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -205,7 +205,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_entityGetAttrSize_text()
     {
         /** === Test Data === */
-        $demAttrType = [DemType::ATTR_TEXT => [Dem::LENGTH => 8]];
+        $demAttrType = [DemType::A_TEXT => [Dem::LENGTH => 8]];
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
@@ -219,21 +219,21 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         /** === Mocks === */
         /** === Test itself === */
         $obj = new Parser();
-        $type = $obj->entityGetAttrType([DemType::ATTR_BINARY => []]);
+        $type = $obj->entityGetAttrType([DemType::A_BINARY => []]);
         $this->assertEquals(MageType::COL_BLOB, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_BOOLEAN => []]);
+        $type = $obj->entityGetAttrType([DemType::A_BOOLEAN => []]);
         $this->assertEquals(MageType::COL_BOOLEAN, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_DATETIME => []]);
+        $type = $obj->entityGetAttrType([DemType::A_DATETIME => []]);
         $this->assertEquals(MageType::COL_TIMESTAMP, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_INTEGER => []]);
+        $type = $obj->entityGetAttrType([DemType::A_INTEGER => []]);
         $this->assertEquals(MageType::COL_INTEGER, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_INTEGER => [Cfg::SUBTYPE => DemType::ATTRSUB_SMALL_INT]]);
+        $type = $obj->entityGetAttrType([DemType::A_INTEGER => [Cfg::SUBTYPE => DemType::ATTRSUB_SMALL_INT]]);
         $this->assertEquals(MageType::COL_SMALLINT, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_NUMERIC => []]);
+        $type = $obj->entityGetAttrType([DemType::A_NUMERIC => []]);
         $this->assertEquals(MageType::COL_DECIMAL, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_OPTION => []]);
+        $type = $obj->entityGetAttrType([DemType::A_OPTION => []]);
         $this->assertEquals(MageType::COL_TEXT, $type);
-        $type = $obj->entityGetAttrType([DemType::ATTR_TEXT => []]);
+        $type = $obj->entityGetAttrType([DemType::A_TEXT => []]);
         $this->assertEquals(MageType::COL_TEXT, $type);
     }
 

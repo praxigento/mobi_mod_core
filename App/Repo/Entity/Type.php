@@ -20,11 +20,11 @@ abstract class Type
     public function getIdByCode($code)
     {
         $result = null;
-        $where = EntityTypeBase::ATTR_CODE . '=' . $this->conn->quote($code);
+        $where = EntityTypeBase::A_CODE . '=' . $this->conn->quote($code);
         $data = $this->repoGeneric->getEntities($this->entityName, null, $where);
         if ($data) {
             $first = reset($data);
-            $result = (int)$first[EntityTypeBase::ATTR_ID];
+            $result = (int)$first[EntityTypeBase::A_ID];
         }
         return $result;
     }

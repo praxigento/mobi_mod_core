@@ -62,7 +62,7 @@ class Config
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
      */
-    const E_CATCAT_EAV_INT_ATTR_ID = 'attribute_id';
+    const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
     const E_CATCAT_EAV_INT_VALUE = 'value';
     const E_CATINV_STOCK_A_STOCK_ID = ModelStock::STOCK_ID;
@@ -109,7 +109,7 @@ class Config
     const E_CUSTOMER_A_MIDDLENAME = 'middlename';
     const E_CUSTOMER_A_PASS_HASH = 'password_hash';
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';
-    const E_PRODUCT_A_ATTR_SET_ID = 'attribute_set_id';
+    const E_PRODUCT_A_A_SET_ID = 'attribute_set_id';
     const E_PRODUCT_A_CRETED_AT = 'created_at';
     const E_PRODUCT_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_PRODUCT_A_HAS_OPTIONS = 'has_options';

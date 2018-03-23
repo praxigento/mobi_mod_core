@@ -43,28 +43,28 @@ class Parser
         /* parse type specific options */
         $type = key($demAttr[Cfg::TYPE]);
         switch ($type) {
-            case DemType::ATTR_BINARY:
+            case DemType::A_BINARY:
                 break;
-            case DemType::ATTR_BOOLEAN:
+            case DemType::A_BOOLEAN:
                 break;
-            case DemType::ATTR_DATETIME:
+            case DemType::A_DATETIME:
                 if (isset($demAttr[Cfg::DEFAULT_]) && ($demAttr[Cfg::DEFAULT_] == DemType::DEF_CURRENT)) {
                     $result[MageType::OPT_DEFAULT] = MageType::DEF_CURRENT_TIMESTAMP;
                 }
                 break;
-            case DemType::ATTR_INTEGER:
-                if (isset($demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::UNSIGNED])) {
-                    $result[MageType::OPT_UNSIGNED] = $demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::UNSIGNED];
+            case DemType::A_INTEGER:
+                if (isset($demAttr[Cfg::TYPE][DemType::A_INTEGER][Cfg::UNSIGNED])) {
+                    $result[MageType::OPT_UNSIGNED] = $demAttr[Cfg::TYPE][DemType::A_INTEGER][Cfg::UNSIGNED];
                 }
-                if (isset($demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::AUTOINCREMENT])) {
-                    $result[MageType::OPT_AUTO_INC] = $demAttr[Cfg::TYPE][DemType::ATTR_INTEGER][Cfg::AUTOINCREMENT];
+                if (isset($demAttr[Cfg::TYPE][DemType::A_INTEGER][Cfg::AUTOINCREMENT])) {
+                    $result[MageType::OPT_AUTO_INC] = $demAttr[Cfg::TYPE][DemType::A_INTEGER][Cfg::AUTOINCREMENT];
                 }
                 break;
-            case DemType::ATTR_NUMERIC:
+            case DemType::A_NUMERIC:
                 break;
-            case DemType::ATTR_OPTION:
+            case DemType::A_OPTION:
                 break;
-            case DemType::ATTR_TEXT:
+            case DemType::A_TEXT:
                 break;
         }
         return $result;
@@ -83,16 +83,16 @@ class Parser
         $type = key($demAttrType);
         $typeData = reset($demAttrType);
         switch ($type) {
-            case DemType::ATTR_BINARY:
+            case DemType::A_BINARY:
                 break;
-            case DemType::ATTR_BOOLEAN:
+            case DemType::A_BOOLEAN:
                 break;
-            case DemType::ATTR_DATETIME:
+            case DemType::A_DATETIME:
                 break;
-            case DemType::ATTR_INTEGER:
+            case DemType::A_INTEGER:
                 $result = isset($typeData[Cfg::LENGTH]) ? $typeData[Cfg::LENGTH] : null;
                 break;
-            case DemType::ATTR_NUMERIC:
+            case DemType::A_NUMERIC:
                 if (isset($typeData[Cfg::PRECISION])) {
                     /* we should have 2 elements in the result array*/
                     $result = [MageType::OPT_PRECISION => 10, MageType::OPT_SCALE => 0];
@@ -102,9 +102,9 @@ class Parser
                     }
                 }
                 break;
-            case DemType::ATTR_OPTION:
+            case DemType::A_OPTION:
                 break;
-            case DemType::ATTR_TEXT:
+            case DemType::A_TEXT:
                 $result = isset($typeData[Cfg::LENGTH]) ? $typeData[Cfg::LENGTH] : null;
                 break;
         }
@@ -124,16 +124,16 @@ class Parser
         $type = key($demAttrType);
         $typeData = reset($demAttrType);
         switch ($type) {
-            case DemType::ATTR_BINARY:
+            case DemType::A_BINARY:
                 $result = MageType::COL_BLOB;
                 break;
-            case DemType::ATTR_BOOLEAN:
+            case DemType::A_BOOLEAN:
                 $result = MageType::COL_BOOLEAN;
                 break;
-            case DemType::ATTR_DATETIME:
+            case DemType::A_DATETIME:
                 $result = MageType::COL_TIMESTAMP;
                 break;
-            case DemType::ATTR_INTEGER:
+            case DemType::A_INTEGER:
                 $result = MageType::COL_INTEGER;
                 if (isset($typeData[Cfg::SUBTYPE])) {
                     if ($typeData[Cfg::SUBTYPE] == DemType::ATTRSUB_SMALL_INT) {
@@ -141,13 +141,13 @@ class Parser
                     }
                 }
                 break;
-            case DemType::ATTR_NUMERIC:
+            case DemType::A_NUMERIC:
                 $result = MageType::COL_DECIMAL;
                 break;
-            case DemType::ATTR_OPTION:
+            case DemType::A_OPTION:
                 $result = MageType::COL_TEXT;
                 break;
-            case DemType::ATTR_TEXT:
+            case DemType::A_TEXT:
                 $result = MageType::COL_TEXT;
                 break;
         }

@@ -29,13 +29,13 @@ class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
     public function test_create()
     {
         $bind = [
-            DataEntity::ATTR_ASSET_TYPE_ID => 1,
-            DataEntity::ATTR_CUST_ID => 1
+            DataEntity::A_ASSET_TYPE_ID => 1,
+            DataEntity::A_CUST_ID => 1
         ];
         $res = $this->_obj->create($bind);
         $this->assertTrue($res > 0);
         $bind = [
-            DataEntityOther::ATTR_TYPE_ID => 1
+            DataEntityOther::A_TYPE_ID => 1
         ];
         $res = $this->_obj2->create($bind);
         $this->assertTrue($res > 0);

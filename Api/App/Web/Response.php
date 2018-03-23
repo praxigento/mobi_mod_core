@@ -13,9 +13,9 @@ class Response
 {
     /**
      * Name for inner 'data' attribute cause getData & setData are abstract methods.
-     * Use "parent::get(self::ATTR_DATA)" & "parent::set(self::ATTR_DATA, $data)" in child classes.
+     * Use "parent::get(self::A_DATA)" & "parent::set(self::A_DATA, $data)" in child classes.
      */
-    const ATTR_DATA = 'data';
+    const A_DATA = 'data';
     /**#@+
      * Common result codes.
      */

@@ -13,8 +13,8 @@ namespace Praxigento\Core\App\Ui\DataProvider;
 class Base
     extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
 {
-    const JSON_ATTR_ITEMS = 'items';
-    const JSON_ATTR_TOTAL_RECORDS = 'totalRecords';
+    const JSON_A_ITEMS = 'items';
+    const JSON_A_TOTAL_RECORDS = 'totalRecords';
 
     /**#@+
      * UI XML arguments and default values to configure this component.
@@ -97,8 +97,8 @@ class Base
         $query->limitPage($pageIndx, $pageSize);
         $data = $conn->fetchAll($query);
         $result = [
-            static::JSON_ATTR_TOTAL_RECORDS => $total,
-            static::JSON_ATTR_ITEMS => $data
+            static::JSON_A_TOTAL_RECORDS => $total,
+            static::JSON_A_ITEMS => $data
         ];
         return $result;
     }

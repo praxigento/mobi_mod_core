@@ -10,16 +10,16 @@ namespace Praxigento\Core\App\Repo\Data\Entity\Type;
 abstract class Base
     extends \Praxigento\Core\App\Repo\Data\Entity\Base
 {
-    const ATTR_CODE = 'code';
-    const ATTR_ID = 'id';
-    const ATTR_NOTE = 'note';
+    const A_CODE = 'code';
+    const A_ID = 'id';
+    const A_NOTE = 'note';
 
     /**
      * @return string
      */
     public function getCode()
     {
-        $result = parent::get(self::ATTR_CODE);
+        $result = parent::get(self::A_CODE);
         return $result;
     }
 
@@ -28,7 +28,7 @@ abstract class Base
      */
     public function getId()
     {
-        $result = parent::get(self::ATTR_ID);
+        $result = parent::get(self::A_ID);
         return $result;
     }
 
@@ -37,13 +37,13 @@ abstract class Base
      */
     public function getNote()
     {
-        $result = parent::get(self::ATTR_NOTE);
+        $result = parent::get(self::A_NOTE);
         return $result;
     }
 
     public static function getPrimaryKeyAttrs()
     {
-        return [self::ATTR_ID];
+        return [self::A_ID];
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class Base
      */
     public function setCode($data)
     {
-        parent::set(self::ATTR_CODE, $data);
+        parent::set(self::A_CODE, $data);
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class Base
      */
     public function setId($data)
     {
-        parent::set(self::ATTR_ID, $data);
+        parent::set(self::A_ID, $data);
     }
 
     /**
@@ -67,6 +67,6 @@ abstract class Base
      */
     public function setNote($data)
     {
-        parent::set(self::ATTR_NOTE, $data);
+        parent::set(self::A_NOTE, $data);
     }
 }

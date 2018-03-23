@@ -15,8 +15,8 @@ class Base
     /**#@+
      *  See method \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider::searchResultToOutput
      */
-    const JSON_ATTR_ITEMS = 'items';
-    const JSON_ATTR_TOTAL_RECORDS = 'totalRecords';
+    const JSON_A_ITEMS = 'items';
+    const JSON_A_TOTAL_RECORDS = 'totalRecords';
     /**#@-  */
     const UICD_UPDATE_URL = 'mui/index/render';
     const UIC_CONFIG = 'config';
@@ -75,8 +75,8 @@ class Base
         $total = $this->gridQueryBuilder->getTotal($search);
         $items = $this->gridQueryBuilder->getItems($search);
         $result = [
-            static::JSON_ATTR_TOTAL_RECORDS => $total,
-            static::JSON_ATTR_ITEMS => $items
+            static::JSON_A_TOTAL_RECORDS => $total,
+            static::JSON_A_ITEMS => $items
         ];
         return $result;
     }

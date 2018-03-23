@@ -19,13 +19,13 @@ class DemType
      * Attribute types.
      */
 
-    const ATTR_BINARY = 'binary';
-    const ATTR_BOOLEAN = 'boolean';
-    const ATTR_DATETIME = 'datetime';
-    const ATTR_INTEGER = 'integer';
-    const ATTR_NUMERIC = 'numeric';
-    const ATTR_OPTION = 'option';
-    const ATTR_TEXT = 'text';
+    const A_BINARY = 'binary';
+    const A_BOOLEAN = 'boolean';
+    const A_DATETIME = 'datetime';
+    const A_INTEGER = 'integer';
+    const A_NUMERIC = 'numeric';
+    const A_OPTION = 'option';
+    const A_TEXT = 'text';
 
     /**
      * Default values for attributes.
