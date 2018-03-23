@@ -22,10 +22,10 @@ class Front
     private $session;
 
     public function __construct(
-        \Magento\Customer\Model\Session $sessCustomer,
+        \Magento\Customer\Model\Session $session,
         \Praxigento\Core\Helper\Config $hlpCfg
     ) {
-        $this->session = $sessCustomer;
+        $this->session = $session;
         $this->hlpCfg = $hlpCfg;
     }
 
