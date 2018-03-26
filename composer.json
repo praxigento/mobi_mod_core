@@ -1,8 +1,8 @@
 {
-  "name": "praxigento/mobi_mod_mage2_core",
+  "name": "praxigento/mobi_mod_core",
   "description": "MOBI: Praxigento_Core module.",
   "type": "magento2-module",
-  "homepage": "https://github.com/praxigento/mobi_mod_mage2_core",
+  "homepage": "https://github.com/praxigento/mobi_mod_core",
   "license": "MIT",
   "authors": [
     {
