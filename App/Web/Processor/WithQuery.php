@@ -7,6 +7,8 @@ namespace Praxigento\Core\App\Web\Processor;
 
 /**
  * This is a sample of the bad architecture - too high coupling, very complex refactoring.
+ *
+ * @deprecated try to invent smth else.
  */
 abstract class WithQuery
 {
