@@ -7,6 +7,8 @@
 
 namespace Praxigento\Core\Helper;
 
+use Praxigento\Core\Config as Cfg;
+
 /**
  * Default implementation of the customer currency converter.
  */
@@ -17,6 +19,11 @@ class Currency
     public function convertFromBase($amount, $customer = null)
     {
         return $amount;
+    }
+
+    public function getCurrency($customer)
+    {
+        return Cfg::CODE_CUR_USD;
     }
 
     public function convertToBase($amount, $customer = null)

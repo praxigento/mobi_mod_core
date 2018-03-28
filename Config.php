@@ -16,6 +16,9 @@ class Config
     /** Default alias for main tables in Magento 2 (used in SQL JOINS) */
     const AS_MAIN_TABLE = 'main_table';
 
+    const CODE_CUR_EUR = 'EUR';
+    const CODE_CUR_USD = 'USD';
+
     const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
     const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
