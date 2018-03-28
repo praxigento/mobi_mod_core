@@ -6,6 +6,10 @@
  */
 namespace Praxigento\Core\Api\Helper;
 
+
+/**
+ * Formatting functions.
+ */
 interface Format
 {
     /**

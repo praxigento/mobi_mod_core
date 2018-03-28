@@ -23,6 +23,8 @@
     <!-- ********** -->
     <!-- API Helper -->
     <!-- ********** -->
+    <preference for="Praxigento\Core\Api\Helper\Customer\Currency"
+                type="Praxigento\Core\Helper\Customer\Currency"/>
     <preference for="Praxigento\Core\Api\Helper\Config"
                 type="Praxigento\Core\Helper\Config"/>
     <preference for="Praxigento\Core\Api\Helper\Date"

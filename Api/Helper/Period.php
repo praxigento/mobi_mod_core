@@ -11,6 +11,9 @@
 
 namespace Praxigento\Core\Api\Helper;
 
+/**
+ * Periods related functionality (YYYY, YYYYMM, YYYYMMDD).
+ */
 interface Period
 {
     const TYPE_DAY = 'DAY';

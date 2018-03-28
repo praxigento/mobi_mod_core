@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Api\Helper;
 
-
+/**
+ * Replace recipients emails before sending (in some cases emails should be sent to the parents).
+ */
 interface Email
 {
     /**

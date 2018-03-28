@@ -5,7 +5,9 @@
 
 namespace Praxigento\Core\Api\Helper;
 
-
+/**
+ * Access store configuration parameters related to the module.
+ */
 interface Config
 {
     /**
