@@ -7,9 +7,10 @@
 
 namespace Praxigento\Core;
 
-use Magento\CatalogInventory\Model\Stock as ModelStock;
-use Magento\CatalogInventory\Model\Stock\Status as ModelStockStatus;
-use Magento\Sales\Api\Data\OrderItemInterface as ModelOrderItem;
+use Magento\CatalogInventory\Model\Stock as DStock;
+use Magento\CatalogInventory\Model\Stock\Status as DStockStatus;
+use Magento\Quote\Api\Data\CartInterface as DCart;
+use Magento\Sales\Api\Data\OrderItemInterface as DOrderItem;
 
 class Config
 {
@@ -40,7 +41,7 @@ class Config
     /**
      * Magento entities as defined in version 2.
      */
-    const ENTITY_MAGE_CATALOGINVENTORY_STOCK = ModelStock::ENTITY;
+    const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
     const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
@@ -68,17 +69,17 @@ class Config
     const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
     const E_CATCAT_EAV_INT_VALUE = 'value';
-    const E_CATINV_STOCK_A_STOCK_ID = ModelStock::STOCK_ID;
-    const E_CATINV_STOCK_A_STOCK_NAME = ModelStock::STOCK_NAME;
+    const E_CATINV_STOCK_A_STOCK_ID = DStock::STOCK_ID;
+    const E_CATINV_STOCK_A_STOCK_NAME = DStock::STOCK_NAME;
     const E_CATINV_STOCK_A_WEBSITE_ID = 'website_id';
     const E_CATINV_STOCK_ITEM_A_ITEM_ID = 'item_id';
     const E_CATINV_STOCK_ITEM_A_PROD_ID = 'product_id';
     const E_CATINV_STOCK_ITEM_A_QTY = 'qty';
     const E_CATINV_STOCK_ITEM_A_STOCK_ID = 'stock_id';
-    const E_CATINV_STOCK_STATUS_A_PROD_ID = ModelStockStatus::KEY_PRODUCT_ID;
-    const E_CATINV_STOCK_STATUS_A_QTY = ModelStockStatus::KEY_QTY;
-    const E_CATINV_STOCK_STATUS_A_STOCK_ID = ModelStockStatus::KEY_STOCK_ID;
-    const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = ModelStockStatus::KEY_STOCK_STATUS;
+    const E_CATINV_STOCK_STATUS_A_PROD_ID = DStockStatus::KEY_PRODUCT_ID;
+    const E_CATINV_STOCK_STATUS_A_QTY = DStockStatus::KEY_QTY;
+    const E_CATINV_STOCK_STATUS_A_STOCK_ID = DStockStatus::KEY_STOCK_ID;
+    const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = DStockStatus::KEY_STOCK_STATUS;
     const E_CATPROD_IDX_PRICE_A_CUST_GROUP_ID = 'customer_group_id';
     const E_COMMON_A_ENTITY_ID = 'entity_id';
     const E_CONFIG_A_PATH = 'path';
@@ -120,8 +121,11 @@ class Config
     const E_PRODUCT_A_SKU = 'sku';
     const E_PRODUCT_A_TYPE_ID = 'type_id';
     const E_PRODUCT_A_UPDATED_AT = 'updated_at';
+    const E_QUOTE_A_ENTITY_ID = DCart::KEY_ENTITY_ID;
+    const E_QUOTE_A_STORE_ID = DCart::KEY_STORE_ID;
     const E_QUOTE_ITEM_A_ITEM_ID = 'item_id';
     const E_QUOTE_ITEM_A_QUOTE_ID = 'quote_id';
+    const E_QUOTE_ITEM_A_STORE_ID = 'store_id';
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
     const E_SALE_ORDER_A_APPLIED_RULE_IDS = 'applied_rule_ids';
@@ -131,14 +135,14 @@ class Config
     const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
     const E_SALE_ORDER_GRID_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
-    const E_SALE_ORDER_ITEM_A_BASE_PRICE = ModelOrderItem::BASE_PRICE;
-    const E_SALE_ORDER_ITEM_A_BASE_ROW_TOTAL_INCL_TAX = ModelOrderItem::BASE_ROW_TOTAL_INCL_TAX;
-    const E_SALE_ORDER_ITEM_A_ITEM_ID = ModelOrderItem::ITEM_ID;
-    const E_SALE_ORDER_ITEM_A_ORDER_ID = ModelOrderItem::ORDER_ID;
-    const E_SALE_ORDER_ITEM_A_PRODUCT_ID = ModelOrderItem::PRODUCT_ID;
-    const E_SALE_ORDER_ITEM_A_QTY_ORDERED = ModelOrderItem::QTY_ORDERED;
-    const E_SALE_ORDER_ITEM_A_SKU = ModelOrderItem::SKU;
-    const E_SALE_ORDER_ITEM_A_TAX_PERCENT = ModelOrderItem::TAX_PERCENT;
+    const E_SALE_ORDER_ITEM_A_BASE_PRICE = DOrderItem::BASE_PRICE;
+    const E_SALE_ORDER_ITEM_A_BASE_ROW_TOTAL_INCL_TAX = DOrderItem::BASE_ROW_TOTAL_INCL_TAX;
+    const E_SALE_ORDER_ITEM_A_ITEM_ID = DOrderItem::ITEM_ID;
+    const E_SALE_ORDER_ITEM_A_ORDER_ID = DOrderItem::ORDER_ID;
+    const E_SALE_ORDER_ITEM_A_PRODUCT_ID = DOrderItem::PRODUCT_ID;
+    const E_SALE_ORDER_ITEM_A_QTY_ORDERED = DOrderItem::QTY_ORDERED;
+    const E_SALE_ORDER_ITEM_A_SKU = DOrderItem::SKU;
+    const E_SALE_ORDER_ITEM_A_TAX_PERCENT = DOrderItem::TAX_PERCENT;
     const E_SALE_ORDER_TAX_A_AMOUNT = 'amount';
     const E_SALE_ORDER_TAX_A_BASE_AMOUNT = 'base_amount';
     const E_SALE_ORDER_TAX_A_BASE_REAL_AMOUNT = 'base_real_amount';
