@@ -121,7 +121,9 @@ class Config
     const E_PRODUCT_A_SKU = 'sku';
     const E_PRODUCT_A_TYPE_ID = 'type_id';
     const E_PRODUCT_A_UPDATED_AT = 'updated_at';
+    const E_QUOTE_A_CUSTOMER_ID = 'customer_id';
     const E_QUOTE_A_ENTITY_ID = DCart::KEY_ENTITY_ID;
+    const E_QUOTE_A_IS_ACTIVE = DCart::KEY_IS_ACTIVE;
     const E_QUOTE_A_STORE_ID = DCart::KEY_STORE_ID;
     const E_QUOTE_ITEM_A_ITEM_ID = 'item_id';
     const E_QUOTE_ITEM_A_QUOTE_ID = 'quote_id';
