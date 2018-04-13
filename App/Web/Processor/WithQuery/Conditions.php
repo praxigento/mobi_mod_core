@@ -12,7 +12,7 @@ namespace Praxigento\Core\App\Web\Processor\WithQuery;
 class Conditions
 {
     /** @var \Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Filter\Parser */
-    protected $subFilterParser;
+    private $subFilterParser;
 
     public function __construct(
         \Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Filter\Parser $subFilterParser
@@ -20,12 +20,13 @@ class Conditions
         $this->subFilterParser = $subFilterParser;
     }
 
-    public function exec(\Praxigento\Core\App\Web\Processor\WithQuery\Conditions\Context $ctx)
+    /**
+     * @param \Magento\Framework\DB\Select $query
+     * @param \Praxigento\Core\Api\App\Web\Request\Conditions $cond
+     * @throws
+     */
+    public function exec($query, $cond)
     {
-        /* get working vars from context */
-        $query = $ctx->getQuery();
-        $cond = $ctx->getConditions();
-
         /* perform action */
         $columns = $query->getPart(\Zend_Db_Select::COLUMNS); // get map [$tblAlias, $column, $valueAlias]
         if ($cond && $cond instanceof \Praxigento\Core\Api\App\Web\Request\Conditions) {
@@ -70,7 +71,7 @@ class Conditions
                 }
             }
         }
-
+        return $query;
     }
 
     /**
@@ -78,8 +79,9 @@ class Conditions
      *
      * @param $columns
      * @return array
+     * @throws \Exception
      */
-    protected function mapReverse($columns)
+    private function mapReverse($columns)
     {
         $result = [];
         foreach ($columns as $one) {

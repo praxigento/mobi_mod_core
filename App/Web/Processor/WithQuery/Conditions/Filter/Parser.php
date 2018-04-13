@@ -18,7 +18,7 @@ class Parser
     const PH_VAL = '${VAL}';
 
     /** @var \Magento\Framework\DB\Adapter\AdapterInterface */
-    protected $dba;
+    private $dba;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource
@@ -33,7 +33,7 @@ class Parser
      * @param $aliases
      * @return \Praxigento\Core\App\Repo\Query\Expression|string
      */
-    protected function mapAlias($alias, $aliases)
+    private function mapAlias($alias, $aliases)
     {
         $data = $aliases[$alias];
         $table = $data->getTable();
@@ -53,6 +53,7 @@ class Parser
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions\Filter $filter
      * @param \Praxigento\Core\App\Web\Processor\WithQuery\Alias[] $aliases map of the aliases to [table, field]
      * @return string
+     * @throws \Exception
      */
     public function parse($filter, $aliases)
     {
@@ -108,7 +109,7 @@ class Parser
      * @param string $func
      * @return string template with placeholders.
      */
-    protected function parseFunc($func)
+    private function parseFunc($func)
     {
         $result = '';
         switch (strtolower(trim($func))) {
