@@ -5,12 +5,11 @@
 
 namespace Praxigento\Core\App\Repo\Query;
 
-use Magento\Rule\Model\Condition\Sql\Expression as BaseExpression;
-
 /**
- * Wrapper for SQL expressions.
+ * MOBI adapter for Magento adapter for Zend's SQL expressions.
  */
-class Expression extends BaseExpression
+class Expression
+    extends \Magento\Rule\Model\Condition\Sql\Expression
 {
 
 }
