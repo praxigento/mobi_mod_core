@@ -9,7 +9,7 @@ namespace Praxigento\Core\Api\Helper;
 /**
  * Use date/time related functions.
  *
- * TODO: perhaps these methods can be moved into .\Period interface.
+ * TODO: perhaps these methods can be moved into .\Format interface.
  */
 interface Date
 {

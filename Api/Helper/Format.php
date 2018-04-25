@@ -22,6 +22,12 @@ interface Format
     public function dateTimeForDb(\DateTime $dt);
 
     /**
+     * @param string|\DateTime\int $date
+     * @return string
+     */
+    public function dateAsRfc3339($date);
+
+    /**
      * Standard round function for bonus amounts.
      *
      * @param     $val
