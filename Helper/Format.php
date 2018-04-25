@@ -19,11 +19,13 @@ class Format
         } elseif ($date instanceof \DateTime) {
             $result = $date->format(DATE_RFC3339);
         } elseif (is_int($date)) {
-            $dt = new \DateTime($date);
+            $dt = new \DateTime();
+            $dt->setTimestamp($date);
             $result = $dt->format(DATE_RFC3339);
         } else {
             $time = strtotime($date);
-            $dt = new \DateTime($time);
+            $dt = new \DateTime();
+            $dt->setTimestamp($time);
             $result = $dt->format(DATE_RFC3339);
         }
         return $result;
