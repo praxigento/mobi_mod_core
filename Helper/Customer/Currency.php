@@ -16,7 +16,7 @@ class Currency
     implements \Praxigento\Core\Api\Helper\Customer\Currency
 {
 
-    public function convertFromBase($amount, $customer = null)
+    public function convertFromBase($amount, $customer = null, $round = true)
     {
         return $amount;
     }

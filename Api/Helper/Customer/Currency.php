@@ -16,9 +16,10 @@ interface Currency
     /**
      * @param float $amount
      * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
+     * @param bool $round 'false' - don't round result.
      * @return float
      */
-    public function convertFromBase($amount, $customer = null);
+    public function convertFromBase($amount, $customer = null, $round = true);
 
     /**
      * Get customer's currency code.
