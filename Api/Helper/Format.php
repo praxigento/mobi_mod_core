@@ -32,7 +32,8 @@ interface Format
     public function roundBonus($val, $precision = 2);
 
     /**
-     * Format $val as number with $precision. Used in external API requests to send numbers outside.
+     * Format $val as number with $precision. Used in internal code & external API responses to send numbers outside.
+     * This is not locale specific formatter for UI.
      *
      * @param $val
      * @param int $precision
