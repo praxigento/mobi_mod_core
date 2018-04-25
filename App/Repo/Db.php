@@ -9,7 +9,6 @@ namespace Praxigento\Core\App\Repo;
  * @deprecated we should use \Praxigento\Core\App\Repo\Generic or \Praxigento\Core\App\Repo\Entity
  */
 abstract class Db
-    implements \Praxigento\Core\App\Repo\IDb
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
     protected $conn;
