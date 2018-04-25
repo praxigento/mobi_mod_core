@@ -2,10 +2,11 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo\Def;
+namespace Praxigento\Core\App\Repo;
 
 /**
  * Base class for DB repositories implementations.
+ * @deprecated we should use \Praxigento\Core\App\Repo\Generic or \Praxigento\Core\App\Repo\Entity
  */
 abstract class Db
     implements \Praxigento\Core\App\Repo\IDb

@@ -2,15 +2,16 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo;
+
+namespace Praxigento\Core\Api\App\Repo;
 
 use Praxigento\Core\Data as DataObject;
 
 /**
  * Base interface for CRUD repositories (general Create-Read-Update-Delete operations).
  */
-interface ICrud
-    extends \Praxigento\Core\App\Repo\IDataSource, \Praxigento\Core\App\Repo\Query\IHasSelect
+interface Crud
+    extends \Praxigento\Core\Api\App\Repo\DataSource
 {
     /**
      * Create new data instance (simple entity or aggregate) using $data. Exception is thrown in case of any error.

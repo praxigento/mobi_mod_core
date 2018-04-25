@@ -32,7 +32,7 @@ abstract class Data
         /** create mocks */
         $this->mConn = m::mock(\Magento\Framework\DB\Adapter\AdapterInterface::class);
         $this->mContext = m::mock(\Magento\Framework\Setup\ModuleContextInterface::class);
-        $this->mRepoGeneric = m::mock(\Praxigento\Core\App\Repo\IGeneric::class);
+        $this->mRepoGeneric = m::mock(\Praxigento\Core\Api\App\Repo\Generic::class);
         $this->mResource = m::mock(\Magento\Framework\App\ResourceConnection::class);
         $this->mSetup = m::mock(\Magento\Framework\Setup\ModuleDataSetupInterface::class);
         $this->mToolDem = m::mock(\Praxigento\Core\App\Setup\Dem\Tool::class);

@@ -4,14 +4,24 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo\Def;
+namespace Praxigento\Core\App\Repo;
 
 use Praxigento\Core\Data as DataObject;
 
 class  Generic
-    extends \Praxigento\Core\App\Repo\Def\Db
-    implements \Praxigento\Core\App\Repo\IGeneric
+    implements \Praxigento\Core\Api\App\Repo\Generic
 {
+    /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
+    protected $conn;
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $resource;
+
+    public function __construct(
+        \Magento\Framework\App\ResourceConnection $resource
+    ) {
+        $this->resource = $resource;
+        $this->conn = $resource->getConnection();
+    }
 
     public function addEntity($entity, $bind)
     {
@@ -51,6 +61,15 @@ class  Generic
             $where["$field=?"] = $value;
         }
         $result = $this->conn->delete($tbl, $where);
+        return $result;
+    }
+
+    public function getConnection($name = null)
+    {
+        if (is_null($name)) {
+            $name = \Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION;
+        }
+        $result = $this->resource->getConnection($name);
         return $result;
     }
 

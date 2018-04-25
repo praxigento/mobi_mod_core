@@ -18,7 +18,7 @@ abstract class Base
     protected $_conn;
     /** @var  \Magento\Framework\Setup\ModuleContextInterface */
     protected $_context;
-    /** @var \Praxigento\Core\App\Repo\IGeneric */
+    /** @var \Praxigento\Core\Api\App\Repo\Generic */
     protected $_repoGeneric;
     /** @var \Magento\Framework\App\ResourceConnection */
     protected $_resource;
@@ -29,7 +29,7 @@ abstract class Base
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric
     ) {
         $this->_resource = $resource;
         $this->_conn = $resource->getConnection();

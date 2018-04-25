@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Repo\Entity;
+namespace Praxigento\Core\App\Repo\Dao;
 
 use Praxigento\Core\App\Repo\Data\Entity\Type\Base as EntityTypeBase;
 
@@ -11,7 +11,7 @@ use Praxigento\Core\App\Repo\Data\Entity\Type\Base as EntityTypeBase;
  * Base implementation for types codifiers repository.
  */
 abstract class Type
-    extends \Praxigento\Core\App\Repo\Def\Entity
+    extends \Praxigento\Core\App\Repo\Dao
 {
     /**
      * @param string $code

@@ -4,11 +4,11 @@
  *
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo\Def;
+namespace Praxigento\Core\App\Repo;
 
-class Entity
-    extends \Praxigento\Core\App\Repo\Def\Crud
-    implements \Praxigento\Core\App\Repo\IEntity
+class Dao
+    extends \Praxigento\Core\App\Repo\Crud
+    implements \Praxigento\Core\Api\App\Repo\Dao
 {
     /** @var  string Class name for the related entity ('\Praxigento\Pv\Repo\Data\Product'). */
     protected $entityClassName;
@@ -24,7 +24,7 @@ class Entity
     protected $entityName;
     /** @var  string[] primary key attributes (ordered: ['first_attr', 'second_attr']) */
     protected $entityPk;
-    /** @var \Praxigento\Core\App\Repo\IGeneric generic repository to perform DB operation */
+    /** @var \Praxigento\Core\Api\App\Repo\Generic generic repository to perform DB operation */
     protected $daoGeneric;
 
     /**
@@ -32,12 +32,12 @@ class Entity
      *
      *
      * @param \Magento\Framework\App\ResourceConnection $resource
-     * @param \Praxigento\Core\App\Repo\IGeneric $daoGeneric
+     * @param \Praxigento\Core\Api\App\Repo\Generic $daoGeneric
      * @param string $entityClassName
      */
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource,
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric,
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric,
         $entityClassName
     ) {
         parent::__construct($resource);

@@ -81,7 +81,7 @@ abstract class Mockery
      */
     protected function _mockRepoGeneric()
     {
-        $result = $this->_mock(\Praxigento\Core\App\Repo\IGeneric::class);
+        $result = $this->_mock(\Praxigento\Core\Api\App\Repo\Generic::class);
         return $result;
     }
 

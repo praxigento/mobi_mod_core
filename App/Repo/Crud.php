@@ -2,15 +2,27 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo\Def;
+namespace Praxigento\Core\App\Repo;
 
 /**
- * Default implementation for CRUD repository to do read-write operations with database. All methods throw exceptions.
+ * Default implementation for CRUD repository to do read-write operations with database.
+ * All methods throw exceptions.
  */
 abstract class Crud
-    extends Db
-    implements \Praxigento\Core\App\Repo\ICrud
+    implements \Praxigento\Core\Api\App\Repo\Crud
 {
+    /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
+    protected $conn;
+    /** @var \Magento\Framework\App\ResourceConnection */
+    protected $resource;
+
+    public function __construct(
+        \Magento\Framework\App\ResourceConnection $resource
+    ) {
+        $this->resource = $resource;
+        $this->conn = $resource->getConnection();
+    }
+
     public function create($data)
     {
         /* override this method in the children classes */

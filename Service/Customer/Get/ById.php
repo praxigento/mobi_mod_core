@@ -15,7 +15,7 @@ class ById
     private $daoGeneric;
 
     public function __construct(
-        \Praxigento\Core\App\Repo\IGeneric $daoGeneric
+        \Praxigento\Core\Api\App\Repo\Generic $daoGeneric
     ) {
         $this->daoGeneric = $daoGeneric;
     }

@@ -2,7 +2,7 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo\Def;
+namespace Praxigento\Core\App\Repo;
 
 use Magento\Framework\App\ObjectManager;
 use Praxigento\Accounting\Repo\Data\Account as DataEntity;
@@ -13,7 +13,7 @@ include_once(__DIR__ . '/../../phpunit_bootstrap.php');
 class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
 {
 
-    /** @var  \Praxigento\Core\App\Repo\Def\Entity */
+    /** @var  \Praxigento\Core\App\Repo\Dao */
     private $_obj;
     private $_obj2;
 
@@ -21,9 +21,9 @@ class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
     {
         parent::setUp();
         $resource = ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class);
-        $daoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\App\Repo\IGeneric::class);
-        $this->_obj = new Entity($resource, $daoGeneric, DataEntity::class);
-        $this->_obj2 = new Entity($resource, $daoGeneric, DataEntityOther::class);
+        $daoGeneric = ObjectManager::getInstance()->get(\Praxigento\Core\Api\App\Repo\Generic::class);
+        $this->_obj = new Dao($resource, $daoGeneric, DataEntity::class);
+        $this->_obj2 = new Dao($resource, $daoGeneric, DataEntityOther::class);
     }
 
     public function test_create()

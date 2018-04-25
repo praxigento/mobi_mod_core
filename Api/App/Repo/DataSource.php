@@ -2,14 +2,15 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo;
+
+namespace Praxigento\Core\Api\App\Repo;
 
 use Praxigento\Core\Data as DataObject;
 
 /**
  * Base interface for data sources repository (read-only mode).
  */
-interface IDataSource
+interface DataSource
 {
 
     /**

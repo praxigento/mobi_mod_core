@@ -8,7 +8,7 @@ use Mockery as m;
 
 /**
  * Base class to create units to test entities repositories
- * based on \Praxigento\Core\App\Repo\Def\Entity.
+ * based on \Praxigento\Core\App\Repo\Entity.
  */
 abstract class Entity
     extends \Praxigento\Core\Test\BaseCase\Repo
@@ -20,7 +20,7 @@ abstract class Entity
     {
         parent::setUp();
         /** create mocks */
-        $this->mRepoGeneric = m::mock(\Praxigento\Core\App\Repo\IGeneric::class);
+        $this->mRepoGeneric = m::mock(\Praxigento\Core\Api\App\Repo\Generic::class);
     }
 
 }

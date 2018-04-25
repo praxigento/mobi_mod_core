@@ -30,7 +30,7 @@ class Base
     /**
      * Repository to select data for grid.
      *
-     * @var \Praxigento\Core\App\Repo\ICrud
+     * @var \Praxigento\Core\Api\App\Repo\Crud
      */
     protected $_repo;
 
@@ -43,7 +43,7 @@ class Base
         \Magento\Framework\UrlInterface $url,
         \Praxigento\Core\App\Repo\Query\Criteria\IAdapter $critAdapter,
         \Praxigento\Core\App\Repo\Query\Criteria\IMapper $api2sqlMapper = null,
-        \Praxigento\Core\App\Repo\ICrud $dao,
+        \Praxigento\Core\Api\App\Repo\Crud $dao,
         \Magento\Framework\View\Element\UiComponent\DataProvider\Reporting $daorting,
         \Magento\Framework\Api\Search\SearchCriteriaBuilder $searchCritBuilder,
         \Magento\Framework\App\RequestInterface $request,

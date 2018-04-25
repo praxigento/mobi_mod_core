@@ -9,7 +9,7 @@ namespace Praxigento\Core\App\Repo\Data\Entity;
 
 abstract class Base
     extends \Praxigento\Core\Data
-    implements \Praxigento\Core\App\Repo\Data\IEntity
+    implements \Praxigento\Core\Api\App\Repo\Data\Entity
 {
     /**
      * Name of the entity (table name w/o prefix). Should be overridden in child classes.

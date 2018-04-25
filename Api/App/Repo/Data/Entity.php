@@ -5,10 +5,10 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Repo\Data;
+namespace Praxigento\Core\Api\App\Repo\Data;
 
 
-interface IEntity
+interface Entity
 {
     /**
      * Get name of the entity (table name w/o prefix).

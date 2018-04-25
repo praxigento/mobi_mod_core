@@ -2,14 +2,15 @@
 /**
  * User: Alex Gusev <alex@flancer64.com>
  */
-namespace Praxigento\Core\App\Repo;
+
+namespace Praxigento\Core\Api\App\Repo;
 
 use Praxigento\Core\Data as DataObject;
 
 /**
  * Interface for generic repository to do universal operations (CRUD) with simple entities (not aggregates).
  */
-interface IGeneric
+interface Generic
 {
     /**
      * Create new $entity instance using $data.
@@ -47,7 +48,7 @@ interface IGeneric
      * @param string $name
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
-    public function getConnection($name = null);
+    public function getConnection();
 
     /**
      * Get list of simple entities according to given conditions ($cols, $where, $order, ...).
