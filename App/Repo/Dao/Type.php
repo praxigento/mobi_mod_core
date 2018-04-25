@@ -37,10 +37,9 @@ abstract class Type
     {
         $this->cached = [];
         $entities = $this->daoGeneric->getEntities($this->entityName);
-        /** @var ETypeBase $one */
         foreach ($entities as $one) {
-            $id = $one->getId();
-            $code = $one->getCode();
+            $id = $one[ETypeBase::A_ID];
+            $code = $one[ETypeBase::A_CODE];
             $this->cached[$code] = $id;
         }
     }
