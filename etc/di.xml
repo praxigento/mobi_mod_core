@@ -125,7 +125,7 @@
     <!-- ***** -->
     <preference for="Praxigento\Core\App\Repo\Query\ISelect"
                 type="Praxigento\Core\App\Repo\Query\Def\Select"/>
-    <preference for="Praxigento\Core\Api\App\Repo\IGeneric"
+    <preference for="Praxigento\Core\Api\App\Repo\Generic"
                 type="Praxigento\Core\App\Repo\Generic"/>
     <preference for="Praxigento\Core\App\Repo\Query\Criteria\IAdapter"
                 type="Praxigento\Core\App\Repo\Query\Criteria\Def\Adapter"/>
