@@ -5,7 +5,7 @@
 
 namespace Praxigento\Core\App\Repo\Dao;
 
-use Praxigento\Core\App\Repo\Data\Entity\Type\Base as EntityTypeBase;
+use Praxigento\Core\App\Repo\Data\Entity\Type\Base as ETypeBase;
 
 /**
  * Base implementation for types codifiers repository.
@@ -13,6 +13,9 @@ use Praxigento\Core\App\Repo\Data\Entity\Type\Base as EntityTypeBase;
 abstract class Type
     extends \Praxigento\Core\App\Repo\Dao
 {
+    /** @var array "id-by-code" map */
+    private $cached;
+
     /**
      * @param string $code
      * @return int|null
@@ -20,13 +23,25 @@ abstract class Type
     public function getIdByCode($code)
     {
         $result = null;
-        $where = EntityTypeBase::A_CODE . '=' . $this->conn->quote($code);
-        $data = $this->daoGeneric->getEntities($this->entityName, null, $where);
-        if ($data) {
-            $first = reset($data);
-            $result = (int)$first[EntityTypeBase::A_ID];
+        if (is_null($this->cached)) $this->load();
+        if (isset($this->cached[$code])) {
+            $result = $this->cached[$code];
         }
         return $result;
     }
 
+    /**
+     * Load data and compose "id-by-code" cache.
+     */
+    private function load()
+    {
+        $this->cached = [];
+        $entities = $this->daoGeneric->getEntities($this->entityName);
+        /** @var ETypeBase $one */
+        foreach ($entities as $one) {
+            $id = $one->getId();
+            $code = $one->getCode();
+            $this->cached[$code] = $id;
+        }
+    }
 }
