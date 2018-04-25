@@ -89,17 +89,6 @@ abstract class BaseIntegrationTest
     }
 
     /**
-     * Reset cache for classes that use internal cache.
-     */
-    protected function _cacheReset()
-    {
-        /** @var  $obj \Praxigento\Core\App\ICached */
-        // fresh classes
-        $this->_manObj->get(\Praxigento\Core\Helper\Period::class)->cacheReset();
-        $this->_manObj->get(\Praxigento\Odoo\Repo\Odoo\Connector\Api\Def\Login::class)->cacheReset();
-    }
-
-    /**
      * @param string $dateBegin datestamp (YYYYMMDD) for the date when the first customer should be created.
      * @param bool $switchDateOnNewCustomer 'true' - create customers day by day, 'false' - create all customers
      * in one day.
@@ -191,6 +180,5 @@ abstract class BaseIntegrationTest
     protected function setUp()
     {
         parent::setUp();
-        $this->_cacheReset();
     }
 }

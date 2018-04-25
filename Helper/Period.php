@@ -11,7 +11,7 @@ namespace Praxigento\Core\Helper;
 use Praxigento\Core\Config as Cfg;
 
 class Period
-    implements \Praxigento\Core\Api\Helper\Period, \Praxigento\Core\App\ICached
+    implements \Praxigento\Core\Api\Helper\Period
 {
     /** @var array Common cache for periods bounds: [period][type][from|to] = ... */
     private static $cachePeriodBounds = [];
@@ -29,11 +29,6 @@ class Period
         \Magento\Framework\ObjectManagerInterface $manObj
     ) {
         $this->manObj = $manObj;
-    }
-
-    public function cacheReset()
-    {
-        self::$cachePeriodBounds = [];
     }
 
     /**
