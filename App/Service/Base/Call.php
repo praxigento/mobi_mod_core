@@ -13,18 +13,6 @@ namespace Praxigento\Core\App\Service\Base;
  */
 abstract class Call
 {
-    /**
-     * @var \Praxigento\Core\Api\App\Logger\Main
-     *
-     * @deprecated use $this->_logger
-     */
-    protected $_logger;
-    /**
-     * @var  \Magento\Framework\ObjectManagerInterface
-     *
-     * @deprecated use $this->_manObj
-     */
-    protected $_manObj;
     /** @var \Praxigento\Core\Api\App\Logger\Main */
     protected $logger;
     /** @var  \Magento\Framework\ObjectManagerInterface */
@@ -36,8 +24,6 @@ abstract class Call
     ) {
         $this->logger = $logger;
         $this->manObj = $manObj;
-        $this->_logger = $logger;
-        $this->_manObj = $manObj;
     }
 
 }
