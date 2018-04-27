@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Service\Base;
+namespace Praxigento\Core\App\Service;
 
 class Response
     extends \Praxigento\Core\Data

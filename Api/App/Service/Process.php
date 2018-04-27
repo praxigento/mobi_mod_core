@@ -5,14 +5,14 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Service;
+namespace Praxigento\Core\Api\App\Service;
 
 /**
  * Interface for processes (services that can be chained one-by-one, like promises in JavaScript).
  *
  * TODO: it was a bad idea w/o process engine, remove this interface.
  */
-interface IProcess
+interface Process
 {
 
 
