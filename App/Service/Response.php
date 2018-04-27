@@ -7,10 +7,10 @@ namespace Praxigento\Core\App\Service\Base;
 
 class Response
     extends \Praxigento\Core\Data
-    implements \Praxigento\Core\App\Service\IResponse
+    implements \Praxigento\Core\Api\App\Service\Response
 {
     /** @var string */
-    private $errorCode = \Praxigento\Core\App\Service\IResponse::ERR_UNDEFINED;
+    private $errorCode = \Praxigento\Core\Api\App\Service\Response::ERR_UNDEFINED;
     /** @var  string */
     private $errorMessage;
 
@@ -41,7 +41,7 @@ class Response
 
     public function markSucceed()
     {
-        $this->errorCode = \Praxigento\Core\App\Service\IResponse::ERR_NO_ERROR;
+        $this->errorCode = \Praxigento\Core\Api\App\Service\Response::ERR_NO_ERROR;
     }
 
     public function setErrorCode($code)

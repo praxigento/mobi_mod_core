@@ -5,10 +5,10 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\App\Service;
+namespace Praxigento\Core\Api\App\Service;
 
 
-interface IResponse
+interface Response
 {
     /**#@+
      * Base error codes.
