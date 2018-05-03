@@ -61,7 +61,7 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="prxgt:app:modules:installed" xsi:type="object">\Praxigento\Core\Cli\Modules\Installed</item>
+                <item name="prxgt:app:modules:installed" xsi:type="object">Praxigento\Core\Cli\Modules\Installed</item>
             </argument>
         </arguments>
     </type>
@@ -89,7 +89,7 @@
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Framework\Reflection\TypeProcessor">
-        <!-- Add "\Praxigento\*" namespace to available namespaces for web service schema generation -->
+        <!-- Add "Praxigento\*" namespace to available namespaces for web service schema generation -->
         <plugin name="praxigento_core_plugin"
                 type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor"
                 sortOrder="100" disabled="false"/>
