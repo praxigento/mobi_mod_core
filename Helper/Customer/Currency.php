@@ -21,13 +21,13 @@ class Currency
         return $amount;
     }
 
+    public function convertToBase($amount, $customer = null, $round = true)
+    {
+        return $amount;
+    }
+
     public function getCurrency($customer)
     {
         return Cfg::CODE_CUR_USD;
-    }
-
-    public function convertToBase($amount, $customer = null)
-    {
-        return $amount;
     }
 }

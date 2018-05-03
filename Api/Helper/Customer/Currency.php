@@ -22,17 +22,18 @@ interface Currency
     public function convertFromBase($amount, $customer = null, $round = true);
 
     /**
+     * @param float $amount
+     * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
+     * @param bool $round 'false' - don't round result.
+     * @return float
+     */
+    public function convertToBase($amount, $customer = null, $round = true);
+
+    /**
      * Get customer's currency code.
      *
      * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
      * @return string
      */
     public function getCurrency($customer);
-
-    /**
-     * @param float $amount
-     * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
-     * @return float
-     */
-    public function convertToBase($amount, $customer = null);
 }
