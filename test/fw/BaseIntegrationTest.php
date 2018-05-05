@@ -12,8 +12,6 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use Praxigento\Core\Api\Helper\Period as HPeriod;
 use Praxigento\Core\Config as Cfg;
-use Praxigento\Downline\Repo\Data\Customer;
-use Praxigento\Downline\Service\Customer\Request\Add as CustomerAddRequest;
 use Praxigento\Downline\Service\Snap\Request\Calc as DownlineSnapCalcRequest;
 
 abstract class BaseIntegrationTest
@@ -86,38 +84,6 @@ abstract class BaseIntegrationTest
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
         /* set up application */
         $this->_setAreaCode();
-    }
-
-    /**
-     * @param string $dateBegin datestamp (YYYYMMDD) for the date when the first customer should be created.
-     * @param bool $switchDateOnNewCustomer 'true' - create customers day by day, 'false' - create all customers
-     * in one day.
-     */
-    protected function _createDownlineCustomers($dateBegin = self::DATE_PERIOD_BEGIN, $switchDateOnNewCustomer = true)
-    {
-        $dtToday = $dateBegin;
-        foreach ($this->DEFAULT_DWNL_TREE as $customerRef => $parentRef) {
-            $customerMageId = $this->_mapCustomerMageIdByIndex[$customerRef];
-            /* get magento customer data */
-            $request = new CustomerAddRequest();
-            $request->setCustomerId($customerMageId);
-            $request->setParentId($this->_mapCustomerMageIdByIndex[$parentRef]);
-            $request->setMlmId($this->_mapCustomerMageIdByIndex[$customerRef]);
-            $request->setCountryCode(self::DEFAULT_DOWNLINE_COUNTRY_CODE);
-            $request->setDate($this->hlpPeriod->getTimestampFrom($dtToday));
-            /* Create customer per day or all customers in the same day. */
-            if ($switchDateOnNewCustomer) {
-                $dtToday = $this->hlpPeriod->getPeriodNext($dtToday);
-            }
-            $response = $this->_callDownlineCustomer->add($request);
-            if ($response->isSucceed()) {
-                $path = $response->get(Customer::A_PATH);
-                $depth = $response->get(Customer::A_DEPTH);
-                $this->_logger->debug("New customer #$customerMageId is added to path '$path' on depth $depth at '$dtToday'.");
-            } else {
-                $this->_logger->error("Cannot add new customer #$customerMageId to downline tree.");
-            }
-        }
     }
 
     protected function _createDownlineSnapshots($dsUpTo)
