@@ -44,8 +44,6 @@ abstract class BaseIntegrationTest
         12 => 10,
         13 => 10
     ];
-    /** @var \Praxigento\Downline\Service\ICustomer */
-    protected $_callDownlineCustomer;
     /** @var \Praxigento\Downline\Service\ISnap */
     protected $_callDownlineSnap;
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
@@ -80,7 +78,6 @@ abstract class BaseIntegrationTest
         $this->_conn = $this->_resource->getConnection();
         $this->hlpPeriod = $this->_manObj->get(HPeriod::class);
         /* base services */
-        $this->_callDownlineCustomer = $this->_manObj->get(\Praxigento\Downline\Service\ICustomer::class);
         $this->_callDownlineSnap = $this->_manObj->get(\Praxigento\Downline\Service\ISnap::class);
         /* set up application */
         $this->_setAreaCode();
