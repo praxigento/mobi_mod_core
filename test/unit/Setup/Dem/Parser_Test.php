@@ -224,7 +224,7 @@ class Parser_UnitTest extends \Praxigento\Core\Test\BaseCase\Mockery
         $type = $obj->entityGetAttrType([DemType::A_BOOLEAN => []]);
         $this->assertEquals(MageType::COL_BOOLEAN, $type);
         $type = $obj->entityGetAttrType([DemType::A_DATETIME => []]);
-        $this->assertEquals(MageType::COL_TIMESTAMP, $type);
+        $this->assertEquals(MageType::COL_DATETIME, $type);
         $type = $obj->entityGetAttrType([DemType::A_INTEGER => []]);
         $this->assertEquals(MageType::COL_INTEGER, $type);
         $type = $obj->entityGetAttrType([DemType::A_INTEGER => [Cfg::SUBTYPE => DemType::ATTRSUB_SMALL_INT]]);

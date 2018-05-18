@@ -131,7 +131,7 @@ class Parser
                 $result = MageType::COL_BOOLEAN;
                 break;
             case DemType::A_DATETIME:
-                $result = MageType::COL_TIMESTAMP;
+                $result = MageType::COL_DATETIME;
                 break;
             case DemType::A_INTEGER:
                 $result = MageType::COL_INTEGER;

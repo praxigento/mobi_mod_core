@@ -16,11 +16,11 @@ class MageType
      */
     const COL_BLOB = Ddl::TYPE_BLOB;
     const COL_BOOLEAN = Ddl::TYPE_BOOLEAN;
+    const COL_DATETIME = Ddl::TYPE_DATETIME;
     const COL_DECIMAL = Ddl::TYPE_DECIMAL;
     const COL_INTEGER = Ddl::TYPE_INTEGER;
     const COL_SMALLINT = Ddl::TYPE_SMALLINT;
     const COL_TEXT = Ddl::TYPE_TEXT;
-    const COL_TIMESTAMP = Ddl::TYPE_TIMESTAMP;
 
     /**
      * Default values for attributes.
