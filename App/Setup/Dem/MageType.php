@@ -27,7 +27,7 @@ class MageType
      * M2: \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT
      */
 
-    const DEF_CURRENT_TIMESTAMP = Ddl::TIMESTAMP_INIT;
+    const DEF_CURRENT_TIMESTAMP = 'CURRENT_TIMESTAMP';
 
     /**
      * Index types in Magento.
