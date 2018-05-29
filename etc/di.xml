@@ -54,6 +54,15 @@
     <preference for="Praxigento\Core\Api\Web\Customer\Search\ByKeyInterface"
                 type="Praxigento\Core\Web\Customer\Search\ByKey"/>
 
+    <!-- ********************* -->
+    <!-- App related overrides -->
+    <!-- ********************* -->
+    <type name="Magento\CatalogSearch\Model\Advanced">
+        <arguments>
+            <argument name="productCollectionFactory" xsi:type="object">Praxigento\Core\App\Magento\CatalogSearch\Model\ResourceModel\Advanced\CollectionFactory</argument>
+        </arguments>
+    </type>
+
 
     <!-- ********************** -->
     <!-- Console (CLI Commands) -->
