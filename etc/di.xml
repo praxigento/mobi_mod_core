@@ -103,6 +103,12 @@
                 type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor"
                 sortOrder="100" disabled="false"/>
     </type>
+    <type name="Magento\Framework\Serialize\Serializer\Json">
+        <!-- MOBI-1358: Check UTF-8 chars in the response content. -->
+        <plugin name="praxigento_core_plugin"
+                type="Praxigento\Core\Plugin\Framework\Serialize\Serializer\Json"
+                sortOrder="100" disabled="false"/>
+    </type>
     <type name="Magento\Framework\Webapi\Rest\Request\Deserializer\Json">
         <!-- Remove from key from Web API request sent using jQuery.ajax(). -->
         <plugin name="praxigento_core_plugin"
