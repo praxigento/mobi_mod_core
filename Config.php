@@ -130,6 +130,7 @@ class Config
     const E_QUOTE_ITEM_A_STORE_ID = 'store_id';
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
+    const E_SALE_INVOICE_A_STATE = 'state';
     const E_SALE_ORDER_A_APPLIED_RULE_IDS = 'applied_rule_ids';
     const E_SALE_ORDER_A_BASE_GRAND_TOTAL = 'base_grand_total';
     const E_SALE_ORDER_A_CREATED_AT = 'created_at';
