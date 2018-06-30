@@ -13,5 +13,5 @@ namespace Praxigento\Core\Api\App\Logger;
 interface Main
     extends \Psr\Log\LoggerInterface
 {
-
+    public function getHandlerMemory(): \Monolog\Handler\StreamHandler;
 }
