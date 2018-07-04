@@ -195,7 +195,7 @@ class Config
     const E_TAX_CALC_RULE_A_PRIORITY = 'priority';
     const E_URL_REWRITE_A_ENTITY_ID = 'entity_id';
     const E_URL_REWRITE_A_ENTITY_TYPE = 'entity_type';
-
+    const E_URL_REWRITE_A_REQUEST_PATH = 'request_path';
     /**
      * other
      */
