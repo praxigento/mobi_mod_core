@@ -62,6 +62,7 @@ class Config
     const ENTITY_MAGE_TAX_CALC = 'tax_calculation';
     const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
     const ENTITY_MAGE_TAX_CALC_RULE = 'tax_calculation_rule';
+    const ENTITY_MAGE_URL_REWRITE = 'url_rewrite';
     /**
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
@@ -189,6 +190,9 @@ class Config
     const E_TAX_CALC_RULE_A_ID = 'tax_calculation_rule_id';
     const E_TAX_CALC_RULE_A_POSITION = 'position';
     const E_TAX_CALC_RULE_A_PRIORITY = 'priority';
+    const E_URL_REWRITE_A_ENTITY_ID = 'entity_id';
+    const E_URL_REWRITE_A_ENTITY_TYPE = 'entity_type';
+
     /**
      * other
      */
