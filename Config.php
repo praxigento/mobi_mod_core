@@ -10,6 +10,7 @@ namespace Praxigento\Core;
 use Magento\CatalogInventory\Model\Stock as DStock;
 use Magento\CatalogInventory\Model\Stock\Status as DStockStatus;
 use Magento\Quote\Api\Data\CartInterface as DCart;
+use Magento\Sales\Api\Data\OrderInterface as DSaleOrder;
 use Magento\Sales\Api\Data\OrderItemInterface as DOrderItem;
 
 class Config
@@ -135,12 +136,12 @@ class Config
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
     const E_SALE_INVOICE_A_STATE = 'state';
-    const E_SALE_ORDER_A_APPLIED_RULE_IDS = 'applied_rule_ids';
-    const E_SALE_ORDER_A_BASE_GRAND_TOTAL = 'base_grand_total';
-    const E_SALE_ORDER_A_CREATED_AT = 'created_at';
-    const E_SALE_ORDER_A_CUSTOMER_ID = 'customer_id';
-    const E_SALE_ORDER_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
-    const E_SALE_ORDER_A_UPDATED_AT = 'updated_at';
+    const E_SALE_ORDER_A_APPLIED_RULE_IDS = DSaleOrder::APPLIED_RULE_IDS;
+    const E_SALE_ORDER_A_BASE_GRAND_TOTAL = DSaleOrder::BASE_GRAND_TOTAL;
+    const E_SALE_ORDER_A_CREATED_AT = DSaleOrder::CREATED_AT;
+    const E_SALE_ORDER_A_CUSTOMER_ID = DSaleOrder::CUSTOMER_ID;
+    const E_SALE_ORDER_A_ENTITY_ID = DSaleOrder::ENTITY_ID;
+    const E_SALE_ORDER_A_UPDATED_AT = DSaleOrder::UPDATED_AT;
     const E_SALE_ORDER_GRID_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_ITEM_A_BASE_PRICE = DOrderItem::BASE_PRICE;
     const E_SALE_ORDER_ITEM_A_BASE_ROW_TOTAL_INCL_TAX = DOrderItem::BASE_ROW_TOTAL_INCL_TAX;
