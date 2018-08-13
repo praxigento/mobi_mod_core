@@ -117,6 +117,7 @@ class Config
     const E_CUSTOMER_A_LASTNAME = 'lastname';
     const E_CUSTOMER_A_MIDDLENAME = 'middlename';
     const E_CUSTOMER_A_PASS_HASH = 'password_hash';
+    const E_CUSTOMER_A_STORE_ID = 'store_id';
     const E_CUSTOMER_A_WEBSITE_ID = 'website_id';
     const E_PRODUCT_A_A_SET_ID = 'attribute_set_id';
     const E_PRODUCT_A_CRETED_AT = 'created_at';
