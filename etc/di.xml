@@ -20,6 +20,7 @@
     <preference for="Praxigento\Core\Api\App\Web\Authenticator\Rest"
                 type="Praxigento\Core\App\Web\Authenticator\Rest"/>
 
+
     <!-- ********** -->
     <!-- API Helper -->
     <!-- ********** -->
@@ -27,6 +28,8 @@
                 type="Praxigento\Core\Helper\Customer\Currency"/>
     <preference for="Praxigento\Core\Api\Helper\Config"
                 type="Praxigento\Core\Helper\Config"/>
+    <preference for="Praxigento\Core\Api\Helper\Csv"
+                type="Praxigento\Core\Helper\Csv"/>
     <preference for="Praxigento\Core\Api\Helper\Date"
                 type="Praxigento\Core\Helper\Date"/>
     <preference for="Praxigento\Core\Api\Helper\Email"
