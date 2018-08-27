@@ -15,7 +15,7 @@ interface Csv
      * Read CSV file and put content into simple array or array with keys (if $keyIndex is not null).
      *
      * @param $path path to the CSV file (relative or absolute).
-     * @param null $keyIndex index of the ID column.
+     * @param null $keyIndex index of the ID column (starting from 0).
      * @param bool $skipFirstRow 'true' skip first row (header)
      * @return array
      */
