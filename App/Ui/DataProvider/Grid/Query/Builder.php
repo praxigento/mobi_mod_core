@@ -56,7 +56,9 @@ abstract class Builder
         /* limit pages */
         $pageSize = $search->getPageSize();
         $pageIndx = $search->getCurrentPage();
-        $query->limitPage($pageIndx, $pageSize);
+        if ($pageSize || $pageIndx) {
+            $query->limitPage($pageIndx, $pageSize);
+        }
         $result = $this->conn->fetchAll($query);
         return $result;
     }
