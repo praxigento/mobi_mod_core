@@ -143,6 +143,7 @@ class Config
     const E_SALE_ORDER_A_CUSTOMER_ID = DSaleOrder::CUSTOMER_ID;
     const E_SALE_ORDER_A_ENTITY_ID = DSaleOrder::ENTITY_ID;
     const E_SALE_ORDER_A_INCREMENT_ID = DSaleOrder::INCREMENT_ID;
+    const E_SALE_ORDER_A_QUOTE_ID = DSaleOrder::QUOTE_ID;
     const E_SALE_ORDER_A_STATE = DSaleOrder::STATE;
     const E_SALE_ORDER_A_UPDATED_AT = DSaleOrder::UPDATED_AT;
     const E_SALE_ORDER_GRID_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
