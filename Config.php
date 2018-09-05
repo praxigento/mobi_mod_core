@@ -39,6 +39,7 @@ class Config
      */
     const DS_CUSTOMERS_GRID = 'customer_listing_data_source';
     const DS_SALES_ORDERS_GRID = 'sales_order_grid_data_source';
+
     /**
      * Magento entities as defined in version 2.
      */
@@ -65,6 +66,7 @@ class Config
     const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
     const ENTITY_MAGE_TAX_CALC_RULE = 'tax_calculation_rule';
     const ENTITY_MAGE_URL_REWRITE = 'url_rewrite';
+
     /**
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
@@ -212,6 +214,7 @@ class Config
     const E_URL_REWRITE_A_ENTITY_ID = 'entity_id';
     const E_URL_REWRITE_A_ENTITY_TYPE = 'entity_type';
     const E_URL_REWRITE_A_REQUEST_PATH = 'request_path';
+
     /**
      * other
      */
