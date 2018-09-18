@@ -7,7 +7,7 @@ namespace Praxigento\Core\Lib\Test\Setup;
 include_once(__DIR__ . '/../phpunit_bootstrap.php');
 
 class Main_IntegrationTest
-    extends \Praxigento\Core\Test\BaseIntegrationTest
+    extends \Praxigento\Core\Test\BaseCase\Manual
 {
     protected function setUp()
     {
