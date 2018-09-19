@@ -37,7 +37,7 @@ class Data
 
     /**
      * @param int $data
-     * @return null
+     * @return void
      */
     public function setCustomerId($data) {
         parent::set(self::CUSTOMER_ID, $data);
@@ -45,7 +45,7 @@ class Data
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setEmail($data) {
         parent::set(self::EMAIL, $data);

@@ -38,6 +38,7 @@ class Filter
      * Single filtering clause.
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions\Filter\Clause $data
+     * @return void
      */
     public function setClause($data)
     {
@@ -48,6 +49,7 @@ class Filter
      * Single group of the filtering clauses.
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions\Filter\Group $data
+     * @return void
      */
     public function setGroup($data)
     {

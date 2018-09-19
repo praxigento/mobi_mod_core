@@ -39,6 +39,7 @@ class Entry
      * Name of the attribute in result set.
      *
      * @param string $data
+     * @return void
      */
     public function setAttr($data)
     {
@@ -49,6 +50,7 @@ class Entry
      * Ordering direction ('asc', 'desc').
      *
      * @param string $data
+     * @return void
      */
     public function setDir($data)
     {

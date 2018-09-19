@@ -33,7 +33,7 @@ class Request
 
     /**
      * @param int $data
-     * @return null
+     * @return void
      */
     public function setCustomerId($data)
     {
@@ -42,7 +42,7 @@ class Request
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setEmail($data)
     {

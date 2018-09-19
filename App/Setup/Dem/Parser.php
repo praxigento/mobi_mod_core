@@ -75,7 +75,7 @@ class Parser
      *
      * @param $demAttrType
      *
-     * @return null
+     * @return void
      */
     public function entityGetAttrSize($demAttrType)
     {

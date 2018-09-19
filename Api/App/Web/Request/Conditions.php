@@ -59,6 +59,7 @@ class Conditions
      * Filtering clauses. Clause can be a single filter or group of filters (united with AND/OR statement).
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions\Filter $data
+     * @return void
      */
     public function setFilter($data)
     {
@@ -69,6 +70,7 @@ class Conditions
      * Number of entries in result set to return.
      *
      * @param int $data
+     * @return void
      */
     public function setLimit($data)
     {
@@ -79,6 +81,7 @@ class Conditions
      * Offset in selected data to skip in result set.
      *
      * @param int $data
+     * @return void
      */
     public function setOffset($data)
     {
@@ -89,6 +92,7 @@ class Conditions
      * Set of ordering conditions.
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions\Order\Entry[] $data
+     * @return void
      */
     public function setOrder($data)
     {

@@ -36,7 +36,7 @@ class Result
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setCode($data)
     {
@@ -45,7 +45,7 @@ class Result
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setText($data)
     {

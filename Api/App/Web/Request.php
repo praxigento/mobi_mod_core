@@ -54,7 +54,7 @@ class Request
      * Override to get appropriate JSON structure for concrete request.
      *
      * @param \Praxigento\Core\Data $data
-     * @return null
+     * @return void
      */
     public function setData($data)
     {
@@ -65,7 +65,7 @@ class Request
      * Development mode data (acts only if app is in DEV MODE).
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Dev $data
-     * @return null
+     * @return void
      */
     public function setDev($data)
     {

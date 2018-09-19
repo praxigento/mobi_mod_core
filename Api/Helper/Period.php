@@ -41,7 +41,7 @@ interface Period
      * @param \DateTime|int|string|null $date datetime to process (see \Praxigento\Core\Tool\Def\Convert::toDateTime)
      * @param int $changeTz
      * @param string $periodType
-     * @return null|string 20150601 | 201506 | 2015
+     * @return string|null 20150601 | 201506 | 2015
      */
     public function getPeriodCurrent($date = null, $changeTz = 0, $periodType = self::TYPE_DAY);
 

@@ -47,6 +47,7 @@ class Group
      * or clauses (\Praxigento\Core\Api\App\Web\Request\Conditions\Filter\Entry) to filter result set.
      *
      * @param \Praxigento\Core\Data[] $data
+     * @return void
      */
     public function setEntries($data)
     {
@@ -57,6 +58,7 @@ class Group
      * Operation to apply to the group entries.
      *
      * @param string $data
+     * @return void
      */
     public function setWith($data)
     {

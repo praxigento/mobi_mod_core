@@ -30,6 +30,7 @@ class RequestCond
      * Conditions (ordering, filtering, limitations).
      *
      * @param \Praxigento\Core\Api\App\Web\Request\Conditions $data
+     * @return void
      */
     public function setConditions($data)
     {

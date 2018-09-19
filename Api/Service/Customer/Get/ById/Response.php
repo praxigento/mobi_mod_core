@@ -47,7 +47,7 @@ class Response
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setEmail($data) {
         parent::set(self::EMAIL, $data);
@@ -55,7 +55,7 @@ class Response
 
     /**
      * @param int $data
-     * @return null
+     * @return void
      */
     public function setId($data) {
         parent::set(self::ID, $data);
@@ -63,7 +63,7 @@ class Response
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setNameFirst($data) {
         parent::set(self::NAME_FIRST, $data);
@@ -71,7 +71,7 @@ class Response
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setNameLast($data) {
         parent::set(self::NAME_LAST, $data);

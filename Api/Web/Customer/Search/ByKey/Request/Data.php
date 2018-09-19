@@ -37,7 +37,7 @@ class Data
 
     /**
      * @param int $data
-     * @return null
+     * @return void
      */
     public function setLimit($data)
     {
@@ -46,7 +46,7 @@ class Data
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setSearchKey($data)
     {

@@ -60,6 +60,7 @@ class Clause
      * Set of attributes/values to be used in the filtering expression.
      *
      * @param string[] $data
+     * @return void
      */
     public function setArgs($data)
     {
@@ -70,6 +71,7 @@ class Clause
      * Name of the attribute in the result set to be filtered.
      *
      * @param string $data
+     * @return void
      */
     public function setAttr($data)
     {
@@ -80,6 +82,7 @@ class Clause
      * Function/operation to use in the filtering expression.
      *
      * @param string $data
+     * @return void
      */
     public function setFunc($data)
     {
@@ -90,6 +93,7 @@ class Clause
      * Single value to be used in the filtering expression.
      *
      * @param string $data
+     * @return void
      */
     public function setValue($data)
     {

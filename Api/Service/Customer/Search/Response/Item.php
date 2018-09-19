@@ -51,7 +51,7 @@ class Item
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setEmail($data)
     {
@@ -60,7 +60,7 @@ class Item
 
     /**
      * @param int $data
-     * @return null
+     * @return void
      */
     public function setId($data)
     {
@@ -69,7 +69,7 @@ class Item
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setNameFirst($data)
     {
@@ -78,7 +78,7 @@ class Item
 
     /**
      * @param string $data
-     * @return null
+     * @return void
      */
     public function setNameLast($data)
     {

@@ -62,7 +62,7 @@ class Response
      * Override to get appropriate JSON structure in response.
      *
      * @param \Praxigento\Core\Data $data
-     * @return null
+     * @return void
      */
     public function setData($data)
     {
@@ -71,7 +71,7 @@ class Response
 
     /**
      * @param \Praxigento\Core\Api\App\Web\Response\Result $data
-     * @return null
+     * @return void
      */
     public function setResult(\Praxigento\Core\Api\App\Web\Response\Result $data)
     {
