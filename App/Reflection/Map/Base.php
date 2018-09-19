@@ -63,7 +63,7 @@ abstract class Base
     {
         if (!isset($this->_map[$typeName])) {
             /* try to load from cache */
-            $key = self::CACHE_PREFIX . "-" . md5($typeName);
+            $key = self::CACHE_PREFIX . "-" . sha1($typeName);
             $cached = $this->_cache->load($key);
             if ($cached) {
                 /* get, un-serialize and register cached data */

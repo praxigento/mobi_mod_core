@@ -94,10 +94,11 @@ abstract class Base
                 $parts = explode('&form_key=', $rawBody);
                 $rawBody = reset($parts);
             }
-            $obj = json_decode($rawBody);
+            $obj = json_decode($rawBody, true);
             if ($obj) {
                 $type = $this->getInDataType();
-                $result = $this->inputProcessor->convertValue($obj, $type);
+                $asArray = (array)$obj;
+                $result = $this->inputProcessor->convertValue($asArray, $type);
             }
         } catch (\Throwable $t) {
             $this->logger->error("Cannot parse input data: " . $t->getMessage());

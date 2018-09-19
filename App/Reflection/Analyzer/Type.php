@@ -189,27 +189,29 @@ class Type
     public function getMethods($type)
     {
         $result = [];
-        $typeNorm = $this->toolsType->normalizeType($type);
-        /** @var \Zend\Code\Reflection\ClassReflection $reflection */
-        $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
-        /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
-        $docBlock = $reflection->getDocBlock();
-        $annotatedMethods = $this->_processClassDocBlock($docBlock);
-        /* process normal methods (not annotated) */
-        $publicMethods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
-        $generalMethods = $this->_processClassMethods($publicMethods);
-        $merged = array_merge($generalMethods, $annotatedMethods);
-        /* convert results to array form according Magento requirements to be saved in the cache */
-        /** @var \Praxigento\Core\App\Reflection\Data\Method $item */
-        foreach ($merged as $item) {
-            $methodName = $item->getName();
-            $entry = [
-                'type' => $item->getType(),
-                'isRequired' => $item->getIsRequired(),
-                'description' => $item->getDescription(),
-                'parameterCount' => $item->getParameterCount()
-            ];
-            $result[$methodName] = $entry;
+        if ($type !== false) {
+            $typeNorm = $this->toolsType->normalizeType($type);
+            /** @var \Zend\Code\Reflection\ClassReflection $reflection */
+            $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
+            /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
+            $docBlock = $reflection->getDocBlock();
+            $annotatedMethods = $this->_processClassDocBlock($docBlock);
+            /* process normal methods (not annotated) */
+            $publicMethods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
+            $generalMethods = $this->_processClassMethods($publicMethods);
+            $merged = array_merge($generalMethods, $annotatedMethods);
+            /* convert results to array form according Magento requirements to be saved in the cache */
+            /** @var \Praxigento\Core\App\Reflection\Data\Method $item */
+            foreach ($merged as $item) {
+                $methodName = $item->getName();
+                $entry = [
+                    'type' => $item->getType(),
+                    'isRequired' => $item->getIsRequired(),
+                    'description' => $item->getDescription(),
+                    'parameterCount' => $item->getParameterCount()
+                ];
+                $result[$methodName] = $entry;
+            }
         }
         return $result;
     }
