@@ -19,6 +19,7 @@ class Request
 
     /**
      * @param \Praxigento\Core\Api\Web\Customer\Search\ByKey\Request\Data $data
+     * @return null
      *
      * Magento 2 WebAPI requires full names in documentation (aliases are not allowed).
      */

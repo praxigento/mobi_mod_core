@@ -21,6 +21,7 @@ class Response
 
     /**
      * @param \Praxigento\Core\Api\Service\Customer\Search\Response\Item[] $data
+     * @return null
      */
     public function setItems($data)
     {
