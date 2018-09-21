@@ -94,12 +94,6 @@
                 type="Praxigento\Core\Plugin\Framework\Mail\Message"
                 sortOrder="100" disabled="false"/>
     </type>
-    <!--<type name="Magento\Framework\Reflection\MethodsMap">-->
-        <!--&lt;!&ndash; Replace Magento mapper to get full methods map (including annotated) used in DO2JSON conversion. &ndash;&gt;-->
-        <!--<plugin name="praxigento_core_plugin"-->
-                <!--type="Praxigento\Core\Plugin\Framework\Reflection\MethodsMap"-->
-                <!--sortOrder="100" disabled="false"/>-->
-    <!--</type>-->
     <type name="Magento\Framework\Reflection\TypeProcessor">
         <!-- Add "Praxigento\*" namespace to available namespaces for web service schema generation -->
         <plugin name="praxigento_core_plugin"
@@ -118,18 +112,6 @@
                 type="Praxigento\Core\Plugin\Framework\Webapi\Rest\Request\Deserializer\Json"
                 sortOrder="100" disabled="false"/>
     </type>
-    <!--<type name="Magento\Framework\Webapi\ServiceInputProcessor">-->
-        <!--&lt;!&ndash; Process annotated methods in API data objects &ndash;&gt;-->
-        <!--<plugin name="praxigento_core_plugin"-->
-                <!--type="Praxigento\Core\Plugin\Framework\Webapi\ServiceInputProcessor"-->
-                <!--sortOrder="100" disabled="false"/>-->
-    <!--</type>-->
-    <!--<type name="Magento\Framework\Webapi\ServiceOutputProcessor">-->
-        <!--&lt;!&ndash; Process annotated methods in API data objects &ndash;&gt;-->
-        <!--<plugin name="praxigento_core_plugin"-->
-                <!--type="Praxigento\Core\Plugin\Framework\Webapi\ServiceOutputProcessor"-->
-                <!--sortOrder="100" disabled="false"/>-->
-    <!--</type>-->
     <type name="Magento\Webapi\Controller\Rest\InputParamsResolver">
         <!-- Save REST input request into Magento registry -->
         <plugin name="praxigento_core_plugin"
