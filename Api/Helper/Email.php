@@ -15,7 +15,7 @@ interface Email
      *
      * 790000145.__.sponsor@praxigento.com => sponsor@praxigento.com
      *
-     * see \Praxigento\Core\Plugin\Framework\Mail\Message::aroundAddTo
+     * see \Praxigento\Core\Plugin\Magento\Framework\Mail\Message::aroundAddTo
      *
      * @param $email
      * @param $name

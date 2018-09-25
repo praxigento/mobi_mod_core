@@ -4,7 +4,7 @@
  * Since: 2018
  */
 
-namespace Praxigento\Core\Plugin\Framework\Mail;
+namespace Praxigento\Core\Plugin\Magento\Framework\Mail;
 
 /**
  * Process recipients emails and replace its by parent's or developer's emails.

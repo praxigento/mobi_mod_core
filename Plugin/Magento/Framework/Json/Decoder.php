@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Plugin\Framework\Json;
+namespace Praxigento\Core\Plugin\Magento\Framework\Json;
 
 
 class Decoder

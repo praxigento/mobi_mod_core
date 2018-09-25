@@ -85,37 +85,37 @@
     <type name="Magento\Framework\Json\DecoderInterface">
         <!-- Cut form key from REST request and add as JSON attribute (MOBI-473). -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Framework\Json\Decoder"
+                type="Praxigento\Core\Plugin\Magento\Framework\Json\Decoder"
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Framework\Mail\Message">
         <!-- Process recipients emails and replace its by parent's or developer's emails. -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Framework\Mail\Message"
+                type="Praxigento\Core\Plugin\Magento\Framework\Mail\Message"
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Framework\Reflection\TypeProcessor">
         <!-- Add "Praxigento\*" namespace to available namespaces for web service schema generation -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Framework\Reflection\TypeProcessor"
+                type="Praxigento\Core\Plugin\Magento\Framework\Reflection\TypeProcessor"
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Framework\Serialize\Serializer\Json">
         <!-- MOBI-1358: Check UTF-8 chars in the response content. -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Framework\Serialize\Serializer\Json"
+                type="Praxigento\Core\Plugin\Magento\Framework\Serialize\Serializer\Json"
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Framework\Webapi\Rest\Request\Deserializer\Json">
         <!-- Remove from key from Web API request sent using jQuery.ajax(). -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Framework\Webapi\Rest\Request\Deserializer\Json"
+                type="Praxigento\Core\Plugin\Magento\Framework\Webapi\Rest\Request\Deserializer\Json"
                 sortOrder="100" disabled="false"/>
     </type>
     <type name="Magento\Webapi\Controller\Rest\InputParamsResolver">
         <!-- Save REST input request into Magento registry -->
         <plugin name="praxigento_core_plugin"
-                type="Praxigento\Core\Plugin\Webapi\Controller\Rest\InputParamsResolver"
+                type="Praxigento\Core\Plugin\Magento\Webapi\Controller\Rest\InputParamsResolver"
                 sortOrder="100" disabled="false"/>
     </type>
 

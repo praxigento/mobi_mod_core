@@ -4,7 +4,7 @@
  * Since: 2018
  */
 
-namespace Praxigento\Core\Plugin\Framework\Serialize\Serializer;
+namespace Praxigento\Core\Plugin\Magento\Framework\Serialize\Serializer;
 
 /**
  * MOBI-1358: Check UTF-8 chars in the response content to prevent "Unable to serialize value" error on Cyrillic.

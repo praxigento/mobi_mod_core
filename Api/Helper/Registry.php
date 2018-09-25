@@ -20,7 +20,7 @@ interface Registry
     /**
      * Save input parameters for REST operation.
      *
-     * see \Praxigento\Core\Plugin\Webapi\Controller\Rest\InputParamsResolver::afterResolve
+     * see \Praxigento\Core\Plugin\Magento\Webapi\Controller\Rest\InputParamsResolver::afterResolve
      */
     public function setRestInputParams($data);
 }

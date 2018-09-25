@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Plugin\Framework\Webapi\Rest\Request\Deserializer;
+namespace Praxigento\Core\Plugin\Magento\Framework\Webapi\Rest\Request\Deserializer;
 
 class Json
 {

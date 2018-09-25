@@ -4,7 +4,7 @@
  * Since: 2018
  */
 
-namespace Praxigento\Core\Plugin\Webapi\Controller\Rest;
+namespace Praxigento\Core\Plugin\Magento\Webapi\Controller\Rest;
 
 /**
  * Save REST input request into Magento registry.

@@ -3,7 +3,7 @@
  * User: Alex Gusev <alex@flancer64.com>
  */
 
-namespace Praxigento\Core\Plugin\Framework\Reflection;
+namespace Praxigento\Core\Plugin\Magento\Framework\Reflection;
 
 /**
  * Allow TypeProcessor to handle DataObject in "\Praxigento\" namespace.
