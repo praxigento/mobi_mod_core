@@ -11,7 +11,15 @@ namespace Praxigento\Core\App\Ui\DataProvider;
  * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Base
-    extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider
+    extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    public function getData()
+    {
+        return [];
+    }
 
+    public function addFilter(\Magento\Framework\Api\Filter $filter)
+    {
+        return null;
+    }
 }
