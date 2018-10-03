@@ -88,6 +88,8 @@ interface Period
      * @param $periodValue
      * @param string $periodType
      * @return string
+     *
+     * @deprecated use "< $nextPeriod"  instead of "<= $lastSecond"
      */
     public function getTimestampUpTo($periodValue, $periodType = self::TYPE_DAY);
 
