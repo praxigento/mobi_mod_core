@@ -57,7 +57,7 @@ class Period
                 $end = $this->getWeekLastDay();
                 $prev = $this->getWeekDayNext($end);
                 /* this should be the last day of the week */
-                $periodValue = substr($periodValue, 0, 8);
+                $periodValue = $this->normalizePeriod($periodValue, self::TYPE_DAY);
                 $dt = date_create_from_format('Ymd', $periodValue);
                 $ts = strtotime("previous $prev midnight", $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -67,7 +67,7 @@ class Period
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_MONTH:
-                $periodValue = substr($periodValue, 0, 6);
+                $periodValue = $this->normalizePeriod($periodValue, self::TYPE_MONTH);
                 $dt = date_create_from_format('Ym', $periodValue);
                 $ts = strtotime('first day of midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -77,7 +77,7 @@ class Period
                 $to = date(Cfg::FORMAT_DATETIME, $ts);
                 break;
             case self::TYPE_YEAR:
-                $periodValue = substr($periodValue, 0, 4);
+                $periodValue = $this->normalizePeriod($periodValue, self::TYPE_YEAR);
                 $dt = date_create_from_format('Y', $periodValue);
                 $ts = strtotime('first day of January', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
@@ -150,6 +150,16 @@ class Period
                 $result = date_format($dt, 'Ymd');
             }
         }
+        return $result;
+    }
+
+    public function getPeriodForDate($date, $periodType = self::TYPE_DAY)
+    {
+        $year = substr($date, 0, 4); // YYYY-
+        $month = substr($date, 5, 2); // -MM-
+        $day = substr($date, 8, 2); // -DD
+        $result = "$year$month$day";
+        $result = $this->normalizePeriod($result, $periodType);
         return $result;
     }
 

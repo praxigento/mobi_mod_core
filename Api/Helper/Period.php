@@ -55,6 +55,14 @@ interface Period
     public function getPeriodFirstDate($periodValue);
 
     /**
+     * Convert date "YYYY-MM-DD" to period "YYYYMMDD|YYYYMM|YYYY"
+     * @param string $date
+     * @param string $periodType
+     * @return string
+     */
+    public function getPeriodForDate($date, $periodType = self::TYPE_DAY);
+
+    /**
      * Return the datestamp for the last date of the month or year period.
      *
      * @param $periodValue 'YYYY' or 'YYYYMM'
