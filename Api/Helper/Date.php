@@ -16,12 +16,16 @@ interface Date
     /**
      * Return 'Magento' now (according to locale settings).
      * @return \DateTime
+     *
+     * @deprecated we need to use UTC time everywhere (SAN-414, see $this->>getUtcNow())
      */
     public function getMageNow();
 
     /**
      * Return 'Magento' now (according to locale settings) formatted as DB timestamp.
      * @return string 'YYYY-MM-DD HH:MM:SS'
+     *
+     * @deprecated we need to use UTC time everywhere (SAN-414, see $this->>getUtcNowForDb())
      */
     public function getMageNowForDb();
 
