@@ -13,6 +13,16 @@ namespace Praxigento\Core\App\Ui\DataProvider;
 class Base
     extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    public function __construct(
+        string $name,
+        string $primaryFieldName = 'id',
+        string $requestFieldName = 'id',
+        array $meta = [],
+        array $data = []
+    ) {
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+    }
+
     public function getData()
     {
         return [];

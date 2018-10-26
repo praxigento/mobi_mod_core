@@ -43,7 +43,7 @@ abstract class Builder
         $this->critAdapter = $critAdapter;
     }
 
-    public function getItems(\Magento\Framework\Api\Search\SearchCriteriaInterface $search)
+    public function getItems(\Magento\Framework\Api\Search\SearchCriteriaInterface $search, $bind = [])
     {
         /** @var \Magento\Framework\DB\Select $query */
         $query = $this->getQueryItems();
@@ -59,7 +59,7 @@ abstract class Builder
         if ($pageSize || $pageIndx) {
             $query->limitPage($pageIndx, $pageSize);
         }
-        $result = $this->conn->fetchAll($query);
+        $result = $this->conn->fetchAll($query, $bind);
         return $result;
     }
 
@@ -84,7 +84,7 @@ abstract class Builder
      */
     abstract protected function getQueryTotal();
 
-    public function getTotal(\Magento\Framework\Api\Search\SearchCriteriaInterface $search)
+    public function getTotal(\Magento\Framework\Api\Search\SearchCriteriaInterface $search, $bind = [])
     {
         /* get query to select totals */
         /** @var \Magento\Framework\DB\Select $query */
@@ -94,7 +94,7 @@ abstract class Builder
         $query->where($where);
         $conn = $query->getConnection();
         /* fetch one result */
-        $result = $conn->fetchOne($query);
+        $result = $conn->fetchOne($query, $bind);
         return $result;
     }
 }
