@@ -244,7 +244,8 @@ class Period
                 $result = date_format($dt, 'Ymd');
                 break;
             case self::TYPE_MONTH:
-                $dt = date_create_from_format('Ym', $periodValue);
+                $middle = $periodValue . '15';
+                $dt = date_create_from_format('Ymd', $middle);
                 $ts = strtotime('previous month', $dt->getTimestamp());
                 $dt = $this->toDateTime($ts);
                 $result = date_format($dt, 'Ym');
