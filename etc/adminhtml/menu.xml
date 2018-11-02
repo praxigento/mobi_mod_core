@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <!-- **************************** -->
+        <!-- Menu items groups separators -->
+        <!-- **************************** -->
+
+        <!-- "Sales / MOBI Actions" groups separator -->
+        <add id="Praxigento_Core::sales_actions"
+             title="MOBI Actions"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="1000"
+             parent="Magento_Sales::sales"
+             resource="Magento_Sales::sales"/>
+
+        <!-- "Sales / MOBI Grids" groups separator -->
+        <add id="Praxigento_Core::sales_grids"
+             title="MOBI Grids"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="2000"
+             parent="Magento_Sales::sales"
+             resource="Magento_Sales::sales"/>
+
+        <!-- "Catalog / MOBI Actions" groups separator -->
+        <add id="Praxigento_Core::catalog_actions"
+             title="MOBI Actions"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="1000"
+             parent="Magento_Catalog::catalog"
+             resource="Magento_Catalog::catalog"/>
+
+        <!-- "Catalog / MOBI Grids" groups separator -->
+        <add id="Praxigento_Core::catalog_grids"
+             title="MOBI Grids"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="2000"
+             parent="Magento_Catalog::catalog"
+             resource="Magento_Catalog::catalog"/>
+
+        <!-- "Customer / MOBI Actions" groups separator -->
+        <add id="Praxigento_Core::customers_actions"
+             title="MOBI Actions"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="1000"
+             parent="Magento_Customer::customer"
+             resource="Magento_Customer::customer"/>
+
+        <!-- "Customer / MOBI Grids" groups separator -->
+        <add id="Praxigento_Core::customers_grids"
+             title="MOBI Grids"
+             translate="title"
+             module="Praxigento_Core"
+             sortOrder="2000"
+             parent="Magento_Customer::customer"
+             resource="Magento_Customer::customer"/>
+
+    </menu>
+</config>
