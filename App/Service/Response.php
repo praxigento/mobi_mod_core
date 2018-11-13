@@ -23,11 +23,29 @@ class Response
     }
 
     /**
+     * @param string $data
+     * @return void
+     */
+    public function setErrorCode($data)
+    {
+        $this->errorCode = $data;
+    }
+
+    /**
      * @return string (required for Magento API transformations)
      */
     public function getErrorMessage()
     {
         return $this->errorMessage;
+    }
+
+    /**
+     * @param string $data
+     * @return void
+     */
+    public function setErrorMessage($data)
+    {
+        $this->errorMessage = $data;
     }
 
     /**
@@ -39,18 +57,11 @@ class Response
         return $result;
     }
 
+    /**
+     * @return void
+     */
     public function markSucceed()
     {
         $this->errorCode = \Praxigento\Core\Api\App\Service\Response::ERR_NO_ERROR;
-    }
-
-    public function setErrorCode($code)
-    {
-        $this->errorCode = $code;
-    }
-
-    public function setErrorMessage($message)
-    {
-        $this->errorMessage = $message;
     }
 }
