@@ -1,5 +1,5 @@
 /**
- * UI component to render cell data as a number.
+ * UI component to render cell data as a decimal number.
  *
  * Based on "./magento/module-ui/view/base/web/js/grid/columns/column.js"
  */
