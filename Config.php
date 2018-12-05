@@ -43,12 +43,13 @@ class Config
     /**
      * Magento entities as defined in version 2.
      */
-    const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
-    const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
-    const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
+    const ENTITY_MAGE_ADMIN_USER= 'admin_user';
     const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
     const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
     const ENTITY_MAGE_CATALOG_URL_REWRITE_PRODUCT_CATEGORY = 'catalog_url_rewrite_product_category';
+    const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
+    const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
+    const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
     const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_CUSTOMER_ADDR = 'customer_address_entity';
@@ -71,6 +72,11 @@ class Config
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
      */
+    const E_ADMIN_USER_A_EMAIL= 'email';
+    const E_ADMIN_USER_A_FIRSTNAME= 'firstname';
+    const E_ADMIN_USER_A_LASTNAME = 'lastname';
+    const E_ADMIN_USER_A_USER_ID = 'user_id';
+    const E_ADMIN_USER_A_USERNAME= 'username';
     const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
     const E_CATCAT_EAV_INT_VALUE = 'value';
