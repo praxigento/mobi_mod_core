@@ -12,9 +12,9 @@ class  Generic
     implements \Praxigento\Core\Api\App\Repo\Generic
 {
     /** @var  \Magento\Framework\DB\Adapter\AdapterInterface */
-    protected $conn;
+    private $conn;
     /** @var \Magento\Framework\App\ResourceConnection */
-    protected $resource;
+    private $resource;
 
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resource
