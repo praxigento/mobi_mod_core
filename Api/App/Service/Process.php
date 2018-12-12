@@ -11,6 +11,7 @@ namespace Praxigento\Core\Api\App\Service;
  * Interface for processes (services that can be chained one-by-one, like promises in JavaScript).
  *
  * TODO: it was a bad idea w/o process engine, remove this interface.
+ * @deprecated
  */
 interface Process
 {
