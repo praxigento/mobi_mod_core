@@ -73,7 +73,11 @@ class  Generic
         return $result;
     }
 
-    public function getEntities($entity, $cols = null, $where = null, $order = null, $limit = null, $offset = null)
+    public function getEntities(
+        $entity, $cols = null, $where = null,
+        $order = null, $limit = null, $offset = null,
+        $group = null
+    )
     {
         $tbl = $this->resource->getTableName($entity);
         $query = $this->conn->select();
@@ -89,6 +93,10 @@ class  Generic
         }
         if ($limit) {
             $query->limit($limit, $offset);
+        }
+
+        if ($group) {
+            $query->group($group);
         }
         $result = $this->conn->fetchAll($query);
         return $result;

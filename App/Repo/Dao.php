@@ -110,7 +110,11 @@ class Dao
         $having = null
     ) {
         $result = [];
-        $rows = $this->daoGeneric->getEntities($this->entityName, $columns, $where, $order, $limit, $offset);
+        $rows = $this->daoGeneric->getEntities(
+            $this->entityName, $columns, $where,
+            $order, $limit, $offset,
+            $group
+        );
         foreach ($rows as $data) {
             $result[] = $this->createEntity($data);
         }
