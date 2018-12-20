@@ -25,7 +25,7 @@ class Base
 
     public function getData()
     {
-        return [];
+        return [null => ['field' => 'value']];
     }
 
     public function addFilter(\Magento\Framework\Api\Filter $filter)
