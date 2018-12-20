@@ -452,12 +452,7 @@ class Period
         return $result;
     }
 
-    /**
-     * @param string $periodValue 'YYYY', 'YYYYMM', 'YYYYMMDD'
-     * @param string $periodType
-     * @return bool|string
-     */
-    private function normalizePeriod($periodValue, $periodType = self::TYPE_DAY)
+    public function normalizePeriod($periodValue, $periodType = self::TYPE_DAY)
     {
         $result = substr($periodValue, 0, 8);
         switch ($periodType) {

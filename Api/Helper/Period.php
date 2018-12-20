@@ -152,4 +152,11 @@ interface Period
      */
     public function isPeriodYear($periodValue);
 
+    /**
+     * @param string $periodValue 'YYYY', 'YYYYMM', 'YYYYMMDD'
+     * @param string $periodType
+     * @return string
+     */
+    public function normalizePeriod($periodValue, $periodType = self::TYPE_DAY);
+
 }
