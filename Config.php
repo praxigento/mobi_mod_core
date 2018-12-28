@@ -15,12 +15,12 @@ use Magento\Sales\Api\Data\OrderItemInterface as DOrderItem;
 
 class Config
 {
+    const ACL_MAGE_CUST__GROUP = self::MOD_MAGE_CUSTOMER . '::group';
+
     /** Default alias for main tables in Magento 2 (used in SQL JOINS) */
     const AS_MAIN_TABLE = 'main_table';
-
     const CODE_CUR_EUR = 'EUR';
     const CODE_CUR_USD = 'USD';
-
     const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
     const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
@@ -39,17 +39,16 @@ class Config
      */
     const DS_CUSTOMERS_GRID = 'customer_listing_data_source';
     const DS_SALES_ORDERS_GRID = 'sales_order_grid_data_source';
-
     /**
      * Magento entities as defined in version 2.
      */
     const ENTITY_MAGE_ADMIN_USER= 'admin_user';
-    const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
-    const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
-    const ENTITY_MAGE_CATALOG_URL_REWRITE_PRODUCT_CATEGORY = 'catalog_url_rewrite_product_category';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
+    const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
+    const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
+    const ENTITY_MAGE_CATALOG_URL_REWRITE_PRODUCT_CATEGORY = 'catalog_url_rewrite_product_category';
     const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_CUSTOMER_ADDR = 'customer_address_entity';
@@ -67,7 +66,6 @@ class Config
     const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
     const ENTITY_MAGE_TAX_CALC_RULE = 'tax_calculation_rule';
     const ENTITY_MAGE_URL_REWRITE = 'url_rewrite';
-
     /**
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
@@ -75,8 +73,8 @@ class Config
     const E_ADMIN_USER_A_EMAIL= 'email';
     const E_ADMIN_USER_A_FIRSTNAME= 'firstname';
     const E_ADMIN_USER_A_LASTNAME = 'lastname';
-    const E_ADMIN_USER_A_USER_ID = 'user_id';
     const E_ADMIN_USER_A_USERNAME= 'username';
+    const E_ADMIN_USER_A_USER_ID = 'user_id';
     const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
     const E_CATCAT_EAV_INT_VALUE = 'value';
@@ -220,12 +218,12 @@ class Config
     const E_URL_REWRITE_A_ENTITY_ID = 'entity_id';
     const E_URL_REWRITE_A_ENTITY_TYPE = 'entity_type';
     const E_URL_REWRITE_A_REQUEST_PATH = 'request_path';
-
     /**
      * other
      */
     const FORMAT_DATETIME = 'Y-m-d H:i:s';
     const MODULE = 'Praxigento_Core';
+    const MOD_MAGE_CUSTOMER = 'Magento_Customer';
     const REG_REST_INPUT = 'prxgtRestInput';
     const SCOPE_CFG_DEFAULT = \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT;
     const SCOPE_CFG_STORES = \Magento\Config\Block\System\Config\Form::SCOPE_STORES;
