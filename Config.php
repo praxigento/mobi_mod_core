@@ -19,6 +19,11 @@ class Config
 
     /** Default alias for main tables in Magento 2 (used in SQL JOINS) */
     const AS_MAIN_TABLE = 'main_table';
+
+    /* Path to node in configuration tree (see './etc/adminhtml/system.xml' in modules ) */
+    const CFG_PATH_TRANS_EMAIL_IDENT_GENERAL_EMAIL = 'trans_email/ident_general/email';
+    const CFG_PATH_TRANS_EMAIL_IDENT_GENERAL_NAME = 'trans_email/ident_general/name';
+
     const CODE_CUR_EUR = 'EUR';
     const CODE_CUR_USD = 'USD';
     const DEFAULT_WRITE_RESOURCE = 'core_write';

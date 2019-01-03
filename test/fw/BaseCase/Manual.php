@@ -24,14 +24,15 @@ abstract class Manual
         $this->manTrans = $this->manObj->get(\Praxigento\Core\Api\App\Repo\Transaction\Manager::class);
     }
 
-    protected function setAreaCode()
+    protected function setAreaCode($areaCode = null)
     {
         /** @var \Magento\Framework\App\State $appState */
         $appState = $this->manObj->get(\Magento\Framework\App\State::class);
         try {
             $appState->getAreaCode();
         } catch (\Exception $e) {
-            $areaCode = \Magento\Framework\App\Area::AREA_GLOBAL;
+            if (is_null($areaCode))
+                $areaCode = \Magento\Framework\App\Area::AREA_GLOBAL;
             $appState->setAreaCode($areaCode);
             /** @var \Magento\Framework\ObjectManager\ConfigLoaderInterface $configLoader */
             $configLoader = $this->manObj->get(\Magento\Framework\ObjectManager\ConfigLoaderInterface::class);
