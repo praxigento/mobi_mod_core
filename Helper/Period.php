@@ -68,7 +68,7 @@ class Period
                 break;
             case self::TYPE_MONTH:
                 $periodValue = $this->normalizePeriod($periodValue, self::TYPE_MONTH);
-                $dt = date_create_from_format('Ym', $periodValue);
+                $dt = date_create_from_format('Ymd H:i:s', $periodValue . '01 12:00:00');
                 $ts = strtotime('first day of midnight', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
@@ -78,7 +78,7 @@ class Period
                 break;
             case self::TYPE_YEAR:
                 $periodValue = $this->normalizePeriod($periodValue, self::TYPE_YEAR);
-                $dt = date_create_from_format('Y', $periodValue);
+                $dt = date_create_from_format('Ymd H:i:s', $periodValue . '0101 12:00:00');
                 $ts = strtotime('first day of January', $dt->getTimestamp());
                 $ts -= $this->getTzDelta();
                 $from = date(Cfg::FORMAT_DATETIME, $ts);
