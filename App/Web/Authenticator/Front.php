@@ -18,6 +18,8 @@ class Front
     private $cacheId = false;
     /** @var \Praxigento\Core\Helper\Config */
     private $hlpCfg;
+    /** @var bool forced development authentication flag */
+    private $isDevAuthForced = false;
     /** @var \Magento\Customer\Model\Session */
     private $session;
 
@@ -29,14 +31,21 @@ class Front
         $this->hlpCfg = $hlpCfg;
     }
 
+    public function forceDevAuthentication()
+    {
+        $this->isDevAuthForced = true;
+    }
+
     public function getCurrentUserId(ARequest $request = null)
     {
+        $result = null;
         /* $cacheId can be equal to 'null' if customer is anonymous */
         if ($this->cacheId === false) {
             /* get currently logged in customer data */
             $customer = $this->session->getCustomer();
             if ($customer) {
                 $this->cacheId = $customer->getId();
+                $result = $this->cacheId;
             }
             /* get ID from request if session is not established */
             if (!$this->cacheId) {
@@ -51,9 +60,16 @@ class Front
                 ) {
                     /* use offered Customer ID if MOBI API DevMode is enabled */
                     $this->cacheId = (int)$offeredId;
+                    $result = $this->cacheId;
+                    /* forced re-authentication from CLI batch processing */
+                    if ($this->isDevAuthForced) {
+                        $this->cacheId = false;
+                    }
                 }
             }
+        } else {
+            $result = $this->cacheId;
         }
-        return $this->cacheId;
+        return $result;
     }
 }

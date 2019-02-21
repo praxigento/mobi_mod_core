@@ -11,4 +11,9 @@ namespace Praxigento\Core\Api\App\Web\Authenticator;
 interface Front
     extends \Praxigento\Core\Api\App\Web\Authenticator
 {
+    /**
+     * Force developer mode for the authenticator.
+     * @return void
+     */
+    public function forceDevAuthentication();
 }
