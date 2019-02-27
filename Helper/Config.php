@@ -33,27 +33,4 @@ class Config
         return $result;
     }
 
-    /**
-     * Comma separated list of emails to get intercepted emails.
-     *
-     * @return string
-     */
-    public function getSystemEmailDevEmails()
-    {
-        $result = $this->scopeConfig->getValue('praxigento_system/email/dev_emails');
-        return $result;
-    }
-
-    /**
-     * 'true' if all emails will be intercepted and sent to developer address.
-     *
-     * @return bool
-     */
-    public function getSystemEmailEnabledIntercept()
-    {
-        $result = $this->scopeConfig->getValue('praxigento_system/email/enabled_intercept');
-        $result = filter_var($result, FILTER_VALIDATE_BOOLEAN);
-        return $result;
-    }
-
 }

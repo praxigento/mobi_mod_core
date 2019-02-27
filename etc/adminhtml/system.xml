@@ -36,32 +36,5 @@
                 <label>General</label>
             </group>
         </section>
-        <section id="praxigento_system" translate="label"
-                 sortOrder="9999"
-                 showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>System</label>
-            <tab>praxigento_mobi</tab>
-            <resource>Praxigento_Core::system</resource>
-            <group id="email" translate="label" type="text"
-                   sortOrder="100"
-                   showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Email</label>
-                <field id="enabled_intercept" translate="label comment tooltip" type="select"
-                       sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Enable Interception</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Switch on/off development mode for emails.</comment>
-                    <tooltip>All emails will be intercepted and be sent to developer address.</tooltip>
-                </field>
-                <field id="dev_emails" translate="label" type="text"
-                       sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Developer Email</label>
-                    <comment>Email addresses (comma separated) to receive intercepted emails.</comment>
-                    <depends>
-                        <field id="enabled_intercept">1</field>
-                    </depends>
-                </field>
-            </group>
-        </section>
     </system>
 </config>
