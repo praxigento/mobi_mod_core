@@ -56,7 +56,8 @@ class Message
             $addrs = $this->hlpConfig->getSystemEmailDevEmails();
             $addrs = explode(',', $addrs);
             foreach ($addrs as $key => $one) {
-                $replaced["_{$key}_" . $allNames] = trim($one);
+                $newEmail = trim($one);
+                $replaced[$newEmail] = $allNames;
             }
         } else {
             $replaced = $validated;
