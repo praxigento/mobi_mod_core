@@ -68,7 +68,7 @@ class Installed
             }
         }
         $output->writeln("\n<info>Total modules: $total.<info>\n");
-        $output->writeln('<info>Command is completed.<info>');
+        $output->writeln('<info>Command \'' . $this->getName() . '\' is completed.<info>');
     }
 
     /**
