@@ -23,7 +23,7 @@ abstract class Base
     {
         /* this is a base class, we need not add $manObj in the every child constructor as an argument */
         $manObj = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->logger = $manObj->get(\Psr\Log\LoggerInterface::class);
+        $this->logger = $manObj->get(\Praxigento\Core\App\Logger\Main::class);
         /** @var \Magento\Framework\App\ResourceConnection $resource */
         $resource = $manObj->get(\Magento\Framework\App\ResourceConnection::class);
         $this->conn = $resource->getConnection();
@@ -91,7 +91,7 @@ abstract class Base
      */
     protected function logError(string $msg)
     {
-        $this->logger->error($msg);
+        $this->logger->error('CMD: ' . $msg);
         $this->out->writeln("<error>$msg<error>");
     }
 
@@ -102,7 +102,7 @@ abstract class Base
      */
     protected function logInfo(string $msg)
     {
-        $this->logger->info($msg);
+        $this->logger->info('CMD: ' . $msg);
         $this->out->writeln("<info>$msg<info>");
     }
 
@@ -112,4 +112,9 @@ abstract class Base
      * @param \Symfony\Component\Console\Input\InputInterface $input
      */
     abstract protected function process(\Symfony\Component\Console\Input\InputInterface $input);
+
+    protected function setOut(\Symfony\Component\Console\Output\OutputInterface $output)
+    {
+        $this->out = $output;
+    }
 }
