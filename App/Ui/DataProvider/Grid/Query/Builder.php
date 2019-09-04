@@ -73,6 +73,8 @@ abstract class Builder
     /**
      * Get query to select items for the grid.
      *
+     * (use "(string)$result" to get SQL query content)
+     *
      * @return \Magento\Framework\DB\Select
      */
     abstract protected function getQueryItems();
