@@ -281,6 +281,13 @@ class Period
         return $result;
     }
 
+    public function getTimestampLastSecond($periodValue, $periodType = self::TYPE_DAY)
+    {
+        $tsTo = $this->getTimestampTo($periodValue, $periodType);
+        $result = date(Cfg::FORMAT_DATETIME, (strtotime($tsTo) - 1));
+        return $result;
+    }
+
     public function getTimestampNextFrom($periodValue, $periodType = self::TYPE_DAY)
     {
         $periodValue = $this->normalizePeriod($periodValue, $periodType);
@@ -311,9 +318,7 @@ class Period
 
     public function getTimestampUpTo($periodValue, $periodType = self::TYPE_DAY)
     {
-        $tsTo = $this->getTimestampTo($periodValue, $periodType);
-        $result = date(Cfg::FORMAT_DATETIME, (strtotime($tsTo) - 1));
-        return $result;
+        return $this->getTimestampLastSecond($periodValue, $periodType);
     }
 
     /**

@@ -92,7 +92,6 @@ interface Period
     public function getTimestampTo($periodValue, $periodType = self::TYPE_DAY);
 
     /**
-     * Get "1 second before next period begin" timestamp
      * @param $periodValue
      * @param string $periodType
      * @return string
@@ -100,6 +99,15 @@ interface Period
      * @deprecated use "< $nextPeriod"  instead of "<= $lastSecond"
      */
     public function getTimestampUpTo($periodValue, $periodType = self::TYPE_DAY);
+
+    /**
+     * Get "1 second before next period begin" timestamp.
+     *
+     * @param $periodValue
+     * @param string $periodType
+     * @return string
+     */
+    public function getTimestampLastSecond($periodValue, $periodType = self::TYPE_DAY);
 
     /**
      * @param $weekDay - string see self::WEEK_
