@@ -36,4 +36,10 @@ interface Currency
      * @return string
      */
     public function getCurrency($customer);
+
+    /**
+     * Get code base currency (USD).
+     * @return string
+     */
+    public function getCurrencyBase();
 }

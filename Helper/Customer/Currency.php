@@ -30,4 +30,9 @@ class Currency
     {
         return Cfg::CODE_CUR_USD;
     }
+
+    public function getCurrencyBase()
+    {
+        return Cfg::CODE_CUR_USD;
+    }
 }
