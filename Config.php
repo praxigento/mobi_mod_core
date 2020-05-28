@@ -141,6 +141,7 @@ class Config
     const E_QUOTE_A_CUSTOMER_ID = 'customer_id';
     const E_QUOTE_A_ENTITY_ID = DCart::KEY_ENTITY_ID;
     const E_QUOTE_A_IS_ACTIVE = DCart::KEY_IS_ACTIVE;
+    const E_QUOTE_A_RESERVED_ORDER_ID= 'reserved_order_id';
     const E_QUOTE_A_STORE_ID = DCart::KEY_STORE_ID;
     const E_QUOTE_ITEM_A_ITEM_ID = 'item_id';
     const E_QUOTE_ITEM_A_QUOTE_ID = 'quote_id';
