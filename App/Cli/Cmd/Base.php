@@ -13,6 +13,7 @@ use Praxigento\BonusReferral\Api\Service\Bonus\Collect\Request as ARequest;
 abstract class Base
     extends \Symfony\Component\Console\Command\Command
 {
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface */
     private $conn;
     /** @var \Psr\Log\LoggerInterface */
     private $logger;

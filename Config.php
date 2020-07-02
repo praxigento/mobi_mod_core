@@ -47,7 +47,7 @@ class Config
     /**
      * Magento entities as defined in version 2.
      */
-    const ENTITY_MAGE_ADMIN_USER= 'admin_user';
+    const ENTITY_MAGE_ADMIN_USER = 'admin_user';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
@@ -75,10 +75,10 @@ class Config
      * Codifier for entities' attributes.
      * Mage2 has different places to store DB fields info, so accumulate this info in the Config.
      */
-    const E_ADMIN_USER_A_EMAIL= 'email';
-    const E_ADMIN_USER_A_FIRSTNAME= 'firstname';
+    const E_ADMIN_USER_A_EMAIL = 'email';
+    const E_ADMIN_USER_A_FIRSTNAME = 'firstname';
     const E_ADMIN_USER_A_LASTNAME = 'lastname';
-    const E_ADMIN_USER_A_USERNAME= 'username';
+    const E_ADMIN_USER_A_USERNAME = 'username';
     const E_ADMIN_USER_A_USER_ID = 'user_id';
     const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
@@ -141,7 +141,8 @@ class Config
     const E_QUOTE_A_CUSTOMER_ID = 'customer_id';
     const E_QUOTE_A_ENTITY_ID = DCart::KEY_ENTITY_ID;
     const E_QUOTE_A_IS_ACTIVE = DCart::KEY_IS_ACTIVE;
-    const E_QUOTE_A_RESERVED_ORDER_ID= 'reserved_order_id';
+    const E_QUOTE_A_PVZ_CODE = 'pvz_code';
+    const E_QUOTE_A_RESERVED_ORDER_ID = 'reserved_order_id';
     const E_QUOTE_A_STORE_ID = DCart::KEY_STORE_ID;
     const E_QUOTE_ITEM_A_ITEM_ID = 'item_id';
     const E_QUOTE_ITEM_A_QUOTE_ID = 'quote_id';
@@ -156,6 +157,7 @@ class Config
     const E_SALE_ORDER_A_ENTITY_ID = DSaleOrder::ENTITY_ID;
     const E_SALE_ORDER_A_GRAND_TOTAL = DSaleOrder::GRAND_TOTAL;
     const E_SALE_ORDER_A_INCREMENT_ID = DSaleOrder::INCREMENT_ID;
+    const E_SALE_ORDER_A_PVZ_CODE = 'pvz_code';
     const E_SALE_ORDER_A_QUOTE_ID = DSaleOrder::QUOTE_ID;
     const E_SALE_ORDER_A_STATE = DSaleOrder::STATE;
     const E_SALE_ORDER_A_STORE_ID = DSaleOrder::STORE_ID;
