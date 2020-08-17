@@ -8,7 +8,7 @@ namespace Praxigento\Core\App\Logger;
 
 
 class Main
-    extends \Monolog\Logger
+    extends \JustBetter\Sentry\Plugin\MonologPlugin
     implements \Praxigento\Core\Api\App\Logger\Main
 {
     const FILENAME = 'mobi.main.log';
@@ -17,11 +17,24 @@ class Main
     /** @var \Monolog\Handler\StreamHandler */
     private $hndlInMemory;
 
-    public function __construct()
-    {
+    public function __construct(
+        \JustBetter\Sentry\Helper\Data $data,
+        \JustBetter\Sentry\Model\SentryLog $sentryLog,
+        \Magento\Framework\App\DeploymentConfig $deploymentConfig
+    ) {
         $handlers = $this->initHandlers();
         $processors = [];
-        parent::__construct(static::NAME, $handlers, $processors);
+        parent::__construct(static::NAME, $data, $sentryLog, $deploymentConfig, $handlers, $processors);
+    }
+
+    /**
+     * Wrapper to catch calls to \JustBetter\Sentry\Plugin\MonologPlugin::addRecord
+     *
+     * @inheritdoc
+     */
+    public function addRecord($level, $message, array $context = [])
+    {
+        return parent::addRecord($level, $message, $context);
     }
 
     public function getHandlerMemory(): \Monolog\Handler\StreamHandler
