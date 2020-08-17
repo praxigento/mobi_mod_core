@@ -11,7 +11,8 @@
     }
   ],
   "require": {
-    "flancer32/php_data_object": "^0.2"
+    "flancer32/php_data_object": "^0.2",
+    "justbetter/magento2-sentry": "^2.3"
   },
   "autoload": {
     "files": [
