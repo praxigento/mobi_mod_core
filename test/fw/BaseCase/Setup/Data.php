@@ -26,7 +26,7 @@ abstract class Data
     /** @var  \Mockery\MockInterface */
     protected $mToolDem;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */

@@ -64,13 +64,13 @@ class Type
     /**
      * Analyze class documentation block and extract annotated methods.
      *
-     * @param \Zend\Code\Reflection\DocBlockReflection $block Documentation block.
+     * @param \Laminas\Code\Reflection\DocBlockReflection $block Documentation block.
      * @return \Praxigento\Core\App\Reflection\Data\Method[]
      */
     public function _processClassDocBlock($block)
     {
         $result = [];
-        if ($block instanceof \Zend\Code\Reflection\DocBlockReflection) {
+        if ($block instanceof \Laminas\Code\Reflection\DocBlockReflection) {
             $docBlockLines = $block->getContents();
             $docBlockLines = explode("\n", $docBlockLines);
             foreach ($docBlockLines as $line) {
@@ -120,7 +120,7 @@ class Type
     }
 
     /**
-     * @param \Zend\Code\Reflection\MethodReflection[] $methods
+     * @param \Laminas\Code\Reflection\MethodReflection[] $methods
      * @return \Praxigento\Core\App\Reflection\Data\Method[]
      */
     public function _processClassMethods($methods)
@@ -130,7 +130,7 @@ class Type
         foreach ($methods as $method) {
             // Include all the methods of classes inheriting from AbstractExtensibleObject.
             // Ignore all the methods of AbstractExtensibleModel's parent classes
-            /** @var \Zend\Code\Reflection\ClassReflection $class */
+            /** @var \Laminas\Code\Reflection\ClassReflection $class */
             $class = $method->getDeclaringClass();
             $className = $class->getName();
             if (
@@ -157,7 +157,7 @@ class Type
     }
 
     /**
-     * @param \Zend\Code\Reflection\DocBlockReflection|false $docBlock
+     * @param \Laminas\Code\Reflection\DocBlockReflection|false $docBlock
      * @return \Praxigento\Core\App\Reflection\Data\Method
      */
     public function _processMethodDocBlock($docBlock)
@@ -166,7 +166,7 @@ class Type
         if ($docBlock) {
             $returnAnnotations = $docBlock->getTags('return');
             if (!empty($returnAnnotations)) {
-                /** @var \Zend\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
+                /** @var \Laminas\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
                 $returnTag = current($returnAnnotations);
                 $types = $returnTag->getTypes();
                 $returnType = current($types);
@@ -191,9 +191,9 @@ class Type
         $result = [];
         if ($type !== false) {
             $typeNorm = $this->toolsType->normalizeType($type);
-            /** @var \Zend\Code\Reflection\ClassReflection $reflection */
-            $reflection = new \Zend\Code\Reflection\ClassReflection($typeNorm);
-            /** @var \Zend\Code\Reflection\DocBlockReflection $docBlock */
+            /** @var \Laminas\Code\Reflection\ClassReflection $reflection */
+            $reflection = new \Laminas\Code\Reflection\ClassReflection($typeNorm);
+            /** @var \Laminas\Code\Reflection\DocBlockReflection $docBlock */
             $docBlock = $reflection->getDocBlock();
             $annotatedMethods = $this->_processClassDocBlock($docBlock);
             /* process normal methods (not annotated) */

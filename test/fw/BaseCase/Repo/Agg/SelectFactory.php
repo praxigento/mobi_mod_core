@@ -120,7 +120,7 @@ abstract class SelectFactory
         }
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /* re-create select and bind it to connection */

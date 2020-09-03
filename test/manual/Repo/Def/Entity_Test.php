@@ -17,7 +17,7 @@ class Entity_ManualTest extends \Praxigento\Core\Test\BaseCase\Mockery
     private $_obj;
     private $_obj2;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $resource = ObjectManager::getInstance()->get(\Magento\Framework\App\ResourceConnection::class);

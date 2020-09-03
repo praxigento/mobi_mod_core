@@ -18,7 +18,7 @@ abstract class Call
     /** @var  \Mockery\MockInterface */
     protected $mManObj;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */

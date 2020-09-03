@@ -16,7 +16,7 @@ abstract class Entity
     /** @var  \Mockery\MockInterface */
     protected $mRepoGeneric;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */

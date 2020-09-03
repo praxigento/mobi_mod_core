@@ -17,7 +17,7 @@ class TypeProcessor
 
     /** @inheritdoc */
     protected function _processMethod(
-        \Zend\Code\Reflection\MethodReflection $methodReflection,
+        \Laminas\Code\Reflection\MethodReflection $methodReflection,
         $typeName
     ) {
         /* skip basic methods of the DataObjects */

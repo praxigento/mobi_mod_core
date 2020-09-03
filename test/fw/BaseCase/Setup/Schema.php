@@ -24,7 +24,7 @@ abstract class Schema
     /** @var  \Mockery\MockInterface */
     protected $mToolDem;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */

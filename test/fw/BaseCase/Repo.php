@@ -17,7 +17,7 @@ abstract class Repo
     /** @var  \Mockery\MockInterface */
     protected $mResource;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */

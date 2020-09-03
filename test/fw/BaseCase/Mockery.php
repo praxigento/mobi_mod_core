@@ -114,7 +114,7 @@ abstract class Mockery
         return $result;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         \Mockery::close();

@@ -56,7 +56,7 @@ abstract class Controller
     /** @var  \Mockery\MockInterface */
     protected $mCtxView;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         /** create mocks */
