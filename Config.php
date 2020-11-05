@@ -10,6 +10,7 @@ namespace Praxigento\Core;
 use Magento\CatalogInventory\Model\Stock as DStock;
 use Magento\CatalogInventory\Model\Stock\Status as DStockStatus;
 use Magento\Quote\Api\Data\CartInterface as DCart;
+use Magento\Sales\Api\Data\OrderAddressInterface as DSaleAddr;
 use Magento\Sales\Api\Data\OrderInterface as DSaleOrder;
 use Magento\Sales\Api\Data\OrderItemInterface as DOrderItem;
 
@@ -63,6 +64,7 @@ class Config
     const ENTITY_MAGE_QUOTE_ITEM = 'quote_item';
     const ENTITY_MAGE_SALES_INVOICE = 'sales_invoice';
     const ENTITY_MAGE_SALES_ORDER = 'sales_order';
+    const ENTITY_MAGE_SALES_ORDER_ADDRESS = 'sales_order_address';
     const ENTITY_MAGE_SALES_ORDER_GRID = 'sales_order_grid';
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
     const ENTITY_MAGE_SALES_ORDER_TAX = 'sales_order_tax';
@@ -150,6 +152,9 @@ class Config
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
     const E_SALE_INVOICE_A_STATE = 'state';
+    const E_SALE_ORDER_ADDR_A_ADDRESS_TYPE = DSaleAddr::ADDRESS_TYPE;
+    const E_SALE_ORDER_ADDR_A_COUNTRY_ID = DSaleAddr::COUNTRY_ID;
+    const E_SALE_ORDER_ADDR_A_PARENT_ID = DSaleAddr::PARENT_ID;
     const E_SALE_ORDER_A_APPLIED_RULE_IDS = DSaleOrder::APPLIED_RULE_IDS;
     const E_SALE_ORDER_A_BASE_GRAND_TOTAL = DSaleOrder::BASE_GRAND_TOTAL;
     const E_SALE_ORDER_A_CREATED_AT = DSaleOrder::CREATED_AT;
@@ -165,6 +170,7 @@ class Config
     const E_SALE_ORDER_GRID_A_BASE_GRAND_TOTAL = 'base_grand_total';
     const E_SALE_ORDER_GRID_A_BILLING_NAME = 'billing_name';
     const E_SALE_ORDER_GRID_A_CREATED_AT = 'created_at';
+    const E_SALE_ORDER_GRID_A_CUSTOMER_ID = 'customer_id';
     const E_SALE_ORDER_GRID_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
     const E_SALE_ORDER_GRID_A_GRAND_TOTAL = 'grand_total';
     const E_SALE_ORDER_GRID_A_INCREMENT_ID = 'increment_id';
