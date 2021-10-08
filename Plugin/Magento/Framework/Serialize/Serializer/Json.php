@@ -15,7 +15,7 @@ class Json
     public function beforeSerialize($subject, $data)
     {
         /* see \Magento\Framework\App\PageCache\Kernel::getPreparedData */
-        if (isset($data['content']) && is_string($data['content'])) {
+        if (is_array($data) && isset($data['content']) && is_string($data['content'])) {
             $data['content'] = mb_convert_encoding($data['content'], 'UTF-8', 'UTF-8');
         }
         return [$data];
