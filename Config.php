@@ -69,6 +69,8 @@ class Config
     const ENTITY_MAGE_SALES_ORDER_ITEM = 'sales_order_item';
     const ENTITY_MAGE_SALES_ORDER_TAX = 'sales_order_tax';
     const ENTITY_MAGE_SALES_ORDER_TAX_ITEM = 'sales_order_tax_item';
+    const ENTITY_MAGE_STORE = 'store';
+    const ENTITY_MAGE_STORE_GROUP = 'store_group';
     const ENTITY_MAGE_TAX_CALC = 'tax_calculation';
     const ENTITY_MAGE_TAX_CALC_RATE = 'tax_calculation_rate';
     const ENTITY_MAGE_TAX_CALC_RULE = 'tax_calculation_rule';
@@ -207,6 +209,10 @@ class Config
     const E_SALE_ORDER_TAX_ITEM_A_TAX_ID = 'tax_id';
     const E_SALE_ORDER_TAX_ITEM_A_TAX_ITEM_ID = 'tax_item_id';
     const E_SALE_ORDER_TAX_ITEM_A_TAX_PERCENT = 'tax_percent';
+    const E_STORE_A_GROUP_ID = 'group_id';
+    const E_STORE_A_STORE_ID = 'store_id';
+    const E_STORE_GROUP_A_GROUP_ID = 'group_id';
+    const E_STORE_GROUP_A_NAME = 'name';
     const E_TAX_CALC_A_CUST_TAX_CLASS_ID = 'customer_tax_class_id';
     const E_TAX_CALC_A_ID = 'tax_calculation_id';
     const E_TAX_CALC_A_PRODUCT_TAX_CLASS_ID = 'product_tax_class_id';
