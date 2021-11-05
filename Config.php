@@ -49,12 +49,13 @@ class Config
      * Magento entities as defined in version 2.
      */
     const ENTITY_MAGE_ADMIN_USER = 'admin_user';
+    const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
+    const ENTITY_MAGE_CATALOG_PRODUCT_EAV_VARCHAR = 'catalog_product_entity_varchar';
+    const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
+    const ENTITY_MAGE_CATALOG_URL_REWRITE_PRODUCT_CATEGORY = 'catalog_url_rewrite_product_category';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK = DStock::ENTITY;
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_ITEM = 'cataloginventory_stock_item';
     const ENTITY_MAGE_CATALOGINVENTORY_STOCK_STATUS = 'cataloginventory_stock_status';
-    const ENTITY_MAGE_CATALOG_CATEGORY_EAV_INT = 'catalog_category_entity_int';
-    const ENTITY_MAGE_CATALOG_PRODUCT_INDEX_PRICE = 'catalog_product_index_price';
-    const ENTITY_MAGE_CATALOG_URL_REWRITE_PRODUCT_CATEGORY = 'catalog_url_rewrite_product_category';
     const ENTITY_MAGE_CORE_CONFIG_DATA = 'core_config_data';
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_CUSTOMER_ADDR = 'customer_address_entity';
@@ -82,8 +83,10 @@ class Config
     const E_ADMIN_USER_A_EMAIL = 'email';
     const E_ADMIN_USER_A_FIRSTNAME = 'firstname';
     const E_ADMIN_USER_A_LASTNAME = 'lastname';
-    const E_ADMIN_USER_A_USERNAME = 'username';
     const E_ADMIN_USER_A_USER_ID = 'user_id';
+    const E_ADMIN_USER_A_USERNAME = 'username';
+    const E_CAT_URL_REWRITE_PROD_CAT_A_CATEGORY_ID = 'category_id';
+    const E_CAT_URL_REWRITE_PROD_CAT_A_PRODUCT_ID = 'product_id';
     const E_CATCAT_EAV_INT_A_ID = 'attribute_id';
     const E_CATCAT_EAV_INT_STORE_ID = 'store_id';
     const E_CATCAT_EAV_INT_VALUE = 'value';
@@ -98,9 +101,11 @@ class Config
     const E_CATINV_STOCK_STATUS_A_QTY = DStockStatus::KEY_QTY;
     const E_CATINV_STOCK_STATUS_A_STOCK_ID = DStockStatus::KEY_STOCK_ID;
     const E_CATINV_STOCK_STATUS_A_STOCK_STATUS = DStockStatus::KEY_STOCK_STATUS;
+    const E_CATPROD_EAV_VARCHAR_A_ATTRIBUTE_ID = 'attribute_id';
+    const E_CATPROD_EAV_VARCHAR_A_ENTITY_ID = self::E_COMMON_A_ENTITY_ID;
+    const E_CATPROD_EAV_VARCHAR_A_STORE_ID = 'store_id';
+    const E_CATPROD_EAV_VARCHAR_A_VALUE = 'value';
     const E_CATPROD_IDX_PRICE_A_CUST_GROUP_ID = 'customer_group_id';
-    const E_CAT_URL_REWRITE_PROD_CAT_A_CATEGORY_ID = 'category_id';
-    const E_CAT_URL_REWRITE_PROD_CAT_A_PRODUCT_ID = 'product_id';
     const E_COMMON_A_ENTITY_ID = 'entity_id';
     const E_CONFIG_A_PATH = 'path';
     const E_CONFIG_A_SCOPE = 'scope';
@@ -154,9 +159,6 @@ class Config
     const E_SALE_INVOICE_A_CREATED_AT = 'created_at';
     const E_SALE_INVOICE_A_ORDER_ID = 'order_id';
     const E_SALE_INVOICE_A_STATE = 'state';
-    const E_SALE_ORDER_ADDR_A_ADDRESS_TYPE = DSaleAddr::ADDRESS_TYPE;
-    const E_SALE_ORDER_ADDR_A_COUNTRY_ID = DSaleAddr::COUNTRY_ID;
-    const E_SALE_ORDER_ADDR_A_PARENT_ID = DSaleAddr::PARENT_ID;
     const E_SALE_ORDER_A_APPLIED_RULE_IDS = DSaleOrder::APPLIED_RULE_IDS;
     const E_SALE_ORDER_A_BASE_GRAND_TOTAL = DSaleOrder::BASE_GRAND_TOTAL;
     const E_SALE_ORDER_A_CREATED_AT = DSaleOrder::CREATED_AT;
@@ -169,6 +171,9 @@ class Config
     const E_SALE_ORDER_A_STATE = DSaleOrder::STATE;
     const E_SALE_ORDER_A_STORE_ID = DSaleOrder::STORE_ID;
     const E_SALE_ORDER_A_UPDATED_AT = DSaleOrder::UPDATED_AT;
+    const E_SALE_ORDER_ADDR_A_ADDRESS_TYPE = DSaleAddr::ADDRESS_TYPE;
+    const E_SALE_ORDER_ADDR_A_COUNTRY_ID = DSaleAddr::COUNTRY_ID;
+    const E_SALE_ORDER_ADDR_A_PARENT_ID = DSaleAddr::PARENT_ID;
     const E_SALE_ORDER_GRID_A_BASE_GRAND_TOTAL = 'base_grand_total';
     const E_SALE_ORDER_GRID_A_BILLING_NAME = 'billing_name';
     const E_SALE_ORDER_GRID_A_CREATED_AT = 'created_at';
@@ -205,18 +210,18 @@ class Config
     const E_SALE_ORDER_TAX_ITEM_A_ITEM_ID = 'item_id';
     const E_SALE_ORDER_TAX_ITEM_A_REAL_AMOUNT = 'real_amount';
     const E_SALE_ORDER_TAX_ITEM_A_REAL_BASE_AMOUNT = 'real_base_amount';
-    const E_SALE_ORDER_TAX_ITEM_A_TAXABLE_ITEM_TYPE = 'taxable_item_type';
     const E_SALE_ORDER_TAX_ITEM_A_TAX_ID = 'tax_id';
     const E_SALE_ORDER_TAX_ITEM_A_TAX_ITEM_ID = 'tax_item_id';
     const E_SALE_ORDER_TAX_ITEM_A_TAX_PERCENT = 'tax_percent';
+    const E_SALE_ORDER_TAX_ITEM_A_TAXABLE_ITEM_TYPE = 'taxable_item_type';
     const E_STORE_A_GROUP_ID = 'group_id';
     const E_STORE_A_STORE_ID = 'store_id';
     const E_STORE_GROUP_A_GROUP_ID = 'group_id';
     const E_STORE_GROUP_A_NAME = 'name';
     const E_TAX_CALC_A_CUST_TAX_CLASS_ID = 'customer_tax_class_id';
     const E_TAX_CALC_A_ID = 'tax_calculation_id';
-    const E_TAX_CALC_A_PRODUCT_TAX_CLASS_ID = 'product_tax_class_id';
     const E_TAX_CALC_A_PROD_TAX_CLASS_ID = 'product_tax_class_id';
+    const E_TAX_CALC_A_PRODUCT_TAX_CLASS_ID = 'product_tax_class_id';
     const E_TAX_CALC_A_RATE_ID = 'tax_calculation_rate_id';
     const E_TAX_CALC_A_RULE_ID = 'tax_calculation_rule_id';
     const E_TAX_CALC_A_TAX_CALCULATION_RATE_ID = 'tax_calculation_rate_id';
