@@ -26,7 +26,9 @@ class Config
     const CFG_PATH_TRANS_EMAIL_IDENT_GENERAL_NAME = 'trans_email/ident_general/name';
 
     const CODE_CUR_EUR = 'EUR';
+    const CODE_CUR_RUB = 'RUB';
     const CODE_CUR_USD = 'USD';
+
     const DEFAULT_WRITE_RESOURCE = 'core_write';
     /** Customer group code for anonymous customers (we cannot change default code for anonymous group) */
     const DEF_CUST_GROUP_ANON_CODE = 'NOT LOGGED IN';
@@ -60,6 +62,7 @@ class Config
     const ENTITY_MAGE_CUSTOMER = 'customer_entity';
     const ENTITY_MAGE_CUSTOMER_ADDR = 'customer_address_entity';
     const ENTITY_MAGE_CUSTOMER_GROUP = 'customer_group';
+    const ENTITY_MAGE_DIR_CUR_RATE = 'directory_currency_rate';
     const ENTITY_MAGE_PRODUCT = 'catalog_product_entity';
     const ENTITY_MAGE_QUOTE = 'quote';
     const ENTITY_MAGE_QUOTE_ITEM = 'quote_item';
@@ -96,6 +99,9 @@ class Config
     const E_CATINV_STOCK_ITEM_A_ITEM_ID = 'item_id';
     const E_CATINV_STOCK_ITEM_A_PROD_ID = 'product_id';
     const E_CATINV_STOCK_ITEM_A_QTY = 'qty';
+    const E_DIR_CUR_RATE_A_CURRENCY_FROM = 'currency_from';
+    const E_DIR_CUR_RATE_A_CURRENCY_TO= 'currency_to';
+    const E_DIR_CUR_RATE_A_RATE= 'rate';
     const E_CATINV_STOCK_ITEM_A_STOCK_ID = 'stock_id';
     const E_CATINV_STOCK_STATUS_A_PROD_ID = DStockStatus::KEY_PRODUCT_ID;
     const E_CATINV_STOCK_STATUS_A_QTY = DStockStatus::KEY_QTY;
