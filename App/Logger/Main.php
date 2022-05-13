@@ -32,7 +32,8 @@ class Main
      *
      * @inheritdoc
      */
-    public function addRecord(int $level, string $message, array $context = []): bool
+//    public function addRecord(int $level, string $message, array $context = []): bool
+    public function addRecord($level, $message, array $context = [])
     {
         return parent::addRecord($level, $message, $context);
     }
