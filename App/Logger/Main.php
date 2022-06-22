@@ -9,8 +9,7 @@ namespace Praxigento\Core\App\Logger;
 
 class Main
     extends \JustBetter\Sentry\Plugin\MonologPlugin
-    implements \Praxigento\Core\Api\App\Logger\Main
-{
+    implements \Praxigento\Core\Api\App\Logger\Main {
     const FILENAME = 'mobi.main.log';
     const NAME = 'MOBI';
 
@@ -32,27 +31,27 @@ class Main
      *
      * @inheritdoc
      */
-    public function addRecord(int $level, string $message, array $context = []): bool
-//    public function addRecord($level, $message, array $context = [])
-    {
+    public function addRecord(
+        int $level,
+        string $message,
+        array $context = [],
+        \Monolog\DateTimeImmutable $datetime = null
+    ): bool {
         return parent::addRecord($level, $message, $context);
     }
 
-    public function getHandlerMemory(): \Monolog\Handler\StreamHandler
-    {
+    public function getHandlerMemory(): \Monolog\Handler\StreamHandler {
         return $this->hndlInMemory;
     }
 
-    private function initFormatter()
-    {
+    private function initFormatter() {
         $dateFormat = "Ymd/His";
         $msgFormat = "%datetime%-%channel%.%level_name% - %message%\n";
         $result = new \Monolog\Formatter\LineFormatter($msgFormat, $dateFormat);
         return $result;
     }
 
-    private function initHandlers()
-    {
+    private function initHandlers() {
         $result = [];
         $formatter = $this->initFormatter();
 
