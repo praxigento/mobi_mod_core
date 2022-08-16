@@ -11,23 +11,24 @@ namespace Praxigento\Core\Api\Helper\Customer;
  *
  * (Santegra project legacy, should not be used in other projects).
  */
-interface Currency
-{
+interface Currency {
     /**
      * @param float $amount
      * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
      * @param bool $round 'false' - don't round result.
+     * @param \DateTime|string $date to get rate (null - current date)
      * @return float
      */
-    public function convertFromBase($amount, $customer = null, $round = true);
+    public function convertFromBase($amount, $customer = null, $round = true, $date = null);
 
     /**
      * @param float $amount
      * @param int|array|\Praxigento\Core\Data|null $customer ID or data object.
      * @param bool $round 'false' - don't round result.
+     * @param \DateTime|string $date to get rate (null - current date)
      * @return float
      */
-    public function convertToBase($amount, $customer = null, $round = true);
+    public function convertToBase($amount, $customer = null, $round = true, $date = null);
 
     /**
      * Get customer's currency code.
@@ -42,4 +43,11 @@ interface Currency
      * @return string
      */
     public function getCurrencyBase();
+
+    /**
+     * Return conversion rate for EUR/USD for given $date.
+     * @param \DateTime|string $date
+     * @return float
+     */
+    public function getRateEur($date = null);
 }

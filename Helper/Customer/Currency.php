@@ -13,26 +13,25 @@ use Praxigento\Core\Config as Cfg;
  * Default implementation of the customer currency converter.
  */
 class Currency
-    implements \Praxigento\Core\Api\Helper\Customer\Currency
-{
+    implements \Praxigento\Core\Api\Helper\Customer\Currency {
 
-    public function convertFromBase($amount, $customer = null, $round = true)
-    {
+    public function convertFromBase($amount, $customer = null, $round = true, $date = null) {
         return $amount;
     }
 
-    public function convertToBase($amount, $customer = null, $round = true)
-    {
+    public function convertToBase($amount, $customer = null, $round = true, $date = null) {
         return $amount;
     }
 
-    public function getCurrency($customer)
-    {
+    public function getCurrency($customer) {
         return Cfg::CODE_CUR_USD;
     }
 
-    public function getCurrencyBase()
-    {
+    public function getCurrencyBase() {
         return Cfg::CODE_CUR_USD;
+    }
+
+    public function getRateEur($date) {
+        return 1; // EUR = USD by default
     }
 }
