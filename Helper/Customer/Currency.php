@@ -31,7 +31,7 @@ class Currency
         return Cfg::CODE_CUR_USD;
     }
 
-    public function getRateEur($date) {
+    public function getRateEur($date = null) {
         return 1; // EUR = USD by default
     }
 }
